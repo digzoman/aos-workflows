@@ -1,0 +1,123 @@
+schema_version: 1.0.0
+template_id: marketing-creative-brief
+version: 0.7.0
+name: Advertising visual strategy and creative brief
+description: Create a source-faithful truthful design brief for portrait/square and placement constraints from locked
+  ad copy.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  copy_revision_ref:
+    type: string
+    required: true
+  brand_guidelines_ref:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - brief-visual
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: brief-visual
+  kind: ai_independent
+  required: true
+  rubric: Approved copy and offer, truthful imagery concept, readable placement hierarchy, 5% text/logo safe-zone
+    recommendation.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: source-brief
+    kind: task
+    needs: []
+    instructions: Map strategy, audience, visual hook and reference evidence, avoiding imitation or invented competitor
+      claims.
+    inputs: []
+    outputs:
+    - artifact_id: source-brief-record
+      path: artifacts/source-brief.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: layout-plan
+    kind: task
+    needs:
+    - source-brief
+    instructions: Specify hierarchy, exact frozen text blocks, logo/CTA safe zone (default 5%), imagery/no-image alternatives,
+      placement-specific crops.
+    inputs:
+    - from: source-brief
+      artifact_id: source-brief-record
+      required: true
+    outputs:
+    - artifact_id: layout-plan-record
+      path: artifacts/layout-plan.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: brief-peer-review
+    kind: review
+    needs:
+    - layout-plan
+    instructions: Verify semantic alignment, image guidance, margins and feasibility before generating any image.
+    inputs:
+    - from: layout-plan
+      artifact_id: layout-plan-record
+      required: true
+    outputs:
+    - artifact_id: brief-peer-review-record
+      path: artifacts/brief-peer-review.md
+      required: true
+    quality:
+      gates:
+      - brief-visual
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: brief-visual

@@ -1,0 +1,190 @@
+schema_version: 1.0.0
+template_id: marketing-competitor-execution
+version: 0.7.0
+name: Competitor research execution
+description: Investigate actual advertisers and buyer-specific offers; every claim requires dated source evidence,
+  not invented ad status or targeting.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  vertical:
+    type: string
+    required: true
+  buyer:
+    type: string
+    required: true
+  queue_ref:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - evidence-integrity
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: evidence-integrity
+  kind: ai_independent
+  required: true
+  rubric: Dated primary/source links, traceability, deduplicated sellers, inaccessible sources distinct from verified
+    absence, reviewer independent from producer.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: verify-access
+    kind: task
+    needs: []
+    instructions: Record actual access, research mode, date, market, query queue, retry budget; unavailable is not
+      a verified zero.
+    inputs: []
+    outputs:
+    - artifact_id: verify-access-record
+      path: artifacts/verify-access.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: sweep-queue
+    kind: task
+    needs:
+    - verify-access
+    instructions: Inspect bounded keyword/search advertiser queue; preserve URL, source date, active/inactive observation
+      and source reliability.
+    inputs:
+    - from: verify-access
+      artifact_id: verify-access-record
+      required: true
+    outputs:
+    - artifact_id: sweep-queue-record
+      path: artifacts/sweep-queue.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    skills:
+    - marketing-source-claims
+  - id: seller-offer-families
+    kind: task
+    needs:
+    - sweep-queue
+    instructions: Dedupe seller/advertiser identity, variations and service-versus-software offer family; preserve
+      conflicts.
+    inputs:
+    - from: sweep-queue
+      artifact_id: sweep-queue-record
+      required: true
+    outputs:
+    - artifact_id: seller-offer-families-record
+      path: artifacts/seller-offer-families.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    skills:
+    - marketing-source-claims
+  - id: coverage-ledger
+    kind: task
+    needs:
+    - seller-offer-families
+    instructions: Account for every authorized keyword and advertiser entry, include unavailable/verified empty/retry
+      needed distinctly.
+    inputs:
+    - from: seller-offer-families
+      artifact_id: seller-offer-families-record
+      required: true
+    outputs:
+    - artifact_id: coverage-ledger-record
+      path: artifacts/coverage-ledger.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: source-evidence-review
+    kind: review
+    needs:
+    - coverage-ledger
+    instructions: Have separate reviewer verify exact observation artifacts, evidence completeness and all outstanding
+      gaps.
+    inputs:
+    - from: coverage-ledger
+      artifact_id: coverage-ledger-record
+      required: true
+    outputs:
+    - artifact_id: source-evidence-review-record
+      path: artifacts/source-evidence-review.md
+      required: true
+    quality:
+      gates:
+      - evidence-integrity
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: evidence-integrity
+extensions:
+  marketing_stage: competitor_observation
+  source_class: OBSERVED_COMPETITOR_ONLY
+skills:
+- skill_id: marketing-source-claims
+  source: bundled
+  path: skills/marketing-source-claims/SKILL.md
+  required: true
+  trust: approved

@@ -1,0 +1,124 @@
+schema_version: 1.0.0
+template_id: marketing-ad-copy
+version: 0.7.0
+name: Advertising copy and messaging package
+description: Produce exact on-image ad text, primary Meta text, headline, description, CTA and optional messaging
+  questions from the **approved deliverable offer** only.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  verified_offer_ref:
+    type: string
+    required: true
+  buyer:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - copy-semantic
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: copy-semantic
+  kind: ai_independent
+  required: true
+  rubric: Approved deliverable offer, buyer, promise, CTA, headline, description and visual text semantically consistent;
+    no fabricated claims.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: semantic-spine
+    kind: task
+    needs: []
+    instructions: Pin buyer, problem, hook, mechanism, promised outcome, deliverable features, offer and next step
+      to owner-approved source.
+    inputs: []
+    outputs:
+    - artifact_id: semantic-spine-record
+      path: artifacts/semantic-spine.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: draft-fields
+    kind: task
+    needs:
+    - semantic-spine
+    instructions: Generate separate image-overlay, primary, headline, description, CTA, full selectable question and
+      blank reply-response where relevant.
+    inputs:
+    - from: semantic-spine
+      artifact_id: semantic-spine-record
+      required: true
+    outputs:
+    - artifact_id: draft-fields-record
+      path: artifacts/draft-fields.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: claims-copy-qa
+    kind: review
+    needs:
+    - draft-fields
+    instructions: Peer check each literal field, punctuation, product truth and semantic alignment; feedback targets
+      only failed copy fields.
+    inputs:
+    - from: draft-fields
+      artifact_id: draft-fields-record
+      required: true
+    outputs:
+    - artifact_id: claims-copy-qa-record
+      path: artifacts/claims-copy-qa.md
+      required: true
+    quality:
+      gates:
+      - copy-semantic
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: copy-semantic

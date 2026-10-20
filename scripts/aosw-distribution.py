@@ -44,7 +44,7 @@ def permitted(rel):
                 len(parts)==3 and parts[1]=='schemas' and (parts[2].endswith('.schema.json') or parts[2]=='README.md'))
     if parts[:1]==('references',):return len(parts)==2 and parts[1].endswith('.md')
     if parts[:1]==('templates',):
-        return (len(parts)==2 and parts[1]=='README.md' or
+        return (len(parts)==2 and parts[1] in ('README.md','MARKETING-LIBRARY.md') or
                 len(parts)==3 and parts[2] in ('README.md','template.yaml') or
                 len(parts)==5 and parts[2]=='skills' and parts[4]=='SKILL.md' or
                 len(parts)>=4 and parts[2]=='assets' and parts[-1].lower().endswith(('.png','.jpg','.jpeg','.svg','.webp')))

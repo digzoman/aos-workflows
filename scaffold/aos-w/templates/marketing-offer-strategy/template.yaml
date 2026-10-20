@@ -1,0 +1,137 @@
+schema_version: 1.0.0
+template_id: marketing-offer-strategy
+version: 0.7.0
+name: Hypothetical offer positioning
+description: Translate observed competitor offers into **proposed hypotheses**, not promises that the seller can actually
+  fulfill.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  observed_competitor_matrix_ref:
+    type: string
+    required: true
+  target_buyer:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - offer-claims
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: offer-claims
+  kind: ai_independent
+  required: true
+  rubric: Competitor observations are not product capabilities; proposed prices/features labeled hypothesis until
+    verified.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: competitor-reference-map
+    kind: task
+    needs: []
+    instructions: Tag each competitor observation OBSERVED_COMPETITOR with source/time; explicitly deny automatic
+      equivalence to our product.
+    inputs: []
+    outputs:
+    - artifact_id: competitor-reference-map-record
+      path: artifacts/competitor-reference-map.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    skills:
+    - marketing-source-claims
+  - id: hypothesize-our-offer
+    kind: task
+    needs:
+    - competitor-reference-map
+    instructions: Draft buyer outcome, pain, mechanism, differentiation, feasible pricing hypothesis, exclusions and
+      commercial path.
+    inputs:
+    - from: competitor-reference-map
+      artifact_id: competitor-reference-map-record
+      required: true
+    outputs:
+    - artifact_id: hypothesize-our-offer-record
+      path: artifacts/hypothesize-our-offer.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    skills:
+    - marketing-source-claims
+  - id: gap-and-assumption-audit
+    kind: review
+    needs:
+    - hypothesize-our-offer
+    instructions: Label every claim/feature/price as UNVERIFIED_HYPOTHESIS until a deliverability verification artifact
+      is accepted.
+    inputs:
+    - from: hypothesize-our-offer
+      artifact_id: hypothesize-our-offer-record
+      required: true
+    outputs:
+    - artifact_id: gap-and-assumption-audit-record
+      path: artifacts/gap-and-assumption-audit.md
+      required: true
+    quality:
+      gates:
+      - offer-claims
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: offer-claims
+extensions:
+  marketing_stage: offer_hypothesis
+  offer_status: HYPOTHESIS_NOT_DELIVERABLE
+skills:
+- skill_id: marketing-source-claims
+  source: bundled
+  path: skills/marketing-source-claims/SKILL.md
+  required: true
+  trust: approved

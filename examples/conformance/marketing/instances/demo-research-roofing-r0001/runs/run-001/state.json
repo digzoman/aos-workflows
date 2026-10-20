@@ -1,0 +1,86 @@
+{
+  "active_steps": [],
+  "completed_steps": [],
+  "eligible_tasks": [
+    "verify-access"
+  ],
+  "governance": {
+    "claims": {},
+    "handoff": null,
+    "permissions": {},
+    "remediation": {},
+    "reviews": {}
+  },
+  "graph_revision": "g0001",
+  "integrity_level": "verified",
+  "last_event_digest": "bdbd17454f43e1f8923304e5f528244d12a75829e5ed5f2668bcc77b2fb1d31e",
+  "last_event_seq": 1,
+  "pending_provider_operations": [],
+  "run_id": "run-001",
+  "run_status": "CREATED",
+  "schema_version": "1.0.0",
+  "state_revision": 1,
+  "tasks": {
+    "coverage-ledger": {
+      "attempts": 0,
+      "evidence": [],
+      "graph_revision": "g0001",
+      "last_attempt_id": null,
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "status": "WAIT_DEPENDENCY"
+    },
+    "seller-offer-families": {
+      "attempts": 0,
+      "evidence": [],
+      "graph_revision": "g0001",
+      "last_attempt_id": null,
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "status": "WAIT_DEPENDENCY"
+    },
+    "source-evidence-review": {
+      "attempts": 0,
+      "evidence": [],
+      "graph_revision": "g0001",
+      "last_attempt_id": null,
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "status": "WAIT_DEPENDENCY"
+    },
+    "sweep-queue": {
+      "attempts": 0,
+      "evidence": [],
+      "graph_revision": "g0001",
+      "last_attempt_id": null,
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "status": "WAIT_DEPENDENCY"
+    },
+    "verify-access": {
+      "attempts": 0,
+      "evidence": [],
+      "graph_revision": "g0001",
+      "last_attempt_id": null,
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "status": "READY"
+    }
+  },
+  "updated_at": "2026-10-20T11:52:25Z"
+}

@@ -1,0 +1,127 @@
+schema_version: 1.0.0
+template_id: marketing-research-plan
+version: 0.7.0
+name: Marketing research planning
+description: Define target buyers, vertical/subvertical boundaries, scope and independently reviewable research portfolio.
+  Proposes child work only after approved scope.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  research_question:
+    type: string
+    required: true
+  max_verticals:
+    type: number
+    default: 5
+    required: false
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - plan-scope
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: plan-scope
+  kind: human
+  required: true
+  rubric: Approve scope, buyer definitions, geography, search budget and child generation limits; this does not authorize
+    external writes.
+  protected: true
+  waivable: false
+graph:
+  nodes:
+  - id: define-buyers
+    kind: task
+    needs: []
+    instructions: Separate owner/buyer from end consumer; map verticals and service class, market, seasonality and
+      inclusion/exclusion rules.
+    inputs: []
+    outputs:
+    - artifact_id: define-buyers-record
+      path: artifacts/define-buyers.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: draft-plan
+    kind: task
+    needs:
+    - define-buyers
+    instructions: Provide stable slug per vertical, ranked questions, coverage matrix, estimate access limitations,
+      per-child evidence contract.
+    inputs:
+    - from: define-buyers
+      artifact_id: define-buyers-record
+      required: true
+    outputs:
+    - artifact_id: draft-plan-record
+      path: artifacts/draft-plan.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: approve-scope
+    kind: approval
+    needs:
+    - draft-plan
+    instructions: Obtain actual owner approval for research scope and any child creation; do not invent reviewer identity.
+    inputs:
+    - from: draft-plan
+      artifact_id: draft-plan-record
+      required: true
+    outputs:
+    - artifact_id: approve-scope-record
+      path: artifacts/approve-scope.md
+      required: true
+    quality:
+      gates:
+      - plan-scope
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: plan-scope
+extensions:
+  marketing_stage: research_plan
+  child_generation: proposal_only

@@ -1,0 +1,11 @@
+{
+  "content_digest": "sha256:7a627e90213897925d75fbe4fba875ad007dd38e753ddcfee55bb4bd18517a47",
+  "graph_revision": "g0001",
+  "instance_id": "demo-research-agencies-r0001",
+  "origin": "templates/marketing-competitor-execution/template.yaml",
+  "pinned_snapshot_path": "template-snapshots/sha256-7a627e9021389792/template.yaml",
+  "resolved_at": "2026-10-20T11:52:25Z",
+  "schema_version": "1.0.0",
+  "template_id": "marketing-competitor-execution",
+  "version": "0.7.0"
+}

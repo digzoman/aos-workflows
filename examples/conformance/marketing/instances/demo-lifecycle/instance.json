@@ -1,0 +1,45 @@
+{
+  "created_at": "2026-10-20T11:52:25Z",
+  "created_by": {
+    "agent": "fixture-agent",
+    "instance": "prompt-15-fixture",
+    "platform": "local-test",
+    "role": "example-producer"
+  },
+  "current_graph_revision": "g0001",
+  "instance_id": "demo-lifecycle",
+  "name": "demo-lifecycle",
+  "parameters": {
+    "brand_asset_ref": "canonical-logo-pending",
+    "research_goal": "Compare buyer niches for a hypothetical AI ads toolkit",
+    "source_ref": "none-provided",
+    "target_buyer": "small business owners",
+    "working_market": "US and Canada"
+  },
+  "policy": {
+    "allow_dynamic_children": true,
+    "allowed_actions": [
+      "read",
+      "research",
+      "write_local",
+      "review"
+    ],
+    "autonomy": "bounded",
+    "default_gates": [
+      "launch-permit"
+    ],
+    "human_required_actions": [
+      "stage_paused",
+      "activate_live",
+      "change_budget",
+      "deploy_prod",
+      "send_message",
+      "emit_conversion"
+    ],
+    "max_parallel_tasks": 4
+  },
+  "schema_version": "1.0.0",
+  "template_id": "marketing-lifecycle-compound",
+  "template_lock": "template-lock.json",
+  "template_version": "0.7.0"
+}

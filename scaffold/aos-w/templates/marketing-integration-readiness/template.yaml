@@ -1,0 +1,133 @@
+schema_version: 1.0.0
+template_id: marketing-integration-readiness
+version: 0.7.0
+name: Final cross-system prelaunch integration QA
+description: Bring approved creative, Meta desired-versus-actual readback, CRM, landing and tracking findings into
+  a single honest READY/BLOCKED status.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  creatives_ref:
+    type: string
+    required: true
+  campaign_ref:
+    type: string
+    required: true
+  crm_ref:
+    type: string
+    required: true
+  landing_ref:
+    type: string
+    required: true
+  tracking_ref:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - integration-readiness
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: integration-readiness
+  kind: ai_independent
+  required: true
+  rubric: All selected asset hashes, actual external configuration readback, CRM/site/tracking and provider state
+    gates PASS or explicitly remain BLOCKED.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: collect-current-versions
+    kind: task
+    needs: []
+    instructions: Pin exact outputs, PASS reviews, current hashes, owner approvals, external provider readbacks and
+      unresolved sources.
+    inputs: []
+    outputs:
+    - artifact_id: collect-current-versions-record
+      path: artifacts/collect-current-versions.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: verify-dependent-gates
+    kind: task
+    needs:
+    - collect-current-versions
+    instructions: Check selected assets and placement previews, paused account status if staged, delivery routing,
+      hosted page and conversion consent/dedup; NOT_RUN cannot become PASS.
+    inputs:
+    - from: collect-current-versions
+      artifact_id: collect-current-versions-record
+      required: true
+    outputs:
+    - artifact_id: verify-dependent-gates-record
+      path: artifacts/verify-dependent-gates.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: integration-peer-review
+    kind: review
+    needs:
+    - verify-dependent-gates
+    instructions: Independent reviewer identifies gaps by system and precise remediation; no blanket PASS, no permission
+      to launch.
+    inputs:
+    - from: verify-dependent-gates
+      artifact_id: verify-dependent-gates-record
+      required: true
+    outputs:
+    - artifact_id: integration-peer-review-record
+      path: artifacts/integration-peer-review.md
+      required: true
+    quality:
+      gates:
+      - integration-readiness
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: integration-readiness

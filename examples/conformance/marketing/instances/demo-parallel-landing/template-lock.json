@@ -1,0 +1,11 @@
+{
+  "content_digest": "sha256:9530e1202263314dbcd0c76228b8d39da5d33c281d3b711cc7b923eac8847d0c",
+  "graph_revision": "g0001",
+  "instance_id": "demo-parallel-landing",
+  "origin": "templates/marketing-landing-page-setup/template.yaml",
+  "pinned_snapshot_path": "template-snapshots/sha256-9530e1202263314d/template.yaml",
+  "resolved_at": "2026-10-20T11:52:25Z",
+  "schema_version": "1.0.0",
+  "template_id": "marketing-landing-page-setup",
+  "version": "0.7.0"
+}

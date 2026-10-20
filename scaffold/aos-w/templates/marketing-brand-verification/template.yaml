@@ -1,0 +1,122 @@
+schema_version: 1.0.0
+template_id: marketing-brand-verification
+version: 0.7.0
+name: Canonical brand and logo verification
+description: Use genuine approved logo provenance and pixel-level appearance checks; never trust a generator to recreate
+  a brand mark accurately.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  artwork_ref:
+    type: string
+    required: true
+  canonical_brand_asset_ref:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - brand-integrity
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: brand-integrity
+  kind: ai_independent
+  required: true
+  rubric: Verify genuine canonical asset provenance, logo clarity and placement from actual pixels; no generated pseudo-logos.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: pin-brand-source
+    kind: task
+    needs: []
+    instructions: Record approved logo/hash/version and any explicitly owner-approved logo-free exception.
+    inputs: []
+    outputs:
+    - artifact_id: pin-brand-source-record
+      path: artifacts/pin-brand-source.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: check-application
+    kind: task
+    needs:
+    - pin-brand-source
+    instructions: Inspect actual pixels of all variants for size, 5% safe regions, distortion, false logos, contrast
+      and top-right placement where specified.
+    inputs:
+    - from: pin-brand-source
+      artifact_id: pin-brand-source-record
+      required: true
+    outputs:
+    - artifact_id: check-application-record
+      path: artifacts/check-application.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: brand-independent-review
+    kind: review
+    needs:
+    - check-application
+    instructions: Separate reviewer verifies canonical asset and every intended placement, issues precise correction
+      if not PASS.
+    inputs:
+    - from: check-application
+      artifact_id: check-application-record
+      required: true
+    outputs:
+    - artifact_id: brand-independent-review-record
+      path: artifacts/brand-independent-review.md
+      required: true
+    quality:
+      gates:
+      - brand-integrity
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: brand-integrity

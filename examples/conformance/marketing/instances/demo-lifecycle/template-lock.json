@@ -1,0 +1,11 @@
+{
+  "content_digest": "sha256:fb1b28402b939d87a71d907aced1b142d821a85e99a987c0d50fbbc6be1dfc80",
+  "graph_revision": "g0001",
+  "instance_id": "demo-lifecycle",
+  "origin": "templates/marketing-lifecycle-compound/template.yaml",
+  "pinned_snapshot_path": "template-snapshots/sha256-fb1b28402b939d87/template.yaml",
+  "resolved_at": "2026-10-20T11:52:25Z",
+  "schema_version": "1.0.0",
+  "template_id": "marketing-lifecycle-compound",
+  "version": "0.7.0"
+}

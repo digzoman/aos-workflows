@@ -1,0 +1,151 @@
+schema_version: 1.0.0
+template_id: marketing-launch-approval
+version: 0.7.0
+name: Human authorization for live ad publication
+description: Prepare exact launch manifest and request real, separately authenticated HUMAN approval. This module
+  **does not activate ads**.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  integration_qc_ref:
+    type: string
+    required: true
+  meta_snapshot_ref:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - launch-permit
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: launch-permit
+  kind: human
+  required: true
+  rubric: Only authenticated owner may authorize exact campaign/adset/ad IDs, cap/budget, excluded holds, artifact
+    versions, expiry and channel; no inferred consent.
+  protected: true
+  waivable: false
+graph:
+  nodes:
+  - id: freeze-launch-manifest
+    kind: task
+    needs: []
+    instructions: Define exact campaign/adset/ad IDs, creative revisions/hashes, budgets and max exposure, geography/holds,
+      permission scope and expiry.
+    inputs: []
+    outputs:
+    - artifact_id: freeze-launch-manifest-record
+      path: artifacts/freeze-launch-manifest.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: check-current-provider-state
+    kind: task
+    needs:
+    - freeze-launch-manifest
+    instructions: Read actual provider snapshot if authorized; if absent or inconsistent STOP and request reconciliation.
+    inputs:
+    - from: freeze-launch-manifest
+      artifact_id: freeze-launch-manifest-record
+      required: true
+    outputs:
+    - artifact_id: check-current-provider-state-record
+      path: artifacts/check-current-provider-state.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: request-owner-launch-permit
+    kind: approval
+    needs:
+    - check-current-provider-state
+    instructions: Owner must explicitly approve exact live activation and budget/exclusions with expiry; passing creative
+      QC or paused staging is NOT authorization.
+    inputs:
+    - from: check-current-provider-state
+      artifact_id: check-current-provider-state-record
+      required: true
+    outputs:
+    - artifact_id: request-owner-launch-permit-record
+      path: artifacts/request-owner-launch-permit.md
+      required: true
+    quality:
+      gates:
+      - launch-permit
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: launch-permit
+  - id: prepare-activation-handoff
+    kind: task
+    needs:
+    - request-owner-launch-permit
+    instructions: Write a NON-EXECUTING launch handoff listing permitted target IDs, dependency readback, provider
+      operation keys and independent verification sequence; no activation.
+    inputs:
+    - from: request-owner-launch-permit
+      artifact_id: request-owner-launch-permit-record
+      required: true
+    outputs:
+    - artifact_id: prepare-activation-handoff-record
+      path: artifacts/prepare-activation-handoff.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+extensions:
+  external_action: activate_live
+  default_mode: approval_only_no_publish

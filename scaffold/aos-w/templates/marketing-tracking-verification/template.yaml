@@ -1,0 +1,150 @@
+schema_version: 1.0.0
+template_id: marketing-tracking-verification
+version: 0.7.0
+name: Conversion and consent tracking verification
+description: Create evidence-backed tracking plan distinguishing clicks, actual booked appointments, qualified leads
+  and purchases, with consent and stable deduplication keys.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  funnel_contract_ref:
+    type: string
+    required: true
+  actual_provider_events_ref:
+    type: string
+    required: false
+    default: unavailable
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - conversion-truth
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: conversion-truth
+  kind: ai_independent
+  required: true
+  rubric: Consent, event source, confirmed appointment, qualification and purchase truth; deduplication and browser/server
+    matching limitations verified.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: milestone-taxonomy
+    kind: task
+    needs: []
+    instructions: Define PageView consent, CTA/DM, appointment-confirmed Schedule, verified Good Lead, and actual
+      paid Purchase; exclude tests/cancellations.
+    inputs: []
+    outputs:
+    - artifact_id: milestone-taxonomy-record
+      path: artifacts/milestone-taxonomy.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: source-of-truth-map
+    kind: task
+    needs:
+    - milestone-taxonomy
+    instructions: Map browser events, server CAPI, CRM confirmations, consent/revoke, event ID dedup, attribution
+      windows and reliability of observed event counts.
+    inputs:
+    - from: milestone-taxonomy
+      artifact_id: milestone-taxonomy-record
+      required: true
+    outputs:
+    - artifact_id: source-of-truth-map-record
+      path: artifacts/source-of-truth-map.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: test-matrix
+    kind: task
+    needs:
+    - source-of-truth-map
+    instructions: Specify rejection/acceptance, browser/server duplicate prevention, booking versus click, chatbot
+      negative controls; actual provider tests marked UNVERIFIED unless performed.
+    inputs:
+    - from: source-of-truth-map
+      artifact_id: source-of-truth-map-record
+      required: true
+    outputs:
+    - artifact_id: test-matrix-record
+      path: artifacts/test-matrix.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: independent-tracking-review
+    kind: review
+    needs:
+    - test-matrix
+    instructions: Peer verifies provider evidence and flags unknown dedup/attribution; no invented Schedule, qualified
+      lead or Purchase.
+    inputs:
+    - from: test-matrix
+      artifact_id: test-matrix-record
+      required: true
+    outputs:
+    - artifact_id: independent-tracking-review-record
+      path: artifacts/independent-tracking-review.md
+      required: true
+    quality:
+      gates:
+      - conversion-truth
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: conversion-truth

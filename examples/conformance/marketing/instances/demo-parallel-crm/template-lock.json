@@ -1,0 +1,11 @@
+{
+  "content_digest": "sha256:333d3904f487455cfa87c383bb0c166166ac5bd45653c9ef5ad58f3d39d38c4a",
+  "graph_revision": "g0001",
+  "instance_id": "demo-parallel-crm",
+  "origin": "templates/marketing-crm-preparation/template.yaml",
+  "pinned_snapshot_path": "template-snapshots/sha256-333d3904f487455c/template.yaml",
+  "resolved_at": "2026-10-20T11:52:25Z",
+  "schema_version": "1.0.0",
+  "template_id": "marketing-crm-preparation",
+  "version": "0.7.0"
+}

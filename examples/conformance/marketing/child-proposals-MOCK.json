@@ -1,0 +1,583 @@
+{
+  "fixture_kind": "MOCKED_PLANNING_EXAMPLE_NOT_REAL_APPROVAL",
+  "data": {
+    "schema_version": "1.0.0",
+    "plan_id": "demo-research",
+    "revision": "r0001",
+    "parent_run_id": "run-001",
+    "status": "PROPOSED",
+    "authorization_required": true,
+    "proposals": [
+      {
+        "proposal_id": "demo-research-coaches-r0001",
+        "instance_id": "demo-research-coaches-r0001",
+        "run_id": "run-001",
+        "status": "PROPOSED",
+        "needs": [
+          "approve-scope"
+        ],
+        "template_id": "marketing-competitor-execution",
+        "template_version": "0.7.0",
+        "inputs": {
+          "vertical": "coaching-services",
+          "buyer": "Owner of coaching business",
+          "queue_ref": "sample-keyword-queue-v1"
+        },
+        "expected_outputs": [
+          {
+            "artifact_id": "verify-access-record",
+            "path": "artifacts/verify-access.md",
+            "required": true,
+            "step_id": "verify-access"
+          },
+          {
+            "artifact_id": "sweep-queue-record",
+            "path": "artifacts/sweep-queue.md",
+            "required": true,
+            "step_id": "sweep-queue"
+          },
+          {
+            "artifact_id": "seller-offer-families-record",
+            "path": "artifacts/seller-offer-families.md",
+            "required": true,
+            "step_id": "seller-offer-families"
+          },
+          {
+            "artifact_id": "coverage-ledger-record",
+            "path": "artifacts/coverage-ledger.md",
+            "required": true,
+            "step_id": "coverage-ledger"
+          },
+          {
+            "artifact_id": "source-evidence-review-record",
+            "path": "artifacts/source-evidence-review.md",
+            "required": true,
+            "step_id": "source-evidence-review"
+          }
+        ],
+        "quality_requirements": [
+          {
+            "gate_id": "evidence-integrity",
+            "kind": "ai_independent",
+            "required": true,
+            "rubric": "Dated primary/source links, traceability, deduplicated sellers, inaccessible sources distinct from verified absence, reviewer independent from producer.",
+            "protected": false,
+            "waivable": false
+          }
+        ],
+        "execution_contracts": [
+          {
+            "step_id": "verify-access",
+            "needs": [],
+            "inputs": [],
+            "outputs": [
+              {
+                "artifact_id": "verify-access-record",
+                "path": "artifacts/verify-access.md",
+                "required": true
+              }
+            ],
+            "quality": {
+              "gates": [],
+              "criteria": [
+                "Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions"
+              ]
+            },
+            "done_when": "Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and exact digest; a required QA review of this revision is recorded."
+          },
+          {
+            "step_id": "sweep-queue",
+            "needs": [
+              "verify-access"
+            ],
+            "inputs": [
+              {
+                "from": "verify-access",
+                "artifact_id": "verify-access-record",
+                "required": true
+              }
+            ],
+            "outputs": [
+              {
+                "artifact_id": "sweep-queue-record",
+                "path": "artifacts/sweep-queue.md",
+                "required": true
+              }
+            ],
+            "quality": {
+              "gates": [],
+              "criteria": [
+                "Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions"
+              ]
+            },
+            "done_when": "Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and exact digest; a required QA review of this revision is recorded."
+          },
+          {
+            "step_id": "seller-offer-families",
+            "needs": [
+              "sweep-queue"
+            ],
+            "inputs": [
+              {
+                "from": "sweep-queue",
+                "artifact_id": "sweep-queue-record",
+                "required": true
+              }
+            ],
+            "outputs": [
+              {
+                "artifact_id": "seller-offer-families-record",
+                "path": "artifacts/seller-offer-families.md",
+                "required": true
+              }
+            ],
+            "quality": {
+              "gates": [],
+              "criteria": [
+                "Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions"
+              ]
+            },
+            "done_when": "Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and exact digest; a required QA review of this revision is recorded."
+          },
+          {
+            "step_id": "coverage-ledger",
+            "needs": [
+              "seller-offer-families"
+            ],
+            "inputs": [
+              {
+                "from": "seller-offer-families",
+                "artifact_id": "seller-offer-families-record",
+                "required": true
+              }
+            ],
+            "outputs": [
+              {
+                "artifact_id": "coverage-ledger-record",
+                "path": "artifacts/coverage-ledger.md",
+                "required": true
+              }
+            ],
+            "quality": {
+              "gates": [],
+              "criteria": [
+                "Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions"
+              ]
+            },
+            "done_when": "Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and exact digest; a required QA review of this revision is recorded."
+          },
+          {
+            "step_id": "source-evidence-review",
+            "needs": [
+              "coverage-ledger"
+            ],
+            "inputs": [
+              {
+                "from": "coverage-ledger",
+                "artifact_id": "coverage-ledger-record",
+                "required": true
+              }
+            ],
+            "outputs": [
+              {
+                "artifact_id": "source-evidence-review-record",
+                "path": "artifacts/source-evidence-review.md",
+                "required": true
+              }
+            ],
+            "quality": {
+              "gates": [
+                "evidence-integrity"
+              ],
+              "criteria": [
+                "Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions"
+              ]
+            },
+            "done_when": "Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and exact digest; a required QA review of this revision is recorded."
+          }
+        ],
+        "authorization_required": true
+      },
+      {
+        "proposal_id": "demo-research-agencies-r0001",
+        "instance_id": "demo-research-agencies-r0001",
+        "run_id": "run-001",
+        "status": "PROPOSED",
+        "needs": [
+          "approve-scope"
+        ],
+        "template_id": "marketing-competitor-execution",
+        "template_version": "0.7.0",
+        "inputs": {
+          "vertical": "boutique-marketing-agencies",
+          "buyer": "Agency owner",
+          "queue_ref": "sample-keyword-queue-v1"
+        },
+        "expected_outputs": [
+          {
+            "artifact_id": "verify-access-record",
+            "path": "artifacts/verify-access.md",
+            "required": true,
+            "step_id": "verify-access"
+          },
+          {
+            "artifact_id": "sweep-queue-record",
+            "path": "artifacts/sweep-queue.md",
+            "required": true,
+            "step_id": "sweep-queue"
+          },
+          {
+            "artifact_id": "seller-offer-families-record",
+            "path": "artifacts/seller-offer-families.md",
+            "required": true,
+            "step_id": "seller-offer-families"
+          },
+          {
+            "artifact_id": "coverage-ledger-record",
+            "path": "artifacts/coverage-ledger.md",
+            "required": true,
+            "step_id": "coverage-ledger"
+          },
+          {
+            "artifact_id": "source-evidence-review-record",
+            "path": "artifacts/source-evidence-review.md",
+            "required": true,
+            "step_id": "source-evidence-review"
+          }
+        ],
+        "quality_requirements": [
+          {
+            "gate_id": "evidence-integrity",
+            "kind": "ai_independent",
+            "required": true,
+            "rubric": "Dated primary/source links, traceability, deduplicated sellers, inaccessible sources distinct from verified absence, reviewer independent from producer.",
+            "protected": false,
+            "waivable": false
+          }
+        ],
+        "execution_contracts": [
+          {
+            "step_id": "verify-access",
+            "needs": [],
+            "inputs": [],
+            "outputs": [
+              {
+                "artifact_id": "verify-access-record",
+                "path": "artifacts/verify-access.md",
+                "required": true
+              }
+            ],
+            "quality": {
+              "gates": [],
+              "criteria": [
+                "Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions"
+              ]
+            },
+            "done_when": "Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and exact digest; a required QA review of this revision is recorded."
+          },
+          {
+            "step_id": "sweep-queue",
+            "needs": [
+              "verify-access"
+            ],
+            "inputs": [
+              {
+                "from": "verify-access",
+                "artifact_id": "verify-access-record",
+                "required": true
+              }
+            ],
+            "outputs": [
+              {
+                "artifact_id": "sweep-queue-record",
+                "path": "artifacts/sweep-queue.md",
+                "required": true
+              }
+            ],
+            "quality": {
+              "gates": [],
+              "criteria": [
+                "Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions"
+              ]
+            },
+            "done_when": "Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and exact digest; a required QA review of this revision is recorded."
+          },
+          {
+            "step_id": "seller-offer-families",
+            "needs": [
+              "sweep-queue"
+            ],
+            "inputs": [
+              {
+                "from": "sweep-queue",
+                "artifact_id": "sweep-queue-record",
+                "required": true
+              }
+            ],
+            "outputs": [
+              {
+                "artifact_id": "seller-offer-families-record",
+                "path": "artifacts/seller-offer-families.md",
+                "required": true
+              }
+            ],
+            "quality": {
+              "gates": [],
+              "criteria": [
+                "Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions"
+              ]
+            },
+            "done_when": "Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and exact digest; a required QA review of this revision is recorded."
+          },
+          {
+            "step_id": "coverage-ledger",
+            "needs": [
+              "seller-offer-families"
+            ],
+            "inputs": [
+              {
+                "from": "seller-offer-families",
+                "artifact_id": "seller-offer-families-record",
+                "required": true
+              }
+            ],
+            "outputs": [
+              {
+                "artifact_id": "coverage-ledger-record",
+                "path": "artifacts/coverage-ledger.md",
+                "required": true
+              }
+            ],
+            "quality": {
+              "gates": [],
+              "criteria": [
+                "Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions"
+              ]
+            },
+            "done_when": "Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and exact digest; a required QA review of this revision is recorded."
+          },
+          {
+            "step_id": "source-evidence-review",
+            "needs": [
+              "coverage-ledger"
+            ],
+            "inputs": [
+              {
+                "from": "coverage-ledger",
+                "artifact_id": "coverage-ledger-record",
+                "required": true
+              }
+            ],
+            "outputs": [
+              {
+                "artifact_id": "source-evidence-review-record",
+                "path": "artifacts/source-evidence-review.md",
+                "required": true
+              }
+            ],
+            "quality": {
+              "gates": [
+                "evidence-integrity"
+              ],
+              "criteria": [
+                "Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions"
+              ]
+            },
+            "done_when": "Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and exact digest; a required QA review of this revision is recorded."
+          }
+        ],
+        "authorization_required": true
+      },
+      {
+        "proposal_id": "demo-research-roofing-r0001",
+        "instance_id": "demo-research-roofing-r0001",
+        "run_id": "run-001",
+        "status": "PROPOSED",
+        "needs": [
+          "approve-scope"
+        ],
+        "template_id": "marketing-competitor-execution",
+        "template_version": "0.7.0",
+        "inputs": {
+          "vertical": "residential-roofing",
+          "buyer": "Roofing company owner",
+          "queue_ref": "sample-keyword-queue-v1"
+        },
+        "expected_outputs": [
+          {
+            "artifact_id": "verify-access-record",
+            "path": "artifacts/verify-access.md",
+            "required": true,
+            "step_id": "verify-access"
+          },
+          {
+            "artifact_id": "sweep-queue-record",
+            "path": "artifacts/sweep-queue.md",
+            "required": true,
+            "step_id": "sweep-queue"
+          },
+          {
+            "artifact_id": "seller-offer-families-record",
+            "path": "artifacts/seller-offer-families.md",
+            "required": true,
+            "step_id": "seller-offer-families"
+          },
+          {
+            "artifact_id": "coverage-ledger-record",
+            "path": "artifacts/coverage-ledger.md",
+            "required": true,
+            "step_id": "coverage-ledger"
+          },
+          {
+            "artifact_id": "source-evidence-review-record",
+            "path": "artifacts/source-evidence-review.md",
+            "required": true,
+            "step_id": "source-evidence-review"
+          }
+        ],
+        "quality_requirements": [
+          {
+            "gate_id": "evidence-integrity",
+            "kind": "ai_independent",
+            "required": true,
+            "rubric": "Dated primary/source links, traceability, deduplicated sellers, inaccessible sources distinct from verified absence, reviewer independent from producer.",
+            "protected": false,
+            "waivable": false
+          }
+        ],
+        "execution_contracts": [
+          {
+            "step_id": "verify-access",
+            "needs": [],
+            "inputs": [],
+            "outputs": [
+              {
+                "artifact_id": "verify-access-record",
+                "path": "artifacts/verify-access.md",
+                "required": true
+              }
+            ],
+            "quality": {
+              "gates": [],
+              "criteria": [
+                "Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions"
+              ]
+            },
+            "done_when": "Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and exact digest; a required QA review of this revision is recorded."
+          },
+          {
+            "step_id": "sweep-queue",
+            "needs": [
+              "verify-access"
+            ],
+            "inputs": [
+              {
+                "from": "verify-access",
+                "artifact_id": "verify-access-record",
+                "required": true
+              }
+            ],
+            "outputs": [
+              {
+                "artifact_id": "sweep-queue-record",
+                "path": "artifacts/sweep-queue.md",
+                "required": true
+              }
+            ],
+            "quality": {
+              "gates": [],
+              "criteria": [
+                "Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions"
+              ]
+            },
+            "done_when": "Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and exact digest; a required QA review of this revision is recorded."
+          },
+          {
+            "step_id": "seller-offer-families",
+            "needs": [
+              "sweep-queue"
+            ],
+            "inputs": [
+              {
+                "from": "sweep-queue",
+                "artifact_id": "sweep-queue-record",
+                "required": true
+              }
+            ],
+            "outputs": [
+              {
+                "artifact_id": "seller-offer-families-record",
+                "path": "artifacts/seller-offer-families.md",
+                "required": true
+              }
+            ],
+            "quality": {
+              "gates": [],
+              "criteria": [
+                "Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions"
+              ]
+            },
+            "done_when": "Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and exact digest; a required QA review of this revision is recorded."
+          },
+          {
+            "step_id": "coverage-ledger",
+            "needs": [
+              "seller-offer-families"
+            ],
+            "inputs": [
+              {
+                "from": "seller-offer-families",
+                "artifact_id": "seller-offer-families-record",
+                "required": true
+              }
+            ],
+            "outputs": [
+              {
+                "artifact_id": "coverage-ledger-record",
+                "path": "artifacts/coverage-ledger.md",
+                "required": true
+              }
+            ],
+            "quality": {
+              "gates": [],
+              "criteria": [
+                "Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions"
+              ]
+            },
+            "done_when": "Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and exact digest; a required QA review of this revision is recorded."
+          },
+          {
+            "step_id": "source-evidence-review",
+            "needs": [
+              "coverage-ledger"
+            ],
+            "inputs": [
+              {
+                "from": "coverage-ledger",
+                "artifact_id": "coverage-ledger-record",
+                "required": true
+              }
+            ],
+            "outputs": [
+              {
+                "artifact_id": "source-evidence-review-record",
+                "path": "artifacts/source-evidence-review.md",
+                "required": true
+              }
+            ],
+            "quality": {
+              "gates": [
+                "evidence-integrity"
+              ],
+              "criteria": [
+                "Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions"
+              ]
+            },
+            "done_when": "Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and exact digest; a required QA review of this revision is recorded."
+          }
+        ],
+        "authorization_required": true
+      }
+    ]
+  }
+}

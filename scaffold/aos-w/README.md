@@ -1,4 +1,4 @@
-# Agent OS Workflows — portable starter (0.6.0)
+# Agent OS Workflows — portable starter (0.7.0)
 
 **Status:** Initial **file-based scaffold**, not a workflow execution engine. It is usable as an instruction-driven, **single-writer, manually operated** workflow folder. Automatic graph execution, distributed locks, time-triggered runs, provider integration and validators are later milestones.
 
@@ -35,6 +35,14 @@ Standalone use remains Git-free. If your workspace explicitly configures Git, fo
 
 [Installation guide](references/INSTALL.md): extract the standalone `aos-w/` ZIP into any persistent work folder. It contains only protected framework files plus **clean starter** `agent-files/` configuration and empty runtime folders. Unlike the public development repository, **the ZIP excludes the synthetic practice instance and any private user data**. For an upgrade **back up and preserve the entire existing `agent-files/`** while replacing only protected paths. The optional, separately hosted distribution checker verifies the ZIP's SHA-256 manifest and stages upgrades with rollback backups. It is not a runtime requirement.
 
+## Marketing lifecycle library (0.7.0)
+
+Read the [marketing template catalog](templates/MARKETING-LIBRARY.md) and [file-only marketing operating guide](references/MARKETING-WORKFLOWS.md). Twenty-one independently reusable master templates cover research planning, keyword discovery, competitor investigation, independent QC, consolidation, scoring, offer positioning/true deliverability, copy/brief/image/brand QA, Meta/CRM/site/tracking preparation, human launch authorization, read-only monitoring and optimization. The [compound lifecycle](templates/marketing-lifecycle-compound/README.md) models version-pinned child composition and explicit research fan-out, independent review, parallel preparation and integration. These are manual workflow definitions, **not** live Meta or HighLevel operations. Live publication always requires separate authenticated human authorization and readback.
+
+## Marketing lifecycle library (0.7.0)
+
+Read the [marketing template catalog](templates/MARKETING-LIBRARY.md) and [file-only marketing operating guide](references/MARKETING-WORKFLOWS.md). Twenty-one independently reusable master templates cover research planning, keyword discovery, competitor investigation, independent QC, consolidation, scoring, offer positioning/true deliverability, copy/brief/image/brand QA, Meta/CRM/site/tracking preparation, human launch authorization, read-only monitoring and optimization. The [compound lifecycle](templates/marketing-lifecycle-compound/README.md) models version-pinned child composition and explicit research fan-out, independent review, parallel preparation and integration. These are manual workflow definitions, **not** live Meta or HighLevel operations. Live publication always requires separate authenticated human authorization and readback.
+
 ## What comes in this directory
 
 | Path | Use | May an executing agent normally edit it? |
@@ -64,4 +72,4 @@ Treat an installed release's `agent-files/` as user-owned. To upgrade, **back up
 
 > Read `aos-w/README.md`, `aos-w/PROTOCOL.md`, `aos-w/agent-files/README.md`, and saved `handoff.md`. Discover instances under `agent-files/instances/`. Validate the selected run's pinned template, `events.jsonl` and `state.json`; report any inconsistencies, blockers, approval requirements or unknown external effects. Identify the **next eligible bounded step** and ask before actions requiring approval. Never infer completion from chat memory or merely from a plan.
 
-This is a foundation for future Prompts 15–19, not the fully tested Version 1 release.
+This is a foundation for future Prompts 16–19, not the fully tested Version 1 release.

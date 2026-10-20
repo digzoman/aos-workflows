@@ -1,0 +1,34 @@
+{
+  "fixture_kind": "MOCK_STATE_NOT_EXECUTED",
+  "simulated_parent_graph_revision": "g0001",
+  "parent_template": "marketing-lifecycle-compound",
+  "scenario": "Four independent implementation streams after exact owner verified deliverability; no real provider state",
+  "statuses": {
+    "offer-verified": "ACCEPTED_SIMULATED",
+    "copy": "COMPLETE_SIMULATED",
+    "creative-brief": "COMPLETE_SIMULATED",
+    "media": "WAIT_REVIEW",
+    "creative-qa": "WAIT_DEPENDENCY",
+    "brand": "WAIT_DEPENDENCY",
+    "meta-plan": "WAIT_DEPENDENCY",
+    "crm": "READY_SIMULATED",
+    "landing": "READY_SIMULATED",
+    "tracking": "WAIT_DEPENDENCY",
+    "integration": "WAIT_DEPENDENCY",
+    "launch-approval": "BLOCKED_NO_REAL_HUMAN_PERMIT"
+  },
+  "parallel_possible": [
+    "crm",
+    "landing"
+  ],
+  "integration_dependencies": [
+    "meta-plan",
+    "crm",
+    "landing",
+    "tracking",
+    "brand"
+  ],
+  "approval_level": "none",
+  "real_provider_changes": false,
+  "interpretation": "TRUE parallel execution needs coordinated host; one-file agent may execute serially"
+}

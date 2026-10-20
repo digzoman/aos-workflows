@@ -1,0 +1,127 @@
+schema_version: 1.0.0
+template_id: marketing-research-quality-review
+version: 0.7.0
+name: Independent research quality and remediation
+description: Evaluate exact current submitted research evidence with independent reviewer, scoped correction and resubmission;
+  do not erase failed attempts.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  submitted_run_ref:
+    type: string
+    required: true
+  rubric_version:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - qc-independent
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: qc-independent
+  kind: ai_independent
+  required: true
+  rubric: Independent review of exact artifact versions and required coverage; issue-level corrections, no blanket
+    waivers.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: freeze-submission
+    kind: task
+    needs: []
+    instructions: Record complete submitted artifact IDs/hashes/graph revision and producer identity; reject missing
+      evidence.
+    inputs: []
+    outputs:
+    - artifact_id: freeze-submission-record
+      path: artifacts/freeze-submission.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: peer-audit
+    kind: review
+    needs:
+    - freeze-submission
+    instructions: Independent reviewer inspects real primary sources, search breadth, dedupe and contradictions; decide
+      PASS/REVISE/BLOCKED/INSUFFICIENT_EVIDENCE.
+    inputs:
+    - from: freeze-submission
+      artifact_id: freeze-submission-record
+      required: true
+    outputs:
+    - artifact_id: peer-audit-record
+      path: artifacts/peer-audit.md
+      required: true
+    quality:
+      gates:
+      - qc-independent
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: qc-independent
+  - id: remediation-route
+    kind: task
+    needs:
+    - peer-audit
+    instructions: For REVISE create exact failed-artifact fixes, bounded new attempt and invalidate affected downstream
+      QC; do not approve failed content.
+    inputs:
+    - from: peer-audit
+      artifact_id: peer-audit-record
+      required: true
+    outputs:
+    - artifact_id: remediation-route-record
+      path: artifacts/remediation-route.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+extensions:
+  marketing_stage: quality
+  requires_separate_reviewer: true

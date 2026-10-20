@@ -1,0 +1,44 @@
+{
+  "created_at": "2026-10-20T11:52:25Z",
+  "created_by": {
+    "agent": "fixture-agent",
+    "instance": "prompt-15-fixture",
+    "platform": "local-test",
+    "role": "example-producer"
+  },
+  "current_graph_revision": "g0001",
+  "instance_id": "demo-parallel-crm",
+  "name": "demo-parallel-crm",
+  "parameters": {
+    "crm_provider_ref": "unverified",
+    "source_ref": "none-provided",
+    "verified_offer_ref": "PENDING_OWNER_APPROVAL",
+    "working_market": "US and Canada"
+  },
+  "policy": {
+    "allow_dynamic_children": false,
+    "allowed_actions": [
+      "read",
+      "research",
+      "write_local",
+      "review"
+    ],
+    "autonomy": "bounded",
+    "default_gates": [
+      "crm-routing"
+    ],
+    "human_required_actions": [
+      "stage_paused",
+      "activate_live",
+      "change_budget",
+      "deploy_prod",
+      "send_message",
+      "emit_conversion"
+    ],
+    "max_parallel_tasks": 1
+  },
+  "schema_version": "1.0.0",
+  "template_id": "marketing-crm-preparation",
+  "template_lock": "template-lock.json",
+  "template_version": "0.7.0"
+}

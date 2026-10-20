@@ -1,0 +1,127 @@
+schema_version: 1.0.0
+template_id: marketing-offer-deliverability
+version: 0.7.0
+name: Verified deliverable offer and capabilities
+description: Have actual owner or authorized product authority verify specific product/service scope, price, deliverability,
+  limits and support; blocks downstream claims until confirmed.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  offer_hypothesis_ref:
+    type: string
+    required: true
+  actual_product_evidence_ref:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - deliverability
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: deliverability
+  kind: human
+  required: true
+  rubric: Human product owner verifies actual deliverable scope, price, tooling, geographic restrictions, support
+    and terms against current authoritative evidence.
+  protected: true
+  waivable: false
+graph:
+  nodes:
+  - id: inventory-capabilities
+    kind: task
+    needs: []
+    instructions: Check real product/tool/service features, staff capacity, fulfillment path, geography and exclusions
+      against authoritative documents.
+    inputs: []
+    outputs:
+    - artifact_id: inventory-capabilities-record
+      path: artifacts/inventory-capabilities.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: verify-commercial-terms
+    kind: task
+    needs:
+    - inventory-capabilities
+    instructions: Cross-check live price, billing, support promises, refund and compliance constraints; unsupported
+      claims remain blocked.
+    inputs:
+    - from: inventory-capabilities
+      artifact_id: inventory-capabilities-record
+      required: true
+    outputs:
+    - artifact_id: verify-commercial-terms-record
+      path: artifacts/verify-commercial-terms.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: owner-confirm-deliverability
+    kind: approval
+    needs:
+    - verify-commercial-terms
+    instructions: Obtain version-scoped human acceptance of exactly deliverable offer terms and limitations; a hypothetical
+      marketing plan is not evidence.
+    inputs:
+    - from: verify-commercial-terms
+      artifact_id: verify-commercial-terms-record
+      required: true
+    outputs:
+    - artifact_id: owner-confirm-deliverability-record
+      path: artifacts/owner-confirm-deliverability.md
+      required: true
+    quality:
+      gates:
+      - deliverability
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: deliverability
+extensions:
+  marketing_stage: offer_truth
+  output_status: VERIFIED_DELIVERABLE_ONLY_ON_HUMAN_PASS

@@ -1,0 +1,150 @@
+schema_version: 1.0.0
+template_id: marketing-evidence-consolidation
+version: 0.7.0
+name: Evidence consolidation and source lineage
+description: Merge only accepted versioned research findings across runs; preserve contradictory claims and provenance.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  accepted_runs_ref:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - consolidation
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: consolidation
+  kind: ai_independent
+  required: true
+  rubric: Traceable source -> observation -> advertiser -> offer family; preserve contradictions and confidence.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: verify-child-acceptance
+    kind: task
+    needs: []
+    instructions: Read each child latest artifact set and independent review, reject stale PASS or missing required
+      runs.
+    inputs: []
+    outputs:
+    - artifact_id: verify-child-acceptance-record
+      path: artifacts/verify-child-acceptance.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: merge-sellers
+    kind: task
+    needs:
+    - verify-child-acceptance
+    instructions: Normalize advertiser identity, offer-family, observed offer, dates, links, market and duplicate
+      identities.
+    inputs:
+    - from: verify-child-acceptance
+      artifact_id: verify-child-acceptance-record
+      required: true
+    outputs:
+    - artifact_id: merge-sellers-record
+      path: artifacts/merge-sellers.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    skills:
+    - marketing-source-claims
+  - id: reconcile-contradictions
+    kind: task
+    needs:
+    - merge-sellers
+    instructions: Preserve evidence disagreement and source limits instead of silently choosing favorable results.
+    inputs:
+    - from: merge-sellers
+      artifact_id: merge-sellers-record
+      required: true
+    outputs:
+    - artifact_id: reconcile-contradictions-record
+      path: artifacts/reconcile-contradictions.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: audit-consolidation
+    kind: review
+    needs:
+    - reconcile-contradictions
+    instructions: Verify all required child references, confidence and source lineage with separate reviewer.
+    inputs:
+    - from: reconcile-contradictions
+      artifact_id: reconcile-contradictions-record
+      required: true
+    outputs:
+    - artifact_id: audit-consolidation-record
+      path: artifacts/audit-consolidation.md
+      required: true
+    quality:
+      gates:
+      - consolidation
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: consolidation
+skills:
+- skill_id: marketing-source-claims
+  source: bundled
+  path: skills/marketing-source-claims/SKILL.md
+  required: true
+  trust: approved

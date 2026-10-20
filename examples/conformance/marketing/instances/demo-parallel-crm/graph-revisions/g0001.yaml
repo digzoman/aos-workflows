@@ -1,0 +1,125 @@
+schema_version: 1.0.0
+template_id: marketing-crm-preparation
+version: 0.7.0
+name: CRM and messaging preparation
+description: Prepare versioned conversational intent/routing, offer knowledge, appointment status and negative control
+  tests without touching actual customer contacts.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  verified_offer_ref:
+    type: string
+    required: true
+  crm_provider_ref:
+    type: string
+    required: false
+    default: unverified
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - crm-routing
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: crm-routing
+  kind: ai_independent
+  required: true
+  rubric: Per-offer intent map and permitted questions, blank responses where expected; saved config distinct from
+    tested live DM behavior.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: crm-journey-map
+    kind: task
+    needs: []
+    instructions: Specify messaging question (full question), blank Meta response, offer fingerprint, bot knowledge/route
+      and contact permissions.
+    inputs: []
+    outputs:
+    - artifact_id: crm-journey-map-record
+      path: artifacts/crm-journey-map.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: prepare-regression-matrix
+    kind: task
+    needs:
+    - crm-journey-map
+    instructions: Separate actual Facebook Messenger and Instagram Direct tests from stored configuration; include
+      unrelated-offer negative control.
+    inputs:
+    - from: crm-journey-map
+      artifact_id: crm-journey-map-record
+      required: true
+    outputs:
+    - artifact_id: prepare-regression-matrix-record
+      path: artifacts/prepare-regression-matrix.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: qa-crm-plan
+    kind: review
+    needs:
+    - prepare-regression-matrix
+    instructions: Peer verifies truth of route, consent/privacy boundaries and channel test plan; no live customer
+      DMs.
+    inputs:
+    - from: prepare-regression-matrix
+      artifact_id: prepare-regression-matrix-record
+      required: true
+    outputs:
+    - artifact_id: qa-crm-plan-record
+      path: artifacts/qa-crm-plan.md
+      required: true
+    quality:
+      gates:
+      - crm-routing
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: crm-routing

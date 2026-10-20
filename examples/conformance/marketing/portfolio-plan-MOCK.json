@@ -1,0 +1,32 @@
+{
+  "fixture_kind": "MOCKED_PLANNING_EXAMPLE_NOT_REAL_APPROVAL",
+  "data": {
+    "plan_id": "demo-research",
+    "revision": "r0001",
+    "parent_run_id": "run-001",
+    "approved_input": true,
+    "child_template_id": "marketing-competitor-execution",
+    "child_template_version": "0.7.0",
+    "approval_node": "approve-scope",
+    "items": [
+      {
+        "slug": "coaches",
+        "vertical": "coaching-services",
+        "buyer": "Owner of coaching business",
+        "queue_ref": "sample-keyword-queue-v1"
+      },
+      {
+        "slug": "agencies",
+        "vertical": "boutique-marketing-agencies",
+        "buyer": "Agency owner",
+        "queue_ref": "sample-keyword-queue-v1"
+      },
+      {
+        "slug": "roofing",
+        "vertical": "residential-roofing",
+        "buyer": "Roofing company owner",
+        "queue_ref": "sample-keyword-queue-v1"
+      }
+    ]
+  }
+}

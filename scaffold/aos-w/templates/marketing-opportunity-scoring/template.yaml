@@ -1,0 +1,148 @@
+schema_version: 1.0.0
+template_id: marketing-opportunity-scoring
+version: 0.7.0
+name: Marketing opportunity and confidence scoring
+description: Score buyers and offer niches using evidence-based transparent axis rubrics, uncertainty and cost-to-test
+  caveats.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  scorecard_ref:
+    type: string
+    required: true
+  scoring_rubric:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - scoring
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: scoring
+  kind: ai_independent
+  required: true
+  rubric: Transparent rubric, cited evidence per axis, missing data and confidence distinct from score; no profitability
+    inferred.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: select-rubric
+    kind: task
+    needs: []
+    instructions: Pin seven-axis or custom rubric and weights, missing-data policy and distinction between opportunity
+      and source-ad persistence.
+    inputs: []
+    outputs:
+    - artifact_id: select-rubric-record
+      path: artifacts/select-rubric.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: score-verticals
+    kind: task
+    needs:
+    - select-rubric
+    instructions: Score buyer pain, value, competition, ability to evidence results, DIY/tool fit, conversion and
+      audience reach using cited rows.
+    inputs:
+    - from: select-rubric
+      artifact_id: select-rubric-record
+      required: true
+    outputs:
+    - artifact_id: score-verticals-record
+      path: artifacts/score-verticals.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: confidence-and-cost
+    kind: task
+    needs:
+    - score-verticals
+    instructions: Separate evidence confidence and research gaps from weighted opportunity scores; estimate incremental
+      creative and adset cost only as assumptions.
+    inputs:
+    - from: score-verticals
+      artifact_id: score-verticals-record
+      required: true
+    outputs:
+    - artifact_id: confidence-and-cost-record
+      path: artifacts/confidence-and-cost.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: independent-score-review
+    kind: review
+    needs:
+    - confidence-and-cost
+    instructions: Verify arithmetic, source specificity and unexplained rankings before proposing test priority.
+    inputs:
+    - from: confidence-and-cost
+      artifact_id: confidence-and-cost-record
+      required: true
+    outputs:
+    - artifact_id: independent-score-review-record
+      path: artifacts/independent-score-review.md
+      required: true
+    quality:
+      gates:
+      - scoring
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: scoring

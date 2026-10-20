@@ -1,0 +1,126 @@
+schema_version: 1.0.0
+template_id: marketing-keyword-discovery
+version: 0.7.0
+name: Keyword and advertiser search discovery
+description: Prepare prioritized Meta Ads Library search terms and advertiser candidates, deduplicated and coverage-aware,
+  without claiming search results.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  vertical:
+    type: string
+    required: true
+  buyer:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - keyword-coverage
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: keyword-coverage
+  kind: ai_independent
+  required: true
+  rubric: Complete, diverse search-term families and per-query coverage, no invented impression/rank values, bounded
+    retry queue.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: seed-families
+    kind: task
+    needs: []
+    instructions: List buyer-language, direct problem, trade niches, category synonyms, offer mechanism, competitor
+      brand and local variants with stable keyword IDs.
+    inputs: []
+    outputs:
+    - artifact_id: seed-families-record
+      path: artifacts/seed-families.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: normalize-queue
+    kind: task
+    needs:
+    - seed-families
+    instructions: Deduplicate terms, rank by relevance, add country/time/search source and explicit exclusions and
+      retry limits.
+    inputs:
+    - from: seed-families
+      artifact_id: seed-families-record
+      required: true
+    outputs:
+    - artifact_id: normalize-queue-record
+      path: artifacts/normalize-queue.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: audit-coverage
+    kind: review
+    needs:
+    - normalize-queue
+    instructions: Independently examine important omitted synonyms, discovery breadth, bias and source availability;
+      record deferred queue.
+    inputs:
+    - from: normalize-queue
+      artifact_id: normalize-queue-record
+      required: true
+    outputs:
+    - artifact_id: audit-coverage-record
+      path: artifacts/audit-coverage.md
+      required: true
+    quality:
+      gates:
+      - keyword-coverage
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: keyword-coverage
+extensions:
+  marketing_stage: research_discovery

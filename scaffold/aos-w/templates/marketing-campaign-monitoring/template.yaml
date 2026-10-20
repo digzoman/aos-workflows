@@ -1,0 +1,153 @@
+schema_version: 1.0.0
+template_id: marketing-campaign-monitoring
+version: 0.7.0
+name: Read-only campaign performance monitoring
+description: Summarize dated real provider delivery and downstream CRM outcomes, not merely API-accepted writes, with
+  observed and estimated metrics clearly labeled.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  reporting_period:
+    type: string
+    required: true
+  provider_readback_ref:
+    type: string
+    required: false
+    default: not-available
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - monitoring-evidence
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: monitoring-evidence
+  kind: ai_independent
+  required: true
+  rubric: Dated provider insights/CRM outcomes, CTR/CPC formulas, observed versus estimated and meaningful uncertainty;
+    do not invent delivery.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: observe-status
+    kind: task
+    needs: []
+    instructions: Record actual configured/effective/review/delivery state separately; distinguish held/paused and
+      unverified status.
+    inputs: []
+    outputs:
+    - artifact_id: observe-status-record
+      path: artifacts/observe-status.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: measure-results
+    kind: task
+    needs:
+    - observe-status
+    instructions: Compute CTR/CPC from actual impressions/clicks/spend; when no clicks use explicitly labeled estimate
+      or N/A; never invent conversations.
+    inputs:
+    - from: observe-status
+      artifact_id: observe-status-record
+      required: true
+    outputs:
+    - artifact_id: measure-results-record
+      path: artifacts/measure-results.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: crm-attribution
+    kind: task
+    needs:
+    - measure-results
+    instructions: Compare confirmed booking/Good Lead status using actual CRM and consent evidence, not Meta events
+      alone.
+    inputs:
+    - from: measure-results
+      artifact_id: measure-results-record
+      required: true
+    outputs:
+    - artifact_id: crm-attribution-record
+      path: artifacts/crm-attribution.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: report-independent-review
+    kind: review
+    needs:
+    - crm-attribution
+    instructions: Check timestamps, denominators, estimated labels, rate-limit/attribution caveats and safe recommended
+      watchlist.
+    inputs:
+    - from: crm-attribution
+      artifact_id: crm-attribution-record
+      required: true
+    outputs:
+    - artifact_id: report-independent-review-record
+      path: artifacts/report-independent-review.md
+      required: true
+    quality:
+      gates:
+      - monitoring-evidence
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: monitoring-evidence
+extensions:
+  recurrence: optional_declared_schedule_requires_host
+  default_trigger: manual

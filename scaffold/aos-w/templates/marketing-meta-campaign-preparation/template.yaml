@@ -1,0 +1,156 @@
+schema_version: 1.0.0
+template_id: marketing-meta-campaign-preparation
+version: 0.7.0
+name: Meta campaign, adset and ad preparation
+description: Draft desired Meta campaign/adset/ad graph, targeting, budgets, holds, creative hashes and CTA; no default
+  provider writes or activation.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  verified_offer_ref:
+    type: string
+    required: true
+  approved_creatives_ref:
+    type: string
+    required: true
+  account_readback_ref:
+    type: string
+    required: false
+    default: not-available
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - campaign-plan
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: campaign-plan
+  kind: human
+  required: true
+  rubric: Explicit scope/targeting/objectives/budget/currency/holds and approval for any PAUSED provider staging;
+    draft document is not authorization.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: baseline-readback
+    kind: task
+    needs: []
+    instructions: Record whether real Meta provider access and current account budget/object inventories were actually
+      read; UNKNOWN if unavailable.
+    inputs: []
+    outputs:
+    - artifact_id: baseline-readback-record
+      path: artifacts/baseline-readback.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: campaign-structure
+    kind: task
+    needs:
+    - baseline-readback
+    instructions: Document exact parent/adset/ad desired state, objective, budget/currency, location/age and exclusions,
+      sibling HOLDs, placement media IDs.
+    inputs:
+    - from: baseline-readback
+      artifact_id: baseline-readback-record
+      required: true
+    outputs:
+    - artifact_id: campaign-structure-record
+      path: artifacts/campaign-structure.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: paused-staging-plan
+    kind: task
+    needs:
+    - campaign-structure
+    instructions: Produce idempotent proposed operations, provider-object identity reconciliation and PENDING provider
+      readback plan; do not claim PAUSED exists.
+    inputs:
+    - from: campaign-structure
+      artifact_id: campaign-structure-record
+      required: true
+    outputs:
+    - artifact_id: paused-staging-plan-record
+      path: artifacts/paused-staging-plan.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: owner-scope-approval
+    kind: approval
+    needs:
+    - paused-staging-plan
+    instructions: Human reviews exact spend exposure, location and identities for a possible future PAUSED staging;
+      this is NOT activation approval.
+    inputs:
+    - from: paused-staging-plan
+      artifact_id: paused-staging-plan-record
+      required: true
+    outputs:
+    - artifact_id: owner-scope-approval-record
+      path: artifacts/owner-scope-approval.md
+      required: true
+    quality:
+      gates:
+      - campaign-plan
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: campaign-plan
+extensions:
+  provider_authority: meta_live_state_external_only
+  default_write_scope: local_only

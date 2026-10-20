@@ -1,0 +1,148 @@
+schema_version: 1.0.0
+template_id: marketing-optimization
+version: 0.7.0
+name: Campaign optimization proposals and authorized changes
+description: Propose bounded changes from verified insights; any live budget, targeting, creative or status edits
+  require a new, exact-scoped authenticated human permit.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  verified_metrics_ref:
+    type: string
+    required: true
+  current_provider_state_ref:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - optimization-authorization
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: optimization-authorization
+  kind: human
+  required: true
+  rubric: Approve exact desired-state diff, original provider snapshot, scope/budget limits, rollback and reconciliation
+    plan before changes.
+  protected: true
+  waivable: false
+graph:
+  nodes:
+  - id: diagnose-opportunity
+    kind: task
+    needs: []
+    instructions: Separate actual performance anomalies and tracking limitations from hypotheses; rank fixes with
+      evidence.
+    inputs: []
+    outputs:
+    - artifact_id: diagnose-opportunity-record
+      path: artifacts/diagnose-opportunity.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: draft-diff
+    kind: task
+    needs:
+    - diagnose-opportunity
+    instructions: Specify exact before/after campaign/adset/ad/asset changes, objective, budget exposure, rollback/compensation,
+      stable operation IDs.
+    inputs:
+    - from: diagnose-opportunity
+      artifact_id: diagnose-opportunity-record
+      required: true
+    outputs:
+    - artifact_id: draft-diff-record
+      path: artifacts/draft-diff.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: owner-change-permit
+    kind: approval
+    needs:
+    - draft-diff
+    instructions: Request exact human approval for each consequential provider write or spend change; no silent auto-optimization.
+    inputs:
+    - from: draft-diff
+      artifact_id: draft-diff-record
+      required: true
+    outputs:
+    - artifact_id: owner-change-permit-record
+      path: artifacts/owner-change-permit.md
+      required: true
+    quality:
+      gates:
+      - optimization-authorization
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: optimization-authorization
+  - id: reconciliation-handoff
+    kind: task
+    needs:
+    - owner-change-permit
+    instructions: Document approved change and required post-write provider readback; without authorized connector,
+      STOP before any action.
+    inputs:
+    - from: owner-change-permit
+      artifact_id: owner-change-permit-record
+      required: true
+    outputs:
+    - artifact_id: reconciliation-handoff-record
+      path: artifacts/reconciliation-handoff.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local

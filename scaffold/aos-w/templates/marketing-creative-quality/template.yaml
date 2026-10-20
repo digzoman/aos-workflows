@@ -1,0 +1,123 @@
+schema_version: 1.0.0
+template_id: marketing-creative-quality
+version: 0.7.0
+name: Independent creative quality and revision
+description: Validate actual rendered artwork, spelling, semantic copy/offer match, safe zones and every supplied
+  format; issue targeted fixes.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  creative_asset_manifest_ref:
+    type: string
+    required: true
+  locked_copy_ref:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - image-pixel
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: image-pixel
+  kind: ai_independent
+  required: true
+  rubric: Inspect actual image pixels for text/spelling, clipping, dimensions, scene credibility, safe zones and variant-specific
+    issues.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: deterministic-export-check
+    kind: task
+    needs: []
+    instructions: Verify exact file existence/hash/format/resolution and literal copy fields wherever editable.
+    inputs: []
+    outputs:
+    - artifact_id: deterministic-export-check-record
+      path: artifacts/deterministic-export-check.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: visual-semantic-inspection
+    kind: review
+    needs:
+    - deterministic-export-check
+    instructions: Independent reviewer views actual full-resolution variants for clipping, typography, realism, logo
+      truth and CTA.
+    inputs:
+    - from: deterministic-export-check
+      artifact_id: deterministic-export-check-record
+      required: true
+    outputs:
+    - artifact_id: visual-semantic-inspection-record
+      path: artifacts/visual-semantic-inspection.md
+      required: true
+    quality:
+      gates:
+      - image-pixel
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: image-pixel
+  - id: revision-manifest
+    kind: task
+    needs:
+    - visual-semantic-inspection
+    instructions: List accepted variants and exact failed ones with correction, new hash and re-review requirement;
+      no aggregate PASS if one required format failed.
+    inputs:
+    - from: visual-semantic-inspection
+      artifact_id: visual-semantic-inspection-record
+      required: true
+    outputs:
+    - artifact_id: revision-manifest-record
+      path: artifacts/revision-manifest.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local

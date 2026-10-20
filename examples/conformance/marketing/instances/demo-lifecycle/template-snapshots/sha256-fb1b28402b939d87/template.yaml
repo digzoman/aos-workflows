@@ -1,0 +1,1128 @@
+schema_version: 1.0.0
+template_id: marketing-lifecycle-compound
+version: 0.7.0
+name: Compound market-research to advertising lifecycle (proposal and approval gated)
+description: Optional file-only composition; research child fanout, human-verified deliverability, creative and parallel
+  CRM/site/tracking prep, all-accepted integration, human live permit, read-only monitoring and separately permitted
+  optimization. Never self-publish.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  research_goal:
+    type: string
+    required: true
+  target_buyer:
+    type: string
+    required: true
+  brand_asset_ref:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - launch-permit
+  max_parallel_tasks: 4
+  allow_dynamic_children: true
+gates:
+- gate_id: launch-permit
+  kind: human
+  required: true
+  rubric: Only authenticated owner may authorize exact campaign/adset/ad IDs, cap/budget, excluded holds, artifact
+    versions, expiry and channel; no inferred consent.
+  protected: true
+  waivable: false
+graph:
+  nodes:
+  - id: plan
+    kind: task
+    needs: []
+    instructions: Resolve pinned marketing-research-plan module, require exact current review and preserve handoff.
+      Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs: []
+    outputs:
+    - artifact_id: plan-record
+      path: artifacts/plan.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-research-plan
+      version: 0.7.0
+      content_digest: sha256:f21fd39fd79e6fd71f45be316333a27eb998015ab3c7a83efd8fa68565dc1615
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: keywords
+    kind: task
+    needs:
+    - plan
+    instructions: Resolve pinned marketing-keyword-discovery module, require exact current review and preserve handoff.
+      Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: plan
+      artifact_id: plan-record
+      required: true
+    outputs:
+    - artifact_id: keywords-record
+      path: artifacts/keywords.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-keyword-discovery
+      version: 0.7.0
+      content_digest: sha256:a8a1b7692e4c1566da75ec0ab8dccee1d80d7f6a7b85db6acaccf1a6dfecb076
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: research-fanout
+    kind: child_generator
+    needs:
+    - keywords
+    instructions: From reviewed plan and keyword queue propose stable separate vertical children; parent does not
+      create or accept a child without independent owner scope. Evidence reports remain UNKNOWN until performed.
+    inputs:
+    - from: keywords
+      artifact_id: keywords-record
+      required: true
+    outputs:
+    - artifact_id: research-fanout-record
+      path: artifacts/research-child-proposals.json
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Only stable PROPOSED child entries exist with exact template pin, buyer, market, outputs and QC;
+        actual child materialization requires separate owner instantiation approval.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-competitor-execution
+      version: 0.7.0
+      content_digest: sha256:7a627e90213897925d75fbe4fba875ad007dd38e753ddcfee55bb4bd18517a47
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+    fanout:
+      child_template_id: marketing-competitor-execution
+      child_template_version: 0.7.0
+      proposals_artifact: research-fanout-record
+      authorization_mode: per_child
+      max_children: 15
+      id_strategy: stable_parent_slug_source_revision
+  - id: research-peer-review
+    kind: task
+    needs:
+    - research-fanout
+    instructions: Resolve pinned marketing-research-quality-review module, require exact current review and preserve
+      handoff. Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: research-fanout
+      artifact_id: research-fanout-record
+      required: true
+    outputs:
+    - artifact_id: research-peer-review-record
+      path: artifacts/research-peer-review.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-research-quality-review
+      version: 0.7.0
+      content_digest: sha256:f32a7ad37c12e7f53a631ab94e923d4d3720cf658ff476147c31dd147c2052d4
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: evidence
+    kind: join
+    needs:
+    - research-peer-review
+    instructions: After approved children have run and each has a current, independently verified evidence QC PASS,
+      use a separate scope-bound synthesis approval; an incomplete or REVISE child blocks this join. Keep other parallel
+      tasks independent.
+    inputs:
+    - from: research-fanout
+      artifact_id: research-fanout-record
+      required: true
+    - from: research-peer-review
+      artifact_id: research-peer-review-record
+      required: true
+    outputs:
+    - artifact_id: evidence-record
+      path: artifacts/evidence.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Every required child is COMPLETE with current independently reviewed PASS on exact evidence digests,
+        and parent synthesis approval valid; preserve source lineage.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-evidence-consolidation
+      version: 0.7.0
+      content_digest: sha256:a4e5c99d0ec52e2ab6dc5c48291b48ef86c2d74d8dd81bbfb4abcb2e6e675f89
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+      join_policy: all_accepted
+      review_gate: evidence-integrity
+      requires_child_acceptance: true
+      no_auto_accept: true
+      join_source: artifacts/research-child-proposals.json
+      source_data_required: context.proposals + context.children + context.synthesis_approval for optional classifier;
+        manual agent must check same files
+  - id: score
+    kind: task
+    needs:
+    - evidence
+    instructions: Resolve pinned marketing-opportunity-scoring module, require exact current review and preserve handoff.
+      Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: evidence
+      artifact_id: evidence-record
+      required: true
+    outputs:
+    - artifact_id: score-record
+      path: artifacts/score.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-opportunity-scoring
+      version: 0.7.0
+      content_digest: sha256:7c837583728813510bd9604c11d3d0c4cd6fe2866d834c223e954af29e7489ee
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: offer-hypothesis
+    kind: task
+    needs:
+    - score
+    instructions: Resolve pinned marketing-offer-strategy module, require exact current review and preserve handoff.
+      Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: score
+      artifact_id: score-record
+      required: true
+    outputs:
+    - artifact_id: offer-hypothesis-record
+      path: artifacts/offer-hypothesis.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-offer-strategy
+      version: 0.7.0
+      content_digest: sha256:6c6563924cb9df7fce440c87ed4da053d12bd64135278ffc296ef1ccfccbe55b
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: offer-verified
+    kind: task
+    needs:
+    - offer-hypothesis
+    instructions: Resolve pinned marketing-offer-deliverability module, require exact current review and preserve
+      handoff. Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: offer-hypothesis
+      artifact_id: offer-hypothesis-record
+      required: true
+    outputs:
+    - artifact_id: offer-verified-record
+      path: artifacts/offer-verified.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-offer-deliverability
+      version: 0.7.0
+      content_digest: sha256:53dd45f1dea0501a8298a83fd3bee2c89591b9a9a388f83b1f5b6052961ffa5f
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: copy
+    kind: task
+    needs:
+    - offer-verified
+    instructions: Resolve pinned marketing-ad-copy module, require exact current review and preserve handoff. Parent
+      stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: offer-verified
+      artifact_id: offer-verified-record
+      required: true
+    outputs:
+    - artifact_id: copy-record
+      path: artifacts/copy.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-ad-copy
+      version: 0.7.0
+      content_digest: sha256:1af1dfba04295640f3c64bde124bfa59669f83b25c1d4ceebada0826419c5595
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: creative-brief
+    kind: task
+    needs:
+    - copy
+    instructions: Resolve pinned marketing-creative-brief module, require exact current review and preserve handoff.
+      Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: copy
+      artifact_id: copy-record
+      required: true
+    outputs:
+    - artifact_id: creative-brief-record
+      path: artifacts/creative-brief.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-creative-brief
+      version: 0.7.0
+      content_digest: sha256:39d843f91d90a1c306d2c486afaa4055745c51284051a13f7b9662b8de14880e
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: media
+    kind: task
+    needs:
+    - creative-brief
+    instructions: Resolve pinned marketing-image-generation module, require exact current review and preserve handoff.
+      Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: creative-brief
+      artifact_id: creative-brief-record
+      required: true
+    outputs:
+    - artifact_id: media-record
+      path: artifacts/media.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-image-generation
+      version: 0.7.0
+      content_digest: sha256:e31796a424a184b054c77eb39dcbd455caa461fc08c3c4746acb92707a64e610
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: creative-qa
+    kind: task
+    needs:
+    - media
+    instructions: Resolve pinned marketing-creative-quality module, require exact current review and preserve handoff.
+      Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: media
+      artifact_id: media-record
+      required: true
+    outputs:
+    - artifact_id: creative-qa-record
+      path: artifacts/creative-qa.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-creative-quality
+      version: 0.7.0
+      content_digest: sha256:1d55ff343eeff72ea0296ea23ea2d166f13d501d36cd6b29844cae813edc789d
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: brand
+    kind: task
+    needs:
+    - creative-qa
+    instructions: Resolve pinned marketing-brand-verification module, require exact current review and preserve handoff.
+      Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: creative-qa
+      artifact_id: creative-qa-record
+      required: true
+    outputs:
+    - artifact_id: brand-record
+      path: artifacts/brand.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-brand-verification
+      version: 0.7.0
+      content_digest: sha256:ce01e1def719c64c0de61c3f3e12e4febce5dfd29799e0da97c7be11e0381267
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: meta-plan
+    kind: task
+    needs:
+    - brand
+    - offer-verified
+    instructions: Resolve pinned marketing-meta-campaign-preparation module, require exact current review and preserve
+      handoff. Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: brand
+      artifact_id: brand-record
+      required: true
+    - from: offer-verified
+      artifact_id: offer-verified-record
+      required: true
+    outputs:
+    - artifact_id: meta-plan-record
+      path: artifacts/meta-plan.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-meta-campaign-preparation
+      version: 0.7.0
+      content_digest: sha256:1fdc32ed8cff2c0e0feba1431a3d01695e33861fe7a464455d891760977f9a33
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: crm
+    kind: task
+    needs:
+    - offer-verified
+    instructions: Resolve pinned marketing-crm-preparation module, require exact current review and preserve handoff.
+      Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: offer-verified
+      artifact_id: offer-verified-record
+      required: true
+    outputs:
+    - artifact_id: crm-record
+      path: artifacts/crm.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-crm-preparation
+      version: 0.7.0
+      content_digest: sha256:333d3904f487455cfa87c383bb0c166166ac5bd45653c9ef5ad58f3d39d38c4a
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: landing
+    kind: task
+    needs:
+    - offer-verified
+    instructions: Resolve pinned marketing-landing-page-setup module, require exact current review and preserve handoff.
+      Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: offer-verified
+      artifact_id: offer-verified-record
+      required: true
+    outputs:
+    - artifact_id: landing-record
+      path: artifacts/landing.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-landing-page-setup
+      version: 0.7.0
+      content_digest: sha256:9530e1202263314dbcd0c76228b8d39da5d33c281d3b711cc7b923eac8847d0c
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: tracking
+    kind: task
+    needs:
+    - crm
+    - landing
+    instructions: Resolve pinned marketing-tracking-verification module, require exact current review and preserve
+      handoff. Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: crm
+      artifact_id: crm-record
+      required: true
+    - from: landing
+      artifact_id: landing-record
+      required: true
+    outputs:
+    - artifact_id: tracking-record
+      path: artifacts/tracking.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-tracking-verification
+      version: 0.7.0
+      content_digest: sha256:2cc84c3f71f54a94fd872f651b225bdc6d29ab7f7f5faebeab14034f47028f3f
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: integration
+    kind: join
+    needs:
+    - meta-plan
+    - crm
+    - landing
+    - tracking
+    - brand
+    instructions: Resolve pinned marketing-integration-readiness module, require exact current review and preserve
+      handoff. Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: meta-plan
+      artifact_id: meta-plan-record
+      required: true
+    - from: crm
+      artifact_id: crm-record
+      required: true
+    - from: landing
+      artifact_id: landing-record
+      required: true
+    - from: tracking
+      artifact_id: tracking-record
+      required: true
+    - from: brand
+      artifact_id: brand-record
+      required: true
+    outputs:
+    - artifact_id: integration-record
+      path: artifacts/integration.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-integration-readiness
+      version: 0.7.0
+      content_digest: sha256:9a03c82043239cf25ae4c750a0dcaa36b3deb7e18c468eb939947376eb232548
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+      review_gate: integration-readiness
+      no_auto_accept: true
+    join:
+      policy: all_accepted
+      members: &id001
+      - meta-plan
+      - crm
+      - landing
+      - tracking
+      - brand
+  - id: launch-approval
+    kind: approval
+    needs:
+    - integration
+    instructions: Human explicitly authorizes precise live objects/budget/held siblings and expiry, after integration
+      QC. This node only documents permit, never activates an ad.
+    inputs:
+    - from: integration
+      artifact_id: integration-record
+      required: true
+    outputs:
+    - artifact_id: launch-approval-record
+      path: artifacts/launch-approval.md
+      required: true
+    quality:
+      gates:
+      - launch-permit
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-launch-approval
+      version: 0.7.0
+      content_digest: sha256:aa68be71ccd83efee87695056dfe4f8209794a0b5aa94dab1bf1d8633667d2ab
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: monitor
+    kind: task
+    needs:
+    - launch-approval
+    instructions: Observe only REAL external provider delivery after separately executed/authorized activation; a
+      granted launch permit alone is not evidence that ads were activated. If no provider readback, WAIT/BLOCK, do
+      not claim performance.
+    inputs:
+    - from: launch-approval
+      artifact_id: launch-approval-record
+      required: true
+    outputs:
+    - artifact_id: monitor-record
+      path: artifacts/monitor.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-campaign-monitoring
+      version: 0.7.0
+      content_digest: sha256:d8196deae6e69110b09e3261123c58775cae82959df5c144ac36037acf70f7f6
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+  - id: optimize
+    kind: task
+    needs:
+    - monitor
+    instructions: Resolve pinned marketing-optimization module, require exact current review and preserve handoff.
+      Parent stage is an acceptance boundary, NOT automatic execution.
+    inputs:
+    - from: monitor
+      artifact_id: monitor-record
+      required: true
+    outputs:
+    - artifact_id: optimize-record
+      path: artifacts/optimize.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    child_template_ref:
+      template_id: marketing-optimization
+      version: 0.7.0
+      content_digest: sha256:64d68655f26e01eedf16ca72118dd2dfd621006846bf696649cd7966d6971e00
+      parameter_bindings: {}
+      authorization_mode: per_child
+    extensions:
+      module_output: child_run_exact_accepted_artifact
+      manual_mapping_required: true
+      provider_readback_cannot_be_inferred: true
+composition:
+  children:
+  - child_id: plan
+    template_id: marketing-research-plan
+    version: 0.7.0
+    content_digest: sha256:f21fd39fd79e6fd71f45be316333a27eb998015ab3c7a83efd8fa68565dc1615
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      research_question: ${artifact.plan.research_question}
+      max_verticals: ${artifact.plan.max_verticals}
+    depends_on: []
+    authorization_mode: per_child
+  - child_id: keywords
+    template_id: marketing-keyword-discovery
+    version: 0.7.0
+    content_digest: sha256:a8a1b7692e4c1566da75ec0ab8dccee1d80d7f6a7b85db6acaccf1a6dfecb076
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      vertical: ${artifact.keywords.vertical}
+      buyer: ${artifact.keywords.buyer}
+    depends_on:
+    - plan
+    authorization_mode: per_child
+  - child_id: research-fanout
+    template_id: marketing-competitor-execution
+    version: 0.7.0
+    content_digest: sha256:7a627e90213897925d75fbe4fba875ad007dd38e753ddcfee55bb4bd18517a47
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      vertical: ${artifact.research-fanout.vertical}
+      buyer: ${artifact.research-fanout.buyer}
+      queue_ref: ${artifact.research-fanout.queue_ref}
+    depends_on:
+    - keywords
+    authorization_mode: per_child
+  - child_id: research-peer-review
+    template_id: marketing-research-quality-review
+    version: 0.7.0
+    content_digest: sha256:f32a7ad37c12e7f53a631ab94e923d4d3720cf658ff476147c31dd147c2052d4
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      submitted_run_ref: ${artifact.research-peer-review.submitted_run_ref}
+      rubric_version: ${artifact.research-peer-review.rubric_version}
+    depends_on:
+    - research-fanout
+    authorization_mode: per_child
+  - child_id: evidence
+    template_id: marketing-evidence-consolidation
+    version: 0.7.0
+    content_digest: sha256:a4e5c99d0ec52e2ab6dc5c48291b48ef86c2d74d8dd81bbfb4abcb2e6e675f89
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      accepted_runs_ref: ${artifact.evidence.accepted_runs_ref}
+    depends_on:
+    - research-peer-review
+    authorization_mode: per_child
+  - child_id: score
+    template_id: marketing-opportunity-scoring
+    version: 0.7.0
+    content_digest: sha256:7c837583728813510bd9604c11d3d0c4cd6fe2866d834c223e954af29e7489ee
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      scorecard_ref: ${artifact.score.scorecard_ref}
+      scoring_rubric: ${artifact.score.scoring_rubric}
+    depends_on:
+    - evidence
+    authorization_mode: per_child
+  - child_id: offer-hypothesis
+    template_id: marketing-offer-strategy
+    version: 0.7.0
+    content_digest: sha256:6c6563924cb9df7fce440c87ed4da053d12bd64135278ffc296ef1ccfccbe55b
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      observed_competitor_matrix_ref: ${artifact.offer-hypothesis.observed_competitor_matrix_ref}
+      target_buyer: ${artifact.offer-hypothesis.target_buyer}
+    depends_on:
+    - score
+    authorization_mode: per_child
+  - child_id: offer-verified
+    template_id: marketing-offer-deliverability
+    version: 0.7.0
+    content_digest: sha256:53dd45f1dea0501a8298a83fd3bee2c89591b9a9a388f83b1f5b6052961ffa5f
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      offer_hypothesis_ref: ${artifact.offer-verified.offer_hypothesis_ref}
+      actual_product_evidence_ref: ${artifact.offer-verified.actual_product_evidence_ref}
+    depends_on:
+    - offer-hypothesis
+    authorization_mode: per_child
+  - child_id: copy
+    template_id: marketing-ad-copy
+    version: 0.7.0
+    content_digest: sha256:1af1dfba04295640f3c64bde124bfa59669f83b25c1d4ceebada0826419c5595
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      verified_offer_ref: ${artifact.copy.verified_offer_ref}
+      buyer: ${artifact.copy.buyer}
+    depends_on:
+    - offer-verified
+    authorization_mode: per_child
+  - child_id: creative-brief
+    template_id: marketing-creative-brief
+    version: 0.7.0
+    content_digest: sha256:39d843f91d90a1c306d2c486afaa4055745c51284051a13f7b9662b8de14880e
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      copy_revision_ref: ${artifact.creative-brief.copy_revision_ref}
+      brand_guidelines_ref: ${artifact.creative-brief.brand_guidelines_ref}
+    depends_on:
+    - copy
+    authorization_mode: per_child
+  - child_id: media
+    template_id: marketing-image-generation
+    version: 0.7.0
+    content_digest: sha256:e31796a424a184b054c77eb39dcbd455caa461fc08c3c4746acb92707a64e610
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      approved_brief_ref: ${artifact.media.approved_brief_ref}
+      image_tool_ref: ${artifact.media.image_tool_ref}
+    depends_on:
+    - creative-brief
+    authorization_mode: per_child
+  - child_id: creative-qa
+    template_id: marketing-creative-quality
+    version: 0.7.0
+    content_digest: sha256:1d55ff343eeff72ea0296ea23ea2d166f13d501d36cd6b29844cae813edc789d
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      creative_asset_manifest_ref: ${artifact.creative-qa.creative_asset_manifest_ref}
+      locked_copy_ref: ${artifact.creative-qa.locked_copy_ref}
+    depends_on:
+    - media
+    authorization_mode: per_child
+  - child_id: brand
+    template_id: marketing-brand-verification
+    version: 0.7.0
+    content_digest: sha256:ce01e1def719c64c0de61c3f3e12e4febce5dfd29799e0da97c7be11e0381267
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      artwork_ref: ${artifact.brand.artwork_ref}
+      canonical_brand_asset_ref: ${artifact.brand.canonical_brand_asset_ref}
+    depends_on:
+    - creative-qa
+    authorization_mode: per_child
+  - child_id: meta-plan
+    template_id: marketing-meta-campaign-preparation
+    version: 0.7.0
+    content_digest: sha256:1fdc32ed8cff2c0e0feba1431a3d01695e33861fe7a464455d891760977f9a33
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      verified_offer_ref: ${artifact.meta-plan.verified_offer_ref}
+      approved_creatives_ref: ${artifact.meta-plan.approved_creatives_ref}
+      account_readback_ref: ${artifact.meta-plan.account_readback_ref}
+    depends_on:
+    - brand
+    - offer-verified
+    authorization_mode: per_child
+  - child_id: crm
+    template_id: marketing-crm-preparation
+    version: 0.7.0
+    content_digest: sha256:333d3904f487455cfa87c383bb0c166166ac5bd45653c9ef5ad58f3d39d38c4a
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      verified_offer_ref: ${artifact.crm.verified_offer_ref}
+      crm_provider_ref: ${artifact.crm.crm_provider_ref}
+    depends_on:
+    - offer-verified
+    authorization_mode: per_child
+  - child_id: landing
+    template_id: marketing-landing-page-setup
+    version: 0.7.0
+    content_digest: sha256:9530e1202263314dbcd0c76228b8d39da5d33c281d3b711cc7b923eac8847d0c
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      verified_offer_ref: ${artifact.landing.verified_offer_ref}
+      site_source_ref: ${artifact.landing.site_source_ref}
+    depends_on:
+    - offer-verified
+    authorization_mode: per_child
+  - child_id: tracking
+    template_id: marketing-tracking-verification
+    version: 0.7.0
+    content_digest: sha256:2cc84c3f71f54a94fd872f651b225bdc6d29ab7f7f5faebeab14034f47028f3f
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      funnel_contract_ref: ${artifact.tracking.funnel_contract_ref}
+      actual_provider_events_ref: ${artifact.tracking.actual_provider_events_ref}
+    depends_on:
+    - crm
+    - landing
+    authorization_mode: per_child
+  - child_id: integration
+    template_id: marketing-integration-readiness
+    version: 0.7.0
+    content_digest: sha256:9a03c82043239cf25ae4c750a0dcaa36b3deb7e18c468eb939947376eb232548
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      creatives_ref: ${artifact.integration.creatives_ref}
+      campaign_ref: ${artifact.integration.campaign_ref}
+      crm_ref: ${artifact.integration.crm_ref}
+      landing_ref: ${artifact.integration.landing_ref}
+      tracking_ref: ${artifact.integration.tracking_ref}
+    depends_on: *id001
+    authorization_mode: per_child
+  - child_id: launch-approval
+    template_id: marketing-launch-approval
+    version: 0.7.0
+    content_digest: sha256:aa68be71ccd83efee87695056dfe4f8209794a0b5aa94dab1bf1d8633667d2ab
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      integration_qc_ref: ${artifact.launch-approval.integration_qc_ref}
+      meta_snapshot_ref: ${artifact.launch-approval.meta_snapshot_ref}
+    depends_on:
+    - integration
+    authorization_mode: per_child
+  - child_id: monitor
+    template_id: marketing-campaign-monitoring
+    version: 0.7.0
+    content_digest: sha256:d8196deae6e69110b09e3261123c58775cae82959df5c144ac36037acf70f7f6
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      reporting_period: ${artifact.monitor.reporting_period}
+      provider_readback_ref: ${artifact.monitor.provider_readback_ref}
+    depends_on:
+    - launch-approval
+    authorization_mode: per_child
+  - child_id: optimize
+    template_id: marketing-optimization
+    version: 0.7.0
+    content_digest: sha256:64d68655f26e01eedf16ca72118dd2dfd621006846bf696649cd7966d6971e00
+    bindings:
+      working_market: ${context.working_market}
+      source_ref: ${context.source_ref}
+      verified_metrics_ref: ${artifact.optimize.verified_metrics_ref}
+      current_provider_state_ref: ${artifact.optimize.current_provider_state_ref}
+    depends_on:
+    - monitor
+    authorization_mode: per_child
+  join:
+    policy: all_accepted
+    children:
+    - plan
+    - keywords
+    - research-fanout
+    - research-peer-review
+    - evidence
+    - score
+    - offer-hypothesis
+    - offer-verified
+    - copy
+    - creative-brief
+    - media
+    - creative-qa
+    - brand
+    - meta-plan
+    - crm
+    - landing
+    - tracking
+    - integration
+    - launch-approval
+    - monitor
+    - optimize
+extensions:
+  default_execution: manual_file_only
+  research_child_acceptance: all_current_independent_QC_PASS
+  staging: PAUSED_requires_separate_authorization
+  publishing: LIVE_requires_authenticated_current_human_permit_and_external_connector
+  current_version: 0.7.0

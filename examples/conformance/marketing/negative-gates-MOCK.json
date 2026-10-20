@@ -1,0 +1,44 @@
+{
+  "fixture_kind": "MOCK_QC_FAILURE_SCENARIOS",
+  "scenarios": [
+    {
+      "case": "coaches_evidence_REVISE",
+      "child": "demo-research-coaches-r0001",
+      "gate": "evidence-integrity",
+      "verdict": "REVISE",
+      "expected_parent": "evidence WAIT_DEPENDENCY",
+      "unrelated": "agencies/roofing research may continue"
+    },
+    {
+      "case": "product_truth_hypothesis_only",
+      "stage": "offer-verified",
+      "owner_deliverability": "NOT_APPROVED",
+      "expected": "advertising-copy and media dependencies BLOCKED"
+    },
+    {
+      "case": "image_clipping",
+      "stage": "creative-qa",
+      "variant": "square",
+      "review": "REVISE",
+      "expected": "brand/meta-plan/integration not accepted; only square variant correction"
+    },
+    {
+      "case": "tracking_unknown",
+      "stage": "integration",
+      "source": "confirmed appointments not observed",
+      "expected": "NOT_READY even when Meta creative PASS"
+    },
+    {
+      "case": "activation_without_permit",
+      "stage": "launch-approval",
+      "human_permit": null,
+      "expected": "NO LIVE ACTIONS; record BLOCKED"
+    },
+    {
+      "case": "published_without_readback",
+      "stage": "monitor",
+      "provider_state": "UNKNOWN",
+      "expected": "DO NOT CLAIM LIVE/DELIVERY OR REAL CPC"
+    }
+  ]
+}

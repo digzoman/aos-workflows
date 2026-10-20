@@ -1,0 +1,151 @@
+schema_version: 1.0.0
+template_id: marketing-image-generation
+version: 0.7.0
+name: Advertising image and variant generation
+description: Generate actual image assets only if an authorized image-capable host is available; store file hashes,
+  generator/source and dimensions; never assume text in images is correct.
+parameters:
+  working_market:
+    type: string
+    required: false
+    default: US and Canada
+  source_ref:
+    type: string
+    required: false
+    default: none-provided
+  approved_brief_ref:
+    type: string
+    required: true
+  image_tool_ref:
+    type: string
+    required: false
+    default: unavailable
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - image-pixel
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: image-pixel
+  kind: ai_independent
+  required: true
+  rubric: Inspect actual image pixels for text/spelling, clipping, dimensions, scene credibility, safe zones and variant-specific
+    issues.
+  protected: false
+  waivable: false
+graph:
+  nodes:
+  - id: verify-generator
+    kind: task
+    needs: []
+    instructions: Check actual image tool availability, user scope, format and access. If unavailable, set BLOCKED
+      without inventing output.
+    inputs: []
+    outputs:
+    - artifact_id: verify-generator-record
+      path: artifacts/verify-generator.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: produce-candidates
+    kind: task
+    needs:
+    - verify-generator
+    instructions: Produce traceable image candidates (e.g. portrait 1080x1350, square 1080x1080) using approved brief;
+      distinguish generated draft from approved asset.
+    inputs:
+    - from: verify-generator
+      artifact_id: verify-generator-record
+      required: true
+    outputs:
+    - artifact_id: produce-candidates-record
+      path: artifacts/produce-candidates.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    required_capabilities:
+    - image_generation
+  - id: record-image-integrity
+    kind: task
+    needs:
+    - produce-candidates
+    instructions: Inspect real file headers, RGB, pixel dimensions, exact copy text visibility and SHA256; reject
+      blank/pseudo-logo output.
+    inputs:
+    - from: produce-candidates
+      artifact_id: produce-candidates-record
+      required: true
+    outputs:
+    - artifact_id: record-image-integrity-record
+      path: artifacts/record-image-integrity.md
+      required: true
+    quality:
+      gates: []
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+  - id: pixel-peer-review
+    kind: review
+    needs:
+    - record-image-integrity
+    instructions: Independently inspect the actual pixels and per-placement crop/text hierarchy, not only image metadata.
+    inputs:
+    - from: record-image-integrity
+      artifact_id: record-image-integrity-record
+      required: true
+    outputs:
+    - artifact_id: pixel-peer-review-record
+      path: artifacts/pixel-peer-review.md
+      required: true
+    quality:
+      gates:
+      - image-pixel
+      criteria:
+      - Cite exact versioned artifacts; distinguish observed facts, inference, UNKNOWN and proposed actions
+    contract:
+      done_when: Each declared artifact exists with timestamp, source refs, producer actor, acceptance details and
+        exact digest; a required QA review of this revision is recorded.
+      on_failure: retry_bounded
+    required_actions:
+    - read
+    - write_local
+    review_gate: image-pixel

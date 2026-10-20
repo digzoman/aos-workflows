@@ -9,7 +9,7 @@ These are discoverable **master definitions**, not active runs. Never write resu
 
 Find a `template.yaml`, read its `parameters`, `policy`, `skills`, `graph.nodes` and any `gates`. Verify the schema and avoid unapproved external effects. See `../references/START-A-RUN.md` to instantiate under agent-files.
 
-The full Ampgent research-to-creative-to-Meta reusable template catalog is a **later milestone**, not bundled as a functioning suite yet.
+The initial **Ampgent-inspired** marketing library is now bundled as 21 independent 0.7.0 master modules and one protected compound lifecycle. These are manually operable definitions, not a live marketing execution engine.
 
 ## Research portfolio composition added in 0.2.0
 
@@ -18,3 +18,15 @@ The full Ampgent research-to-creative-to-Meta reusable template catalog is a **l
 - [research-portfolio-compound](research-portfolio-compound/template.yaml): static composition example with pinned coach, agency and roofing subworkflows plus all-accepted join.
 
 A matching example custom overlay lives **only** under `agent-files/custom-templates/competitor-investigation-ontario/`. Each master remains protected; executing agents write only in agent-files. See `../references/COMPOSITION.md`.
+
+## Version 0.7.0 — substantial marketing workflow library
+
+[Browse all 21 independently reusable marketing modules and their review gates](MARKETING-LIBRARY.md), from research planning to optimization. [Full lifecycle compound](marketing-lifecycle-compound/README.md) pins all module sources by SHA-256 and models dynamic reviewed research fan-out, parallel preparatory branches, integration, and a distinct **human live-publication authorization**. [Manual operating guide](../references/MARKETING-WORKFLOWS.md) covers evidence states, execution boundaries and example fixtures.
+
+**Every master is an independent one-off workflow.** The parent does not automatically execute the children. Source observations, product hypotheses and verified deliverable offers are distinct typed evidence states; launch permission is not implied by creative/QC PASS.
+
+## Version 0.7.0 — substantial marketing workflow library
+
+[Browse all 21 independently reusable marketing modules and their review gates](MARKETING-LIBRARY.md), from research planning to optimization. [Full lifecycle compound](marketing-lifecycle-compound/README.md) pins all module sources by SHA-256 and models dynamic reviewed research fan-out, parallel preparatory branches, integration, and a distinct **human live-publication authorization**. [Manual operating guide](../references/MARKETING-WORKFLOWS.md) covers evidence states, execution boundaries and example fixtures.
+
+**Every master is an independent one-off workflow.** The parent does not automatically execute the children. Source observations, product hypotheses and verified deliverable offers are distinct typed evidence states; launch permission is not implied by creative/QC PASS.
