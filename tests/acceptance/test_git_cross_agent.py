@@ -14,6 +14,15 @@ from state import RunStore,digest
 ACTORS={'alpha':{'agent':'Alpha','platform':'local-subprocess','role':'researcher','instance':'worker-001'},'beta':{'agent':'Beta','platform':'local-subprocess','role':'researcher','instance':'worker-002'},'qa':{'agent':'QAGate','platform':'local-subprocess','role':'deterministic-reviewer','instance':'reviewer-003'},'handoff':{'agent':'Receiver','platform':'local-subprocess','role':'research-lead','instance':'receiver-004'}}
 PREFIX='scaffold/aos-w/agent-files/'
 
+# Test-fixture isolation: Git 2.55 runner may launch auto-GC/maintenance while
+# TemporaryDirectory cleanup is removing bare remote packfiles. This is not
+# part of the AOS-W claim protocol. Keep test repositories deterministic.
+os.environ['GIT_CONFIG_COUNT']='2'
+os.environ['GIT_CONFIG_KEY_0']='gc.auto'
+os.environ['GIT_CONFIG_VALUE_0']='0'
+os.environ['GIT_CONFIG_KEY_1']='maintenance.auto'
+os.environ['GIT_CONFIG_VALUE_1']='false'
+
 def git(cwd,*args,check=True):
  p=subprocess.run(['git',*args],cwd=cwd,text=True,capture_output=True,timeout=30)
  if check and p.returncode:raise AssertionError({'git':args,'stderr':p.stderr,'stdout':p.stdout})
