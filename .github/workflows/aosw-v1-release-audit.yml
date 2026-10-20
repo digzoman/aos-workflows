@@ -6,6 +6,13 @@ on:
       - 'scripts/aosw-v1-release-audit.py'
       - 'tests/acceptance/run_standalone_acceptance.py'
       - '.github/workflows/aosw-v1-release-audit.yml'
+      - 'docs/release/**'
+      - 'docs/specs/**'
+      - 'docs/history/**'
+      - 'docs/installation/**'
+      - 'docs/testing/**'
+      - 'README.md'
+      - 'temp/**'
   workflow_dispatch:
 permissions:
   contents: read

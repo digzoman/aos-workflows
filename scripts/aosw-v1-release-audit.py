@@ -32,7 +32,7 @@ PATTERNS={
 }
 UNSAFE_EXT={".env",".pem",".p12",".pfx",".p8",".sqlite",".db",".keystore"}
 ALLOW_PUBLIC_EMAIL_DOMAIN={"example.com","example.org","example.net","example.invalid",
- "users.noreply.github.com","noreply.github.com","github.com","localhost"}
+ "users.noreply.github.com","noreply.github.com","github.com","localhost","invalid.example"}
 EMAIL=re.compile(r"\b[A-Za-z0-9._%+-]+@([A-Za-z0-9.-]+\.[A-Za-z]{2,})\b")
 EXCLUDE_AS_USER_INPUT=False
 
