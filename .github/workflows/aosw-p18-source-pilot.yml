@@ -1,0 +1,53 @@
+name: AOS-W P18 grounded marketing workflow
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tests/acceptance/p18_source_pilot.py'
+      - 'tests/acceptance/p18_verifier.py'
+      - 'examples/conformance/marketing/p18-public-sources-20261020.json'
+      - '.github/workflows/aosw-p18-source-pilot.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  end-to-end-staged-pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install optional Python libraries for staged pilot
+        run: python -m pip install pyyaml pillow
+      - name: Run three separate research instances with source evidence and QC
+        run: python tests/acceptance/p18_source_pilot.py --out "docs/testing/evidence/p18-grounded-$GITHUB_RUN_ID"
+      - name: Confirm evidence and no external activation
+        run: |
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          root=Path('docs/testing/evidence/p18-grounded-'+os.environ['GITHUB_RUN_ID'])
+          d=json.loads((root/'SUMMARY.json').read_text())
+          assert all(x['status']=='PASS' for x in d['checks']),d
+          assert d['sources']>=7
+          assert d['launch']=='NOT_GRANTED'
+          assert d['real_meta_crm_effects']=='NONE'
+          print('PASS',d['total_checks'],'assertions',d['sources'],'public pages, launch blocked')
+          PY
+      - name: Commit immutable run evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "docs/testing/evidence/p18-grounded-$GITHUB_RUN_ID"
+          git commit -m "test(p18): archive staged source-backed run, checkpoint and peer reviews"
+          git push origin HEAD:main
+      - name: Upload hosted run artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aos-w-p18-grounded-evidence
+          path: docs/testing/evidence/p18-grounded-*/
+          retention-days: 90
+          if-no-files-found: warn
