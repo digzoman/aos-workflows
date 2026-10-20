@@ -1,0 +1,38 @@
+# Agent OS Workflows (AOS-W)
+
+AOS-W is a planned portable, file-based framework for repeatable, auditable AI-agent workflows. It is designed for one agent on a local or persistent cloud filesystem, with optional Git synchronization and multi-agent coordination. No Git installation, dedicated MCP server, database, Python runtime, or scheduler is required for the standalone design.
+
+> **Status: planning only.** This repository currently contains project decisions, working notes, and scaffold layout documentation. No workflow engine is implemented or claimed to work yet.
+
+## Planned distribution
+
+The installable directory will live at `scaffold/aos-w/`. Users will be able to copy or download that directory into an arbitrary working folder.
+
+Only `scaffold/aos-w/agent-files/` is intended to change during ordinary installed-framework use. It will contain project-specific configuration, customized templates, active runs, evidence, reviews, state, and history. Framework maintainers may update the standardized scaffold outside this area through explicit releases.
+
+## Development repository
+
+- `docs/` — product and technical specifications as they are approved.
+- `examples/` — sanitized reference examples.
+- `scripts/` and `tools/` — optional utilities, not mandatory dependencies.
+- `scaffold/` — future downloadable AOS-W distribution.
+- `temp/` — **tracked**, public work-in-progress documentation, decisions, research, plans, progress, and cross-session handoffs.
+
+Start with [temp/OPERATING-RULES.md](temp/OPERATING-RULES.md) and [temp/HANDOFF.md](temp/HANDOFF.md) when continuing the project. See [temp/DESIGN-DECISIONS.md](temp/DESIGN-DECISIONS.md) for the baseline requirements.
+
+## Principles
+
+1. Offline or cloud standalone first, Git optional.
+2. Multi-agent execution optional, but supported when safe shared coordination is available.
+3. Modular reusable templates, composed workflows, dependency gates, state, retries, recovery, evidence, and audit trails.
+4. Explicit identity and permission boundaries. Quality review is not itself authorization for external side effects.
+5. Model-agnostic interfaces. Integration with A Rep, not dependence on A Rep.
+6. No credentials, customer secrets, private customer information, or unsanitized business records in this public repository.
+
+## Roadmap
+
+The next step is historical workflow discovery using sanitized examples from prior advertising research, creative production, campaign setup, launch, and monitoring. The enhanced PRD comes later and requires human approval before implementation.
+
+## Licensing
+
+No open-source license has been selected yet. Public repository visibility does not itself grant reuse rights. Licensing is an unresolved decision to record during requirements review.
