@@ -84,19 +84,51 @@ def main():
       protoB.lock(lockfile,B)
       res['lfs']['second_lock']='granted_or_same_owner_response';res['lfs']['status']='REVIEW_REQUIRED'
      except Exception as e:res['lfs']['second_lock']='refused_'+type(e).__name__
-    except Exception as e:res['lfs']={'status':'BLOCKED','reason':'Live Git LFS lock API '+type(e).__name__}
+    except Exception as e:res['lfs']={'status':'BLOCKED','reason':'Live Git LFS lock API '+type(e).__name__+': '+str(e)[:140]}
     finally:
-     if lock:
-      try:protoA.unlock(lock['lock']['id'],A);res['lfs']['unlock']='verified_request_succeeded'
-      except Exception as e:res['lfs']['unlock']='FAILED_'+type(e).__name__
+     # Local lock response can fail to parse AFTER server already created a lock.
+     # Re-query only our uniquely named synthetic paths and remove owned locks;
+     # do not expose or modify unrelated repository lock records.
+     try:
+      raw=ca.run('lfs','locks','--verify','--json',allow_failure=True)
+      if raw.returncode==0:
+       observed=json.loads(raw.stdout)
+       ours=observed.get('ours',[]) if isinstance(observed,dict) else []
+       exact_targets={lockfile,'scaffold/aos-w/agent-files/p17-39427147402-1-fa67c29c-lfs.txt'}
+       for obj in ours:
+        if isinstance(obj,dict) and obj.get('path') in exact_targets and obj.get('id'):
+         try:
+          protoA.unlock(obj['id'],A)
+          res['lfs'].setdefault('cleaned_test_lock_ids',[]).append('OWN_SYNTHETIC_LOCK')
+         except Exception as e:
+          res['lfs']['cleanup_error']=type(e).__name__
+     except Exception as e:
+      res['lfs']['lock_list_error']=type(e).__name__
+
  finally:
   for ref in created:
-   # No unscoped history refs, and never force-delete a ref after someone else changed it.
+   # Only target own unique synthetic refs; never delete if tip moved.
    try:
-    p=subprocess.run(['git','push',f'--force-with-lease={ref}:{st["sha"]}',ghurl,':'+ref],cwd=ROOT,capture_output=True,text=True,timeout=45)
-    res.setdefault('cleanup',{})[ref]='DELETED' if p.returncode==0 else 'FAILED_SAFE_STOP'
-    if p.returncode:res['status']='REVIEW_REQUIRED'
-   except Exception as e:res.setdefault('cleanup',{})[ref]='FAILED_'+type(e).__name__;res['status']='REVIEW_REQUIRED'
+    want=st['sha']
+    p=subprocess.run(['git','push',f'--force-with-lease={ref}:{want}',ghurl,':'+ref],cwd=ROOT,capture_output=True,text=True,timeout=45)
+    if p.returncode:
+     # Conservative REST fallback. Recheck tip before issuing deletion.
+     probe=subprocess.run(['git','ls-remote',ghurl,ref],cwd=ROOT,capture_output=True,text=True,timeout=40)
+     current=probe.stdout.strip().split()[0] if probe.returncode==0 and probe.stdout.strip() else None
+     if current==want:
+      delete=subprocess.run(['gh','api','-X','DELETE',f'repos/{os.environ["GITHUB_REPOSITORY"]}/git/refs/{ref}'],cwd=ROOT,capture_output=True,text=True,timeout=40,env={**os.environ,'GH_TOKEN':token})
+      res.setdefault('cleanup',{})[ref]={'git_push_delete':'REJECTED','rest_delete':'SUCCESS' if delete.returncode==0 else 'FAILED_'+str(delete.returncode)}
+     else:
+      res.setdefault('cleanup',{})[ref]={'git_push_delete':'REJECTED','rest_delete':'REF_NOT_CURRENT_SAFE_STOP'}
+    else:
+     res.setdefault('cleanup',{})[ref]={'git_push_delete':'SUCCESS'}
+    check=subprocess.run(['git','ls-remote',ghurl,ref],cwd=ROOT,capture_output=True,text=True,timeout=40)
+    absent=check.returncode==0 and not check.stdout.strip()
+    res['cleanup'][ref]['verified_absent']=absent
+    if not absent:res['status']='REVIEW_REQUIRED'
+   except Exception as e:
+    res.setdefault('cleanup',{})[ref]={'status':'FAILED_'+type(e).__name__}
+    res['status']='REVIEW_REQUIRED'
   res.pop('credential',None);out.write_text(json.dumps(res,indent=2,sort_keys=True)+'\n')
  print(json.dumps({'hosted_cas':res['status'],'lfs':res['lfs']['status'],'results_path':str(out)}))
 if __name__=='__main__':main()

@@ -159,8 +159,13 @@ class LFSLockPrototype:
         if not (self.git.repo/p).is_file():raise GitCoordinationError('Git LFS locking requires an existing worktree file')
         if not self.available():raise Offline('Git LFS executable unavailable, cannot claim tested live lock')
         result=self.git.run('lfs','lock','--json',str(p))
-        try: lock=json.loads(result.stdout)['lock']
-        except (KeyError,ValueError) as e:raise GitCoordinationError('Unrecognized LFS lock response') from e
+        try:
+            response=json.loads(result.stdout)
+            lock=response.get('lock',response) if isinstance(response,dict) else None
+        except (TypeError,ValueError) as e:
+            raise GitCoordinationError('Unrecognized LFS lock response') from e
+        if not isinstance(lock,dict) or not isinstance(lock.get('id'),str) or not lock.get('path'):
+            raise GitCoordinationError('LFS lock response lacks verified ID/path fields')
         return {'lock':lock,'actor':actor,'warning':'Git LFS server owner is Git account, not logical agent; no same-account isolation'}
     def verify(self,path):
         if not self.available():raise Offline('Git LFS unavailable')

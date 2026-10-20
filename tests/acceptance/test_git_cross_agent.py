@@ -9,7 +9,7 @@ HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[1]
 sys.path.insert(0,str(ROOT/'tools/git'))
 sys.path.insert(0,str(ROOT/'tools/state'))
-from coordination import GitClient,Conflict,Offline,Unauthorized,iso,now_utc
+from coordination import GitClient,Conflict,Offline,Unauthorized,LFSLockPrototype,iso,now_utc
 from state import RunStore,digest
 ACTORS={'alpha':{'agent':'Alpha','platform':'local-subprocess','role':'researcher','instance':'worker-001'},'beta':{'agent':'Beta','platform':'local-subprocess','role':'researcher','instance':'worker-002'},'qa':{'agent':'QAGate','platform':'local-subprocess','role':'deterministic-reviewer','instance':'reviewer-003'},'handoff':{'agent':'Receiver','platform':'local-subprocess','role':'research-lead','instance':'receiver-004'}}
 PREFIX='scaffold/aos-w/agent-files/'
@@ -175,6 +175,16 @@ class GitCollaborativeAcceptance(unittest.TestCase):
   self.cb.sync_commit([PREFIX+'synthesis-reviewed.json'],ACTORS['beta'])
   self.ca.sync_refresh()
   self.assertEqual(json.loads((self.a/PREFIX/'synthesis-reviewed.json').read_text())['children'],synth)
+ def test_09b_lfs_parser_accepts_verified_flat_lock_object(self):
+  # LFS CLI versions may return the object directly rather than wrapped in {lock:{}}.
+  # This is a mocked response *parser* check, NOT a live LFS server test.
+  class FakeClient:
+   repo=self.a
+   def run(self,*args,allow_failure=False):
+    return subprocess.CompletedProcess(args,0,stdout=json.dumps({'id':'lfs-test-id','path':PREFIX+'portfolio-plan.json','owner':{'name':'Shared Git Credential'}}),stderr='')
+  result=LFSLockPrototype(FakeClient()).lock(PREFIX+'portfolio-plan.json',ACTORS['alpha'])
+  self.assertEqual(result['lock']['id'],'lfs-test-id')
+  self.assertEqual(result['lock']['owner']['name'],'Shared Git Credential')
  def test_10_move_to_different_git_remote_preserves_checked_run(self):
   c=self.ca.acquire('portfolio','coaches',ACTORS['alpha']);self.worker(self.a,'start','coaches','alpha',c);self.worker(self.a,'submit','coaches','alpha',c,note='Source: synthetic\nObserved: saved work\n');self.publish(self.ca,self.a,'coaches',ACTORS['alpha'])
   migrated=self.root/'new-remote.git';git(self.root,'init','--bare',str(migrated));git(self.a,'remote','add','migration',str(migrated));git(self.a,'push','migration','main')
