@@ -1,0 +1,17 @@
+# Never commit credentials or local secrets.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+*.credentials.json
+**/.DS_Store
+**/__pycache__/
+**/.venv/
+**/node_modules/
+temp/private/
+temp/raw-exports/
+scaffold/aos-w/agent-files/private/
