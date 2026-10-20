@@ -1,35 +1,35 @@
 # Progress Snapshot
 
 Date: 2026-10-20
-Phase: Prompt 02, historical Ampgent workflow research and evidence indexing
-Status: COMPLETE for evidence-indexing scope, with explicit access and live-verification limitations. Next: Prompt 03.
+Phase: Prompt 03, competitor advertising research workflow reverse engineering
+Status: COMPLETE for research/modeling scope. Next: Prompt 04 creative production workflow investigation.
 
-## Completed before Prompt 02
+## Verified prior steps
 
-- Public `digzoman/aos-workflows` initialized with the tracked `temp/` workspace and scaffold placeholders.
-- All 16 survey decisions and Prompt 01b requirements documented.
-- No implementation authorized ahead of PRD approval.
+- Prompt 01/01b: public repository, tracked design/operating context, portable scaffold boundary, recurring/skill requirements.
+- Prompt 02: sanitized 12-conversation index and 20 inspected Max marketing sources, ten failure/correction patterns.
 
-## Prompt 02 results
+## Prompt 03 completed
 
-- Read persistent project rules, decisions, work plan, prior handoff, research starting notes, and open questions.
-- Inspected the current private Max marketing artifact structure and **20 primary documents** across research planning, queues, QA, creative, cross-agent collaboration, staged Meta operations, launch and website handoff.
-- Viewed the open B9.1 ChatGPT run conversation and identified related chat titles/context with source-access distinctions.
-- Added `temp/research/SOURCE-INDEX.md`, `WORKFLOW-PATTERNS.md`, and `EVIDENCE-GAPS.md` with reusable patterns, concrete failure/correction cases and evidence limitations.
-- Reconciled a live chat showing the next research run in progress versus the previously read nine-run completed index without claiming unverified completion.
-- Captured recoverability, false missing files across repos, source limitations, independent QA, external side-effect reconciliation and layered launch verification as lessons for later PRD research.
-- Sanitized summaries for this public repository. Raw ads, proprietary conversations, provider IDs and credentials were not copied.
+- Re-read project operating rules, decisions, work plan, handoff and evidence index.
+- Inspected 30 additional directly accessible documents from Max research refresh, vertical expansion, portfolio, industry and subtrade workflows. See `temp/research/SOURCE-ADDENDUM-03.md`.
+- Reconstructed queue-driven advertiser/keyword research and the later 15-audience, separately authorized vertical portfolio.
+- Documented each stage's observed input/output and proposed gates, dependencies, retry/recovery behavior and handoff.
+- Identified different score meanings. Historical source-ad persistence uses 50/30/20 and provisional missing-rank scoring. The later vertical opportunity method uses 25/20/20/15/10/5/5 with independent confidence.
+- Documented data quality and failure modes including inaccessible Meta cards, partial QC tied to old artifact sets, cross-repo false-absence, incomplete sampling, and the live Run 10 in-progress versus stale portfolio index.
+- Described proposed dynamic subvertical fan-out, safe parallelism and independent QC, without treating historical planned tasks as authorized.
+- Wrote 14 candidate reusable research template contracts and four compound workflow sketches, **not runnable templates**.
+- Updated progress, history, source index and cross-session handoff; no private source content copied verbatim into the public repo.
 
-## Not performed
+## Not completed or claimed
 
-- No AOS-W workflow engine, runtime, templates or synchronization implementation.
-- No Meta, CRM, website or customer account changes.
-- No new advertiser research or re-verification of live ads.
-- No claim that all historical ChatGPT conversations have been fully retrieved.
-- No direct current Meta delivery, spend, CPC, CTR, lead signals or production website verification.
+- No AOS-W engine, schemas, tools, actual run execution or tested template package.
+- No live Meta Ads Library current re-verification, production campaign changes or CRM edits.
+- No authorization for future child studies inferred from a stored prompt.
+- No real-time resolution of the private portfolio index beyond verified started Run 10.
 
 ## Next action
 
-Run Prompt 03. Inspect original keyword and advertiser queue/result schemas, repeated prompt batches, scored evidence, retry and source-match records, and current vertical-run progress. Build a detailed research workflow contract and candidate templates, clearly identifying inferred requirements.
+Prompt 04. Inspect original ad copy/creative briefs, source-match rubrics, visuals, Fred/Muse independent creative bakeoff and final ad asset QA. Derive reusable creative production contracts including truthful adaptation, image correction and version-bound reviews.
 
-Next session first reads `temp/OPERATING-RULES.md`, `DESIGN-DECISIONS.md`, `WORK-PLAN.md`, `PROGRESS.md`, `HANDOFF.md`, then the new research index.
+Start by reading `temp/OPERATING-RULES.md`, `temp/DESIGN-DECISIONS.md`, `temp/WORK-PLAN.md`, `temp/PROGRESS.md`, `temp/HANDOFF.md`, plus the research index and model.

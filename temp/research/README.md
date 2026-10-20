@@ -12,3 +12,14 @@ Read in this order:
 3. [EVIDENCE-GAPS.md](EVIDENCE-GAPS.md), contradictions, privacy limits and further investigation required.
 
 All private files remain in the restricted original sources. The AOS-W repository contains sanitized summaries only.
+
+## Prompt 03 research expansion, 2026-10-20
+
+- [SOURCE-ADDENDUM-03.md](SOURCE-ADDENDUM-03.md), 30 additional directly inspected restricted sources R21–R50.
+- [RESEARCH-WORKFLOW-MODEL.md](RESEARCH-WORKFLOW-MODEL.md), stage-by-stage actual discovery and vertical portfolio reconstruction.
+- [RESEARCH-EVIDENCE-QA.md](RESEARCH-EVIDENCE-QA.md), independent scoring models, evidence quality, retry and QC failure patterns.
+- [VERTICAL-RESEARCH-LINEAGE.md](VERTICAL-RESEARCH-LINEAGE.md), broad research, B9 split, subvertical screening and conditional fan-out.
+- [candidate-templates/CATALOG.md](candidate-templates/CATALOG.md), 14 candidate reusable research template contracts.
+- [candidate-templates/COMPOSITION-EXAMPLES.md](candidate-templates/COMPOSITION-EXAMPLES.md), four **non-executable** composition examples.
+
+Everything in candidate-templates remains proposed design input for PRD review, not runnable framework code.

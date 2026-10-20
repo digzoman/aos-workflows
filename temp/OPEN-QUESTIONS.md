@@ -29,3 +29,11 @@ Open questions are not blockers for Prompt 02 research unless explicitly noted.
 19. How will handoff records reference artifacts across separate private agent repositories without making the portable AOS-W core Git-dependent?
 20. What provider read-back and idempotency evidence suffices after an ambiguous external API timeout?
 21. How should user-facing status distinguish configured active, effective eligible/delivering, review pending, and measured spend/conversion from merely accepted API writes?
+
+## Prompt 03 research-derived decisions for later design
+
+22. Should the agent offer-family ledger and the vertical seller/market observations use one shared identifier envelope or separate domain tables with cross-links?
+23. How should a versioned rubric key distinguish advertisement-persistence score, vertical opportunity score and evidence confidence in a mixed portfolio?
+24. What is the precise handoff rule when child run PROGRESS has newer observed state than its aggregate RUN-INDEX or cached rollup?
+25. Which evidence-quality failures require blocking QC, and when may a human accept a qualified report despite incomplete coverage?
+26. What policy controls auto-start of suggested subverticals versus explicit per-run approval, considering the historical 15-run individually authorized program?

@@ -1,8 +1,8 @@
 # AOS-W V1 Work Plan
 
 Updated: 2026-10-20
-Current phase: Prompt 02, historical workflow source indexing completed
-Next phase: Prompt 03, detailed research workflow reverse engineering
+Current phase: Prompt 03, competitor Meta research reverse engineering completed
+Next phase: Prompt 04, ad creative production workflow research
 No workflow engine implementation authorized before PRD approval.
 
 ## Research and design stages
@@ -10,7 +10,7 @@ No workflow engine implementation authorized before PRD approval.
 - [x] Prompt 01. Create public repository and tracked decision and handoff workspace, without implementing the engine.
 - [x] Prompt 01b. Add one-off versus scheduled recurring workflow triggering and per-template/per-instance just-in-time skills to the agreed design scope.
 - [x] Prompt 02. Indexed accessible Ampgent conversations and inspected restricted research, creative, collaboration, staging, launch, and website artifacts, with sanitization and evidence limitations documented.
-- [ ] Prompt 03. Reverse engineer Meta Ads Library research, multi-run prompts, evidence, and QC.
+- [x] Prompt 03. Reconstructed 34-advertiser / 96-keyword queue workflow and 15-run vertical portfolio, scoring, source evidence, retry and independent QC; candidate research template specifications committed.
 - [ ] Prompt 04. Reverse engineer ad copy and creative/image production and revision loops.
 - [ ] Prompt 05. Reverse engineer Meta campaign setup, tracking, CRM, prelaunch QA, activation, and optimization.
 - [ ] Prompt 06. Review A Rep, LangGraph, Agent Skills, locking and portability tradeoffs; include scheduling backend interfaces, due-trigger behavior, skill packaging and skill resolution/trust.

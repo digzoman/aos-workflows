@@ -28,3 +28,13 @@ Future sessions should append substantive events with changed files, test eviden
 - Recorded recoverability, cross-repo missing-artifact errors, partial QA, ambiguous external API retries and launch readback limits as observed failure/correction cases.
 - Did not build an engine, modify external marketing infrastructure, or copy restricted source data into this public repo.
 - Next task remains Prompt 03, detailed research workflow reverse engineering.
+
+## 2026-10-20. Prompt 03, reverse engineering research workflow
+
+- Read required AOS-W project state and the Prompt 02 sanitized research index.
+- Directly inspected original Max research refresh queues, result logs, candidate ledger, scoring rubric, final report and source-match failures, plus October vertical methodology, trades discovery, independent 15-run portfolio and representative individual runs.
+- Added restricted-source path addendum R21–R50, research workflow model, scoring/evidence/QC analysis, vertical and subvertical lineage, and 14 non-executable reusable template contracts with four composition sketches.
+- Found distinct ad-persistence versus market-opportunity scoring and documented incomplete/blocked access without interpreting as verified absence.
+- Recorded a source-of-truth discrepancy, Run 10 local progress started while portfolio index still said not started, without modifying the private source.
+- No AOS-W workflow engine, schemas, live marketing actions or external system modifications.
+- Next stage is Prompt 04 creative workflow research.

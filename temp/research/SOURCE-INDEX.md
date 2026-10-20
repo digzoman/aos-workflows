@@ -81,3 +81,7 @@ These were listed in directories, but not all individual bodies were read. **L**
 This index establishes concrete historical workflows for search planning, batch research, evidence/QC, creative production, revision, paused staging, launch and its verification limitations. It **does not** independently verify today's live Meta campaign delivery, performance metrics, HighLevel functionality, production site status, or final completion of research Run 10. No proprietary project transcripts were exported.
 
 Next: use R02–R05/R16–R18 for Prompt 03 research; R08–R10 for Prompt 04 creative research; R11–R13/R19–R20 for Prompt 05 implementation/deployment research.
+
+## E. Prompt 03 source expansion
+
+Thirty further directly inspected Max repository documents, R21–R50, are registered with exact restricted relative locators and evidence purposes in [SOURCE-ADDENDUM-03.md](SOURCE-ADDENDUM-03.md). The new research interpretation and candidate template specifications are in [RESEARCH-WORKFLOW-MODEL.md](RESEARCH-WORKFLOW-MODEL.md) and [candidate-templates/CATALOG.md](candidate-templates/CATALOG.md). **This does not imply updated independent live Meta verification.**
