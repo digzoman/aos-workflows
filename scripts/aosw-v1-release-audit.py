@@ -116,7 +116,7 @@ def scan_zip(path):
         for n in names:
             if not n.startswith("aos-w/") or ".." in PurePosixPath(n).parts:unsafe.append(n)
             rel=n[len("aos-w/"):]
-            if rel.startswith("agent-files/instances/") or rel.startswith("agent-files/custom-templates/"):
+            if not n.endswith("/") and (rel.startswith("agent-files/instances/") or rel.startswith("agent-files/custom-templates/")):
                 # Distribution includes only clean README seeds.
                 if PurePosixPath(rel).name!="README.md":unsafe.append(n)
             if rel.startswith(("temp/","tests/","tools/","docs/","scripts/")):unsafe.append(n)
