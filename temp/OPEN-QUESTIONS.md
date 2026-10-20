@@ -21,3 +21,11 @@ These questions are intentionally deferred until research and PRD review. Record
 16. Which skills are instructions only versus executable tools, and how do we guarantee skill discovery never expands execution permissions?
 
 Open questions are not blockers for Prompt 02 research unless explicitly noted.
+
+## Research-phase evidence questions for Prompt 03–05
+
+17. What is the precise authoritative precedence when a ChatGPT message shows a newer research run in progress but the repository run index has not yet been updated?
+18. How must a QC approval be bound to an exact artifact revision and required output set so that old or partial passes do not approve new work?
+19. How will handoff records reference artifacts across separate private agent repositories without making the portable AOS-W core Git-dependent?
+20. What provider read-back and idempotency evidence suffices after an ambiguous external API timeout?
+21. How should user-facing status distinguish configured active, effective eligible/delivering, review pending, and measured spend/conversion from merely accepted API writes?

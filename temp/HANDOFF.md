@@ -1,37 +1,45 @@
 # Latest Cross-Session Handoff
 
 Updated: 2026-10-20
-Previous assignments: Prompt 01 repository initialization, then Prompt 01b requirements amendment for recurring triggers and bundled/referenced skills.
-Result: Initial GitHub repository and documentation-only scaffold committed. Prompt 01b design decisions added without implementing any workflow or scheduling runtime. Verify the current branch head before work.
+Previous completed assignment: Prompt 02, Ampgent history and evidence index.
+Result: Sanitized history indexed and work-pattern cases documented in the public repository. Verify current GitHub branch head and read the source index before starting.
 
-## First reads
+## First reads for Prompt 03
 
 1. `temp/OPERATING-RULES.md`
 2. `temp/DESIGN-DECISIONS.md`
 3. `temp/WORK-PLAN.md`
 4. `temp/PROGRESS.md`
-5. `temp/OPEN-QUESTIONS.md`
-6. `temp/CONCEPT-NOTES-01B.md`
+5. `temp/research/SOURCE-INDEX.md`
+6. `temp/research/WORKFLOW-PATTERNS.md`
+7. `temp/research/EVIDENCE-GAPS.md`
+8. `temp/OPEN-QUESTIONS.md`
+9. `temp/CONCEPT-NOTES-01B.md`, as relevant to recurring workflows and skill references
 
-## Next assignment, Prompt 02
+## Evidence collected
 
-Research the actual Ampgent project conversations from recent weeks and relevant `digzoman/a-rep-Max` artifacts, focusing on the multistep Meta Ads Library research process and transition through ad creatives, campaign setup, launch, and performance monitoring.
+- Private Max repo inspected at `work/ampgent-adaptive-offer-testing/`, including research refresh, meta-ad bakeoff, creative bakeoff, Meta staging/launch, B9 and vertical portfolio directories, plus the separate website-redesign work area.
+- Twenty source documents indexed (R01–R20) with exact authorized repo-relative locators and explicit evidence types.
+- One B9.1 ChatGPT conversation directly viewed, while many historical titles had only project-context excerpts, not fully retrieved transcripts. Links to private chats were deliberately **not** published.
+- Historic cases include batch research and retries, false missing files from cross-repo lookup, independent Fred/Muse evaluation, QA tied to the artifact revision, timeout-related duplicate external objects, launch read-back rate limits, new category definitions, vertical portfolio run status and staged website handoff.
 
-Create a source index in `temp/research/` with conversation title, date or approximate period, workflow stage, accessible source pointer, evidence strength, and any access limitations.
+## Next assignment, Prompt 03
 
-Capture how tasks were planned, divided into prompt-specific runs, completed, quality checked, revised, and handed off.
+Reverse-engineer the existing Meta Ads Library research methodology in depth. Start from R02–R05 and R16–R18 in the source index, then inspect queues, result records, evidence grading, selection/scoring logic and individual research run templates.
 
-Only commit **sanitized summaries and source pointers**, not raw private conversations or personal/client information.
+Pay particular attention to:
+- planned vs authorized vs running vs reviewed vs completed states;
+- unreliable Ads Library access and `RETRY_REQUIRED` handling;
+- exactly what counts as observed Meta evidence versus inference;
+- how new research runs are spawned and tracked;
+- QC gates that depend on actual artifact sets and versions;
+- consistency between per-run `PROGRESS.md` and portfolio-level status.
 
-If project conversations are not accessible to the current agent, report which sources can/cannot be reached and record a reproducible blocker. Avoid inventing absent details.
+Use sanitized process explanations, not internal account IDs or copied source evidence. Report gaps honestly. Commit the detailed analysis and update handoff.
 
-## Important added requirements for later PRD
+## Guardrails
 
-- Workflows are non-repeating by default. Master/custom templates may provide overridable recurring schedules, and ad hoc launch must always remain an option.
-- Recording a schedule does not mean it runs autonomously. No required scheduler, daemon, or background engine.
-- Templates and workflow instances may contain their own skill packages; steps may also refer to installed/local/repository skills, loaded only when relevant. A skill does not grant authority.
-- See `temp/CONCEPT-NOTES-01B.md` for explicit distinction between confirmed requirements and proposed design examples.
-
-## Scope restrictions
-
-Do not create executable engine code or treat this scaffold as operational. Keep true user choices separate from proposed designs. The next human approval gate is Prompt 07 PRD review.
+- No engine implementation and no premature PRD approval.
+- No live Meta/GHL/website changes.
+- No publishing of private conversation links or unsanitized data.
+- Prompt 07 is still the human approval checkpoint for the enhanced PRD.

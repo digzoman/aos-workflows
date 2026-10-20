@@ -18,3 +18,13 @@
 - No scheduling service, workflow engine, or skill resolver implemented. Next step still Prompt 02.
 
 Future sessions should append substantive events with changed files, test evidence, commit references, and failures. Avoid copying raw private logs.
+
+## 2026-10-20. Prompt 02, workflow history and source index
+
+- Read the required tracked project context and confirmed the previous Prompt 01b commit as starting state.
+- Inspected the restricted Max marketing repository and twenty targeted source documents spanning research planning, multiple-run execution, QC, creative production, peer review, staging, launch and web-development handoff.
+- Directly viewed a Bucket 9 ChatGPT research conversation and consulted provided Ampgent project-context excerpts. Classified each title/source by observed access rather than inferring full transcript access.
+- Created sanitized `temp/research/SOURCE-INDEX.md`, `WORKFLOW-PATTERNS.md` and `EVIDENCE-GAPS.md`.
+- Recorded recoverability, cross-repo missing-artifact errors, partial QA, ambiguous external API retries and launch readback limits as observed failure/correction cases.
+- Did not build an engine, modify external marketing infrastructure, or copy restricted source data into this public repo.
+- Next task remains Prompt 03, detailed research workflow reverse engineering.

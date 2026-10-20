@@ -1,28 +1,35 @@
 # Progress Snapshot
 
 Date: 2026-10-20
-Phase: Prompt 01b, requirements amendment after repository initialization
-Status: Prompt 01 completed and verified; Prompt 01b is a requirements-only amendment. Next task remains Prompt 02.
+Phase: Prompt 02, historical Ampgent workflow research and evidence indexing
+Status: COMPLETE for evidence-indexing scope, with explicit access and live-verification limitations. Next: Prompt 03.
 
-## Completed
+## Completed before Prompt 02
 
-- Created public `digzoman/aos-workflows` repository.
-- Established Git-tracked `temp/` for multi-session plans and decisions.
-- Recorded the survey baseline and post-survey refinements.
-- Created top-level documentation and placeholder portable scaffold layout.
-- Created public-repository operating and sanitization rules.
-- Prompt 01b documented default non-repeating workflows, optional recurring template schedules, ad hoc launch overrides, and template/instance skill bundles with just-in-time resolution.
-- Extended PRD, implementation, and testing work plans to account for triggering and skills.
+- Public `digzoman/aos-workflows` initialized with the tracked `temp/` workspace and scaffold placeholders.
+- All 16 survey decisions and Prompt 01b requirements documented.
+- No implementation authorized ahead of PRD approval.
 
-## Deliberately not done
+## Prompt 02 results
 
-- No workflow engine or executable workflows.
-- No final PRD or validated technical schema.
-- No real historical research index or cross-agent tests.
-- No Git LFS locking, claim engine, cloud sync, schedule runner, skill resolver, or working trigger implementation.
+- Read persistent project rules, decisions, work plan, prior handoff, research starting notes, and open questions.
+- Inspected the current private Max marketing artifact structure and **20 primary documents** across research planning, queues, QA, creative, cross-agent collaboration, staged Meta operations, launch and website handoff.
+- Viewed the open B9.1 ChatGPT run conversation and identified related chat titles/context with source-access distinctions.
+- Added `temp/research/SOURCE-INDEX.md`, `WORKFLOW-PATTERNS.md`, and `EVIDENCE-GAPS.md` with reusable patterns, concrete failure/correction cases and evidence limitations.
+- Reconciled a live chat showing the next research run in progress versus the previously read nine-run completed index without claiming unverified completion.
+- Captured recoverability, false missing files across repos, source limitations, independent QA, external side-effect reconciliation and layered launch verification as lessons for later PRD research.
+- Sanitized summaries for this public repository. Raw ads, proprietary conversations, provider IDs and credentials were not copied.
+
+## Not performed
+
+- No AOS-W workflow engine, runtime, templates or synchronization implementation.
+- No Meta, CRM, website or customer account changes.
+- No new advertiser research or re-verification of live ads.
+- No claim that all historical ChatGPT conversations have been fully retrieved.
+- No direct current Meta delivery, spend, CPC, CTR, lead signals or production website verification.
 
 ## Next action
 
-Run Prompt 02. Use Ampgent conversations and relevant repository evidence to create a **sanitized source index** for actual recent research, creative, ad configuration, launch, and monitoring workflows.
+Run Prompt 03. Inspect original keyword and advertiser queue/result schemas, repeated prompt batches, scored evidence, retry and source-match records, and current vertical-run progress. Build a detailed research workflow contract and candidate templates, clearly identifying inferred requirements.
 
-Next session must reread `OPERATING-RULES.md`, `DESIGN-DECISIONS.md`, `WORK-PLAN.md`, and `HANDOFF.md` before starting.
+Next session first reads `temp/OPERATING-RULES.md`, `DESIGN-DECISIONS.md`, `WORK-PLAN.md`, `PROGRESS.md`, `HANDOFF.md`, then the new research index.

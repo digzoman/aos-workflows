@@ -1,15 +1,15 @@
 # AOS-W V1 Work Plan
 
 Updated: 2026-10-20
-Current phase: Prompt 01, repository initialization
-Next phase: Prompt 02, index real historical workflows
+Current phase: Prompt 02, historical workflow source indexing completed
+Next phase: Prompt 03, detailed research workflow reverse engineering
 No workflow engine implementation authorized before PRD approval.
 
 ## Research and design stages
 
 - [x] Prompt 01. Create public repository and tracked decision and handoff workspace, without implementing the engine.
 - [x] Prompt 01b. Add one-off versus scheduled recurring workflow triggering and per-template/per-instance just-in-time skills to the agreed design scope.
-- [ ] Prompt 02. Index recent Ampgent ad research, creative, campaign configuration, launch, and monitoring conversations. Preserve sanitized evidence links and accessibility limitations.
+- [x] Prompt 02. Indexed accessible Ampgent conversations and inspected restricted research, creative, collaboration, staging, launch, and website artifacts, with sanitization and evidence limitations documented.
 - [ ] Prompt 03. Reverse engineer Meta Ads Library research, multi-run prompts, evidence, and QC.
 - [ ] Prompt 04. Reverse engineer ad copy and creative/image production and revision loops.
 - [ ] Prompt 05. Reverse engineer Meta campaign setup, tracking, CRM, prelaunch QA, activation, and optimization.
