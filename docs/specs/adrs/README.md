@@ -1,13 +1,18 @@
-# Architecture Decision Records under docs/specs
+# Architecture decision register
 
-**Prompt 08 ADRs are PROPOSED, not adopted**. Original Prompt 06 ADR-001 through ADR-008 remain in `temp/architecture/adrs/`, also PROPOSED unless separately approved. This collection records concrete design choices for further owner review and testing, not implementation or external-action authority.
+ADR-001 through ADR-013 remain PROPOSED, as originally recorded. ADR-014 remains provisionally selected for local prototype only. No decision is retroactively accepted merely because its implementation exists.
 
-- [ADR-009](ADR-009-file-layout-and-compatibility.md), protected install root and pinned instance layout.
-- [ADR-010](ADR-010-event-ledger-and-recovery.md), canonical validated event history and derived snapshots.
-- [ADR-011](ADR-011-graph-and-policy-merge.md), DAG, conditional UNKNOWN, dynamic children and protected inheritance.
-- [ADR-012](ADR-012-shared-task-claims.md), advisory local mode and optional empirically verified distributed claims.
-- [ADR-013](ADR-013-skill-schedule-permission.md), just-in-time skill and recurring trigger separation from permissions.
+## Original research decisions, preserved unmodified
 
-Pending owner authorization is **not** satisfied by this repository commit. Git LFS vs atomic Git claim design is intentionally unresolved until Prompts 13/17 tests.
+- [ADR-001-portable-single-spec.md](ADR-001-portable-single-spec.md), PROPOSED, originally at temp/architecture/adrs/ADR-001-portable-single-spec.md
+- [ADR-002-state-and-checkpoints.md](ADR-002-state-and-checkpoints.md), PROPOSED, originally at temp/architecture/adrs/ADR-002-state-and-checkpoints.md
+- [ADR-003-optional-capabilities.md](ADR-003-optional-capabilities.md), PROPOSED, originally at temp/architecture/adrs/ADR-003-optional-capabilities.md
+- [ADR-004-git-coordination.md](ADR-004-git-coordination.md), PROPOSED, originally at temp/architecture/adrs/ADR-004-git-coordination.md
+- [ADR-005-skills-and-trust.md](ADR-005-skills-and-trust.md), PROPOSED, originally at temp/architecture/adrs/ADR-005-skills-and-trust.md
+- [ADR-006-scheduling.md](ADR-006-scheduling.md), PROPOSED, originally at temp/architecture/adrs/ADR-006-scheduling.md
+- [ADR-007-a-rep-boundary.md](ADR-007-a-rep-boundary.md), PROPOSED, originally at temp/architecture/adrs/ADR-007-a-rep-boundary.md
+- [ADR-008-authority-and-side-effects.md](ADR-008-authority-and-side-effects.md), PROPOSED, originally at temp/architecture/adrs/ADR-008-authority-and-side-effects.md
 
-- [ADR-014](ADR-014-git-cas-provisional-selection.md), provisional preference for explicit expected-SHA Git ref CAS based on real *local* bare-Git tests; no real hosted GitHub/LFS server comparison yet.
+## Technical design and Git coordination
+
+ADR-009 through ADR-013 are under this directory and remain PROPOSED. ADR-014 is provisional, with hosted GitHub CAS marked REVIEW_REQUIRED and LFS server test BLOCKED. See docs/specs/prd/APPROVAL-REVIEW.md and the release approval packet before changing a status.
