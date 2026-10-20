@@ -1,0 +1,230 @@
+{
+  "cases": [
+    {
+      "detail": {
+        "archive_bytes": 97648,
+        "existing_workflow_instances": 0,
+        "git_repo_in_install": false,
+        "protected_files": 54,
+        "version": "0.6.0"
+      },
+      "evidence_paths": [
+        "protected-baseline.json"
+      ],
+      "expected": "Install verified standalone ZIP in arbitrary persistent local folder, with no Git and no existing runs.",
+      "id": "P16-01-fresh-zip-no-git",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "created": "offline-research",
+        "fixture_rows": 3,
+        "pin": "sha256:1e7eb336acfd9489ea3c8f465c08575e3c169efcb99c65db4e43ba1120eab953",
+        "ready": [
+          "define-scope"
+        ]
+      },
+      "evidence_paths": [
+        "initial-handoff.json",
+        "offline-working-directory/aos-w/agent-files/instances/offline-research/instance.json"
+      ],
+      "expected": "Create pinned CREATED run with exactly one initially eligible unconditioned task.",
+      "id": "P16-02-initialize-real-research-workflow",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "completed": [
+          "define-scope"
+        ],
+        "cp_before_interruption": "checkpoint-000005",
+        "cp_during_interruption": "checkpoint-000009",
+        "events": 10,
+        "interrupted": [
+          "collect-evidence"
+        ]
+      },
+      "evidence_paths": [
+        "interrupted-state.json",
+        "offline-working-directory/aos-w/agent-files/instances/offline-research/runs/run-001/artifacts/scope.md"
+      ],
+      "expected": "Write scope artifact, complete and checkpoint step; persist an incomplete running evidence attempt.",
+      "id": "P16-03-real-step-and-deliberate-midtask-interruption",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "all_steps": [
+          "define-scope",
+          "collect-evidence",
+          "review-evidence"
+        ],
+        "final_event_seq": 23,
+        "qc": "self_review_pass_on_fictional_fixture",
+        "resumed_task_attempts": 2,
+        "separate_process": true,
+        "start_from_persisted_handoff_seq": 10,
+        "status": "COMPLETED"
+      },
+      "evidence_paths": [
+        "cold-agent-output.txt",
+        "offline-working-directory/aos-w/agent-files/instances/offline-research/runs/run-001/events.jsonl",
+        "offline-working-directory/aos-w/agent-files/instances/offline-research/runs/run-001/artifacts/evidence.md",
+        "offline-working-directory/aos-w/agent-files/instances/offline-research/runs/run-001/artifacts/summary.md"
+      ],
+      "expected": "New process discovers handoff, correctly restarts incomplete task, writes fictional research, reviews artifacts, completes and checkpoints.",
+      "id": "P16-04-cold-process-recovery-and-real-research-completion",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "all_runtime_records_under_agent_files": true,
+        "no_git": true,
+        "protected_count": 54,
+        "protected_hashes_match": true,
+        "review_event_present": true
+      },
+      "evidence_paths": [
+        "protected-baseline.json",
+        "acceptance-results.json"
+      ],
+      "expected": "Protected framework hashes unchanged; event history and outputs under agent-files.",
+      "id": "P16-05-protected-file-write-boundary",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "actual_step_executed": "define-scope",
+        "custom_pinned": true,
+        "next": "collect-evidence",
+        "user_custom_source": "agent-files/custom-templates/local-custom-research/template.yaml"
+      },
+      "evidence_paths": [
+        "offline-working-directory/aos-w/agent-files/custom-templates/local-custom-research/template.yaml"
+      ],
+      "expected": "Custom source, graph revision, snapshot and actual executed step saved only under agent-files.",
+      "id": "P16-06-custom-template-and-manual-instance",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "correction_logged": true,
+        "failure_logged": true,
+        "next": [
+          "review-evidence"
+        ],
+        "retry_attempts": 2
+      },
+      "evidence_paths": [
+        "offline-working-directory/aos-w/agent-files/instances/custom-instance/runs/run-001/events.jsonl"
+      ],
+      "expected": "Explicit attempt-1 failure and correction, new attempt, validated output; no silent completion.",
+      "id": "P16-07-transient-failure-bounded-retry-correction",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "explicit_retry_approval_required": true,
+        "first_verdict": "REVISE",
+        "second_verdict": "PASS",
+        "status": "COMPLETED"
+      },
+      "evidence_paths": [
+        "offline-working-directory/aos-w/agent-files/instances/custom-instance/runs/run-001/artifacts/summary.md"
+      ],
+      "expected": "Rejected review blocks completion; unauthorized retry denied; corrected revision accepted after explicit approval.",
+      "id": "P16-08-qa-failure-remediation-resubmission",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "approval_is_mocked": true,
+        "history_preserved": true,
+        "invalidated": [
+          "collect-evidence",
+          "review-evidence"
+        ],
+        "preserved": [
+          "define-scope"
+        ],
+        "revision": "g0002"
+      },
+      "evidence_paths": [
+        "offline-working-directory/aos-w/agent-files/instances/custom-instance/graph-revisions/g0001.yaml",
+        "offline-working-directory/aos-w/agent-files/instances/custom-instance/graph-revisions/g0002.yaml"
+      ],
+      "expected": "Unapproved revision denied; scoped mock-approved revision retains original graph/history and invalidates descendants.",
+      "id": "P16-09-versioned-graph-revision-nondestructive",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "cancelled_blocked": true,
+        "checkpoint": "checkpoint-000004",
+        "paused_blocked": true,
+        "resumed": true
+      },
+      "evidence_paths": [
+        "offline-working-directory/aos-w/agent-files/instances/cancellation/runs/run-001/events.jsonl"
+      ],
+      "expected": "Paused run refuses task start; explicit resume works; canceled run refuses task start.",
+      "id": "P16-10-pause-resume-cancel",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "corrupt_detected": true,
+        "previous_running_state_retained": true,
+        "repair_explicit": true,
+        "tail_quarantined": true
+      },
+      "evidence_paths": [
+        "offline-working-directory/aos-w/agent-files/instances/corrupt-test/runs/run-001/events.jsonl"
+      ],
+      "expected": "Torn JSONL detected, cannot auto-repair, authorized repair preserves valid prefix and quarantines tail.",
+      "id": "P16-11-partial-journal-recovery",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "duplicate_blocked": true,
+        "mock_provider_only": true,
+        "no_real_provider_call": true,
+        "reconcile_required": true
+      },
+      "evidence_paths": [
+        "offline-working-directory/aos-w/agent-files/instances/provider-ambiguity/runs/run-001/events.jsonl"
+      ],
+      "expected": "Mock provider operation uses stable key; duplicate intent and unreconciled completion blocked.",
+      "id": "P16-12-ambiguous-external-operation-idempotency",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "no_git": true,
+        "protected_files_unchanged": 54,
+        "runs_with_event_journals": 5
+      },
+      "evidence_paths": [
+        "protected-baseline.json"
+      ],
+      "expected": "All framework bytes untouched after entire suite; install still contains no .git.",
+      "id": "P16-13-final-root-immutability",
+      "status": "PASS"
+    },
+    {
+      "actual": "A separate persistent cloud filesystem accessible through an authorized execution environment was not available. The isolated local folder is not a cloud substitute.",
+      "evidence_paths": [],
+      "expected": "Install on separate genuinely persistent cloud filesystem with an independent lifecycle and rerun offline cold start.",
+      "id": "P16-14-separate-persistent-cloud-filesystem",
+      "status": "NOT_RUN"
+    }
+  ],
+  "fail": 0,
+  "not_run": 1,
+  "pass": 13,
+  "release_sha256": "7d9ce9a3ea72f9546fe9d398647d76867bd1766a42bae717d6912f827734c5e9",
+  "release_zip": "/mnt/data/aos-w-portable-0.6.0.zip",
+  "run_date": "2026-10-20T12:26:15.598290+00:00",
+  "test_mode": "REAL_LOCAL_FILES + SYNTHETIC_OFFLINE_RESEARCH; NOT REAL CLOUD OR LIVE PROVIDER"
+}

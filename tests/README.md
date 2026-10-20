@@ -21,3 +21,7 @@ Run `python -m unittest discover -s tests -p 'test_state*.py' -v` for the **26**
 ## Prompt 14 optional ZIP and installation tests
 
 `python -m unittest discover -s tests -p 'test_distribution.py' -q` runs **18** new synthetic ZIP/install/upgrade, malicious archive and clean cold-start checks. `python -m unittest discover -s tests -p 'test_*.py' -q` runs **108 total** with all previous Git, governance, state and composition tests. The optional tool uses Python stdlib only for ZIP/upgrade; optional `aosw-ops.py init` needs PyYAML but the downloaded folder works manually without any Python. A separate GitHub Actions workflow builds the release from the **complete** scaffold and tests installation/upgrade; report that hosted result separately from local fixture tests.
+
+## Prompt 16 practical standalone acceptance
+
+See `tests/acceptance/README.md`. Run `python tests/acceptance/run_standalone_acceptance.py --zip /path/to/aos-w-portable-0.6.0.zip --evidence /tmp/aosw-p16` to exercise an **actual extracted no-Git installation** and complete an offline research workflow with a cold new-process resume and 12 other integrity/failure scenarios. The first verified local result: **13 PASS, 0 FAIL, 1 NOT RUN** (separate persistent cloud filesystem). It is not a test of real advertisers, live provider operations or real cross-platform AI-agent collaboration. Unlike pure unittest cases, this invokes the user-facing initializer and persisted run protocol and retains actual event/evidence files.

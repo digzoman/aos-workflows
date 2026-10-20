@@ -1,0 +1,115 @@
+schema_version: 1.0.0
+template_id: local-custom-research
+version: 0.1.0-custom
+name: Local custom offline research
+description: Bounded manual local research
+parameters:
+  question:
+    type: string
+    required: true
+  scope:
+    type: string
+    required: false
+    default: No external account changes
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - evidence-self-check
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+skills:
+- skill_id: evidence-handling
+  source: bundled
+  path: skills/evidence-handling/SKILL.md
+  required: true
+  trust: approved
+gates:
+- gate_id: evidence-self-check
+  kind: self_review
+  required: true
+  rubric: Separate observation, inference and unresolved source checks.
+graph:
+  nodes:
+  - id: define-scope
+    kind: task
+    needs: []
+    instructions: Record input sources and synthetic provenance from local fixture.
+    inputs: []
+    outputs:
+    - artifact_id: research-scope
+      path: artifacts/scope.md
+      required: true
+    quality:
+      gates: []
+    contract:
+      done_when: All declared output artifacts exist, are dated and have provenance;
+        do not invent outcomes.
+    required_actions:
+    - read
+    - write_local
+  - id: collect-evidence
+    kind: task
+    needs:
+    - define-scope
+    instructions: 'Revision v2: require explicit classification of direct and inferred
+      evidence.'
+    inputs:
+    - from: define-scope
+      artifact_id: research-scope
+      required: true
+    outputs:
+    - artifact_id: evidence-log
+      path: artifacts/evidence.md
+      required: true
+    quality:
+      gates: []
+    contract:
+      done_when: All declared output artifacts exist, are dated and have provenance;
+        do not invent outcomes.
+    required_actions:
+    - read
+    - write_local
+    skills:
+    - evidence-handling
+    retry:
+      schema_version: 1.0.0
+      max_attempts: 2
+      'on':
+      - source_unavailable
+      backoff: manual
+  - id: review-evidence
+    kind: review
+    needs:
+    - collect-evidence
+    instructions: Self-review complete evidence, then prepare summary.
+    inputs:
+    - from: collect-evidence
+      artifact_id: evidence-log
+      required: true
+    outputs:
+    - artifact_id: reviewed-summary
+      path: artifacts/summary.md
+      required: true
+    quality:
+      gates:
+      - evidence-self-check
+    contract:
+      done_when: All declared output artifacts exist, are dated and have provenance;
+        do not invent outcomes.
+    required_actions:
+    - read
+    - write_local

@@ -133,3 +133,12 @@ Open questions are not blockers for Prompt 02 research unless explicitly noted.
 99. No source-level secret scanner guarantees public binary assets contain no private data; packager uses strict safe file shape allowlist and blocks all unknown agent-files user data. Review public master/template content before release.
 100. Optional template initializer supports pinned master YAML. Custom template overlay resolution stays with composition/manual protocol and current trust rules; never silently follow updated master HEAD for existing runs.
 101. Optional quick status is advisory (event sequencing only), not SHA256/reviewer/permission verification; verified recovery needs the state/governance routines.
+
+## Prompt 16 outstanding acceptance requirements
+
+102. Prompt 15's prepared marketing template work was not committed at Prompt 16 start; complete P15 publication and rerun acceptance against that version, not solely v0.6.
+103. Execute on a **genuinely separate persistent cloud filesystem** using an independently owned lifecycle, and prove data survives cold agent session teardown. Local CI runner directory does not count.
+104. Use an actual other AI agent/harness (not just another Python process) to resume the pinned workflow, verify identity provenance and no remembered context; target Prompt 17.
+105. Test recurring-template manual launch vs scheduled occurrence identity, and skill bundle/source resolution in standalone offline installation.
+106. Verify newly added CI practical acceptance step and artifact results independently after publication; do not infer success from workflow definition.
+107. Confirm host OS ACL/symlink behavior for hard protection. Normal agent-files-only writes are cooperative, not a sandbox.

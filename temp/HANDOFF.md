@@ -1,50 +1,29 @@
-# AOS-W Cross-Session Handoff — Prompt 14
+# AOS-W Cross-Session Handoff — Prompt 16
 
 Updated: 2026-10-20
-Status: **0.6.0 portable distribution tools committed; 108/108 local conformance tests PASS.** GitHub Actions 39415147383 SUCCESS and v0.6.0-portable-preview ZIP published and verified.
-Repository: public digzoman/aos-workflows, main. Check exact HEAD and recent Actions run before changes.
+Current stage: **Standalone/offline practical local acceptance PASSED 13/13; cloud persistent filesystem NOT RUN.** Formal Version 1 acceptance incomplete.
+Repo: public digzoman/aos-workflows main. Verify current HEAD and Actions run before working.
 
-## Mandatory opening reads
+## Required reads
+1. `temp/OPERATING-RULES.md`, `temp/DESIGN-DECISIONS.md`, `temp/WORK-PLAN.md` and this handoff.
+2. `docs/testing/PROMPT-16-STANDALONE-ACCEPTANCE.md` and `tests/acceptance/README.md`.
+3. `tests/acceptance/run_standalone_acceptance.py`, `resume_agent.py`, `evidence/acceptance-results.json` and selected real event journals.
+4. `scaffold/aos-w/README.md`, `PROTOCOL.md`, `references/STATE-AND-RECOVERY.md`, `tools/state/state.py`, `scripts/aosw-ops.py`.
+5. `.github/workflows/aosw-portable.yml` for the hosted local-filesystem ZIP acceptance job.
+6. Prompt 15 design files must be checked for an actual commit; as of Prompt 16 start they were uncommitted.
 
-1. `temp/OPERATING-RULES.md`, `temp/DESIGN-DECISIONS.md`, `temp/CONCEPT-NOTES-01B.md`
-2. `temp/WORK-PLAN.md`, `temp/PROGRESS.md`, this handoff
-3. `scaffold/aos-w/README.md`, `PROTOCOL.md`, `VERSION.json`
-4. `scaffold/aos-w/references/INSTALL.md`, `UPGRADE-AND-PORTABILITY.md`
-5. `docs/installation/QUICKSTART.md`
-6. `scripts/aosw-distribution.py`, `scripts/aosw-ops.py`, `scripts/package-scaffold.sh`
-7. `tests/test_distribution.py`, `temp/tests/PROMPT-14-DISTRIBUTION.md`
-8. `.github/workflows/aosw-portable.yml`
-9. Prior Prompt 10–13 helper/tests/manual references, particularly governance and current publisher/source permissions.
+## Confirmed local capabilities
+- Verified release v0.6.0 ZIP SHA-256 `7d9ce9a3ea72f9546fe9d398647d76867bd1766a42bae717d6912f827734c5e9`, actual extracted installation with no Git.
+- Three research steps genuinely executed on a **fictional offline fixture**. Scope and evidence hashes verified; one incomplete running attempt deliberately interrupted and resumed from saved event/handoff/graph/skill by a new independent OS process.
+- Completed run has a verified event chain, QC submission/PASS, checkpoint and saved handoff. Legacy master and installed framework 54 protected files unchanged.
+- A user custom template was created under agent-files, initialized and executed; test also covered bounded failure/retry, QC rejection/correction, approved graph revision with preserved history, pause/resume/cancel, corrupt-tail recovery and ambiguous-effect dedup.
+- 13 acceptance cases PASS; cloud persistent filesystem case explicitly NOT RUN; real cross-platform AI harness/remote provider actions not tested.
 
-## What is actually implemented
+## Test harness correction
+The first test wrongly expected a skill-bound node in the automatic eligible list. The implementation correctly demands an explicit context/skill check. Tests were fixed and rerun; no production framework bug established.
 
-- Portable standalone `scaffold/aos-w/` manual core requiring no Git, Python, Node, MCP or database.
-- Optional clean ZIP builder/verify/install/upgrade: format `aos-w-standalone-zip-v1`, a self-contained ZIP rooted at `aos-w/`, SHA256 integrity manifest, only standardized protected framework and nonsecret starter agent-files config. **No generated user work** included.
-- Fresh installs create an empty user-workspace instances area. Existing installs upgraded with `agent-files/` kept unchanged, rollback backup retained; no automatic major-schema migration.
-- Optional developer Python quickstarter lists templates/instances, creates a pinned/manual CREATED run and emits initial event/handoff; status is advisory and never grants permission.
-- Optional GitHub Actions workflow builds full repo versioned ZIP, runs complete regressions and install/init/upgrade smoke, uploads Actions artifact and tries a separately observable prerelease asset.
-- Old repo's synthetic demonstration remains present in **development** agent-files but is intentionally excluded from standalone clean release.
-
-## Validation evidence and limits
-
-- 18 new + 90 old = **108 local tests passed**, including ZIP privacy/safety, upgrade preservation and task initialization. Tested on synthetic local ZIP; the full public repository artifact is tested in hosted workflow, not presumed from code alone.
-- The quickstarter was separately tested with real prior research-starter YAML and Prompt 11 RunStore verifying event prefix.
-- No shell script is mandatory for *using* the ZIP. Builder itself requires optional Python, only in development host.
-- Verified Actions run 39415147383 SUCCESS, artifact ID 12261710573 available, prerelease v0.6.0-portable-preview with SHA256 digest independently matched; permanent release asset link below.
-- Does not authenticate human reviews/permissions, enforce provider-side fencing or run unattended work.
-
-## Next prompt 15
-
-Create sanitized actual Ampgent-style workflow master templates, protecting owner boundaries and preserving all file-only operation. Do not touch live advertising/CRM accounts. Use evidence-indexed research templates as basis. Commit outputs and updated progress/handoff.
-
-## Reserved follow-ups
-
-Real hosted GitHub CAS races and Git LFS server lock competition remain Prompt 17 tasks; ZIP installation on varied cloud filesystems still needs broader release test coverage.
-
-## Hosted verified distribution download
-
-- GitHub release: https://github.com/digzoman/aos-workflows/releases/download/v0.6.0-portable-preview/aos-w-portable-0.6.0.zip
-- SHA-256: `7d9ce9a3ea72f9546fe9d398647d76867bd1766a42bae717d6912f827734c5e9`
-- Hosted workflow: https://github.com/digzoman/aos-workflows/actions/runs/39415147383 (SUCCESS, 108 tests)
-- Release ZIP: 97,648 bytes, 63 manifest entries, 20 schemas, clean agent-files; installed, initialized and upgraded independently after download.
-- Failed first run 39414897602 was corrected by mocking absence of Git LFS rather than assuming host environment. No live Git LFS lock server test was performed.
+## Next steps
+- Observe GitHub Actions outcome for the newly added practical acceptance CI step. A push alone is not a passing hosted run.
+- Finish previously prepared but unpublished Prompt 15 marketing templates. Do not conflate the GitHub v0.6.0 release with an unreleased v0.7.0.
+- Future separate cloud-host persisted install, actual other-agent platform cold resume, scheduled occurrence tests and independent approval enforcement are pending.
+- No live Meta/HighLevel/site operations, and mock approvals cannot be used for them.

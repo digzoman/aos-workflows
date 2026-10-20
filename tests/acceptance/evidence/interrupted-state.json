@@ -1,0 +1,11 @@
+{
+  "event_seq": 10,
+  "active_steps": [
+    "collect-evidence"
+  ],
+  "checkpoint_ids": [
+    "checkpoint-000005",
+    "checkpoint-000009"
+  ],
+  "attempts": 1
+}

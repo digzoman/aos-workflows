@@ -1,8 +1,8 @@
 # AOS-W V1 Work Plan
 
 Updated: 2026-10-20
-Current phase: Prompt 14 distribution/optional helper implementation complete, release ZIP published and hosted smoke tests verified
-Next phase: Prompt 15 sanitized Ampgent marketing reusable workflow templates
+Current phase: Prompt 16 formal local/offline acceptance executed against published v0.6.0; 13 PASS / 0 FAIL / 1 NOT RUN
+Next phase: complete and publish pending Prompt 15 marketing library, validate hosted Prompt 16 CI, then Prompt 17 cross-agent/cloud tests
 Implementation phases 09–13 were explicitly directed by the owner; live external operations remain separately approval-gated. Full V1 production/release approval is not implied.
 
 ## Research and design stages
@@ -29,7 +29,7 @@ Implementation phases 09–13 were explicitly directed by the owner; live extern
 
 ## Validation and release stages
 
-- [ ] Prompt 16. Standalone offline and single-agent tests, including manually launched one-off/recurring-template instances and bundled/local skills.
+- [ ] Prompt 16. **Partial acceptance:** 13 real local file-based workflow scenarios PASSED, 0 FAILED; separate persistent cloud-filesystem case NOT RUN. End-to-end fictional research, interruption/new-process recovery, custom template, skill-context, retry/QC, revision, cancel, journal corruption, idempotency and protected files covered. Schedule-triggered recurring occurrence and independent real cloud/AI harness tests remain open.
 - [ ] Prompt 17. Git and cross-agent collaboration tests, including scheduled occurrence identity and safe shared skill references where supported.
 - [ ] Prompt 18. Staged end-to-end marketing workflow pilot, no live publishing without new authorization.
 - [ ] Prompt 19. Requirements audit, release readiness and human review.

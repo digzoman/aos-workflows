@@ -1,0 +1,24 @@
+{
+  "scenario": "fictional_offline_fixture",
+  "question": "Compare 3 fictional service tools using only provided offline records",
+  "records": [
+    {
+      "id": "FX-01",
+      "product": "Nimbus Desk (fictional)",
+      "capability": "appointment reminders",
+      "tier": "illustrative budget"
+    },
+    {
+      "id": "FX-02",
+      "product": "Pine Funnel (fictional)",
+      "capability": "ad copy drafts",
+      "tier": "illustrative mid"
+    },
+    {
+      "id": "FX-03",
+      "product": "Harbor Lead (fictional)",
+      "capability": "appointment reminders",
+      "tier": "illustrative premium"
+    }
+  ]
+}

@@ -41,6 +41,29 @@ jobs:
           python scripts/aosw-distribution.py upgrade dist/aos-w-portable-0.6.0.zip "$RUNNER_TEMP/install-a/aos-w"
           test "$(cat "$RUNNER_TEMP/install-a/aos-w/agent-files/instances/integration-test/runs/run-001/artifacts/user-data.txt")" = PRESERVE_ME
           python scripts/aosw-ops.py status "$RUNNER_TEMP/install-a/aos-w" integration-test run-001
+      - name: Practical offline standalone acceptance (no Git in installation)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tests/acceptance/run_standalone_acceptance.py --zip dist/aos-w-portable-0.6.0.zip --evidence "$RUNNER_TEMP/p16-acceptance"
+          python - "$RUNNER_TEMP/p16-acceptance/acceptance-results.json" <<'PY'
+          import json,sys
+          r=json.load(open(sys.argv[1]))
+          assert r['pass']==13 and r['fail']==0 and r['not_run']==1, r
+          print("P16 practical offline: 13 PASS, 0 FAIL, cloud persistent filesystem NOT RUN")
+          PY
+      - name: Upload practical offline acceptance evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: aos-w-practical-offline-acceptance
+          path: |
+            ${{ runner.temp }}/p16-acceptance/ACCEPTANCE-REPORT.md
+            ${{ runner.temp }}/p16-acceptance/acceptance-results.json
+            ${{ runner.temp }}/p16-acceptance/initial-handoff.json
+            ${{ runner.temp }}/p16-acceptance/interrupted-state.json
+            ${{ runner.temp }}/p16-acceptance/cold-agent-output.txt
+          retention-days: 90
+          if-no-files-found: error
       - name: Upload portable ZIP artifact
         uses: actions/upload-artifact@v4
         with:

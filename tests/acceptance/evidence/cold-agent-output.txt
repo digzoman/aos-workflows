@@ -1,0 +1,3 @@
+{"completed": ["define-scope", "collect-evidence", "review-evidence"], "final_seq": 23, "final_status": "COMPLETED", "first_checkpoint": "checkpoint-000022", "handoff_seq": 23, "integrity": "verified", "new_process_actor": {"agent": "Offline Research Agent", "instance": "p16-cold-resume", "platform": "standalone-fresh-process", "role": "research-worker"}, "quality": "self_review_pass_on_fictional_fixture", "result": "PASS", "resumed_from_handoff_seq": 10}
+
+STDERR:

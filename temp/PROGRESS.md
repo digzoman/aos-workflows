@@ -1,47 +1,33 @@
 # AOS-W Development Progress
 
 Date: 2026-10-20
-Phase: **Prompt 14 portable distribution and optional helpers — IMPLEMENTED / local tests PASS**
-Framework: **0.6.0** portable Markdown/YAML/JSON manual core; optional host tools separate.
-Next: Prompt 15, sanitized Ampgent marketing workflow modules, pending distribution-hosted verification details.
+Phase: **Prompt 16 real standalone/offline local acceptance — 13 PASS, 0 FAIL; independent cloud test NOT RUN**
+Tested baseline: verified public AOS-W **0.6.0** portable ZIP, SHA-256 `7d9ce9a3ea72f9546fe9d398647d76867bd1766a42bae717d6912f827734c5e9`.
 
-## Prior foundation
+## Baseline and dependency truth
+- `main` at opening was `07d5101684bd2cf6996938622fbc8c65a4399141`, the published v0.6.0 release.
+- Prior Prompt 15 created a substantial local/staged marketing library but **had not committed it to main**. Do not represent 0.7 marketing templates as a released or accepted dependency. Prompt 16 tests the reproducible 0.6.0 package, not unpublished changes.
+- Prompts 01–14 remain in development history. User explicitly authorized this local acceptance testing; no advertising/provider actions authorized.
 
-- Prompts 01–08: decisions, research, enhanced PRD and technical file/state/QC/Git architecture.
-- Prompt 09: protected downloadable scaffold, writable agent-files.
-- Prompt 10: reusable templates/compound graph rules, optional composition helper; 11 tests.
-- Prompt 11: append-oriented event ledger, recovery/checkpoints/retries; 26 tests.
-- Prompt 12: identity, advisory claims, reviews, permissions and remediation; 38 tests.
-- Prompt 13: optional Git sync and local bare-ref CAS experiments; 15 tests, production claim backend still provisional.
+## Practical execution performed
+- Extracted the actual verified clean ZIP into a newly created **Git-free** working directory under local /mnt/data.
+- Initialized master `research-starter` as a pinned CREATED instance using only a local optional initializer external to the downloaded scaffold.
+- Performed scope research task and verified output hash; wrote a local synthetic 3-record offline source fixture, checkpointed and intentionally interrupted `collect-evidence` mid-attempt.
+- A **fresh OS process** with no previous conversation/process variables read only installed PROTOCOL, pinned graph, bundle skill, saved handoff, event journal and fixture. It explicitly paused/resumed the incomplete attempt, completed evidence with observed-vs-inferred-vs-unverified separation, submitted a low-risk self-review and completed the final summary and checkpoints.
+- Actual research artifacts and event journal, version/revision pins, SHA digest and controlled interruption output retained in `tests/acceptance/evidence/`.
+- Created a genuine user-owned custom template and manual instance; executed step, failed and retried evidence with correction, failed QC then resubmitted for PASS, applied an approval-scoped graph revision preserving old immutable history.
+- Tested pause/resume/cancel, detected/quarantined torn JSONL, prevented duplicate ambiguous mock provider intent, and compared 54 protected standard files before/after. No changes outside installed `agent-files/`; no Git in installed directory.
+- Initial acceptance harness expected skill-dependent task to be automatically READY; actual AOS-W correctly withheld it pending context check. Corrected test assertions and reran all 13 scenarios successfully. **No framework defect was proven by that test correction.**
 
-## Prompt 14 deliverables
+## Results and limitations
+- **13 PASS, 0 FAIL, 1 NOT RUN (separate persistent cloud filesystem).**
+- See `docs/testing/PROMPT-16-STANDALONE-ACCEPTANCE.md`, `tests/acceptance/run_standalone_acceptance.py`, `tests/acceptance/resume_agent.py`, `tests/acceptance/evidence/` for reproducible expected-vs-actual and real evidence.
+- An OS process and optional deterministic helpers were used. This is **not** proof of independent commercial AI harness handoff, fully scriptless execution by a different AI model, real advertiser research or provider authorization.
+- Owner approval for graph revision was a clearly marked mock, not authenticated security. A separate persistent cloud host/volume was not available; an ephemeral Actions worker must NOT be relabeled a persistent cloud-filesystem acceptance.
+- CI workflow amended to run offline practical acceptance against packaged ZIP on push and retain evidence artifact; hosted result must be observed before claiming CI PASS.
 
-- `scripts/aosw-distribution.py`: Python **stdlib-only, optional maintainer** ZIP builder/manifest verifier/clean installer/safe upgrade. Whitelists protected readmes/templates/reference/schema files and **only** nonsecret config/readme seeds from agent-files. Rejects ZIP traversal, case collisions, symlinks, mismatched hashes, size excess and unintended source paths. SHA256 file manifest; deterministic archive bytes.
-- Upgrade stages protected files, copies the **entire existing agent-files subtree byte-for-byte**, uses same-parent filesystem renames with rollback recovery on supported hosts and retains previous installation as sibling backup; unknown schema major blocked. Not a distributed transaction and not guaranteed crash atomic on cloud/NFS.
-- `scripts/aosw-ops.py`: optional list/status (status explicitly advisory, not permission), new one-off workflow init from pinned master YAML (PyYAML only for init) using four-field actor, immutable template snapshot/graph, CREATED run, SHA256 genesis event, state and handoff. No task/provider executions.
-- `scripts/package-scaffold.sh` now delegates to safe builder instead of recursively zipping possibly private agent-files data. `scripts/validate-scaffold.mjs` updated to 0.6.0 and handles clean ZIP without the repository's synthetic demo.
-- `scaffold/aos-w/references/INSTALL.md` and `docs/installation/QUICKSTART.md` provide manually executable, **no Python/Git required** directions.
-- `.github/workflows/aosw-portable.yml`: authored hosted test/package workflow, uploading independent `aos-w-portable-0.6.0.zip` Actions artifact and attempting best-effort preview release asset. GitHub Actions run 39415147383 completed SUCCESS; artifact and SHA256-verified prerelease asset were independently downloaded and tested.
-- Clean ZIP excludes all dev tools/tests/temp/docs/examples and **all active/user private agent-files** (including public repo synthetic practice sample and custom overlay); installs default config and empty instance/custom folders.
-
-## Locally executed tests
-
-- **18 new local distribution/initialization/upgrade tests PASS** with synthetic scaffold files, manifest integrity, arbitrary extraction, preservation of all user bytes, corrupt/malicious ZIP cases and new instance status.
-- **108/108 combined tests PASS** with all 90 existing regression cases in local container.
-- Additionally initialized from actual preexisting `research-starter` 0.2 YAML, resumed with existing `RunStore.verified()`, confirmed event digest and first eligible task, with zero executed tasks.
-- GitHub Actions run 39415147383 completed SUCCESS: full repository packaged, 108 hosted tests PASSED, installed and upgraded. Preview asset SHA256 matches independently downloaded ZIP.
-
-## Remaining limitations
-
-- No background workflow engine, scheduler, authenticated owner approval or live provider integration.
-- Hosted CAS/LFS live coordination still untested; Git default disabled.
-- Manual agent-file-only operation remains core. Optional tooling does not provide hard OS permissions on arbitrary host.
-- GitHub preview release v0.6.0-portable-preview is published and verified, including 97,648-byte ZIP and matching SHA256; temporary Actions artifact also present.
-
-## Next action
-
-Hosted release verification COMPLETE. Next Prompt 15 sanitized Ampgent templates; broader cloud/filesystem, hosted Git CAS/LFS and cross-platform tests remain future work. Prompt 15 adds sanitized Ampgent templates; Prompt 16–17 will stress portability/cross-platform and hosted coordination tests.
-
-### Confirmed release
-
-[Download AOS-W v0.6.0 standalone ZIP](https://github.com/digzoman/aos-workflows/releases/download/v0.6.0-portable-preview/aos-w-portable-0.6.0.zip), SHA256 `7d9ce9a3ea72f9546fe9d398647d76867bd1766a42bae717d6912f827734c5e9`, GitHub Actions [successful run](https://github.com/digzoman/aos-workflows/actions/runs/39415147383). Actual ZIP verified and installed/upgraded in local independent retest after hosted workflow passed.
+## Next work
+1. Verify the commit and automated GitHub CI acceptance result.
+2. Resolve and commit previously prepared Prompt 15 marketing library, then repeat acceptance using the new distribution.
+3. Run real separate persisted cloud-filesystem and cross-platform agent handoff tests (Prompts 16/17), plus scheduled occurrence/skills tests; keep Git optional.
+4. No live Meta/GHL/website changes until new explicit authorization.

@@ -1,0 +1,155 @@
+{
+  "active_steps": [],
+  "audit_warnings": [],
+  "blocked_reasons": [],
+  "checkpoints": [
+    "checkpoint-000005",
+    "checkpoint-000009",
+    "checkpoint-000015",
+    "checkpoint-000022"
+  ],
+  "completed_steps": [
+    "define-scope",
+    "collect-evidence",
+    "review-evidence"
+  ],
+  "eligible_tasks": [],
+  "evidence_refs": [
+    {
+      "artifact_id": "research-scope",
+      "locator": "artifacts/scope.md",
+      "revision": "v1",
+      "sha256": "55fd5238c27c38ccc177339dafd73d43662a97948024e4df120dad21007046d0",
+      "task_id": "define-scope"
+    },
+    {
+      "artifact_id": "evidence-log",
+      "locator": "artifacts/evidence.md",
+      "revision": "v1",
+      "sha256": "372cb648a98e6b9343e86035453447e082a422e78cc759044cdcc29d29be3ee1",
+      "task_id": "collect-evidence"
+    },
+    {
+      "artifact_id": "reviewed-summary",
+      "locator": "artifacts/summary.md",
+      "revision": "v1",
+      "sha256": "7a398bdb23a1a350d429862456387a3ad25fb01ffb3fd20ce20856917256f138",
+      "task_id": "review-evidence"
+    }
+  ],
+  "governance": {
+    "claims": {},
+    "handoff": null,
+    "permissions": {},
+    "remediation": {},
+    "reviews": {}
+  },
+  "graph_revision": "g0001",
+  "integrity_level": "verified",
+  "last_event_digest": "2b17c1bffc4408a457e83400175a63932df7a367feecb2bb06b787f636daae7f",
+  "last_event_seq": 23,
+  "operations": {},
+  "owners": {},
+  "paused": false,
+  "pending_provider_operations": [],
+  "run_id": "run-001",
+  "run_status": "COMPLETED",
+  "schema_version": "1.0.0",
+  "state_revision": 23,
+  "tasks": {
+    "collect-evidence": {
+      "attempts": 2,
+      "evidence": [
+        {
+          "artifact_id": "evidence-log",
+          "locator": "artifacts/evidence.md",
+          "revision": "v1",
+          "sha256": "372cb648a98e6b9343e86035453447e082a422e78cc759044cdcc29d29be3ee1"
+        }
+      ],
+      "graph_revision": "g0001",
+      "last_attempt_id": "attempt-0002",
+      "last_attempt_owner": {
+        "agent": "Offline Research Agent",
+        "instance": "p16-cold-resume",
+        "platform": "standalone-fresh-process",
+        "role": "research-worker"
+      },
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "resume_status": "RUNNING",
+      "retry": null,
+      "review": null,
+      "started_at": "2026-10-20T12:26:17Z",
+      "status": "COMPLETE"
+    },
+    "define-scope": {
+      "attempts": 1,
+      "evidence": [
+        {
+          "artifact_id": "research-scope",
+          "locator": "artifacts/scope.md",
+          "revision": "v1",
+          "sha256": "55fd5238c27c38ccc177339dafd73d43662a97948024e4df120dad21007046d0"
+        }
+      ],
+      "graph_revision": "g0001",
+      "last_attempt_id": "attempt-0001",
+      "last_attempt_owner": {
+        "agent": "Offline Research Agent",
+        "instance": "p16-initial",
+        "platform": "standalone-local",
+        "role": "research-worker"
+      },
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "started_at": "2026-10-20T12:26:16Z",
+      "status": "COMPLETE"
+    },
+    "review-evidence": {
+      "attempts": 1,
+      "evidence": [
+        {
+          "artifact_id": "reviewed-summary",
+          "locator": "artifacts/summary.md",
+          "revision": "v1",
+          "sha256": "7a398bdb23a1a350d429862456387a3ad25fb01ffb3fd20ce20856917256f138"
+        }
+      ],
+      "graph_revision": "g0001",
+      "last_attempt_id": "attempt-0001",
+      "last_attempt_owner": {
+        "agent": "Offline Research Agent",
+        "instance": "p16-cold-resume",
+        "platform": "standalone-fresh-process",
+        "role": "research-worker"
+      },
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": {
+        "artifacts": [
+          {
+            "artifact_id": "reviewed-summary",
+            "locator": "artifacts/summary.md",
+            "revision": "v1",
+            "sha256": "7a398bdb23a1a350d429862456387a3ad25fb01ffb3fd20ce20856917256f138"
+          }
+        ],
+        "review_id": "p16-self-review-001",
+        "reviewer_kind": "self_review",
+        "rubric_version": "evidence-self-check-v1",
+        "subject": "fictional only",
+        "verdict": "PASS"
+      },
+      "started_at": "2026-10-20T12:26:18Z",
+      "status": "COMPLETE"
+    }
+  },
+  "updated_at": "2026-10-20T12:26:18Z"
+}
