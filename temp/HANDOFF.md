@@ -29,3 +29,8 @@ Repository: public digzoman/aos-workflows. Check actual HEAD before editing.
 
 ## Next
 Inspect hosted Actions outcome, record PASS/BLOCKED/FAIL and any leaked claim ref cleanup; complete P15 publication; then stage Prompt 18 marketing pilot. For real cross-model platform coverage, acquire actual separate connected AI sessions and durable shared volume before marking T02 pass.
+
+
+## Verified handoff amendment after latest main review, 2026-10-20
+
+Read docs/release/V1-READINESS-2026-10-20.md, docs/release/V1-TRACEABILITY-2026-10-20.md, docs/release/V1X-BACKLOG.md and docs/testing/PROMPT-18-PILOT-PLAN.md before proceeding. Prompt 15 is now ON MAIN as version 0.7.0 and hosted 126 tests PASS, superseding older notes above. Prompt 17 hosted workflow success does NOT clear its CAS REVIEW_REQUIRED and LFS BLOCKED outcomes. Next actual work is to RUN Prompt 18 and save execution evidence, not to present its preparation as execution. Prompt 19 only prepared readiness documentation and release gate HOLD. Do not declare V1 complete until evidence gaps and owner approval are resolved. Do not modify live marketing accounts.
