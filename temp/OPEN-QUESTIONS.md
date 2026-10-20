@@ -62,3 +62,18 @@ Open questions are not blockers for Prompt 02 research unless explicitly noted.
 43. Which measured/estimated reporting metrics, freshness windows and uncertainty flags belong in reusable recurring monitoring templates?
 44. When a parent campaign has held sibling adsets, what preflight prevents activating unapproved children?
 45. How should deployment authority distinguish a Max source build, Firebase DEV preview and subsequent production with explicit backup/rollback?
+
+## Prompt 06 architecture decisions explicitly awaiting PRD review
+
+46. Which proposed ADRs 001–008 may be ACCEPTED in whole or with modifications, given zero-runtime manual guarantees?
+47. Are task graph predicates restricted to declarative operators (to be evaluated manually where no validator exists), and which UNKNOWN outcome is blocking?
+48. How can snapshot JSON and append-style JSONL be kept coherent after torn writes in a plain-files-only environment without claiming host atomics?
+49. Does AOS-W need adapter capability levels (advisory, verified local exclusive, verified remote exclusive), and how should a user switch safely?
+50. If an arbitrary GitHub API client exposes only REST PATCH ref without expected-SHA semantics, what tested atomic create/renew/reclaim mechanism will work?
+51. Which stale-lease fencing and output acceptance checks must be mandatory in shared mode, and who authorizes reclaim after crashes?
+52. What is the minimum cloud persistent-filesystem durability proof, especially where agent containers may be ephemeral?
+53. How should skills in AOS-W and existing A Rep procedures coexist without ambiguous shadowing/override?
+54. Should workflow-instance checkpoints be snapshots + events with both authoritative roles or should one dominate reconstruction under conflict?
+55. Which exact manual/offline guarantees can reasonably be asserted in V1 and which require a verified runtime?
+56. How should AOS-W integrate with an existing A Rep plan-work without creating a second competing business-work plan?
+57. Need to reconcile public A Rep doc version mismatch CURRENT 1.5.0 versus main SKILL 1.5.1 when selecting an integration baseline. Installed Fred host remains unverified.

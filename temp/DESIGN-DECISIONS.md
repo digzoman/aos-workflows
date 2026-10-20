@@ -80,3 +80,14 @@ The user specifically requested study of LangGraph ideas such as checkpoints, co
 - The public repo contains no secret/API key, customer information, private raw conversations, or unsanitized operational exports.
 - Prompts 02–06 are historical and architectural research. Prompt 07 drafts the enhanced PRD; a **human approval checkpoint** precedes engine implementation.
 - Specific file schemas, lock enforcement method, licensing, and cloud persistence guarantees remain open pending research and approval.
+
+## Prompt 06 external architectural research, NOT new user decisions
+
+The source and tradeoff analysis is in `temp/architecture/`, including eight **PROPOSED** ADRs. These are candidate decisions for Prompt 07 user review. The user-approved baseline above remains unchanged.
+
+- Provisional technical preference, file-first workflow protocol with optional host execution and coordination; do not represent this as approved schema/runtime.
+- Provisional technical preference, Git ref CAS claim trial for task-level exclusivity and Git LFS as the required alternative trial. **No winner selected; no two-agent tests performed.**
+- Recorded current external-documentation discrepancy: public A Rep CURRENT says 1.5.0 while a-rep/SKILL says 1.5.1. No live Fred installed version verified.
+- AOS-W may declare schedules, skills, QA, retries and ownership in files, but a plain text protocol cannot by itself enforce hard claims, run a timer or perform external provider actions.
+
+Explicit owner approval of the enhanced PRD is required before technical implementation or marking any proposed ADR accepted.

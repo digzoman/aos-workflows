@@ -33,7 +33,7 @@ Start with [temp/OPERATING-RULES.md](temp/OPERATING-RULES.md) and [temp/HANDOFF.
 
 ## Roadmap
 
-The next step is historical workflow discovery using sanitized examples from prior advertising research, creative production, campaign setup, launch, and monitoring. The enhanced PRD comes later and requires human approval before implementation.
+Historical workflow and architecture research stages (Prompts 02–06) are complete, with sanitized results in tracked `temp/research/` and `temp/architecture/`. **The next step is Prompt 07 enhanced PRD and explicit human approval**, after which implementation may begin. Draft architecture decision records are not yet approved.
 
 ## Licensing
 

@@ -1,37 +1,34 @@
-# Progress snapshot
+# AOS-W Progress Snapshot
 
 Date: 2026-10-20
-Phase: Prompt 05, campaign setup, launch, tracking and optimization
-Status: COMPLETED as research/design stage. Next Prompt 06.
+Phase: Prompt 06, research of existing frameworks and architecture alternatives
+Status: **Research stage COMPLETED; architecture choices proposed, NOT approved.**
+Next: Prompt 07, enhanced PRD and human review/approval.
 
-## Prior stages
+## Verified prior work
 
-- Prompt 01/01b initial repository and decisions, optional Git, scheduling and skills.
-- Prompt 02 Ampgent historical index and observed failure patterns.
-- Prompt 03 competitor research queues, portfolio workflows, QC and template candidates.
-- Prompt 04 B1–B9 creative pipeline and version-aware quality template candidates.
+Prompts 01–05 completed and committed as research/design; see earlier `temp/IMPLEMENTATION-HISTORY.md`, evidence indexes and the operation/creative/research candidate template catalogs.
 
-## Prompt 05 completed
+## Prompt 06 completed
 
-- Read required AOS-W operating rules, design, work plan and previous handoff.
-- Directly inspected relevant private Max Meta staging, audience, launch, B8/B9 creative/staging, website and HighLevel documentation, plus Fred issues and subsequent audit comments.
-- Examined an independent Oct 14 Pixel/CAPI audit and differentiated source-proven real booking events from probable duplicate Schedule counts, unknown Good Lead logic and incomplete GHL trigger verification.
-- Indexed 26 named directly inspected primary source files/issues as restricted pointers R82–R107 and labeled private conversation context as secondary.
-- Reconstructed stage-by-stage operations from approved source/permissions through Meta configuration, paused staging, prelaunch QA, owner activation, provider readback and read-only monitoring.
-- Formalized proposal for provider authority matrix, non-atomic side-effect compensation, idempotency, rate-limit recovery and distinguishing configured ACTIVE, effective ACTIVE, actual delivery, attributed and qualified leads.
-- Added 15 design-only operations template candidates, five compound workflows and PRD/test recommendations under temp/research/.
-- Kept historical statuses dated, including Oct 14 targeting superseded Oct 15, B9 paused staging preceding activation, old P-prefix not a reliable state, website source and deployment separation.
-- Sanitized every public document: no credential, contact, account or appointment IDs, raw internal emails/conversations, or actual confidential spend reports.
+- Read current AOS-W rules, design baseline, work plan, prior handoff and open questions and verified starting repo branch SHA.
+- Authenticated read-only inspection of `digzoman/a-rep` (public), `digzoman/a-rep-Fred` (private) and `digzoman/a-rep-Max` (private). Traced skills, one-PRIMARY authority, four-field provenance, plan-work/data-ledger, hot/deep context, Fred active scheduler and Max dormant/manual pattern. Verified one actual Fred PLAN/EVENTS example.
+- Compared official current LangGraph documentation for nodes/edges, checkpoint/thread state, retries, conditional routing, parallelism, interrupts, idempotency, time travel and subgraphs.
+- Reviewed Agent Skills specification and Git official documentation for worktrees, LFS locking and Git ref/push semantics.
+- Kept separate text-file graph description and any enforcing runtime; wrote shared-Git claim CAS design as **provisional preference**, with LFS comparison still explicitly required.
+- Described standalone local/cloud, Git synced and collaborative modes as orthogonal capabilities, never separate workflow languages.
+- Recorded proposed state/event/checkpoint, optional scheduling, just-in-time skill trust, A Rep integration, file-only execution limits and external-action approval boundaries.
+- Created source register, architecture alternatives comparison, LangGraph/A Rep/coordination/skills notes, PRD recommendations and eight draft ADRs, all PROPOSED.
+- Updated work plan, durable handoff and open questions. Public docs have no private repo raw content or secrets.
 
-## Not done
+## Not done, not claimed
 
-- No current live Meta/HighLevel/Firebase/API readback in Prompt 05 and no account changes.
-- No workflow engine, executable templates or schedule runner.
-- No verified current campaign performance; early prior-chat figures were not presented as current facts.
-- No new tracking events, CRM contacts, bookings, click-to-message tests or ad activation.
+- No workflow implementation, runtime, schema validator, lock, scheduler, MCP server, database or automated host.
+- No empirical Git LFS or atomic Git double-claim race test, stale lock recovery or network-outage test. These remain Prompts 13 and 17.
+- No claim that plain Markdown/YAML enforces parallelism, exclusive locks, time-triggered wake or external spend boundaries.
+- No approval or final selection of ADRs and no unapproved agent/prod account changes.
+- No assertion that private Fred's installed host runtime version equals the differing public A Rep documentation versions (CURRENT 1.5.0, SKILL 1.5.1).
 
-## Next step
+## Next action
 
-Prompt 06, compare A Rep/Fred/Max plans and provenance, LangGraph graph/checkpoint/retry concepts, skills packages and just-in-time loading, portable file-only execution, optional host scheduling and Git LFS versus atomic task claims.
-
-Before acting, reread temp/OPERATING-RULES.md, DESIGN-DECISIONS.md, WORK-PLAN.md, PROGRESS.md, HANDOFF.md and the Prompt 05 research files.
+Run Prompt 07. Read `temp/architecture/SOURCES-06.md`, `ALTERNATIVES-COMPARISON.md`, `PRD-INPUTS-06.md`, all proposed ADRs and the preceding marketing workflow research. Draft enhanced `docs/specs/prd/PRD.md` with explicit evidence/requirement tags and user approval checkpoint. **Stop before coding until owner approves PRD.**

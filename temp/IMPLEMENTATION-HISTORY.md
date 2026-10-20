@@ -56,3 +56,14 @@ Future sessions should append substantive events with changed files, test eviden
 - Explicitly separated source-recorded historical provider actions from current live provider verification, which was not performed.
 - No Meta, CRM, GHL, website or external account edits, and no engine implementation.
 - Next Prompt 06 architecture/reliability research.
+
+## 2026-10-20. Prompt 06, architecture framework research
+
+- Read AOS-W persistent operating context and confirmed prior Prompt 05 commit.
+- Reviewed public A Rep framework, current primary skill and references, provenance, plans, ledgers, skills and recovery; reviewed private Fred and Max README and existing bounded Fred plan/events (without copying private content).
+- Examined official LangGraph graph/checkpoint/interrupt/retry/subgraph and Agent Skills progressive disclosure docs; official Git worktree/LFS/ref-push behavior.
+- Recorded a public A Rep version discrepancy and actual separate Fred-host / Max-manual execution models.
+- Wrote sanitized `temp/architecture/` source index, A Rep compatibility, LangGraph mapping, minimal environment/core, Git claims/LFS/worktree tradeoffs, skills/scheduling/security, alternatives comparison and PRD inputs.
+- Wrote eight **PROPOSED** ADRs, without representing them as owner-approved decisions. Git LFS versus atomic claims is deliberately **unresolved pending empirical trials**.
+- No workflow runtime/code, provider action, lock test or scheduling service created.
+- Next Prompt 07 enhanced PRD with human approval before implementation.

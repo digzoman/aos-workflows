@@ -1,8 +1,8 @@
 # AOS-W V1 Work Plan
 
 Updated: 2026-10-20
-Current phase: Prompt 05, Meta campaign setup, CRM, tracking, activation and monitoring research completed
-Next phase: Prompt 06, A Rep/LangGraph/skills/locking/scheduling technical architecture research
+Current phase: Prompt 06, architecture pattern and coordination research completed
+Next phase: Prompt 07, enhanced PRD draft, synthesis and explicit owner approval
 No workflow engine implementation authorized before PRD approval.
 
 ## Research and design stages
@@ -13,7 +13,7 @@ No workflow engine implementation authorized before PRD approval.
 - [x] Prompt 03. Reconstructed 34-advertiser / 96-keyword queue workflow and 15-run vertical portfolio, scoring, source evidence, retry and independent QC; candidate research template specifications committed.
 - [x] Prompt 04. Reconstructed B1–B9 creative strategy, copy, semantic gates, image generation and repair, exact logo placement, format variants, QA, Fred/Muse critique and owner selection; 14 candidate creative templates documented.
 - [x] Prompt 05. Reconstructed Meta campaign/adset/ad architecture and targeted updates, provider state, paused staging, cross-system CRM/website/Pixel/CAPI gating, owner-controlled launch, rate limits, dedup/consent risks, and reporting; 15 candidate operations modules and composition designs documented.
-- [ ] Prompt 06. Review A Rep, LangGraph, Agent Skills, locking and portability tradeoffs; include scheduling backend interfaces, due-trigger behavior, skill packaging and skill resolution/trust.
+- [x] Prompt 06. Inspected A Rep/Fred/Max source conventions; researched current LangGraph, Agent Skills, Git LFS locks, Git worktrees and version-checked Git refs; documented portable versus host-enforced behavior, environments, architecture alternatives and eight proposed ADRs. Git locking winner deferred to empirical tests.
 - [ ] Prompt 07. Produce enhanced PRD at `docs/specs/prd/PRD.md`, explicitly covering non-repeating vs recurring schedules, on-demand launch, missed/overlapping schedules, optional schedule triggering, template/instance skill bundles, lazy skill resolution, and remote skill security; obtain explicit human review and approval.
 
 ## Implementation stages, conditional on PRD approval
