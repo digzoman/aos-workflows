@@ -44,3 +44,8 @@ Prompt 15 was subsequently published in commit 3512cb7, schema repair a7b7e8a. H
 ## Prompt 18 synthetic executable pilot, verified 2026-10-20
 
 CI run 39495294275 SUCCESS. Actual optional RunStore executed 77 on-disk event transitions in a mock three-vertical marketing scenario, including incomplete research QC -> correction, SVG fixture QC -> correction, parallel CRM/landing prep, cold reopening, checkpoint/handoff and deliberately NOT_GRANTED live permit. Report docs/testing/PROMPT-18-SYNTHETIC-PILOT-REPORT.md. This does NOT satisfy T01 real Ampgent pilot, independent model QA or provider state verification. Hosted portable CI 39495294210 also SUCCESS. Prompt 19 remains release HOLD pending original criteria and owner approval.
+
+
+## Prompt 18 latest source-grounded execution, 2026-10-20
+
+GitHub Actions run 39498378421 SUCCESS, 27/27 assertions, three separate research child run instances, eight real public supplier-offer pages, rejected and preserved v1 research and creative, deterministic reviewer subprocess, corrected 1080x1350 PNG, 57 parent events, 13+8+8 child events, exact-hash child join, cold reopened state and blocked launch. Evidence automatically committed under docs/testing/evidence/p18-grounded-39498378421, with formal report docs/testing/PROMPT-18-END-TO-END-RESULTS.md. This is partial original T01/T04 proof. No active Meta Ad Library cards verified, no independent AI review, no provider action or owner budget authorization. Prior synthetic pilot entries are historical, latest source-grounded evidence supersedes for staged scope.

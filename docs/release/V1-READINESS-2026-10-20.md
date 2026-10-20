@@ -61,3 +61,8 @@ Next work: execute Prompt 18 in a controlled, sanitized environment, complete ho
 ## Subsequent execution addendum, same-day continuation
 
 After the original main review, commit 0863e3f added an executable Prompt 18 synthetic marketing pilot and GitHub Actions run 39495294275 completed SUCCESS. This generated 77 real AOS-W file/state events including a failed and then corrected mock research review, a failed and corrected SVG creative fixture review, a three-branch join, parallel CRM and landing planning, a cold state reopen, and a launch gate left NOT_GRANTED. Full details in docs/testing/PROMPT-18-SYNTHETIC-PILOT-REPORT.md. This raises Prompt 18 from NOT RUN to PARTIAL, CONTROLLED SYNTHETIC ONLY, while T01 real marketing evidence, independent AI assessment and production-style creative proof remain incomplete. V1 release decision remains HOLD. Later CI run 39495294210 also passed portable distribution tests.
+
+
+## Real-source P18 continuation evidence, 2026-10-20
+
+CI run 39498378421 SUCCESS. 27/27 audited assertions, 8 real first-party public offering pages, 3 durable child instances, independent deterministic process QC and retained rejected/repaired research JSON and creative PNG, 57 parent events. Staged integration package and unapproved launch gate saved. Actual Meta ad cards, separate AI reviewer, real provider staging and owner-approved 47 dollar deliverability remain missing. T01/T04 continue PARTIAL. See docs/testing/PROMPT-18-END-TO-END-RESULTS.md and evidence/p18-grounded-39498378421. Stable V1 readiness remains HOLD.

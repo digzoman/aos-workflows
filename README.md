@@ -68,3 +68,8 @@ The practical acceptance test also [passed independently on GitHub Actions](http
 ## Prompt 17 — real local Git collaboration acceptance
 
 [Eleven local bare-Git collaboration scenarios](docs/testing/PROMPT-17-GIT-COLLABORATION.md) passed across separate clones/processes, including competing task CAS claims, stale lease/reclaim, actor provenance, real output/checkpoint commits, new-process review and cold handoff, manual parallel-branch reconciliation, offline blocking, and transfer to a second Git repository. One provenance defect was corrected: claim release now verifies the exact recorded actor, in addition to token/epoch. GitHub-hosted CAS/LFS and genuine other AI provider handoff are **separately verified or labeled BLOCKED/NOT RUN**, not inferred from local results. [Test ledger](temp/tests/PROMPT-17-LOCAL-RESULTS.json).
+
+
+## Prompt 18 current staged source-grounded pilot
+
+[GitHub CI execution](https://github.com/digzoman/aos-workflows/actions/runs/39498378421) passed 27 assertions against three isolated research runs, eight real public vendor pages, a corrected 1080x1350 PNG, independent deterministic-process QC and an ungranted publishing checkpoint. Read [the detailed execution report](docs/testing/PROMPT-18-END-TO-END-RESULTS.md) and [the committed evidence](docs/testing/evidence/p18-grounded-39498378421/). This does not establish full V1 T01 or independent AI QC; stable release remains pending.

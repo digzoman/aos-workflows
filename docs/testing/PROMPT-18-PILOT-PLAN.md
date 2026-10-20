@@ -1,3 +1,5 @@
+**Later execution status, 2026-10-20.** This plan has since been partially executed in a bounded pilot. See [Prompt 18 source-grounded result](PROMPT-18-END-TO-END-RESULTS.md), which documents 27 passing assertions, eight public supplier websites and residual acceptance gaps. The historical plan below is preserved.
+
 # Prompt 18 staged end-to-end marketing pilot execution plan
 
 Status: PREPARED, NOT EXECUTED. Date: 2026-10-20.

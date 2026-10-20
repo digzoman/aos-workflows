@@ -39,3 +39,8 @@ Read docs/release/V1-READINESS-2026-10-20.md, docs/release/V1-TRACEABILITY-2026-
 ## Prompt 18 actual pilot execution amendment, 2026-10-20
 
 Hosted synthetic file pilot executed successfully in run 39495294275, 77 events, no actual provider changes, no real research and no independent AI review. Read docs/testing/PROMPT-18-SYNTHETIC-PILOT-REPORT.md for what genuinely ran. Continue the REAL research/image/independent QC segment of P18, then re-audit stable V1. Do not mark T01 PASS or treat CI green as hosted Git CAS acceptance.
+
+
+## Prompt 18 completed staged pilot handoff, 2026-10-20
+
+Newest executable source-grounded P18 run is GitHub Actions 39498378421. Read docs/testing/PROMPT-18-END-TO-END-RESULTS.md and docs/testing/evidence/p18-grounded-39498378421/SUMMARY.json. Three separate child instances with 8 observed first-party seller sites, real 1080x1350 pilot PNG, independent deterministic subprocess QA, preserved rejected artifacts, 27 passing checks, 57 parent events, no external operations. Launch NOT_GRANTED. Pending full T01 are verified Ad Library ad cards, true independent AI review, verified product/price and official logo, real full compound workflow execution and any authorized provider staging. Preserve current evidence, update V1 readiness only when acceptance improves.
