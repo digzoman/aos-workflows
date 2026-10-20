@@ -1,0 +1,90 @@
+{
+  "as_of": "2026-10-20",
+  "status": "PUBLIC_FIRST_PARTY_PAGE_RESEARCH_NOT_META_AD_LIBRARY",
+  "question": "Bucket 9 Meta AI toolkit audience pilot across coaches, agencies and remodeling businesses",
+  "segments": [
+    {
+      "id": "coaches",
+      "buyer": "Coaches and consultants",
+      "evidence": [
+        {
+          "ref": "C1",
+          "url": "https://tadkai.io/for/coaches-and-courses",
+          "seller": "Tadka",
+          "offer_kind": "self_serve_AI_creatives",
+          "observed": "AI creative variants for coaches and course creators, with some Meta publishing capability"
+        },
+        {
+          "ref": "C2",
+          "url": "https://oakmarketingqa.com/meta-ads-for-coaches",
+          "seller": "Oak Marketing",
+          "offer_kind": "training_consulting_managed",
+          "observed": "AI-assisted Meta ads framework for coaches, with webinar and managed service options"
+        },
+        {
+          "ref": "C3",
+          "url": "https://theadsgirlco.com/services",
+          "seller": "The Ads Girl",
+          "offer_kind": "consulting_managed",
+          "observed": "Meta ads consulting and done-for-you account management for coaches and consultants"
+        }
+      ],
+      "hypothesis": "A self-managed entry toolkit could fit; actual willingness to purchase remains unknown"
+    },
+    {
+      "id": "agencies",
+      "buyer": "Marketing agency owners",
+      "evidence": [
+        {
+          "ref": "A1",
+          "url": "https://academy.madgicx.com/lessons/what-is-madgicx",
+          "seller": "Madgicx",
+          "offer_kind": "self_serve_platform",
+          "observed": "AI creative, optimization and advertising account management with agency use cases"
+        },
+        {
+          "ref": "A2",
+          "url": "https://www.adcreative.ai/",
+          "seller": "AdCreative.ai",
+          "offer_kind": "self_serve_AI_creatives",
+          "observed": "AI creative production and advertising asset generation for small businesses and agencies"
+        }
+      ],
+      "hypothesis": "Experienced users may demand deeper campaign integrations and support than an entry kit"
+    },
+    {
+      "id": "remodeling",
+      "buyer": "Renovation and remodeling business owners",
+      "evidence": [
+        {
+          "ref": "R1",
+          "url": "https://veasy.ca/",
+          "seller": "V Easy",
+          "offer_kind": "managed_service",
+          "observed": "Facebook and Instagram ads plus AI text follow-up for contractors including renovation companies"
+        },
+        {
+          "ref": "R2",
+          "url": "https://www.syntexai.ca/",
+          "seller": "Syntex AI",
+          "offer_kind": "managed_service",
+          "observed": "Meta and Google ads with AI SMS response for general contractors"
+        },
+        {
+          "ref": "R3",
+          "url": "https://northvalemedia.ca/",
+          "seller": "NorthVale Media",
+          "offer_kind": "managed_service",
+          "observed": "Managed Meta ads for Ontario home services including renovations and roofers"
+        }
+      ],
+      "hypothesis": "High-ticket projects present clear value, but most observed offerings are managed services, not self-serve tools"
+    }
+  ],
+  "evidence_restrictions": [
+    "Observed seller site descriptions are not verified Meta advertisement cards",
+    "Seller claims do not prove delivered results",
+    "All score and buyer fit conclusions are interpretation, not measurement",
+    "Ampgent toolkit delivery and $47 commercial terms require independent owner approval"
+  ]
+}
