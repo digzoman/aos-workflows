@@ -1,29 +1,31 @@
-# AOS-W Cross-Session Handoff — Prompt 16
+# AOS-W Cross-Session Handoff — Prompt 17
 
 Updated: 2026-10-20
-Current stage: **Standalone/offline practical local acceptance PASSED 13/13; cloud persistent filesystem NOT RUN.** Formal Version 1 acceptance incomplete.
-Repo: public digzoman/aos-workflows main. Verify current HEAD and Actions run before working.
+Status: **Local real Git multi-process collaboration PASS 11/11; hosted GitHub CAS/LFS experimental run requires verification.** No other AI-model-provider handoff executed.
+Repository: public digzoman/aos-workflows. Check actual HEAD before editing.
 
-## Required reads
-1. `temp/OPERATING-RULES.md`, `temp/DESIGN-DECISIONS.md`, `temp/WORK-PLAN.md` and this handoff.
-2. `docs/testing/PROMPT-16-STANDALONE-ACCEPTANCE.md` and `tests/acceptance/README.md`.
-3. `tests/acceptance/run_standalone_acceptance.py`, `resume_agent.py`, `evidence/acceptance-results.json` and selected real event journals.
-4. `scaffold/aos-w/README.md`, `PROTOCOL.md`, `references/STATE-AND-RECOVERY.md`, `tools/state/state.py`, `scripts/aosw-ops.py`.
-5. `.github/workflows/aosw-portable.yml` for the hosted local-filesystem ZIP acceptance job.
-6. Prompt 15 design files must be checked for an actual commit; as of Prompt 16 start they were uncommitted.
+## Starting reads
+1. `temp/OPERATING-RULES.md`, `temp/DESIGN-DECISIONS.md`, `temp/WORK-PLAN.md`, `temp/PROGRESS.md`.
+2. `docs/testing/PROMPT-17-GIT-COLLABORATION.md`, `temp/tests/PROMPT-17-LOCAL-RESULTS.json`.
+3. `tests/acceptance/test_git_cross_agent.py`, `tests/acceptance/git_collab_worker.py`, `tests/acceptance/hosted_github_claims.py`.
+4. `tools/git/coordination.py`, `tools/git/README.md`, ADR-014.
+5. `.github/workflows/aosw-p17-git-collaboration.yml` and actual GitHub Actions run logs/results/artifact, if available.
+6. Prior Prompt 16 standalone acceptance and PRD T02/T03/T06 and FR-401–406/FR-501–506.
 
-## Confirmed local capabilities
-- Verified release v0.6.0 ZIP SHA-256 `7d9ce9a3ea72f9546fe9d398647d76867bd1766a42bae717d6912f827734c5e9`, actual extracted installation with no Git.
-- Three research steps genuinely executed on a **fictional offline fixture**. Scope and evidence hashes verified; one incomplete running attempt deliberately interrupted and resumed from saved event/handoff/graph/skill by a new independent OS process.
-- Completed run has a verified event chain, QC submission/PASS, checkpoint and saved handoff. Legacy master and installed framework 54 protected files unchanged.
-- A user custom template was created under agent-files, initialized and executed; test also covered bounded failure/retry, QC rejection/correction, approved graph revision with preserved history, pause/resume/cancel, corrupt-tail recovery and ambiguous-effect dedup.
-- 13 acceptance cases PASS; cloud persistent filesystem case explicitly NOT RUN; real cross-platform AI harness/remote provider actions not tested.
+## Actual tested functionality
+- Separate process workers in three independent clones of one **local bare Git remote**, same Git email, independent declared agent identities and separate task execution history.
+- Multiple CAS tests: one winner per task, owner identity verified at worker-start, stale epochs rejected, no auto lease stealing, explicit reviewed stale-claim takeover under simulated expiry.
+- Full local artifact submission/remote commit/readback, separate-process deterministic QC, new clone cold resume, checkpoint/event chain and accepted completion.
+- Parallel branches: failure to refresh dirty/behind, explicit backup and human-style reconciliation, reviewed child evidence and merge into mock synthesis artifact.
+- Divergent local commits preserved; remote partition fails closed; incomplete run migrated to a new Git bare remote and resumed; old claim refs not implicitly carried over.
+- **Code fix:** `GitClient.release` now requires exact actor match alongside token and epoch to prevent accidental provenance misattribution. This is not identity authentication.
 
-## Test harness correction
-The first test wrongly expected a skill-bound node in the automatic eligible list. The implementation correctly demands an explicit context/skill check. Tests were fixed and rerun; no production framework bug established.
+## Verification limits
+- 11/11 local tests passed, no actual advertising research or provider effects.
+- Worker subprocess names reflect **local-subprocess**, not fake Codex/Claude/Muse sessions. Reviewer is a separate deterministic process only.
+- Hosted GitHub LFS/CAS probe separately scheduled in new Actions workflow, must be read back and classified accurately before removing ADR-014 provisional status.
+- Git remains optional; standalone 0.6.0 unaffected. Claim ref CAS does not fence external API actions, authorize ad spend, or verify human roles.
+- Prompt 15 marketing library is not yet on main; do not present 0.7.0 templates as published.
 
-## Next steps
-- GitHub Actions run 39423403366 **completed SUCCESS**, with 108 regressions and 13 standalone acceptance cases PASS; artifact ID 12264942466 holds acceptance report/results/interruption/cold-resume evidence. Persistent cloud FS test still NOT RUN.
-- Finish previously prepared but unpublished Prompt 15 marketing templates. Do not conflate the GitHub v0.6.0 release with an unreleased v0.7.0.
-- Future separate cloud-host persisted install, actual other-agent platform cold resume, scheduled occurrence tests and independent approval enforcement are pending.
-- No live Meta/HighLevel/site operations, and mock approvals cannot be used for them.
+## Next
+Inspect hosted Actions outcome, record PASS/BLOCKED/FAIL and any leaked claim ref cleanup; complete P15 publication; then stage Prompt 18 marketing pilot. For real cross-model platform coverage, acquire actual separate connected AI sessions and durable shared volume before marking T02 pass.

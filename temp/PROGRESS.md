@@ -1,37 +1,36 @@
-# AOS-W Development Progress
+# AOS-W Project Progress
 
-Date: 2026-10-20
-Phase: **Prompt 16 real standalone/offline local acceptance — 13 PASS, 0 FAIL; independent cloud test NOT RUN**
-Tested baseline: verified public AOS-W **0.6.0** portable ZIP, SHA-256 `7d9ce9a3ea72f9546fe9d398647d76867bd1766a42bae717d6912f827734c5e9`.
+Updated: 2026-10-20
+Current: **Prompt 17 local Git collaboration acceptance passed 11/11. Hosted GitHub CAS/LFS probe pending separate readback.**
+Prior: Prompt 16 v0.6 local standalone/offline practical 13 PASS, 0 FAIL, independent persistent cloud FS NOT RUN; GitHub CI 108 previous regressions + 13 acceptance PASS.
 
-## Baseline and dependency truth
-- `main` at opening was `07d5101684bd2cf6996938622fbc8c65a4399141`, the published v0.6.0 release.
-- Prior Prompt 15 created a substantial local/staged marketing library but **had not committed it to main**. Do not represent 0.7 marketing templates as a released or accepted dependency. Prompt 16 tests the reproducible 0.6.0 package, not unpublished changes.
-- Prompts 01–14 remain in development history. User explicitly authorized this local acceptance testing; no advertising/provider actions authorized.
+## Baseline truth
 
-## Practical execution performed
-- Extracted the actual verified clean ZIP into a newly created **Git-free** working directory under local /mnt/data.
-- Initialized master `research-starter` as a pinned CREATED instance using only a local optional initializer external to the downloaded scaffold.
-- Performed scope research task and verified output hash; wrote a local synthetic 3-record offline source fixture, checkpointed and intentionally interrupted `collect-evidence` mid-attempt.
-- A **fresh OS process** with no previous conversation/process variables read only installed PROTOCOL, pinned graph, bundle skill, saved handoff, event journal and fixture. It explicitly paused/resumed the incomplete attempt, completed evidence with observed-vs-inferred-vs-unverified separation, submitted a low-risk self-review and completed the final summary and checkpoints.
-- Actual research artifacts and event journal, version/revision pins, SHA digest and controlled interruption output retained in `tests/acceptance/evidence/`.
-- Created a genuine user-owned custom template and manual instance; executed step, failed and retried evidence with correction, failed QC then resubmitted for PASS, applied an approval-scoped graph revision preserving old immutable history.
-- Tested pause/resume/cancel, detected/quarantined torn JSONL, prevented duplicate ambiguous mock provider intent, and compared 54 protected standard files before/after. No changes outside installed `agent-files/`; no Git in installed directory.
-- Initial acceptance harness expected skill-dependent task to be automatically READY; actual AOS-W correctly withheld it pending context check. Corrected test assertions and reran all 13 scenarios successfully. **No framework defect was proven by that test correction.**
+- Main at test start `d7f59cdd30959b2f2cee8a082c5545fe1d7fe82d` (AOS-W 0.6.0). Earlier Prompt 15 marketing library remained prepared but **uncommitted**, so cannot count it as released tested material.
+- PRD T02/T03/T06 and FR-401–406/FR-501–506/NFR-07/08 defined acceptance targets; full V1 release approval still unresolved.
 
-## Results and limitations
-- **13 PASS, 0 FAIL, 1 NOT RUN (separate persistent cloud filesystem).**
-- See `docs/testing/PROMPT-16-STANDALONE-ACCEPTANCE.md`, `tests/acceptance/run_standalone_acceptance.py`, `tests/acceptance/resume_agent.py`, `tests/acceptance/evidence/` for reproducible expected-vs-actual and real evidence.
-- An OS process and optional deterministic helpers were used. This is **not** proof of independent commercial AI harness handoff, fully scriptless execution by a different AI model, real advertiser research or provider authorization.
-- Owner approval for graph revision was a clearly marked mock, not authenticated security. A separate persistent cloud host/volume was not available; an ephemeral Actions worker must NOT be relabeled a persistent cloud-filesystem acceptance.
-- GitHub Actions run 39423403366 independently completed SUCCESS: 108 regressions PASS and 13 practical offline acceptance cases PASS, with separate evidence artifact ID 12264942466.
+## Prompt 17 executed
 
-## Next work
-1. Verify the commit and automated GitHub CI acceptance result.
-2. Resolve and commit previously prepared Prompt 15 marketing library, then repeat acceptance using the new distribution.
-3. Run real separate persisted cloud-filesystem and cross-platform agent handoff tests (Prompts 16/17), plus scheduled occurrence/skills tests; keep Git optional.
-4. No live Meta/GHL/website changes until new explicit authorization.
+- **11 PASS / 0 FAIL** in local bare-Git remote experiment with two separately cloned task workers, third reviewer clone and fourth fresh subprocess handoff reader.
+- Both independent worker processes discovered actual eligible workflow tasks and read/wrote real local AOS-W `RunStore` event history, output artifacts, reviews, checkpoint and handoff records.
+- Both Git clones use same Git username/email while AOS-W events, claim ref records and commit trailers identify distinct actors `[Agent | Platform | Role | Instance]`.
+- Remote ref CAS simultaneous acquisition admitted one winner; stale local claims blocked. A new regression detects and rejects different logical actor attempting to release a task with valid token/epoch.
+- Human-reviewed stale takeover **simulated** (expiry moved by controlled remote test commit); no automatic takeover. Old claimant could not write after remote epoch changed.
+- Induced offline Git remote blocked shared task writes; divergent Git history was not auto reset/overwritten.
+- Two parallel child research runs with separate output/event journals were manually reconciled without discarded evidence; process-isolated deterministic QC recorded and exact-hash checked before a synthetic merged portfolio file.
+- An active child run was moved to a different local bare Git remote/clone, reloaded from event history; claims were correctly NOT inherited.
+- No live ad/CRM/website/provider operations. These are separate OS processes, NOT actual independent AI provider platforms; reviewer was deterministic, not a second model.
 
-## Hosted CI readback
+## Discovered defect and correction
 
-[GitHub Actions run 39423403366](https://github.com/digzoman/aos-workflows/actions/runs/39423403366) — SUCCESS, 108 previous regressions PASS and 13 new practical offline cases PASS; cloud persistence NOT RUN. Standalone ZIP SHA256 matched published v0.6.0. Acceptance evidence artifact 12264942466.
+`tools/git/coordination.py:GitClient.release` previously accepted any 4-field actor so long as token+epoch matched. With shared Git credentials, this could incorrectly attribute release to another agent if the token leaked. New code validates exact current owner actor before recording release. Added regression P17-03b PASS. File-declared identities remain cooperative and not cryptographic authorization.
+
+## Evidence and open items
+
+- `tests/acceptance/test_git_cross_agent.py`, `git_collab_worker.py` and `temp/tests/PROMPT-17-LOCAL-RESULTS.json`: executable tests and actual case-level PASS ledger.
+- `docs/testing/PROMPT-17-GIT-COLLABORATION.md`: classification/PRD comparison and limitations.
+- Hosted GitHub Actions experiment in `.github/workflows/aosw-p17-git-collaboration.yml`; GitHub-hosted CAS/LFS results MUST be checked after publication, never assumed.
+- Live GitHub refs may have permission/ruleset limitations, and LFS server locking may be unavailable. In such cases report BLOCKED.
+- Separate ChatGPT/Codex/Claude/Muse agent-surface handoff, persistent multi-session cloud volume, signed approvals, provider fencing and scheduled occurrence remains NOT RUN.
+
+Next: hosted experiment readback; complete separate P15 library commit and repeat acceptance; Prompt 18 staged marketing pilot, no external live operations.

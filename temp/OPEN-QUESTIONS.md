@@ -142,3 +142,13 @@ Open questions are not blockers for Prompt 02 research unless explicitly noted.
 105. Test recurring-template manual launch vs scheduled occurrence identity, and skill bundle/source resolution in standalone offline installation.
 106. Verify newly added CI practical acceptance step and artifact results independently after publication; do not infer success from workflow definition.
 107. Confirm host OS ACL/symlink behavior for hard protection. Normal agent-files-only writes are cooperative, not a sandbox.
+
+## Prompt 17 outstanding conditions
+
+108. Confirm actual hosted GitHub CAS and LFS test job output, claim ref cleanup, repo namespace protections and retry semantics; local bare remote tests are not hosted GitHub guarantees.
+109. Execute actual ChatGPT → Codex/Claude/Muse cross-provider handoff using independent persistent sessions and volume, not only separate OS subprocesses.
+110. Confirm claim owner is host-authenticated if shared Git account identity differs; new release actor equality is only cooperative self-declaration, not protection from compromised tokens.
+111. Document approved operator handoff policy for dirty/behind clone with unsent per-task run records; current acceptance demonstrates explicit backup and manual reconcile, not automatic merge.
+112. Demonstrate real multi-provider reviewer isolation, provider-specific API idempotency/fencing and production human approvals before deployment.
+113. Repeat P17 integration tests using released Prompt 15+ marketing templates after their separate publication and validation; present tests use synthetic child research graphs.
+114. Schedule occurrence IDs, distinct skill resolution, and durable shared cloud VM persistence remain separate untested PRD capabilities.

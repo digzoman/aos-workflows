@@ -39,3 +39,7 @@ Keep a Git LFS wrapper as an alternative test adapter for teams that already use
 7. Dedicated branch refs may be visible in public repositories and accumulate. No automatic sweeping/deletion; future admin cleanup must preserve an auditable history and avoid leaking private task titles.
 
 **Next acceptance gate:** Run two independent hosted workers with shared authentication against a temporary protected-test repo, verify one winner, interrupt/reclaim, force a network failure and recover, then compare with actual Git LFS server locking. Until then, mark Git CAS as **PROVISIONAL** and default AOS-W to standalone single-writer.
+
+## Prompt 17 local acceptance update (2026-10-20)
+
+The existing local ref CAS approach passed 11 additional real local Git/multi-process integration scenarios covering task discovery/ownership, separate child runs, checkpoint and handoff provenance, divergent history, reviewed synthetic merge, suspended worker, stale token and transfer to a second remote. The claim release implementation was tightened to check the exact four-field owner actor. This improves audit consistency but not authentication. A dedicated hosted GitHub CAS/LFS probe is provided in Actions and must be **observed** before upgrading this ADR from provisional. No real Codex, Claude, Muse or other independent AI provider was tested.

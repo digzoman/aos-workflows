@@ -1,8 +1,8 @@
 # AOS-W V1 Work Plan
 
 Updated: 2026-10-20
-Current phase: Prompt 16 formal local/offline acceptance executed against published v0.6.0; 13 PASS / 0 FAIL / 1 NOT RUN
-Next phase: complete and publish pending Prompt 15 marketing library, validate hosted Prompt 16 CI, then Prompt 17 cross-agent/cloud tests
+Current phase: Prompt 17 cross-agent local Git acceptance: 11 PASS / 0 FAIL; real GitHub-hosted CAS/LFS and independent AI provider handoff pending separate verification
+Next phase: observe hosted GitHub P17 experiment; complete missing Prompt 15 publication, then Prompt 18 staged marketing pilot
 Implementation phases 09–13 were explicitly directed by the owner; live external operations remain separately approval-gated. Full V1 production/release approval is not implied.
 
 ## Research and design stages
@@ -30,7 +30,7 @@ Implementation phases 09–13 were explicitly directed by the owner; live extern
 ## Validation and release stages
 
 - [ ] Prompt 16. **Partial acceptance:** 13 real local file-based workflow scenarios PASSED, 0 FAILED; separate persistent cloud-filesystem case NOT RUN. End-to-end fictional research, interruption/new-process recovery, custom template, skill-context, retry/QC, revision, cancel, journal corruption, idempotency and protected files covered. Schedule-triggered recurring occurrence and independent real cloud/AI harness tests remain open.
-- [ ] Prompt 17. Git and cross-agent collaboration tests, including scheduled occurrence identity and safe shared skill references where supported.
+- [ ] Prompt 17. **PARTIAL:** 11 real local Git / separate-OS-process collaboration tests PASS (2 independent workers + reviewer, same Git email, CAS races, stale lease and owner, checkpoint/QC handoff, parallel child reconciliation/merge, conflict, offline, migration). Actual hosted GitHub CAS/LFS and real independent ChatGPT↔Codex/Claude/Muse handoff must be verified or marked BLOCKED. Scheduling occurrence/remote skills still untested.
 - [ ] Prompt 18. Staged end-to-end marketing workflow pilot, no live publishing without new authorization.
 - [ ] Prompt 19. Requirements audit, release readiness and human review.
 

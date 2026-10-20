@@ -103,6 +103,8 @@ class GitClient:
     def release(self,run,task,actor,token,epoch):
         if not valid_actor(actor):raise Unauthorized('Four-part actor required')
         st=self.verify(run,task,token,epoch)
+        if st['record']['actor'] != actor:
+            raise Unauthorized('Claim release actor must match current recorded owner')
         rec={**st['record'],'state':'released','released_at':iso(now_utc()),'released_by':actor}
         new=self._commit(rec,st['sha']);self._push(new,st['ref'],st['sha'])
         return {'ref':st['ref'],'sha':new,'record':rec}

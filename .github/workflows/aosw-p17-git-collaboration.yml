@@ -1,0 +1,49 @@
+name: AOS-W P17 Git collaboration acceptance
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tests/acceptance/test_git_cross_agent.py'
+      - 'tests/acceptance/git_collab_worker.py'
+      - 'tests/acceptance/hosted_github_claims.py'
+      - 'tools/git/coordination.py'
+      - '.github/workflows/aosw-p17-git-collaboration.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  p17-collaboration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install optional test parser
+        run: python -m pip install pyyaml
+      - name: Run real local Git bare-remote multi-process acceptance
+        run: python -m unittest discover -s tests/acceptance -p 'test_git_cross_agent.py' -v
+      - name: GitHub-hosted Git CAS and Git LFS candidate experiment
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/p17-hosted-evidence"
+          python tests/acceptance/hosted_github_claims.py "$RUNNER_TEMP/p17-hosted-evidence/hosted-results.json"
+          python - "$RUNNER_TEMP/p17-hosted-evidence/hosted-results.json" <<'PY'
+          import json,sys
+          d=json.load(open(sys.argv[1]))
+          print('P17 GitHub hosted claim test:', d['status'])
+          print('P17 hosted LFS test:',d['lfs']['status'])
+          if d['status']=='FAIL':raise SystemExit('GitHub CAS race failed; do not treat as production-ready')
+          if d['status']!='PASS': print('::warning::Hosted GitHub CAS is BLOCKED/REVIEW_REQUIRED; not accepted as PASS')
+          PY
+      - name: Upload P17 hosted Git acceptance evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: aos-w-p17-hosted-git-evidence
+          path: ${{ runner.temp }}/p17-hosted-evidence/hosted-results.json
+          retention-days: 90
+          if-no-files-found: error

@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-20",
+  "tested_base_commit": "d7f59cdd30959b2f2cee8a082c5545fe1d7fe82d",
+  "environment": "local container; real Git 2.47.3, ephemeral bare remote, three independent clones and four separate-process logical identities",
+  "classification": "REAL_LOCAL_GIT_AND_SEPARATE_OS_PROCESSES",
+  "test_command": "python -m unittest discover -s tests/acceptance -p 'test_git_cross_agent.py' -v",
+  "case_results": [
+    {"id":"P17-01", "status":"PASS", "evidence":"Two subprocesses read eligible tasks from own clones; same git email, distinct four-field actor"},
+    {"id":"P17-02", "status":"PASS", "evidence":"Simultaneous competing Git ref CAS one winner, one loser; stale clone rejected"},
+    {"id":"P17-03", "status":"PASS", "evidence":"Worker rejects task start with foreign actor even when claim token is provided"},
+    {"id":"P17-03b", "status":"PASS", "evidence":"Regression for corrected owner equality check on claim release"},
+    {"id":"P17-04", "status":"PASS", "evidence":"Real event/checkpoint output and scoped Git commit, remote blob readback and provenance trailer"},
+    {"id":"P17-05", "status":"PASS", "evidence":"Cold separate-clone process resumes, deterministic distinct reviewer records PASS; producer refreshes and completes run"},
+    {"id":"P17-06", "status":"PASS", "evidence":"Simulated stopped process, remote expiry, blocked implicit takeover, audited reclaim and stale-token rejection"},
+    {"id":"P17-07", "status":"PASS", "evidence":"Induced remote loss fails closed and prevents worker artifact submission"},
+    {"id":"P17-08", "status":"PASS", "evidence":"Divergent histories refuse unsafe refresh; local modified source preserved"},
+    {"id":"P17-09", "status":"PASS", "evidence":"Independent parallel child runs, explicit backup/reconciliation, reviews, exact checked output hashes and merged synthetic summary"},
+    {"id":"P17-10", "status":"PASS", "evidence":"Migrated paused child run to different local Git bare remote; state persisted, claim refs not silently inherited"}
+  ],
+  "local_result":{"pass":11,"fail":0,"run_configuration":"9 tests in first group (25.252 s) and 2 tests in second group (16.943 s); each with isolated test fixture"},
+  "additional_test_status":{
+    "hosted_github_ref_CAS":"PENDING_SEPARATE_GITHUB_ACTIONS_RUN",
+    "live_git_lfs_server":"PENDING_SEPARATE_GITHUB_ACTIONS_RUN",
+    "two_different_AI_provider_platforms":"NOT_RUN",
+    "persistent_cloud_agent_handoff":"NOT_RUN",
+    "actual_external_provider_effects":"NOT_RUN"
+  },
+  "discovered_defect":"GitClient.release accepted mismatched recorded actor when token/epoch valid; corrected with actor equality check and new regression case",
+  "limitations":"Logical identities self-declared, no authenticated owner authority, simulated lease expiry, no external API fencing, distinct processes are not different AI platforms"
+}

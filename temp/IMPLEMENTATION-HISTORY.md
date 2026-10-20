@@ -152,3 +152,13 @@ Future sessions should append substantive events with changed files, test eviden
 - Added reproducible scripts to `tests/acceptance/` and a GitHub Actions offline acceptance step; hosted result must be checked separately. No framework code was changed for test harness corrections. These local tests do not establish separate AI harness, authenticated approval, scriptless manual execution or persistent cloud-host operation.
 
 - Post-commit independent GitHub Actions run `39423403366` SUCCESS. Its logs show 108 previously existing tests PASS and practical tests P16-01 through P16-13 PASS; ZIP digest equals v0.6.0. Uploaded separate acceptance evidence artifact ID `12264942466`. This is a separate hosted *ephemeral* CI runner, **not** the unperformed durable cloud filesystem acceptance case.
+
+## 2026-10-20 — Prompt 17 Git collaboration acceptance
+
+- Inspected public current GitHub `main`, PRD T02/T03/T06, provisional ADR-014 and prior Prompt 13/16 evidence before testing; Prompt 15 marketing modules still unpublished.
+- Built genuine ephemeral local bare Git remote with three separate clones, two independently invoked OS-process worker sessions, a third process performing deterministic QC, and a fresh handoff reader (all declared as local subprocesses, not other AI models).
+- Executed 11 reproducible acceptance cases against existing `GitClient` and `RunStore`: independent discovery; simultaneous claim CAS; stale clone; owner identity; checkpoint/evidence Git commits; fresh-clone handoff/review/completion; simulated hung worker and explicit stale takeover; offline fail-closed; divergence; parallel two-child work reconciliation and review/merge; migration to another Git remote.
+- Found `GitClient.release` allowed a mismatched actor to release the current claim if token/epoch were correct. Added actor equality check and passing negative regression. This does NOT provide cryptographic authentication.
+- Ran nine cases in local group 1 and two cases in group 2 to fit local tool execution windows: **11 PASS, 0 FAIL**.
+- Added optional main-only GitHub Actions hosted CAS/LFS probe with ephemeral namespace and cleanup plus separate case report; its eventual outcome must be independently checked. GitHub push claims/real LFS lock API support are not assumed.
+- No live provider actions, external AI platform handoffs or production task fencing. Next staged marketing pilot after resolving Prompt 15 publication and hosted probe.
