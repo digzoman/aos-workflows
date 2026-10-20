@@ -23,7 +23,7 @@ Repo: public digzoman/aos-workflows main. Verify current HEAD and Actions run be
 The first test wrongly expected a skill-bound node in the automatic eligible list. The implementation correctly demands an explicit context/skill check. Tests were fixed and rerun; no production framework bug established.
 
 ## Next steps
-- Observe GitHub Actions outcome for the newly added practical acceptance CI step. A push alone is not a passing hosted run.
+- GitHub Actions run 39423403366 **completed SUCCESS**, with 108 regressions and 13 standalone acceptance cases PASS; artifact ID 12264942466 holds acceptance report/results/interruption/cold-resume evidence. Persistent cloud FS test still NOT RUN.
 - Finish previously prepared but unpublished Prompt 15 marketing templates. Do not conflate the GitHub v0.6.0 release with an unreleased v0.7.0.
 - Future separate cloud-host persisted install, actual other-agent platform cold resume, scheduled occurrence tests and independent approval enforcement are pending.
 - No live Meta/HighLevel/site operations, and mock approvals cannot be used for them.

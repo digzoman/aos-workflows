@@ -60,3 +60,5 @@ The [installation guide](docs/installation/QUICKSTART.md) and [standalone manual
 ## Prompt 16 — practical offline acceptance on standalone v0.6.0
 
 Thirteen [real local file-based acceptance scenarios](docs/testing/PROMPT-16-STANDALONE-ACCEPTANCE.md) passed against the verified 0.6.0 download. These include a research run deliberately interrupted mid-step, then completed by a new OS process using only persisted files; local custom templates, failed QC with correction, retries, revision, cancel, corrupt-tail recovery and no changes outside `agent-files`. One separate persistent cloud filesystem test remains **NOT RUN**. This is not evidence of real cross-platform AI model handoff, live provider integration, or production shared locking. The prior Prompt 15 marketing library was unpublished at the start of this acceptance run and needs a distinct commit/test.
+
+The practical acceptance test also [passed independently on GitHub Actions](https://github.com/digzoman/aos-workflows/actions/runs/39423403366) (108 regressions + 13 offline lifecycle scenarios); the real persistent-cloud test remains NOT RUN.

@@ -24,10 +24,14 @@ Tested baseline: verified public AOS-W **0.6.0** portable ZIP, SHA-256 `7d9ce9a3
 - See `docs/testing/PROMPT-16-STANDALONE-ACCEPTANCE.md`, `tests/acceptance/run_standalone_acceptance.py`, `tests/acceptance/resume_agent.py`, `tests/acceptance/evidence/` for reproducible expected-vs-actual and real evidence.
 - An OS process and optional deterministic helpers were used. This is **not** proof of independent commercial AI harness handoff, fully scriptless execution by a different AI model, real advertiser research or provider authorization.
 - Owner approval for graph revision was a clearly marked mock, not authenticated security. A separate persistent cloud host/volume was not available; an ephemeral Actions worker must NOT be relabeled a persistent cloud-filesystem acceptance.
-- CI workflow amended to run offline practical acceptance against packaged ZIP on push and retain evidence artifact; hosted result must be observed before claiming CI PASS.
+- GitHub Actions run 39423403366 independently completed SUCCESS: 108 regressions PASS and 13 practical offline acceptance cases PASS, with separate evidence artifact ID 12264942466.
 
 ## Next work
 1. Verify the commit and automated GitHub CI acceptance result.
 2. Resolve and commit previously prepared Prompt 15 marketing library, then repeat acceptance using the new distribution.
 3. Run real separate persisted cloud-filesystem and cross-platform agent handoff tests (Prompts 16/17), plus scheduled occurrence/skills tests; keep Git optional.
 4. No live Meta/GHL/website changes until new explicit authorization.
+
+## Hosted CI readback
+
+[GitHub Actions run 39423403366](https://github.com/digzoman/aos-workflows/actions/runs/39423403366) — SUCCESS, 108 previous regressions PASS and 13 new practical offline cases PASS; cloud persistence NOT RUN. Standalone ZIP SHA256 matched published v0.6.0. Acceptance evidence artifact 12264942466.

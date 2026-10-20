@@ -43,3 +43,11 @@ ZIP SHA-256: `7d9ce9a3ea72f9546fe9d398647d76867bd1766a42bae717d6912f827734c5e9`
 - Separate persistent cloud filesystem/second cloud host was **not available**. Local second-directory tests cannot count as cloud acceptance.
 - A graph revision uses a **mocked owner approval**; manual run records cannot authenticate the owner and cannot authorize real effects.
 - Background scheduling, concurrent shared agents, hosted Git CAS/LFS, and real Meta/CRM calls are out of scope.
+
+## Independent GitHub Actions verification — 2026-10-20
+
+- [Workflow run 39423403366](https://github.com/digzoman/aos-workflows/actions/runs/39423403366), commit `1751ffb70878a1f018d0c22fbc7130056525932f`: **completed SUCCESS**.
+- GitHub Ubuntu runner passed the entire existing suite (**108 tests**), independently rebuilt/verified the real v0.6.0 ZIP (SHA-256 `7d9ce9a3ea72f9546fe9d398647d76867bd1766a42bae717d6912f827734c5e9`), and passed its install/initialize/upgrade-preservation smoke tests.
+- The *separate* practical offline test step reported **P16-01 through P16-13 PASS**, **13 PASS, 0 FAIL**. It explicitly reported the persistent cloud-filesystem case **NOT RUN**.
+- Published Actions artifact: `aos-w-practical-offline-acceptance` (artifact ID `12264942466`, 5 execution evidence files, retention 90 days). Another Actions artifact contains the standalone ZIP.
+- An ephemeral GitHub Actions runner is a different **CI host**, but its working directory is not evidence of a distinct durable cloud filesystem surviving termination; P16-14 remains NOT RUN.
