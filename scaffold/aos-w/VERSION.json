@@ -1,8 +1,8 @@
 {
-  "aosw_version": "0.3.0",
+  "aosw_version": "0.4.0",
   "schema_version": "1.0.0",
   "distribution": "portable-file-scaffold",
-  "status": "manual-file-protocol-with-optional-local-state-recovery",
+  "status": "manual-file-protocol-with-optional-state-and-governance-checkers",
   "minimum_requirements": [
     "capable agent",
     "persistent writable files within agent-files"
@@ -37,5 +37,18 @@
     "shared_writes": "not implemented",
     "provider_writes": "not implemented",
     "scheduler": "not implemented"
+  },
+  "governance": {
+    "manual": "documented",
+    "optional_python_helper": "tools/governance/",
+    "quality_gates": [
+      "deterministic",
+      "ai_independent",
+      "human",
+      "self_review"
+    ],
+    "claim_enforcement": "advisory_only",
+    "human_identity_authentication": "not_implemented",
+    "provider_actions": "not_implemented"
   }
 }

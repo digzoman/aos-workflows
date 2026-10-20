@@ -1,6 +1,6 @@
 # AOS-W 1.0 Draft Record Schemas
 
-**Design artifacts, not installed runtime code.** Each `*.schema.json` is a JSON Schema Draft 2020-12 document. YAML templates parse into the same object model. These are authoring contracts for Prompt 08, *not proof* that a future implementation or agent successfully enforces them. All 16 documents were syntax-parsed and their local `$ref` pointers reviewed as part of the design write-up; runtime schema validation and cross-file semantic checks belong to later tests.
+**Design artifacts, not installed runtime code.** Each `*.schema.json` is a JSON Schema Draft 2020-12 document. YAML templates parse into the same object model. These are authoring contracts for Prompt 08, *not proof* that a future implementation or agent successfully enforces them. The original 16 documents (18 after Prompt 12) were syntax-parsed and their local `$ref` pointers reviewed as part of the design write-up; runtime schema validation and cross-file semantic checks belong to later tests.
 
 | Schema file | Intended stored record |
 | --- | --- |
@@ -43,3 +43,7 @@
 8. Offline manual single-writer run with **no installed validator** remains usable and honestly advisory.
 
 See [architecture specification](../architecture/README.md) and [PRD](../prd/PRD.md).
+
+## Prompt 12 additions
+
+`remediation.schema.json` and `governance-handoff.schema.json` document the two newly formalized record types. Claim, review, approval, event, state, handoff and common gate schemas gained compatible optional fields. Development and installed copies are byte-identical. This is shape validation guidance, not user authentication.

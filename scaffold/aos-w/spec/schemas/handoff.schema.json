@@ -129,6 +129,15 @@
         "CANCELLED",
         "SUPERSEDED"
       ]
+    },
+    "governance_next_action": {
+      "type": "string"
+    },
+    "governance_pending_quality": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/id"
+      }
     }
   },
   "required": [

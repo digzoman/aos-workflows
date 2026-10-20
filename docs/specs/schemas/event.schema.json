@@ -61,7 +61,14 @@
         "operation_submitted",
         "operation_ack",
         "operation_unknown",
-        "operation_reconciled"
+        "operation_reconciled",
+        "claim_recorded",
+        "claim_released",
+        "permission_granted",
+        "permission_revoked",
+        "quality_recorded",
+        "remediation_requested",
+        "governance_handoff"
       ]
     },
     "at": {

@@ -283,6 +283,53 @@
       "items": {
         "type": "object"
       }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "claims": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "permissions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "reviews": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "remediation": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "handoff": {
+          "oneOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "claims",
+        "permissions",
+        "reviews",
+        "remediation",
+        "handoff"
+      ]
     }
   },
   "required": [

@@ -13,3 +13,7 @@ These tests do **not** make Python/PyYAML a prerequisite for ordinary standalone
 ## Prompt 11 state/recovery suite
 
 Run `python -m unittest discover -s tests -p 'test_state*.py' -v` for the **26** local state/recovery/CLI tests, or `python -m unittest discover -s tests -p 'test_*.py' -q` for **37** total (including the 11 composition tests). Python/PyYAML are optional maintainer tools, not installed scaffold requirements. The new tests cover historic event preservation, SHA-256 integrity, torn-tail quarantine, checkpoint recovery, bounded retries, QC correction, uncertain provider intent dedup, explicit pause/resume/cancel/fail, stale artifact blocking, graph revision recovery, and no duplicate child creation. See `temp/tests/PROMPT-11-STATE-CONFORMANCE.md` for actual scope and limitations. No real external accounts were used.
+
+## Prompt 12 governance tests
+
+`python -m unittest discover -s tests -p 'test_governance*.py' -q` executes **38** new local tests. `python -m unittest discover -s tests -p 'test_*.py' -q` executes **75 total**, including Prompt 11's 26 and Prompt 10's 11. These run entirely against synthetic files and self-declared actors, not real providers, signed approvals or enforced distributed locks.

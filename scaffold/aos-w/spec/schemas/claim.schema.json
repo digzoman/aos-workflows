@@ -60,6 +60,22 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "supersedes_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "progress": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
     }
   },
   "required": [

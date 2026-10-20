@@ -73,6 +73,19 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "task_id": {
+      "oneOf": [
+        {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "graph_revision": {
+      "$ref": "common.schema.json#/$defs/id"
     }
   },
   "required": [

@@ -34,3 +34,7 @@ An agent following `../PROTOCOL.md` can **manually** start a new instance, ident
 ## Version 0.3.0 state and recovery
 
 Persist the actor-bound event journal and immutable graph revision under each run. Before resuming after interruption, reconcile `events.jsonl`, `state.json`, checkpoints, attempt records, actual artifacts and pending provider operation identities. The portable manual procedure is [STATE-AND-RECOVERY.md](../references/STATE-AND-RECOVERY.md). Local snapshot files may be regenerated; accepted history must not be silently rewritten. Only explicit repair quarantines a corrupt tail and retains all previously accepted event bytes. All such changes stay **inside agent-files**. There is no automatic timer or distributed mutex.
+
+## Prompt 12 append-only governance records
+
+Runs may create `claims/`, `reviews/`, `approvals/` and `handoffs/` records under this writable subtree. Append meaningful changes to `events.jsonl` and rebuild `state.json` from the verified event prefix. Owner/reviewer names are declared metadata, not authenticated permission; claims are advisory without a coordinator. Consult [the governance reference](../references/PROVENANCE-QUALITY-PERMISSIONS.md) and keep normal writes only under `agent-files`.

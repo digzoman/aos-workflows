@@ -46,3 +46,7 @@ The [composition protocol](scaffold/aos-w/references/COMPOSITION.md) and [planni
 ## Prompt 11 — durable run state (0.3.0)
 
 The [manual state/recovery protocol](scaffold/aos-w/references/STATE-AND-RECOVERY.md) now specifies append-oriented event history, checkpoints, retries, paused/failed runs, evidence integrity, provider-action intent reconciliation and fresh-agent recovery. The [optional deterministic helper](tools/state/README.md) implements and locally tests these operations under a **single-writer** assumption; 26 new tests and 11 composition regressions passed. Real provider writes, hard distributed locks, unattended timers and cryptographic human authorization are **not implemented**. All ordinary installed-workflow modifications remain under `agent-files/`.
+
+## Prompt 12 — governance (0.4.0)
+
+The [portable manual governance protocol](scaffold/aos-w/references/PROVENANCE-QUALITY-PERMISSIONS.md) and [optional local checker](tools/governance/README.md) now support four-field provenance, advisory claims/handoffs, deterministic/independent AI/human/permitted self-review, structured corrections, explicit resource and budget permissions, expiry and revocation. **File records are not authenticated host permission; no provider operations occur.** [Conformance report](temp/tests/PROMPT-12-GOVERNANCE-CONFORMANCE.md).

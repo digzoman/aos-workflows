@@ -392,6 +392,9 @@
         },
         "protected": {
           "type": "boolean"
+        },
+        "waivable": {
+          "type": "boolean"
         }
       },
       "required": [

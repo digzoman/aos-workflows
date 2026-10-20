@@ -86,7 +86,8 @@ def init_state(run_id,graph,graph_revision='g0001'):
                          'retry':None,'last_error':None,'last_attempt_id':None,'review':None} for n in graph['nodes']},
       'operations':{},'pending_provider_operations':[], 'eligible_tasks':[],
       'blocked_reasons':[], 'completed_steps':[], 'active_steps':[],
-      'owners':{},'evidence_refs':[], 'checkpoints':[], 'audit_warnings':[]}
+      'owners':{},'evidence_refs':[], 'checkpoints':[], 'audit_warnings':[],
+      'governance':{'claims':{},'permissions':{},'reviews':{},'remediation':{},'handoff':None}}
 
 def reduce_event(state,event):
     s=state
@@ -184,6 +185,20 @@ def reduce_event(state,event):
                    graph_revision=p['new_revision'],owner=None,review=None,evidence=[],last_attempt_id=None,retry=None)
         for nid in p.get('new_nodes',[]):
             ensure(nid not in s['tasks'],'New node already exists');s['tasks'][nid]={'status':'WAIT_DEPENDENCY','attempts':0,'graph_revision':p['new_revision'],'owner':None,'evidence':[],'pending_actions':[],'retry':None,'last_error':None,'last_attempt_id':None,'review':None}
+    elif t in ('claim_recorded','claim_released','permission_granted','permission_revoked',
+               'quality_recorded','remediation_requested','governance_handoff'):
+        g=s.setdefault('governance',{'claims':{},'permissions':{},'reviews':{},'remediation':{},'handoff':None})
+        bucket={'claim_recorded':'claims','claim_released':'claims',
+                'permission_granted':'permissions','permission_revoked':'permissions',
+                'quality_recorded':'reviews','remediation_requested':'remediation',
+                'governance_handoff':'handoff'}[t]
+        if bucket=='handoff':g['handoff']=dict(p)
+        else:
+            rid=p.get('record_id');ensure(valid_id(rid),'Governance event record ID missing')
+            ensure(rid not in g[bucket],'Duplicate governance event '+rid)
+            g[bucket][rid]={'type':t,'at':event['at'],'actor':event['actor'],**p}
+        if t=='claim_released' and item is not None and item.get('status')=='CLAIMED':
+            item.update(status='READY',owner=None)
     elif t in ('checkpoint_created','recovery_checked','handoff_updated','task_wait_external'):
         if t=='task_wait_external':task('RUNNING')['status']='WAIT_EXTERNAL'
         if t=='checkpoint_created':s['checkpoints'].append(p.get('checkpoint_id','unknown'))
@@ -285,7 +300,7 @@ class RunStore:
         if tail or error:raise CorruptLog('Event stream needs explicit repair: '+str(error))
         return state
 
-    def append(self,event_type,actor,task_id=None,payload=None,evidence=None,attempt_id=None):
+    def append(self,event_type,actor,task_id=None,payload=None,evidence=None,attempt_id=None,context_checked=False):
         ensure(valid_actor(actor),'Actor provenance required')
         ensure(self.run_data.get('mode','standalone_single_writer')!='shared_coordinated',
                'Shared coordinated writes require an independently verified claim adapter (not provided here)')
@@ -296,7 +311,7 @@ class RunStore:
             node=self.node_map[task_id]
             ensure(all(state['tasks'].get(dep,{}).get('status')=='COMPLETE' for dep in node.get('needs',[])),
                    'Task cannot bypass dependencies')
-            ensure(not (node.get('when') or node.get('join') or node.get('fanout') or node.get('skills')
+            ensure(context_checked or not (node.get('when') or node.get('join') or node.get('fanout') or node.get('skills')
                     or any(a in SIDE_EFFECTS for a in node.get('required_actions',[]))),
                    'Context-dependent work requires manual or independently authorized gate')
         if event_type=='task_completed':
@@ -404,16 +419,16 @@ class RunStore:
         atomic_write(self.root/'handoff.md',body.encode())
         return data
 
-    def start(self,task_id,actor):
+    def start(self,task_id,actor,context_checked=False):
         s=self.verified();ensure(task_id in self.node_map,'Unknown task')
         ensure(s['tasks'][task_id]['status'] in ('READY','WAIT_DEPENDENCY'),'Not startable')
         node=self.node_map[task_id]
         ensure(all(s['tasks'].get(dep,{}).get('status')=='COMPLETE' for dep in node.get('needs',[])),'Incomplete dependencies')
-        ensure(not (node.get('when') or node.get('join') or node.get('fanout') or node.get('skills') or any(a in SIDE_EFFECTS for a in node.get('required_actions',[]))),'Required context must be checked via manual gate')
-        if s['tasks'][task_id]['status']!='READY':self.append('task_ready',actor,task_id)
-        self.append('task_claimed',actor,task_id)
+        ensure(context_checked or not (node.get('when') or node.get('join') or node.get('fanout') or node.get('skills') or any(a in SIDE_EFFECTS for a in node.get('required_actions',[]))),'Required context must be checked via manual gate')
+        if s['tasks'][task_id]['status']!='READY':self.append('task_ready',actor,task_id,context_checked=context_checked)
+        self.append('task_claimed',actor,task_id,context_checked=context_checked)
         attempt=f'attempt-{self.verified()["tasks"][task_id]["attempts"]+1:04d}'
-        return self.append('task_started',actor,task_id,attempt_id=attempt)
+        return self.append('task_started',actor,task_id,attempt_id=attempt,context_checked=context_checked)
 
     def _validate_outputs(self,task_id,output_refs,s):
         ensure(task_id in s['tasks'] and s['tasks'][task_id]['status'] in ('RUNNING','WAIT_REVIEW'),'Task not running')

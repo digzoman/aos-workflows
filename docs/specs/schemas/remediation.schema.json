@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Review remediation",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "record_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "source_review_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "correction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required_new_attempt": {
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "OPEN",
+        "RESUBMITTED",
+        "ACCEPTED",
+        "CLOSED"
+      ]
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "actor": {
+      "$ref": "common.schema.json#/$defs/actor"
+    },
+    "graph_revision": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "record_id",
+    "run_id",
+    "task_id",
+    "source_review_id",
+    "correction",
+    "required_new_attempt",
+    "status",
+    "created_at",
+    "actor",
+    "graph_revision"
+  ]
+}

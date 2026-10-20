@@ -13,3 +13,5 @@ No example grants Meta, CRM, messaging or production deployment access.
 - [Prompt 10 composition fixtures](conformance/README.md), a sanitized 3-investigation portfolio and deliberately simulated approvals, with real **local-file-only** conformance tests. These are not completed real competitor investigations.
 
 - [Prompt 11 recovery scenarios](conformance/recovery/README.md) describe interrupted, inconsistent and incomplete local runs with no real provider actions. The executable `tests/test_state.py` builds these disposable fixtures and checks their safe outcomes.
+
+- [Prompt 12 governance examples](conformance/governance/README.md) demonstrate declared identity, advisory claims, independent/human/self-review, remediation, expiry/revocation and safe local operation intent.

@@ -71,6 +71,21 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "graph_revision": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "attempt_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "correction": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "expires_at": {
+      "$ref": "common.schema.json#/$defs/time"
     }
   },
   "required": [
