@@ -78,3 +78,9 @@ Input: current run state, last submitted artifacts, exact paths/versions, review
 ## Common candidate conventions for later design
 
 Every proposed template should eventually declare accepted inputs, required skills/resources and their locations, source-of-truth pointers, stable task identifiers, read/write permissions, artifacts, dependencies, QC/approval policy, retry budget, state and event recording, and a non-Git standalone procedure. Subtemplates may bundle relevant `SKILL.md` instructions in the standardized template or inside a custom template/run under `agent-files/`; external references must not expand authority. None of these manifests has been implemented.
+
+## Prompt 04 creative modules
+
+Fourteen additional **design-only** creative templates C01–C14 are detailed in [CREATIVE-CATALOG.md](CREATIVE-CATALOG.md). These cover source assignment, offer truth, semantic pre-image approval, Meta copy, art direction, generation, deterministic branding, placement variants, export checks, independent visual/semantic QA, peer bakeoff, targeted correction, owner selection and provider handoff. See [CREATIVE-COMPOSITION-EXAMPLES.md](CREATIVE-COMPOSITION-EXAMPLES.md).
+
+No template implementation or workflow engine was created during Prompt 04.

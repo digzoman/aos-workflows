@@ -85,3 +85,7 @@ Next: use R02–R05/R16–R18 for Prompt 03 research; R08–R10 for Prompt 04 cr
 ## E. Prompt 03 source expansion
 
 Thirty further directly inspected Max repository documents, R21–R50, are registered with exact restricted relative locators and evidence purposes in [SOURCE-ADDENDUM-03.md](SOURCE-ADDENDUM-03.md). The new research interpretation and candidate template specifications are in [RESEARCH-WORKFLOW-MODEL.md](RESEARCH-WORKFLOW-MODEL.md) and [candidate-templates/CATALOG.md](candidate-templates/CATALOG.md). **This does not imply updated independent live Meta verification.**
+
+## F. Prompt 04 creative production source expansion
+
+Thirty-one additional restricted Max documentation sources, R51–R81, are indexed in [creative-production/SOURCE-INDEX-04.md](creative-production/SOURCE-INDEX-04.md). New files document B1–B9 creative production, the canonical logo skill, image generation and correction, QA, approvals, asset versions and Meta staging boundaries. These notes do **not** imply current independent pixel inspection or production delivery verification.

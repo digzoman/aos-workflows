@@ -38,3 +38,12 @@ Future sessions should append substantive events with changed files, test eviden
 - Recorded a source-of-truth discrepancy, Run 10 local progress started while portfolio index still said not started, without modifying the private source.
 - No AOS-W workflow engine, schemas, live marketing actions or external system modifications.
 - Next stage is Prompt 04 creative workflow research.
+
+## 2026-10-20. Prompt 04, creative production history and candidate contracts
+
+- Directly read restricted Max source documents for B1–B5 V3, B6/B7 Fred/Muse bakeoff and ChatGPT creative runs, B6.3 Ontario special cases, B8 VA variants, B9 offer/asset revisions, brand guidance and the existing logo-placement skill.
+- Indexed 31 directly inspected source documents R51–R81 with evidence limitations.
+- Built a staged production model, QA/approval matrix, version and skill design notes, corrective casebook, 14 proposed creative template contracts and four draft compositions.
+- Preserved important chronology such as B9 logo-free owner selection and later branded approved variants. Differentiated documented historical QA from a new direct image inspection, which was not performed here.
+- No executable engine, live creative generation, provider account modification or remote publish action.
+- Next Prompt 05, reverse engineer Meta configuration, launch, CRM and monitoring.

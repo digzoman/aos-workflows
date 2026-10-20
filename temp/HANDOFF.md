@@ -1,34 +1,35 @@
-# Latest Cross-Session Handoff
+# Latest cross-session handoff
 
-Date: 2026-10-20
-Completed stage: Prompt 03, competitor advertising research workflow reverse engineering.
-Repository: `digzoman/aos-workflows`, public, `main`. Verify the latest SHA and files before editing.
+Updated 2026-10-20
+Completed assignment: Prompt 04, advertising creative workflow reverse engineering.
+Repository: `digzoman/aos-workflows`, main. Verify current HEAD before edits.
 
-## First reads for Prompt 04
+## Read these first for Prompt 05
 
 1. `temp/OPERATING-RULES.md`
 2. `temp/DESIGN-DECISIONS.md`
 3. `temp/WORK-PLAN.md`
 4. `temp/PROGRESS.md`
 5. `temp/research/SOURCE-INDEX.md`
-6. `temp/research/SOURCE-ADDENDUM-03.md`
-7. `temp/research/RESEARCH-WORKFLOW-MODEL.md`
-8. `temp/research/RESEARCH-EVIDENCE-QA.md`
-9. `temp/research/VERTICAL-RESEARCH-LINEAGE.md`
-10. `temp/research/candidate-templates/CATALOG.md`
+6. `temp/research/creative-production/SOURCE-INDEX-04.md`
+7. `temp/research/creative-production/CREATIVE-PRODUCTION-MODEL.md`
+8. `temp/research/creative-production/QA-GATES-AND-APPROVALS.md`
+9. `temp/research/creative-production/FAILURES-REVISIONS-04.md`
+10. `temp/research/candidate-templates/CREATIVE-CATALOG.md`
+11. `temp/research/creative-production/ASSET-LINEAGE-AND-SKILLS.md`
 
-## What Prompt 03 established
+## Verified Prompt 04 findings
 
-- Two executable-in-future research styles, an ordered advertiser/keyword queue and independent portfolio child runs, with distinct source and market scoring models.
-- Actual earlier loop boundaries, access retries, candidate dedup, source-confidence tiers, partial QA risks, and portfolio summary lag.
-- Run 10 had been started but the aggregate index lagged. Completion was not asserted.
-- Fourteen candidate research template specifications and compound composition sketches saved. **No runnable YAML, engine or technical implementation has been created.**
-- Previous project design decisions remain unmodified, especially Git optional, default non-repeating, skill references, agent-files-only installed runtime writes, and human-controlled external permissions.
+- B1–B5 top-two upgrades used distinct semantic, visual, export, GitHub upload and post-upload QA states.
+- B6/B7 established a **semantic pre-image hard gate** and Fred/Muse independent/peer critique protocol; B6.1 wrong logo version had targeted archive and repair.
+- B8 had three independent creative variants; square/Meta mapping and placement remained separate checks.
+- B9's Oct 17 logo-free owner-selected image and Oct 18 branded approved portrait/square assets are different chronological versions, not contradictory current approvals.
+- The B9 Oct 18 staging QA notes correct original assets while flagging unresolved 9:16 placement previews and live message routing; a subsequent record includes activation but does not close every downstream gate.
+- The existing `scratch/skills/add-ampgent-logo/SKILL.md` is a reusable optional visual-production skill, **not** a core mandatory Python dependency.
+- Historical creative assets and source copy remain private; public repo contains sanitized process summaries and original restricted paths only.
 
-## Next assignment, Prompt 04
+## Next assignment, Prompt 05
 
-Reverse engineer the full creative workflow, including ad source recheck, offer mapping, hook/ICP/claims, primary text/headline, creative briefs, actual image generation, semantic QA, visual/technical QA, branding, square variants, version-specific review and human signoff.
+Reverse engineer campaign setup, Meta messaging, staged versus approved versus activated state, CRM/landing destinations and tracking, prelaunch independent QA, launch and read-back, and monitoring/optimization. Use the previously indexed private source R11–R13 and new R66–R81 plus website handoff records. Look for duplicate provider objects after ambiguous API timeouts, parent/child activation order, effective versus configured status, image/placement mapping, and incomplete CAPI/lead signal work. Do not write to live Meta, GHL, ad accounts or websites.
 
-Use the private Max source files listed as R08–R10 and R28–R30, including `meta-ad-creative-bakeoff-2026-10-04/` and `meta-ad-creatives-v3-five-buckets-2026-09-26/`. Explore Fred/Muse independent creative outputs and corrections; do not publish copyrighted raw originals or confidential private assets here. Distinguish future template proposals from source observations.
-
-Commit sanitized analysis, update the plan and leave another handoff. Prompt 07 remains a human PRD approval checkpoint. No engine development and no live Meta/CRM actions.
+Commit only sanitized research notes and update HANDOFF, PROGRESS and WORK-PLAN. No engine before owner approval of enhanced PRD at Prompt 07.

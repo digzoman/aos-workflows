@@ -37,3 +37,15 @@ Open questions are not blockers for Prompt 02 research unless explicitly noted.
 24. What is the precise handoff rule when child run PROGRESS has newer observed state than its aggregate RUN-INDEX or cached rollup?
 25. Which evidence-quality failures require blocking QC, and when may a human accept a qualified report despite incomplete coverage?
 26. What policy controls auto-start of suggested subverticals versus explicit per-run approval, considering the historical 15-run individually authorized program?
+
+## Creative pipeline requirements to finalize in Prompt 07/08
+
+27. Which artifact types require stable hashes, including source screenshots, copy fields, SVGs, portrait/square rasters and Meta imported media?
+28. Which exact variant change invalidates semantic/copy/brand/export/placement/human approval gates, and can automatically preserve unaffected approved sibling variants?
+29. How should explicitly owner-approved brand or aspect-ratio exceptions be represented and distinguished from errors or incomplete compliance?
+30. Which environment-side tools can deterministically inspect image dimensions/mode/hash versus which are only advisory in the plain-file no-runtime mode?
+31. How to enforce reviewer independence and preserve first-pass Fred/Muse outputs when file reads and access policy are not technically enforceable in every host?
+32. How should placement-specific approved formats and Story/Reels safe zones be versioned, since 1080×1080 and 1350×1350 squares have different historical usage?
+33. How will a step-local optional logo skill resolve a pinned source/version and safe fallback without mandatory Python in AOS-W?
+34. How should GitHub asset persistence, Meta creative media mapping, actual placement previews, messaging and eventual publication be separate gate states?
+35. What is the scope of authorized automatic repair when it changes a headline, price, funding eligibility statement, official brand asset or owner-selected version?

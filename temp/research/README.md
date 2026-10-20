@@ -23,3 +23,9 @@ All private files remain in the restricted original sources. The AOS-W repositor
 - [candidate-templates/COMPOSITION-EXAMPLES.md](candidate-templates/COMPOSITION-EXAMPLES.md), four **non-executable** composition examples.
 
 Everything in candidate-templates remains proposed design input for PRD review, not runnable framework code.
+
+## Prompt 04, creative production reverse engineering
+
+The [creative-production directory](creative-production/SOURCE-INDEX-04.md) contains a sanitized primary source index R51–R81, [full process model](creative-production/CREATIVE-PRODUCTION-MODEL.md), [failure and correction cases](creative-production/FAILURES-REVISIONS-04.md), [granular QA/approval gates](creative-production/QA-GATES-AND-APPROVALS.md) and [artifact/skill lineage](creative-production/ASSET-LINEAGE-AND-SKILLS.md).
+
+Initial **non-executable** creative workflow specifications are [CREATIVE-CATALOG.md](candidate-templates/CREATIVE-CATALOG.md) and [CREATIVE-COMPOSITION-EXAMPLES.md](candidate-templates/CREATIVE-COMPOSITION-EXAMPLES.md). These require PRD and technical schema approval before development.
