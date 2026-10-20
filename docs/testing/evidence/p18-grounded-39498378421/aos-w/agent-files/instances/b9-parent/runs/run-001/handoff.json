@@ -1,0 +1,39 @@
+{
+  "active": [],
+  "blocked": [],
+  "checkpoint_id": "checkpoint-000056",
+  "completed": [
+    "plan",
+    "fanout",
+    "synthesis",
+    "offer",
+    "copy",
+    "creative",
+    "crm",
+    "landing",
+    "tracking",
+    "prelaunch"
+  ],
+  "generated_at": "2026-10-20T21:11:59Z",
+  "graph_revision": "g0001",
+  "last_event_digest": "fd6e209d1e15c5a8bfb00bde9c533db0f12b19befb8236065a04fe9bed6ae86f",
+  "last_event_seq": 57,
+  "next_action": "Inspect eligible work and verify untrusted context; no automatic dispatch",
+  "owners": {},
+  "pending_approvals": [],
+  "pending_provider_reconciliations": [],
+  "prepared_by": {
+    "agent": "ColdResume",
+    "instance": "p18-c",
+    "platform": "file-replay",
+    "role": "worker"
+  },
+  "ready": [
+    "launch-permit"
+  ],
+  "run_id": "run-001",
+  "run_status": "ACTIVE",
+  "schema_version": "1.0.0",
+  "source_references": [],
+  "sync_status": "local_only"
+}

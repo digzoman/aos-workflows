@@ -1,0 +1,46 @@
+{
+  "blocked_tasks": [],
+  "checkpoint_id": "checkpoint-000005",
+  "completed_tasks": [
+    "plan"
+  ],
+  "created_at": "2026-10-20T21:11:57Z",
+  "created_by": {
+    "agent": "AmpgentResearch",
+    "instance": "p18-a",
+    "platform": "github-actions",
+    "role": "producer"
+  },
+  "event_digest": "74b5f34dcb73b6fccae1769b16ebe5844d3e6f30b0772c70d5e6cfb0e50cffd0",
+  "event_seq": 5,
+  "graph_revision": "g0001",
+  "integrity_level": "verified",
+  "next_eligible_tasks": [
+    "fanout"
+  ],
+  "pending_tasks": [
+    "fanout",
+    "synthesis",
+    "offer",
+    "copy",
+    "creative",
+    "crm",
+    "landing",
+    "tracking",
+    "prelaunch",
+    "launch-permit"
+  ],
+  "provider_unknown_operations": [],
+  "run_id": "run-001",
+  "schema_version": "1.0.0",
+  "state_revision": 5,
+  "sync_status": "local_only",
+  "verified_artifacts": [
+    {
+      "artifact_id": "plan-record",
+      "locator": "artifacts/plan.md",
+      "revision": "v1",
+      "sha256": "892d58c64c352361ec42b03cb1e2f3b2c6b92747d66545e7aee872df1fe7f7e7"
+    }
+  ]
+}

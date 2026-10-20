@@ -1,0 +1,19 @@
+graph:
+  nodes:
+  - contract:
+      done_when: Exact-hash artifact and scoped QC verified
+    id: collect
+    inputs: []
+    instructions: No external writes or account effects
+    kind: task
+    needs: []
+    outputs:
+    - artifact_id: collect-record
+      path: artifacts/collect.json
+      required: true
+    quality:
+      gates:
+      - independent-check
+    required_actions:
+    - read
+    - write_local

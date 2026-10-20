@@ -1,0 +1,33 @@
+{
+  "actor": {
+    "agent": "AmpgentResearch",
+    "instance": "p18-a",
+    "platform": "github-actions",
+    "role": "producer"
+  },
+  "attempt_id": "attempt-0001",
+  "extensions": {
+    "aosw": {
+      "attempt_count": 1,
+      "current_task_status": "COMPLETE",
+      "derived_from_event_seq": 57,
+      "error": null,
+      "retry": null
+    }
+  },
+  "graph_revision": "g0001",
+  "input_refs": [],
+  "output_refs": [
+    {
+      "artifact_id": "synthesis-record",
+      "locator": "artifacts/synthesis.md",
+      "revision": "v1",
+      "sha256": "e876487bf87e0ad2cc0478cfe5054acc502e6a48ae6ca1e99408d1d50ad3b792"
+    }
+  ],
+  "run_id": "run-001",
+  "schema_version": "1.0.0",
+  "started_at": "2026-10-20T21:11:57Z",
+  "status": "succeeded",
+  "task_id": "synthesis"
+}
