@@ -1,35 +1,35 @@
-# AOS-W prioritized V1 and V1.x backlog
+# AOS-W prioritized work remaining after Prompt 19
 
-Prepared 2026-10-20. Priorities reflect blocking acceptance gaps, not estimates or owner approval.
+Updated October 20, 2026. Current published version remains v0.7.0-portable-preview. Stable Version 1 is NOT approved. This backlog distinguishes mandatory original acceptance work from possible post-release enhancements. Nothing marked P1 is automatically approved for deferral from the original PRD.
 
-## P0, before stable V1 release
+## P0, mandatory stable V1 blockers unless the owner explicitly changes the PRD
 
-1. Execute and commit Prompt 18 real end-to-end staged marketing pilot, with independent QA failures/corrections and durable exact-artifact evidence. Use real source research for T01 where possible, never invented ads.
-2. Obtain and record an actual two-platform agent handoff, or resolve V1 scope explicitly with the owner. Local subprocesses do not count as T02.
-3. Reconcile hosted CAS acceptance report currently REVIEW_REQUIRED and live LFS BLOCKED. Confirm cleanup, branch protections, stale/reclaim semantics and provider fencing limitations; keep collaboration as experimental meanwhile.
-4. Complete independent AI review and separate human approval boundary demonstration for T04, not only deterministic or mocked reviews.
-5. Test on a genuinely durable independent cloud filesystem across session termination, including persisted resume.
-6. Approve or revise the PRD-wide signoff, open architecture decisions and licensing. Explicit scoped engineering instructions do not resolve this approval automatically.
-7. Complete public repository and historical commit/content secret and privacy scan, plus release ZIP inspection. Independent owner review before publishing stable V1.
-8. Update top-level docs, quickstart and changelog for 0.7.0; verify current release manifest, stable version naming and safe upgrade instructions.
+1. Formal scope/governance. Approve PRD and ADR statuses, choose license, and record any explicit change to the six original mandatory success tests.
+2. T01 real Ampgent end-to-end. Capture actual source ad cards and dated evidence with approved scoring, genuinely independent AI review, actual approved Ampgent offer truth and brand-perfect creative, complete/pin the full marketing compound flow. Retain blocked live provider actions unless separately authorized.
+3. T02 two genuine model platform handoff. ChatGPT to Codex, Claude or another provider across a durable shared workspace, cold restart, source and approval integrity preserved.
+4. T03 hosted collision prevention. Re-run actual hosted CAS with reproducible one-winner results and verified cleanup, compare genuine Git LFS server locking, document chosen restrictions and failure modes; stop shared mode otherwise.
+5. T04 actual independent AI research and visual reviewer. Verify changed artifact hashes, rejected/repaired versions, separate identity, unaffected branch eligibility and parent join.
+6. Cloud persistence. Use a genuinely durable cloud storage environment that outlives the runner/session and cold resume an instance without a preexisting in-memory model state.
+7. Cross-instance dependency fix. Bring reviewed-child artifact gate into reusable composition validation rather than keeping it in one pilot script. Add regression for child INCOMPLETE/REVISE/revoked and mismatched hash.
+8. Privacy/legal/public release. Human review of contextual business references and public source rights, binary creative assets, full historical exposure, generated examples and all reachable branches. Automated scan passed limited signatures, not a full privacy certification.
+9. Release engineering. Verify current docs and all accepted product claims; mint approved version/tag/manifest only after owner approval; rerun tests and publish correct licensing and migration notes.
 
-## P1, near-term V1.x
+## P1, possible V1.x follow-ons if the owner expressly defers them from V1
 
-1. Recurrence/scheduler adapter, exact occurrence deduplication, missed/DST schedules and manual invocation.
-2. Host-side permission and authenticated owner approval integration rather than trusting editable file declarations.
-3. Provider API operation reconciliation, reliable paused staging, read-back, idempotency and safe compensation with test accounts.
-4. Real generated-image inspection, logo/brand verification, placements, text compliance, changed artifact invalidation.
-5. Trusted external skill pinning, offline fallback and source authorization.
-6. Multiple independent cloud/host coordination tests under genuinely different GitHub logins.
-7. Importer/conversion tooling for durable old Meta research and approved advertising workflow records.
-8. Robust schema major-version migrations and recovery/rollback tests.
+1. Recurring scheduled host adapter, durable occurrence IDs, overlap/missed/DST and manual one-off override tests.
+2. Host-authenticated owner approval, reviewer identity and provider-specific authority/fencing integration.
+3. Actual Meta/GHL/landing isolated-test readback, idempotent paused staging, retry/timeout reconciliation, CAPI/message quality checks.
+4. Remote skill signature/source trust, safe pin/cache, missing skill fallback and permissions.
+5. Full image validation and official logo insertion, portrait/square/Stories placement QA.
+6. Schema-major migration tests, multi-host conflict scenarios and safe rollback after crash.
+7. Transparent opportunity and source-ad scores with confidence separate from economic assumptions, automatic audited child scoring.
 
-## P2, improvements
+## P2 improvements
 
-1. Better observability/status dashboard as optional tooling, never a core requirement.
-2. Optional remote schedulers and integrations for recurring marketing monitoring.
-3. Performance, scale and conflict stress tests for large fanout portfolios.
-4. Starter kits for nonmarketing business processes and governance policy recipes.
-5. Structured archive/index of temp research and permanent accepted ADRs after owner review.
+1. Optional operator dashboards and concise human-readable run overviews, never a mandatory core runtime.
+2. Expanded self-contained workflow libraries outside marketing.
+3. Large portfolio and stress-testing for task concurrency and Git coordination.
+4. More ergonomic logging, evidence link navigation and privacy/sanitization preflight.
+5. Owner-reviewed temp archive cleanup after durable migration is complete, with no historical erasure.
 
-Keep the portable file-only core and the agent-files write boundary nonnegotiable unless the owner explicitly changes the PRD. Preserve historical temp notes until archival policy is approved.
+See docs/release/V1-RELEASE-APPROVAL-PACKET.md and docs/release/V1-REQUIREMENTS-MATRIX.md. An owner decision is needed before any change to the original success definition.

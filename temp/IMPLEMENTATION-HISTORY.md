@@ -162,3 +162,8 @@ Future sessions should append substantive events with changed files, test eviden
 - Ran nine cases in local group 1 and two cases in group 2 to fit local tool execution windows: **11 PASS, 0 FAIL**.
 - Added optional main-only GitHub Actions hosted CAS/LFS probe with ephemeral namespace and cleanup plus separate case report; its eventual outcome must be independently checked. GitHub push claims/real LFS lock API support are not assumed.
 - No live provider actions, external AI platform handoffs or production task fencing. Next staged marketing pilot after resolving Prompt 15 publication and hosted probe.
+
+
+## 2026-10-20. Prompt 19 release readiness review
+
+Audited actual current 0.7.0 preview and historic PRD, original survey, architecture and tests. Added hosted Actions release audit running complete regression suite, P16 real ZIP acceptance, reachable Git historical blob/current token pattern scanner and SHA-verified clean ZIP. CI run 39499859355 completed success after correcting a false positive for benign empty agent-files seed directory entries. Promoted the agreed survey and Prompt 01b material, eight proposed ADRs and historical conformance results into permanent documentation without deleting or changing temp originals. Reworked current quickstart and kept 0.6.0 historical guide. Authored traceability, safety limitations, owner approval packet and proposed, unpublished V1 release notes. Formal V1 state remains HOLD because original T01–T04 and other acceptance evidence remain incomplete, license/open decisions pending. No provider effects or stable v1.0.0 release.

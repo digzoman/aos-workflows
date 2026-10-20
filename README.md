@@ -1,75 +1,43 @@
-# Agent OS Workflows (AOS-W)
+# Agent OS Workflows, AOS-W
 
-**Current preview, 0.7.0.** The [0.7.0 portable preview release](https://github.com/digzoman/aos-workflows/releases/tag/v0.7.0-portable-preview) now includes 21 independent marketing modules and one compound lifecycle. Hosted CI passed 126 conformance/regression tests on 2026-10-20. **This is not an approved stable Version 1 release.** The [hosted synthetic marketing pilot](docs/testing/PROMPT-18-SYNTHETIC-PILOT-REPORT.md) produced 77 event transitions and a blocked publishing gate, but is not real-world marketing acceptance. Read the [current release readiness review](docs/release/V1-READINESS-2026-10-20.md) and [Prompt 18 pilot plan](docs/testing/PROMPT-18-PILOT-PLAN.md). Older 0.6.0 documentation below remains historical.
+AOS-W is a **portable, file-based workflow standard** for AI agents. It provides repeatable tasks, reusable template contracts, evidence tracking, checkpoints, handoffs and manual protocols. Its downloaded core does not require Git, Python, an MCP server, a database or a scheduler. Optional helper tooling adds local deterministic validation, file state management and experimental Git synchronization.
 
-AOS-W is a planned portable, file-based framework for repeatable, auditable AI-agent workflows. It is designed for one agent on a local or persistent cloud filesystem, with optional Git synchronization and multi-agent coordination. No Git installation, dedicated MCP server, database, Python runtime, or scheduler is required for the standalone design.
+**Current status, October 20, 2026.** The [0.7.0 portable preview](https://github.com/digzoman/aos-workflows/releases/tag/v0.7.0-portable-preview) is available and tested. **The original six Version 1 success criteria are not all demonstrated, and stable Version 1 is not approved or published.** See the [release approval packet](docs/release/V1-RELEASE-APPROVAL-PACKET.md), [full requirement traceability](docs/release/V1-REQUIREMENTS-MATRIX.md), and [limitations](docs/release/V1-LIMITATIONS-AND-RISKS.md).
 
-> **Status: portable AOS-W 0.6.0 scaffold and optional helper tooling.** [Read the standalone quick start](docs/installation/QUICKSTART.md) or [explore the scaffold](scaffold/aos-w/README.md). The portable release ships **20 draft schemas**, instructions, templates and clean starter data; automatic workflow dispatch, a live scheduler and production distributed locking are not implemented.
+## Download and start
 
-## Downloadable distribution and optional tools
+Follow the [0.7.0 quick start](docs/installation/QUICKSTART.md). Download the clean aos-w-portable-0.7.0.zip from its [GitHub prerelease](https://github.com/digzoman/aos-workflows/releases/tag/v0.7.0-portable-preview), confirm the published SHA-256 and extract the single aos-w folder into persistent storage. Read aos-w/README.md and PROTOCOL.md, choose a template, then create a pinned instance under aos-w/agent-files.
 
-The installable directory is [scaffold/aos-w/](scaffold/aos-w/). Copy it from the repository's ZIP into any persistent local/cloud folder, or use the optional packaging script to create a scaffold-only ZIP. It works manually without a Git checkout.
+Ordinary operation may write only within **aos-w/agent-files**. The protected file protocol includes templates, specification schemas, skills and reference instructions. Only the optional maintainer upgrade changes the protected standardized part while preserving the user data subtree.
 
-Only `scaffold/aos-w/agent-files/` is intended to change during ordinary installed-framework use. It will contain project-specific configuration, customized templates, active runs, evidence, reviews, state, and history. Framework maintainers may update the standardized scaffold outside this area through explicit releases.
+## Available templates and optional tools
 
-## Development repository
+The portable preview includes 21 standalone marketing modules plus one compound research-through-staged-campaign workflow. See scaffold/aos-w/templates/MARKETING-LIBRARY.md and scaffold/aos-w/references/MARKETING-WORKFLOWS.md. The development repository also includes optional tools/composition, tools/state, tools/governance and tools/git, plus audited packaging and installation utilities under scripts.
 
-- `docs/` — product and technical specifications as they are approved.
-- `examples/` — sanitized reference examples.
-- `scripts/` and `tools/` — optional utilities, not mandatory dependencies.
-- `scaffold/` — future downloadable AOS-W distribution.
-- `temp/` — **tracked**, public work-in-progress documentation, decisions, research, plans, progress, and cross-session handoffs.
+Its task graph, quality gates, autonomy and external-action approvals are documented, but plain files do not themselves enforce a live scheduler, hard cross-process mutex, authenticated human approval or external provider side effects. Git CAS remains a prototype, and unattended Meta/GHL publication is not part of the release.
 
-Start with [temp/OPERATING-RULES.md](temp/OPERATING-RULES.md) and [temp/HANDOFF.md](temp/HANDOFF.md) when continuing the project. See [temp/DESIGN-DECISIONS.md](temp/DESIGN-DECISIONS.md) for the baseline requirements.
+## Tests and documented evidence
 
-## Principles
+- [Hosted V1 release audit](https://github.com/digzoman/aos-workflows/actions/runs/39499859355), 126 unit/conformance tests and 13 standalone practical checks passed on the actual clean 0.7.0 ZIP. A selected current/historical repository secret-pattern and archive-allowlist audit passed. This does not certify all privacy/legal requirements.
+- [Prompt 18 source-backed staged marketing pilot](docs/testing/PROMPT-18-END-TO-END-RESULTS.md), 27 passing assertions, three separately persisted children, eight public supplier offer descriptions, rejected/corrected research and a 1080x1350 PNG, blocked publication gate. Not an independently AI-reviewed or actual Meta staging acceptance.
+- [Prompt 17 Git collaboration acceptance](docs/testing/PROMPT-17-GIT-COLLABORATION.md), genuine local bare Git and process races passed; the separate hosted GitHub CAS probe was REVIEW_REQUIRED and Git LFS server test BLOCKED.
+- [Prompt 16 standalone local acceptance](docs/testing/PROMPT-16-STANDALONE-ACCEPTANCE.md) includes 13 file-based scenarios. The separate durable cloud filesystem scenario was not run.
 
-1. Offline or cloud standalone first, Git optional.
-2. Multi-agent execution optional, but supported when safe shared coordination is available.
-3. Modular reusable templates, composed workflows, dependency gates, state, retries, recovery, evidence, and audit trails.
-4. Non-repeating workflows by default, with optional schedule-triggered recurring instances. A template may provide a default schedule, while any permitted workflow can also be launched ad hoc. Scheduling must not require an always-on AOS-W runtime.
-5. Skills can be bundled with templates and workflow instances or referenced from installed/local/repository skill locations. Steps identify needed skills and agents load them when relevant.
-6. Explicit identity and permission boundaries. Quality review is not itself authorization for external side effects.
-7. Model-agnostic interfaces. Integration with A Rep, not dependence on A Rep.
-8. No credentials, customer secrets, private customer information, or unsanitized business records in this public repository.
+Original test requirements and acceptance conditions are in docs/specs/prd/ACCEPTANCE-TEST-MATRIX.md. The original PRD remains formally unapproved, despite later bounded implementation instructions. No live marketing permission is granted by a PRD or file-based approval.
 
-## Roadmap
+## Repository map
 
-Prompts 02–06 researched Ampgent processes, A Rep, LangGraph and collaboration. Prompt 07 produced the PRD; Prompt 08 produced [technical specifications](docs/specs/architecture/) and [draft schemas](docs/specs/schemas/). **Prompt 09 is the initial file-based scaffold implementation.** Later prompts will implement graph execution, durable automated recovery, permissions, Git coordination and full Ampgent templates, followed by tests. The user explicitly directed Prompt 09 implementation; this does **not** approve production account actions or automatically accept all draft ADRs.
+- docs/specs for the original surveyed requirements, PRD, schemas and proposed architecture decisions.
+- docs/testing for reproducible test reports, historical conformance and real run evidence.
+- docs/release for release assessments, missing evidence, risk and pending owner approval.
+- docs/installation for current and historically versioned install/upgrade instructions.
+- scaffold/aos-w for the clean installable framework and templates.
+- tools and scripts for **optional** developer or host helpers, not inside the minimal ZIP.
+- examples for sanitized demonstrations and test fixtures.
+- temp for tracked, preserved historical notes, source indexes and handoffs, indexed by docs/history/TEMP-ARCHIVE-INDEX.md.
 
-## Licensing
+## Licensing and safety
 
-No open-source license has been selected yet. Public repository visibility does not itself grant reuse rights. Licensing is an unresolved decision to record during requirements review.
+**No open-source license has been selected.** Public GitHub visibility does not automatically grant reuse rights. Approval to publish an AOS-W release is separate from approval to publish marketing advertisements, spend funds or access customer systems. Live external actions require explicit, authenticated, scoped authority and read-back at the provider boundary.
 
-## Prompt 10, reusable composition (0.2.0)
-
-The [composition protocol](scaffold/aos-w/references/COMPOSITION.md) and [planning/competitor templates](scaffold/aos-w/templates/README.md) now support explicit task contracts, dependency routing, custom overlays, stable child proposals, independent research QC and reviewed portfolio merging. An [optional PyYAML helper](tools/composition/README.md) implements local checks and approval-gated child instantiation, with [sanitized fixtures](examples/conformance/README.md) and unit tests. **No Python or Git is mandatory for file-only operation.** Automatic task dispatch, enforced multi-agent claims and external provider APIs are not implemented.
-
-## Prompt 11 — durable run state (0.3.0)
-
-The [manual state/recovery protocol](scaffold/aos-w/references/STATE-AND-RECOVERY.md) now specifies append-oriented event history, checkpoints, retries, paused/failed runs, evidence integrity, provider-action intent reconciliation and fresh-agent recovery. The [optional deterministic helper](tools/state/README.md) implements and locally tests these operations under a **single-writer** assumption; 26 new tests and 11 composition regressions passed. Real provider writes, hard distributed locks, unattended timers and cryptographic human authorization are **not implemented**. All ordinary installed-workflow modifications remain under `agent-files/`.
-
-## Prompt 12 — governance (0.4.0)
-
-The [portable manual governance protocol](scaffold/aos-w/references/PROVENANCE-QUALITY-PERMISSIONS.md) and [optional local checker](tools/governance/README.md) now support four-field provenance, advisory claims/handoffs, deterministic/independent AI/human/permitted self-review, structured corrections, explicit resource and budget permissions, expiry and revocation. **File records are not authenticated host permission; no provider operations occur.** [Conformance report](temp/tests/PROMPT-12-GOVERNANCE-CONFORMANCE.md).
-
-## Prompt 14: tested clean ZIP and upgrades (0.6.0)
-
-The [installation guide](docs/installation/QUICKSTART.md) and [standalone manual guide](scaffold/aos-w/references/INSTALL.md) describe the clean downloadable `aos-w-portable-0.6.0.zip`. [GitHub Actions](.github/workflows/aosw-portable.yml) builds, verifies and uploads an independent ZIP; the [verified v0.6.0 preview release](https://github.com/digzoman/aos-workflows/releases/tag/v0.6.0-portable-preview) is now publicly available. The [optional maintainer packager](scripts/aosw-distribution.py) creates SHA-256-verified allowlisted ZIPs, installs into arbitrary working directories and stages upgrades that preserve existing `agent-files/` byte for byte, with a rollback backup. The [optional workflow quickstarter](scripts/aosw-ops.py) discovers templates, inspects saved work (advisory) and initializes a pinned, CREATED run with zero provider effects. **108 local tests passed (18 new + 90 regression)**. This is still a file-based/manual core with no mandatory scripting runtime or Git. See [conformance report](temp/tests/PROMPT-14-DISTRIBUTION.md).
-
-**Verified direct download:** [aos-w-portable-0.6.0.zip](https://github.com/digzoman/aos-workflows/releases/download/v0.6.0-portable-preview/aos-w-portable-0.6.0.zip) · SHA256 `7d9ce9a3ea72f9546fe9d398647d76867bd1766a42bae717d6912f827734c5e9`. Hosted [CI run](https://github.com/digzoman/aos-workflows/actions/runs/39415147383) passed 108 tests, clean installation, workflow initialization and agent-files-preserving upgrade.
-
-## Prompt 16 — practical offline acceptance on standalone v0.6.0
-
-Thirteen [real local file-based acceptance scenarios](docs/testing/PROMPT-16-STANDALONE-ACCEPTANCE.md) passed against the verified 0.6.0 download. These include a research run deliberately interrupted mid-step, then completed by a new OS process using only persisted files; local custom templates, failed QC with correction, retries, revision, cancel, corrupt-tail recovery and no changes outside `agent-files`. One separate persistent cloud filesystem test remains **NOT RUN**. This is not evidence of real cross-platform AI model handoff, live provider integration, or production shared locking. The prior Prompt 15 marketing library was unpublished at the start of this acceptance run and needs a distinct commit/test.
-
-The practical acceptance test also [passed independently on GitHub Actions](https://github.com/digzoman/aos-workflows/actions/runs/39423403366) (108 regressions + 13 offline lifecycle scenarios); the real persistent-cloud test remains NOT RUN.
-
-## Prompt 17 — real local Git collaboration acceptance
-
-[Eleven local bare-Git collaboration scenarios](docs/testing/PROMPT-17-GIT-COLLABORATION.md) passed across separate clones/processes, including competing task CAS claims, stale lease/reclaim, actor provenance, real output/checkpoint commits, new-process review and cold handoff, manual parallel-branch reconciliation, offline blocking, and transfer to a second Git repository. One provenance defect was corrected: claim release now verifies the exact recorded actor, in addition to token/epoch. GitHub-hosted CAS/LFS and genuine other AI provider handoff are **separately verified or labeled BLOCKED/NOT RUN**, not inferred from local results. [Test ledger](temp/tests/PROMPT-17-LOCAL-RESULTS.json).
-
-
-## Prompt 18 current staged source-grounded pilot
-
-[GitHub CI execution](https://github.com/digzoman/aos-workflows/actions/runs/39498378421) passed 27 assertions against three isolated research runs, eight real public vendor pages, a corrected 1080x1350 PNG, independent deterministic-process QC and an ungranted publishing checkpoint. Read [the detailed execution report](docs/testing/PROMPT-18-END-TO-END-RESULTS.md) and [the committed evidence](docs/testing/evidence/p18-grounded-39498378421/). This does not establish full V1 T01 or independent AI QC; stable release remains pending.
+For current work, read [the release approval packet](docs/release/V1-RELEASE-APPROVAL-PACKET.md) and temp/HANDOFF.md. Verify the current main commit and actual CI results before making changes.

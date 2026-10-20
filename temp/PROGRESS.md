@@ -49,3 +49,8 @@ CI run 39495294275 SUCCESS. Actual optional RunStore executed 77 on-disk event t
 ## Prompt 18 latest source-grounded execution, 2026-10-20
 
 GitHub Actions run 39498378421 SUCCESS, 27/27 assertions, three separate research child run instances, eight real public supplier-offer pages, rejected and preserved v1 research and creative, deterministic reviewer subprocess, corrected 1080x1350 PNG, 57 parent events, 13+8+8 child events, exact-hash child join, cold reopened state and blocked launch. Evidence automatically committed under docs/testing/evidence/p18-grounded-39498378421, with formal report docs/testing/PROMPT-18-END-TO-END-RESULTS.md. This is partial original T01/T04 proof. No active Meta Ad Library cards verified, no independent AI review, no provider action or owner budget authorization. Prior synthetic pilot entries are historical, latest source-grounded evidence supersedes for staged scope.
+
+
+## Prompt 19 release audit and archival migration, October 20, 2026
+
+Reproducible CI audited v0.7.0 preview, 126 hosted test passes, 13 standalone v0.7.0 practical passes, secret signature checks against current tree and 713 historical Git blobs, and integrity checked ZIP matching 0826ddf9807354e80e22b757dd129b86539aae8d6ff3c7799029e5f3719c74f7. Original survey/01b, proposed ADR-001..008 and historical test reports migrated by exact-copy into docs. No temp files deleted. docs/release/V1-RELEASE-APPROVAL-PACKET.md holds formal decision, no owner signoff yet, V1 NOT DECLARED COMPLETE.

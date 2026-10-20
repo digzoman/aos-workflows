@@ -44,3 +44,8 @@ Hosted synthetic file pilot executed successfully in run 39495294275, 77 events,
 ## Prompt 18 completed staged pilot handoff, 2026-10-20
 
 Newest executable source-grounded P18 run is GitHub Actions 39498378421. Read docs/testing/PROMPT-18-END-TO-END-RESULTS.md and docs/testing/evidence/p18-grounded-39498378421/SUMMARY.json. Three separate child instances with 8 observed first-party seller sites, real 1080x1350 pilot PNG, independent deterministic subprocess QA, preserved rejected artifacts, 27 passing checks, 57 parent events, no external operations. Launch NOT_GRANTED. Pending full T01 are verified Ad Library ad cards, true independent AI review, verified product/price and official logo, real full compound workflow execution and any authorized provider staging. Preserve current evidence, update V1 readiness only when acceptance improves.
+
+
+## Final Prompt 19 audit handoff, October 20, 2026
+
+Read docs/release/V1-RELEASE-APPROVAL-PACKET.md, docs/release/V1-REQUIREMENTS-MATRIX.md, docs/release/V1-LIMITATIONS-AND-RISKS.md and docs/installation/QUICKSTART.md first. Original 16 survey decisions and historical proposed ADR-001..008 plus tests 09..15/17 have been promoted to permanent docs while original temp copies remain. Hosted audit 39499859355 passed 126 tests, 13 practical v0.7.0 standalone cases, scanned 713 reachable historical blob objects with zero high-confidence secret matches and verified archive SHA. P18 remains partial and T02 hosted agent handoff/T03 CAS/T04 true independent AI gates incomplete. Formal PRD approval, license and V1 stable signoff pending. Do not publish a v1.0.0 tag or take live marketing actions without new explicit authorization.

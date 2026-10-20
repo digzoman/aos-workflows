@@ -53,3 +53,8 @@ This direct instruction is recorded as authorization to build and commit the **i
 **Scope approved by this direction:** the Prompt 09 scaffold, standard/protected files, `agent-files`, basic templates, agent instructions, sanitized examples and safe tests. **Not approved by this direction:** real Meta/GHL/website/customer actions; autonomous external publishing/spend; a selected Git claim winner; unattended scheduling; automatic acceptance of all proposed ADRs. This does not claim T01–T16 have passed.
 
 The PRD is the implementation reference for this bounded step. A formal PRD-wide status and further ADR decisions may be recorded separately; do not silently rewrite the earlier review history.
+
+
+## 2026-10-20 Prompt 19 final readiness review, still awaiting owner decision
+
+The owner requested preparation and a full requirement audit before declaring stable Version 1 complete. This instruction authorizes review, documentation and nonproduction release-candidate preparation only. It does not itself fill in the formal PRD-wide Decision, Owner message/date, ADR acceptance or license selection fields above. See docs/release/V1-RELEASE-APPROVAL-PACKET.md for explicit choices. Stable V1 remains NOT APPROVED. No live marketing account changes authorized.
