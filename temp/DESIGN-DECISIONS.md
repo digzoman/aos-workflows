@@ -21,6 +21,29 @@ Recorded 2026-10-20 from the 16-question interactive/conversational survey and f
 - Prototype **both Git LFS locking and atomic Git claims** and choose based on tests. Standard Git checkout is not a file lock. Agents sharing credentials require independent identity records.
 - Optional helper scripts/tools are allowed so long as core operation remains possible through files and agent instructions.
 
+## Prompt 01b addition, triggering and reusable skills
+
+User-approved requirements added 2026-10-20, subsequent to the original survey.
+
+### One-off and recurring workflow triggers
+
+- **Default execution is non-repeating**, initiated when needed.
+- Templates, including master and customized templates, may declare a configurable schedule for recurring launch of a workflow. A caller may override or remove the schedule when creating a workflow.
+- A scheduled-capable template **must also support an ad hoc workflow launch**, even if a default schedule exists.
+- Repeating is a trigger/execution property, **not the same thing as repeating research steps inside a single workflow**.
+- AOS-W must not require its own daemon or scheduler for local standalone installation. The final design must distinguish storing a schedule from having a connected execution environment capable of actually launching work on that schedule.
+- Recommended for review, not yet an approved schema: keep each scheduled occurrence as a distinguishable execution run with provenance and checkpoint history. Define scheduling, overlapping occurrences, missed events, timezone and deduplication rules in the PRD.
+
+### Skill packages and just-in-time skill discovery
+
+- **Skills may live within reusable workflow templates and within individual workflow instances themselves**, not only in a separate global library.
+- A workflow or step identifies which skill(s) it needs, where they are found, and when agents should consult them.
+- Skills may be locally bundled, referenced from previously installed agent skills, or referenced from Git repositories or other supported remote locations.
+- Agent instructions should load **relevant skills just in time**, rather than all skills at every start.
+- Custom template skills and workflow-instance skills must live inside `agent-files/` during normal installed operation. Approved base-template skills can ship inside standardized, read-only framework template packages.
+- For external skills, design must address location, version/pinning, provenance, availability, trust and authorization before allowing any automatic fetch or execution. Referencing a skill never grants extra permissions.
+- Specific manifest syntax and fallback/precedence rules are technical design work for PRD and implementation, not yet decided.
+
 ## Identity, coordination, and provenance
 
 - Compatible with existing A Rep convention `[Agent | Platform | Role | Instance]`.

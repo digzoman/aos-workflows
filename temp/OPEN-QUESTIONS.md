@@ -13,4 +13,11 @@ These questions are intentionally deferred until research and PRD review. Record
 9. What is the specific policy for expiring ownership/leases and reclaiming abandoned tasks when no daemon exists?
 10. Which LangGraph patterns should be borrowed conceptually, and which require an actual runtime?
 
+11. What portable schedule notation is simplest, and how are timezone, daylight saving time, schedule changes, and ad hoc overrides represented?
+12. What performs triggering in each host environment, if anything, and what happens when no scheduler is available?
+13. How are missed schedule occurrences, overlap policy, duplicate triggers, pause/resume, retries, and per-occurrence history handled?
+14. What is the precise format and resolution order for skills bundled with a base template, custom template, or workflow instance versus an installed or external repository reference?
+15. How are remote skills version-pinned, authenticated safely, validated, trusted, cached, updated, and handled when unavailable or offline?
+16. Which skills are instructions only versus executable tools, and how do we guarantee skill discovery never expands execution permissions?
+
 Open questions are not blockers for Prompt 02 research unless explicitly noted.

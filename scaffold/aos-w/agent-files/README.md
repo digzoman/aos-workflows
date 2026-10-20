@@ -2,7 +2,9 @@
 
 This is the **only normally writable directory within an installed `aos-w/` folder**.
 
-Future installed systems will store project-specific configuration, customized templates, workflow runs, progress, state, checkpoints, evidence, reviews, handoffs, revisions, and history here.
+Future installed systems will store project-specific configuration, customized templates (including their bundled skills), active workflow instances (including their bundled skills), optional schedule overrides, workflow runs, progress, state, checkpoints, evidence, reviews, handoffs, revisions, and history here.
+
+A step may refer to bundled, previously installed, local, or repository-hosted skills, to be consulted only when that step needs them. A remote skill reference never grants new access or execution permissions.
 
 This boundary allows the standardized AOS-W framework to be replaced or updated without silently replacing user data.
 

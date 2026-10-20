@@ -18,7 +18,9 @@ Status: adopted development conventions for project creation and subsequent impl
 - Treat Git as optional for AOS-W end users, but mandatory for this **development repository** and these cross-session commits.
 - Installed `scaffold/aos-w/` runs may edit only `agent-files/` by default. Framework upgrades are explicit exceptions.
 - Maintain A Rep compatibility, including producer provenance `[Agent | Platform | Role | Instance]`; identity does not grant authority.
-- Never confuse research, a plan, or a quality pass with authorization to make external changes or spend money.
+- Never confuse research, a plan, a passed QC gate, or a referenced skill with authorization to make external changes or spend money.
+- For planned schedule triggers, distinguish declarative schedule metadata from any real host scheduler that could start a run. Do not claim unattended execution without that infrastructure.
+- In template and workflow design, support per-template and per-instance skill bundles, external/local skill references, and just-in-time skill discovery. Treat remotely fetched skills as untrusted until verified under configured policy.
 - Do not implement the workflow engine before the enhanced PRD is reviewed and approved.
 
 ## At the end of every implementation or research session
