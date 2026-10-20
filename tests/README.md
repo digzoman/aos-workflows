@@ -17,3 +17,7 @@ Run `python -m unittest discover -s tests -p 'test_state*.py' -v` for the **26**
 ## Prompt 12 governance tests
 
 `python -m unittest discover -s tests -p 'test_governance*.py' -q` executes **38** new local tests. `python -m unittest discover -s tests -p 'test_*.py' -q` executes **75 total**, including Prompt 11's 26 and Prompt 10's 11. These run entirely against synthetic files and self-declared actors, not real providers, signed approvals or enforced distributed locks.
+
+## Prompt 14 optional ZIP and installation tests
+
+`python -m unittest discover -s tests -p 'test_distribution.py' -q` runs **18** new synthetic ZIP/install/upgrade, malicious archive and clean cold-start checks. `python -m unittest discover -s tests -p 'test_*.py' -q` runs **108 total** with all previous Git, governance, state and composition tests. The optional tool uses Python stdlib only for ZIP/upgrade; optional `aosw-ops.py init` needs PyYAML but the downloaded folder works manually without any Python. A separate GitHub Actions workflow builds the release from the **complete** scaffold and tests installation/upgrade; report that hosted result separately from local fixture tests.

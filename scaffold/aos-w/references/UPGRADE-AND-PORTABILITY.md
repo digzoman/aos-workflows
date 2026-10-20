@@ -27,3 +27,7 @@ Copy the complete `agent-files/instances/<instance-id>/` tree, plus required `ag
 ## Safety and data ownership
 
 The public repository has sanitized examples. User data in local `agent-files/` may contain sensitive material and must not be pushed to public Git. All backups are the user's responsibility, and a Git commit/release is never evidence that a provider-side action completed.
+
+## 0.6.0 release ZIP (clean starter)
+
+AOS-W now includes an optional **allowlisted** distribution builder and a dedicated, clean standalone ZIP. Its `agent-files/` contains only nonsecret default configuration and directory READMEs/empty directories. The public development repository's synthetic `demo-local-research` instance and example user overlay are **intentionally excluded** from releases; a new installation starts without any claimed work. For real user upgrades, **do not extract directly over an existing folder**—retain all existing `agent-files/` bytes, check schema major compatibility and keep a rollback backup. The optional maintainer `scripts/aosw-distribution.py install|upgrade` performs a staged local replacement; ordinary file-only agents follow the manual procedure here and in `INSTALL.md`.

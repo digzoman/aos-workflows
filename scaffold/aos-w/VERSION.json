@@ -1,8 +1,17 @@
 {
-  "aosw_version": "0.5.0",
+  "aosw_version": "0.6.0",
   "schema_version": "1.0.0",
-  "distribution": "portable-file-scaffold",
-  "status": "manual-standalone-plus-optional-git-synchronization-and-provisional-cas",
+  "distribution": {
+    "format": "aos-w-standalone-zip-v1",
+    "clean_user_seed": true,
+    "manifest": "DISTRIBUTION-MANIFEST.json",
+    "runtime_dependencies": [],
+    "optional_build_tool": "scripts/aosw-distribution.py",
+    "optional_init_tool": "scripts/aosw-ops.py",
+    "user_data_policy": "release_excludes_user_instances_custom_templates_and_private_config",
+    "mode": "file-only-manual"
+  },
+  "status": "portable-manual-core-with-separate-optional-install-and-checkpoint-tools",
   "minimum_requirements": [
     "capable agent",
     "persistent writable files within agent-files"

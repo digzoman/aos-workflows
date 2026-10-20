@@ -1,11 +1,9 @@
-# Portable AOS-W scaffold
+# Portable AOS-W distribution (0.6.0)
 
-The self-contained installable folder is [aos-w/](aos-w/). It now contains operating documentation, 16 draft JSON Schemas, master templates, a bundled skill, user-only writable agent-files config, and an inert practice instance.
+The self-contained folder is [aos-w/](aos-w/), and [INSTALL.md](aos-w/references/INSTALL.md) explains the zero-runtime/manual installation path. **Standalone usage does not require Git, Python, Node, an MCP server, a database, or a scheduler.**
 
-**Standalone operation is manual and cooperative.** Download GitHub's whole-repository ZIP, then extract/copy only `scaffold/aos-w/` to a local or persistent cloud folder. After installation no Git, Python, Node, database, MCP or scheduler is required for a capable agent to follow the file protocol.
+The project supplies a separate, clean distribution ZIP `aos-w-portable-0.6.0.zip`, built and tested by [.github/workflows/aosw-portable.yml](../.github/workflows/aosw-portable.yml). When available, download it from the workflow's GitHub Actions Artifacts or the verified versioned preview release. The ZIP has only a single `aos-w/` root and a manifest of SHA-256 file hashes; it excludes repository development tooling and **all existing user-specific content** (the in-repo synthetic practice instance is intentionally not shipped). Its `agent-files/` is an **empty clean starter** except for safe default config and guidance.
 
-Only `aos-w/agent-files/` is normally writable. Future framework releases replace protected material while preserving this user-owned subtree. See `aos-w/references/UPGRADE-AND-PORTABILITY.md`.
+Installed protected framework paths are replaceable by a versioned upgrade, but existing `agent-files/` must be preserved in their entirety. Never blindly unzip a new ZIP over an active installation. An optional stdlib distributor and safe upgrade helper live under [scripts/](../scripts/).
 
-Optional project maintainer helper: `sh scripts/package-scaffold.sh` from the development repository root creates a ZIP containing only the installable folder if `zip` is installed.
-
-This is an initial scaffold, **not** a fully automated agent workflow engine or tested multi-agent locking system.
+The core remains a manually operated agent-and-files framework; no unattended executor, authenticated approvals or production distributed task mutex is included.

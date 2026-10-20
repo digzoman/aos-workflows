@@ -1,8 +1,8 @@
 # AOS-W V1 Work Plan
 
 Updated: 2026-10-20
-Current phase: Prompt 13 optional Git synchronization and local-remote coordination experiments completed
-Next phase: Prompt 14 optional tools, packaging, and real remote capability validation
+Current phase: Prompt 14 distribution/optional helper implementation complete, release publication pending hosted verification
+Next phase: Prompt 15 sanitized Ampgent marketing reusable workflow templates
 Implementation phases 09–13 were explicitly directed by the owner; live external operations remain separately approval-gated. Full V1 production/release approval is not implied.
 
 ## Research and design stages
@@ -22,9 +22,9 @@ Implementation phases 09–13 were explicitly directed by the owner; live extern
 - [x] Prompt 09. Implemented self-contained `scaffold/aos-w/` with protected docs, 16 copied draft schemas, two master templates, bundled evidence skill, user-owned `agent-files`, inert practice instance and handoffs, optional structural validator/ZIP packager, documented manual startup/recovery and staged structural check results.
 - [x] Prompt 10. Implemented 0.2.0 reusable template contracts, policy-constrained custom overlays, static/dynamic compound research workflows, optional local PyYAML composition/approval-gated instance helper, conditional/QA/permission-aware eligibility, revision impact planning, 11 passing conformance tests and sanitized multi-investigation fixtures. Automatic dispatch/event-safe revision application remain Prompt 11.
 - [x] Prompt 11. Implemented optional local append-oriented SHA-256 event/state helper, immutable checkpoint anchors, attempt/retry records, pause/resume/cancel/fail, exact-scope provider operation identity/reconciliation, graph revision application, corrupted-tail and stale-snapshot recovery; updated 5 schema pairs and file-only manual protocol. 26 new + 11 prior tests PASS. No provider calls, automatic scheduler or distributed mutual exclusion.
-- [ ] Prompt 12. Agent provenance, autonomy, permissions, QC, handoffs, and just-in-time skill loading/resolution without implicit authority expansion.
+- [x] Prompt 12. Implemented four-field agent provenance, advisory claims, configurable QC, expiry/revocation approvals and handoffs. 38 new tests passed. Remote trusted skill loading remains future work.
 - [x] Prompt 13. Implemented optional Git sync, explicit old-SHA CAS task claims, Git LFS client prototype, fail-closed offline modes, and 15 local Git conformance tests (90 total); provisional preference for CAS, hosted GitHub/LFS server tests still pending.
-- [ ] Prompt 14. Optional helper tooling and independent download package.
+- [x] Prompt 14. Authored optional clean ZIP builder/installer/upgrade, quick-start initialization/status helper, manifest integrity and archive safety, portable docs and GitHub Actions standalone ZIP workflow. 18 new tests + 90 prior = 108 local PASS. Verify hosted artifact and preview release status separately.
 - [ ] Prompt 15. Sanitized Ampgent marketing template library.
 
 ## Validation and release stages

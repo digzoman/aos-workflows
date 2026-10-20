@@ -26,7 +26,7 @@ function check(ok, message) { checks++; if (!ok) throw new Error(message); }
 const read = relative => fs.readFileSync(path.join(root, relative), "utf8");
 for(const p of required) check(fs.existsSync(path.join(root,p)), "Missing scaffold path: " + p);
 const version = JSON.parse(read("VERSION.json"));
-check(version.aosw_version === "0.5.0", "Unexpected framework version");
+check(version.aosw_version === "0.6.0", "Unexpected framework version");
 check(version.mandatory_git === false && version.mandatory_programming_runtime === false, "Required runtime unexpectedly configured");
 const sync=JSON.parse(read("agent-files/config/sync.json"));
 check(sync.enabled === false && sync.status === "not_configured", "Bundled Git mirror must default off");
@@ -65,9 +65,11 @@ for(const [name,doc] of Object.entries(by))walk(name,doc);
 
 for(const n of ["research-starter","periodic-review-example"]){
  const t=read("templates/"+n+"/template.yaml");
- check(/^schema_version: "1\.0\.0"/m.test(t) && t.includes("template_id: "+n) && t.includes("graph:"),
+ check(/^schema_version:\s*[\x27"]?1\.0\.0[\x27"]?\s*$/m.test(t) && t.includes("template_id: "+n) && t.includes("graph:"),
   "Bundled YAML lacks required structural markers: "+n);
 }
+// The dev repository includes a synthetic practice instance; clean ZIPs deliberately don't.
+if (fs.existsSync(path.join(root,"agent-files/instances/demo-local-research/instance.json"))) {
 const base="agent-files/instances/demo-local-research/";
 const records=["instance.json","template-lock.json","graph-revisions/g0001.yaml","runs/run-001/run.json",
  "runs/run-001/events.jsonl","runs/run-001/state.json","runs/run-001/handoff.json",
@@ -96,6 +98,12 @@ check(state.run_status==="CREATED" && state.tasks["define-scope"]?.status==="REA
 check(Object.values(state.tasks).every(x=>x.attempts===0) && events.every(x=>x.type!=="task_completed"),
  "Practice run must not claim any executed tasks");
 check(handoff.ready.includes("define-scope") && !handoff.pending_approvals?.length, "Handoff disagrees with safe starter");
+
+console.log("PASS: dev-only pinned synthetic practice run (not distributed).");
+} else {
+  check(fs.existsSync(path.join(root,"agent-files/instances")), "Clean install needs writable instances directory");
+  console.log("PASS: clean standalone release excludes seeded user runs.");
+}
 console.log("PASS: "+checks+" read-only structural checks, "+schemas.length+" schemas, "+refs+" local $ref links.");
-console.log("PASS: protected scaffold and user workspace, pinned practice example, no fake completed work.");
+console.log("PASS: protected scaffold and user-owned workspace; no live effects claimed.");
 console.log("NOT TESTED: full YAML/JSON Schema validation, graph engine, provider APIs, distributed locks or scheduler.");

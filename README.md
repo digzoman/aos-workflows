@@ -2,9 +2,9 @@
 
 AOS-W is a planned portable, file-based framework for repeatable, auditable AI-agent workflows. It is designed for one agent on a local or persistent cloud filesystem, with optional Git synchronization and multi-agent coordination. No Git installation, dedicated MCP server, database, Python runtime, or scheduler is required for the standalone design.
 
-> **Status: first portable scaffold implemented (Prompt 09), manually operated only.** [Start with the self-contained scaffold](scaffold/aos-w/README.md). Templates, 16 draft schemas, instructions and a safe sample run are present. No automatic workflow engine, distributed lock or scheduler has been implemented.
+> **Status: portable AOS-W 0.6.0 scaffold and optional helper tooling.** [Read the standalone quick start](docs/installation/QUICKSTART.md) or [explore the scaffold](scaffold/aos-w/README.md). The portable release ships **20 draft schemas**, instructions, templates and clean starter data; automatic workflow dispatch, a live scheduler and production distributed locking are not implemented.
 
-## Planned distribution
+## Downloadable distribution and optional tools
 
 The installable directory is [scaffold/aos-w/](scaffold/aos-w/). Copy it from the repository's ZIP into any persistent local/cloud folder, or use the optional packaging script to create a scaffold-only ZIP. It works manually without a Git checkout.
 
@@ -50,3 +50,7 @@ The [manual state/recovery protocol](scaffold/aos-w/references/STATE-AND-RECOVER
 ## Prompt 12 — governance (0.4.0)
 
 The [portable manual governance protocol](scaffold/aos-w/references/PROVENANCE-QUALITY-PERMISSIONS.md) and [optional local checker](tools/governance/README.md) now support four-field provenance, advisory claims/handoffs, deterministic/independent AI/human/permitted self-review, structured corrections, explicit resource and budget permissions, expiry and revocation. **File records are not authenticated host permission; no provider operations occur.** [Conformance report](temp/tests/PROMPT-12-GOVERNANCE-CONFORMANCE.md).
+
+## Prompt 14: tested clean ZIP and upgrades (0.6.0)
+
+The [installation guide](docs/installation/QUICKSTART.md) and [standalone manual guide](scaffold/aos-w/references/INSTALL.md) describe the clean downloadable `aos-w-portable-0.6.0.zip`. [GitHub Actions](.github/workflows/aosw-portable.yml) builds, verifies and uploads an independent ZIP; publication as a preview release is best-effort and **must be verified separately**. The [optional maintainer packager](scripts/aosw-distribution.py) creates SHA-256-verified allowlisted ZIPs, installs into arbitrary working directories and stages upgrades that preserve existing `agent-files/` byte for byte, with a rollback backup. The [optional workflow quickstarter](scripts/aosw-ops.py) discovers templates, inspects saved work (advisory) and initializes a pinned, CREATED run with zero provider effects. **108 local tests passed (18 new + 90 regression)**. This is still a file-based/manual core with no mandatory scripting runtime or Git. See [conformance report](temp/tests/PROMPT-14-DISTRIBUTION.md).

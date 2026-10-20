@@ -1,17 +1,12 @@
 #!/bin/sh
-# Optional packaging helper. The scaffold itself needs no shell, Git or runtime.
-# Run at the DEVELOPMENT repository root: sh scripts/package-scaffold.sh [output.zip]
+# Optional safe maintainer package wrapper. The downloaded aos-w core needs NO script.
 set -eu
-OUT="${1:-aos-w-portable.zip}"
 if [ ! -f "scaffold/aos-w/VERSION.json" ]; then
-  echo "Run this from the digzoman/aos-workflows repository root." >&2
-  exit 1
-fi
-if command -v zip >/dev/null 2>&1; then
-  cd scaffold
-  zip -q -r "../$OUT" aos-w
-  echo "Created ${OUT}"
-else
-  echo "The optional zip utility is not installed. Download the repository ZIP and copy scaffold/aos-w/ instead." >&2
+  echo "Run from development repository root." >&2
   exit 2
 fi
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "Safe distribution packaging requires optional Python 3; use GitHub Actions artifact instead." >&2
+  exit 2
+fi
+exec python3 scripts/aosw-distribution.py build scaffold/aos-w "${1:-dist/aos-w-portable-0.6.0.zip}"

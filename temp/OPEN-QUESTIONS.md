@@ -124,3 +124,12 @@ Open questions are not blockers for Prompt 02 research unless explicitly noted.
 93. Verify clock skew policy and lease renewal; expiration alone must never authorize takeover.
 94. Multi-file transactional recovery across local event journal, claim ref and synced Git branch remains future work.
 95. Confirm hosted service supports namespaced claim branches and explicit expected-old-SHA lease before enabling shared mode.
+
+## Prompt 14 distribution follow-ups
+
+96. Confirm actual GitHub Actions conformance workflow result, ZIP artifact URL/retention, and optional versioned prerelease asset publication; code authoring alone does not prove asset exists.
+97. Hosted cloud filesystem upgrade rename/fsync guarantees remain environment-specific, and backup contains user-private data requiring protection/removal by user.
+98. Schema-major migrations are deliberately blocked, not automatically converted. Define safe migration/rollback before next major release.
+99. No source-level secret scanner guarantees public binary assets contain no private data; packager uses strict safe file shape allowlist and blocks all unknown agent-files user data. Review public master/template content before release.
+100. Optional template initializer supports pinned master YAML. Custom template overlay resolution stays with composition/manual protocol and current trust rules; never silently follow updated master HEAD for existing runs.
+101. Optional quick status is advisory (event sequencing only), not SHA256/reviewer/permission verification; verified recovery needs the state/governance routines.

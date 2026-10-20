@@ -17,3 +17,5 @@ These documents are part of the **protected** scaffold. Put project-specific var
 - [PROVENANCE-QUALITY-PERMISSIONS.md](PROVENANCE-QUALITY-PERMISSIONS.md), v0.4.0 identity, advisory claims, version-bound reviews, remediation, scoped approvals and handoffs.
 
 - [GIT-SYNC-AND-COORDINATION.md](GIT-SYNC-AND-COORDINATION.md), v0.5.0 optional local/Git/multiagent modes, remote refresh, explicit Git ref CAS, LFS limitations, offline recovery and safe handoffs.
+
+- [INSTALL.md](INSTALL.md), clean standalone ZIP installation, no-script quick start and upgrades preserving agent-files.

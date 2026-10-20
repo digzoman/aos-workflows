@@ -132,3 +132,13 @@ Future sessions should append substantive events with changed files, test eviden
 - Added three-mode configuration, observed sync-state, two Draft 2020-12 JSON schemas (20 total), portable manual rules, ADR-014, sanitized fixtures and test evidence.
 - Provisional preferred coordinator is Git ref CAS, subject to hosted GitHub branch/ref, race and network testing; no real GitHub Git transport (DNS unresolved) or provider side effects.
 - Next Prompt 14: packaging and upgrade preservation, schema validation and optional-host readiness testing.
+
+## 2026-10-20. Prompt 14 — optional helpers, standalone distribution and safe upgrades
+
+- Re-read durable Prompt 13 Git/agent-files implementation, preserved 0.5.0 manual portability and current GitHub main.
+- Replaced the old unrestricted `zip -r` packaging behavior with optional, stdlib-only `scripts/aosw-distribution.py`: strict source allowlist, nonsecret clean agent-files seed, deterministic ZIP, SHA-256 manifest, zip-slip/duplicate/symlink and size checks, staged install and rollback-preserving upgrade. Updated shell wrapper to call safe builder; no silent raw user-folder ZIP.
+- Added optional `scripts/aosw-ops.py` for template/instance discovery, advisory status, one-off safe run creation from a pinned master YAML with optional PyYAML, four-field provenance, initial SHA256-chained event and clean handoff. The tool never executes tasks/Meta/CRM actions and cannot authenticate owners.
+- Added independent `.github/workflows/aosw-portable.yml` to execute regression suite, produce/verify `aos-w-portable-0.6.0.zip`, install into arbitrary working folder, create an initialized workflow and upgrade preserving its user artifact, upload Actions artifact and attempt optional preview release asset. Hosted execution and asset status must be independently verified after commit.
+- Shipped `scaffold/aos-w/references/INSTALL.md` plus development quickstart and updated README/version/docs. The clean ZIP omits the repository's synthetic demo run and custom overlay, but retains empty config/instance directories and protected docs/schema/master/skill definitions.
+- **18** new local tests and **90** existing regression tests PASS (**108/108**). Also created an instance from the actual previous `research-starter` YAML and replayed with Prompt 11 `RunStore.verified()` without any prior chat context.
+- No automatic scheduler, always-on engine, external provider actions or production distributed claim/authorization system; retain Git ref CAS as provisional for hosted verification. Prompt 15 marketing templates next.
