@@ -154,21 +154,21 @@ def main():
     # Manual cross-run join enforcement. Core graph READY is only an advisory
     # listing; this gate must be evaluated before synthesis.
     analysis=(
-       "# Bucket 9 competitor evaluation, public websites as of 2026-10-20\\n\\n"
+       "# Bucket 9 competitor evaluation, public websites as of 2026-10-20\n\n"
        "Coaches and consultants. Tadka advertises a self-serve creative system, "
        "Oak Marketing an AI assisted ads framework and The Ads Girl consulting and managed ads. "
-       "This is the most direct pilot buyer for a beginner toolkit, but actual demand is unmeasured.\\n\\n"
+       "This is the most direct pilot buyer for a beginner toolkit, but actual demand is unmeasured.\n\n"
        "Agency owners. Madgicx and AdCreative.ai sell established tools. "
-       "Likely higher operator literacy and repeat volume, but the toolkit needs clear differentiation and workflow integration.\\n\\n"
+       "Likely higher operator literacy and repeat volume, but the toolkit needs clear differentiation and workflow integration.\n\n"
        "Remodelers. V Easy, Syntex and NorthVale primarily offer done-for-you lead generation. "
-       "High-value inquiries and available imagery are attractive, but a self-managed 47 dollar toolkit has unproven fit.\\n\\n"
+       "High-value inquiries and available imagery are attractive, but a self-managed 47 dollar toolkit has unproven fit.\n\n"
        "Ranking is a test hypothesis, not statistical scoring. Evidence confidence is low to moderate. "
        "Eight first party supplier webpages were observed, zero active Meta ad cards were verified. "
-       "Business results and independent customer demand are not proven.\\n"
+       "Business results and independent customer demand are not proven.\n"
     )
     (out/"OPPORTUNITY-EVALUATION.md").write_text(analysis)
-    finish(p,"synthesis","# Accepted exact-hash child research\\n"+json.dumps(evidence,indent=2)+
-      "\\n"+analysis)
+    finish(p,"synthesis","# Accepted exact-hash child research\n"+json.dumps(evidence,indent=2)+
+      "\n"+analysis)
     finish(p,"offer","# Ampgent proposed offer\n$47 AI starter toolkit from historical Bucket 9 concept.\nHypothesis only, deliverability and current price not owner reverified.")
     finish(p,"copy","# PROPOSED B9 C01 COPY\nPrimary. Put AI to work on your Facebook and Instagram ad creatives and campaign planning. Explore our guided toolkit for coaches and consultants. Message us for details.\nHeadline. AI Ad Creatives and Campaigns\nDescription. Plan and create with AI\nCTA. SEND MESSAGE.")
     p.start("crm",PRODUCER)
