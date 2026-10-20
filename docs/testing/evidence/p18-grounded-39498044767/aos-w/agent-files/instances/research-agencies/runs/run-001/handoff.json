@@ -1,0 +1,28 @@
+{
+  "active": [],
+  "blocked": [],
+  "checkpoint_id": "checkpoint-000007",
+  "completed": [
+    "collect"
+  ],
+  "generated_at": "2026-10-20T21:09:30Z",
+  "graph_revision": "g0001",
+  "last_event_digest": "b1a1004b09ac2e7cb9da494ccfd71850460c86ee6b5f0687c161ba6e77ccfe8b",
+  "last_event_seq": 8,
+  "next_action": "Inspect eligible work and verify untrusted context; no automatic dispatch",
+  "owners": {},
+  "pending_approvals": [],
+  "pending_provider_reconciliations": [],
+  "prepared_by": {
+    "agent": "IndependentQC",
+    "instance": "p18-b",
+    "platform": "separate-process",
+    "role": "reviewer"
+  },
+  "ready": [],
+  "run_id": "run-001",
+  "run_status": "COMPLETED",
+  "schema_version": "1.0.0",
+  "source_references": [],
+  "sync_status": "local_only"
+}

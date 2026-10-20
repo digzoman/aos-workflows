@@ -1,0 +1,27 @@
+{
+  "buyer": "Coaches and consultants",
+  "evidence": [
+    {
+      "ref": "C1",
+      "seller": "Tadka",
+      "offer_kind": "self_serve_AI_creatives",
+      "observed": "AI creative variants for coaches and course creators, with some Meta publishing capability"
+    },
+    {
+      "ref": "C2",
+      "url": "https://oakmarketingqa.com/meta-ads-for-coaches",
+      "seller": "Oak Marketing",
+      "offer_kind": "training_consulting_managed",
+      "observed": "AI-assisted Meta ads framework for coaches, with webinar and managed service options"
+    },
+    {
+      "ref": "C3",
+      "url": "https://theadsgirlco.com/services",
+      "seller": "The Ads Girl",
+      "offer_kind": "consulting_managed",
+      "observed": "Meta ads consulting and done-for-you account management for coaches and consultants"
+    }
+  ],
+  "evidence_class": "FIRST_PARTY_OFFER_PAGES_NOT_AD_CARDS",
+  "hypothesis": "A self-managed entry toolkit could fit; actual willingness to purchase remains unknown"
+}

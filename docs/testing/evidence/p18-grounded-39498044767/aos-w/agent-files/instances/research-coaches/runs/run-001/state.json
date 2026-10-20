@@ -1,0 +1,86 @@
+{
+  "active_steps": [],
+  "audit_warnings": [],
+  "blocked_reasons": [],
+  "checkpoints": [
+    "checkpoint-000012"
+  ],
+  "completed_steps": [
+    "collect"
+  ],
+  "eligible_tasks": [],
+  "evidence_refs": [
+    {
+      "artifact_id": "collect-record",
+      "locator": "artifacts/collect.json",
+      "revision": "v2",
+      "sha256": "e5f0160d0941b588f63aedcc1c5e2f359f6559d4eb59d4b0b5dac0432e0b9618",
+      "task_id": "collect"
+    }
+  ],
+  "governance": {
+    "claims": {},
+    "handoff": null,
+    "permissions": {},
+    "remediation": {},
+    "reviews": {}
+  },
+  "graph_revision": "g0001",
+  "integrity_level": "verified",
+  "last_event_digest": "8335d3b669126be7162e4ccb43097e3ee7a76e95064d8a0d28469112de3394da",
+  "last_event_seq": 13,
+  "operations": {},
+  "owners": {},
+  "paused": false,
+  "pending_provider_operations": [],
+  "run_id": "run-001",
+  "run_status": "COMPLETED",
+  "schema_version": "1.0.0",
+  "state_revision": 13,
+  "tasks": {
+    "collect": {
+      "attempts": 2,
+      "evidence": [
+        {
+          "artifact_id": "collect-record",
+          "locator": "artifacts/collect.json",
+          "revision": "v2",
+          "sha256": "e5f0160d0941b588f63aedcc1c5e2f359f6559d4eb59d4b0b5dac0432e0b9618"
+        }
+      ],
+      "graph_revision": "g0001",
+      "last_attempt_id": "attempt-0002",
+      "last_attempt_owner": {
+        "agent": "ColdResume",
+        "instance": "p18-c",
+        "platform": "file-replay",
+        "role": "worker"
+      },
+      "last_error": {
+        "class": "review_revise",
+        "correction": "missing_url"
+      },
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": {
+        "artifacts": [
+          {
+            "artifact_id": "collect-record",
+            "locator": "artifacts/collect.json",
+            "revision": "v2",
+            "sha256": "e5f0160d0941b588f63aedcc1c5e2f359f6559d4eb59d4b0b5dac0432e0b9618"
+          }
+        ],
+        "review_id": "p18-collect-accepted",
+        "review_pid": 2131,
+        "reviewer_kind": "separate_deterministic_process",
+        "rubric_version": "p18-website-and-pixel-v1",
+        "verdict": "PASS"
+      },
+      "started_at": "2026-10-20T21:09:30Z",
+      "status": "COMPLETE"
+    }
+  },
+  "updated_at": "2026-10-20T21:09:30Z"
+}

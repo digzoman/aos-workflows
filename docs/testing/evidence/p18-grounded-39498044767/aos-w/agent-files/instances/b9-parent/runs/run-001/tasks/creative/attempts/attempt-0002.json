@@ -1,0 +1,36 @@
+{
+  "actor": {
+    "agent": "ColdResume",
+    "instance": "p18-c",
+    "platform": "file-replay",
+    "role": "worker"
+  },
+  "attempt_id": "attempt-0002",
+  "extensions": {
+    "aosw": {
+      "attempt_count": 2,
+      "current_task_status": "COMPLETE",
+      "derived_from_event_seq": 57,
+      "error": {
+        "class": "review_revise",
+        "correction": "missing_correct_CTA"
+      },
+      "retry": null
+    }
+  },
+  "graph_revision": "g0001",
+  "input_refs": [],
+  "output_refs": [
+    {
+      "artifact_id": "creative-record",
+      "locator": "artifacts/creative.png",
+      "revision": "v2",
+      "sha256": "67be5fbe5f15375aa6090ac4f28e2260c7b1cdfecca2f872d85c7e4014528456"
+    }
+  ],
+  "run_id": "run-001",
+  "schema_version": "1.0.0",
+  "started_at": "2026-10-20T21:09:31Z",
+  "status": "succeeded",
+  "task_id": "creative"
+}

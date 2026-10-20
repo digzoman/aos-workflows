@@ -1,0 +1,52 @@
+{
+  "blocked_tasks": [],
+  "checkpoint_id": "checkpoint-000010",
+  "completed_tasks": [
+    "plan",
+    "fanout"
+  ],
+  "created_at": "2026-10-20T21:09:30Z",
+  "created_by": {
+    "agent": "AmpgentResearch",
+    "instance": "p18-a",
+    "platform": "github-actions",
+    "role": "producer"
+  },
+  "event_digest": "4ae57f3fc4ac0ecb795164da15266cd704e57bcaa21c2f088ba242882552a886",
+  "event_seq": 10,
+  "graph_revision": "g0001",
+  "integrity_level": "verified",
+  "next_eligible_tasks": [
+    "synthesis"
+  ],
+  "pending_tasks": [
+    "synthesis",
+    "offer",
+    "copy",
+    "creative",
+    "crm",
+    "landing",
+    "tracking",
+    "prelaunch",
+    "launch-permit"
+  ],
+  "provider_unknown_operations": [],
+  "run_id": "run-001",
+  "schema_version": "1.0.0",
+  "state_revision": 10,
+  "sync_status": "local_only",
+  "verified_artifacts": [
+    {
+      "artifact_id": "plan-record",
+      "locator": "artifacts/plan.md",
+      "revision": "v1",
+      "sha256": "892d58c64c352361ec42b03cb1e2f3b2c6b92747d66545e7aee872df1fe7f7e7"
+    },
+    {
+      "artifact_id": "fanout-record",
+      "locator": "artifacts/fanout.md",
+      "revision": "v1",
+      "sha256": "2639c9ce6fc4ce79877c789f6e479aee285f3c59c199a9ff7cf693074f20e22f"
+    }
+  ]
+}

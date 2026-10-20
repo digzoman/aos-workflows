@@ -1,0 +1,21 @@
+{
+  "buyer": "Marketing agency owners",
+  "evidence": [
+    {
+      "ref": "A1",
+      "url": "https://academy.madgicx.com/lessons/what-is-madgicx",
+      "seller": "Madgicx",
+      "offer_kind": "self_serve_platform",
+      "observed": "AI creative, optimization and advertising account management with agency use cases"
+    },
+    {
+      "ref": "A2",
+      "url": "https://www.adcreative.ai/",
+      "seller": "AdCreative.ai",
+      "offer_kind": "self_serve_AI_creatives",
+      "observed": "AI creative production and advertising asset generation for small businesses and agencies"
+    }
+  ],
+  "evidence_class": "FIRST_PARTY_OFFER_PAGES_NOT_AD_CARDS",
+  "hypothesis": "Experienced users may demand deeper campaign integrations and support than an entry kit"
+}

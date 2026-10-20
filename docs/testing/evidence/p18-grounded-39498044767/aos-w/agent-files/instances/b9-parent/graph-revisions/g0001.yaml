@@ -1,0 +1,191 @@
+graph:
+  nodes:
+  - contract:
+      done_when: Exact-hash artifact and scoped QC verified
+    id: plan
+    inputs: []
+    instructions: No external writes or account effects
+    kind: task
+    needs: []
+    outputs:
+    - artifact_id: plan-record
+      path: artifacts/plan.md
+      required: true
+    quality:
+      gates: []
+    required_actions:
+    - read
+    - write_local
+  - contract:
+      done_when: Exact-hash artifact and scoped QC verified
+    id: fanout
+    inputs: []
+    instructions: No external writes or account effects
+    kind: task
+    needs:
+    - plan
+    outputs:
+    - artifact_id: fanout-record
+      path: artifacts/fanout.md
+      required: true
+    quality:
+      gates: []
+    required_actions:
+    - read
+    - write_local
+  - contract:
+      done_when: Exact-hash artifact and scoped QC verified
+    id: synthesis
+    inputs: []
+    instructions: No external writes or account effects
+    kind: task
+    needs:
+    - fanout
+    outputs:
+    - artifact_id: synthesis-record
+      path: artifacts/synthesis.md
+      required: true
+    quality:
+      gates: []
+    required_actions:
+    - read
+    - write_local
+  - contract:
+      done_when: Exact-hash artifact and scoped QC verified
+    id: offer
+    inputs: []
+    instructions: No external writes or account effects
+    kind: task
+    needs:
+    - synthesis
+    outputs:
+    - artifact_id: offer-record
+      path: artifacts/offer.md
+      required: true
+    quality:
+      gates: []
+    required_actions:
+    - read
+    - write_local
+  - contract:
+      done_when: Exact-hash artifact and scoped QC verified
+    id: copy
+    inputs: []
+    instructions: No external writes or account effects
+    kind: task
+    needs:
+    - offer
+    outputs:
+    - artifact_id: copy-record
+      path: artifacts/copy.md
+      required: true
+    quality:
+      gates: []
+    required_actions:
+    - read
+    - write_local
+  - contract:
+      done_when: Exact-hash artifact and scoped QC verified
+    id: creative
+    inputs: []
+    instructions: No external writes or account effects
+    kind: task
+    needs:
+    - copy
+    outputs:
+    - artifact_id: creative-record
+      path: artifacts/creative.png
+      required: true
+    quality:
+      gates:
+      - independent-check
+    required_actions:
+    - read
+    - write_local
+  - contract:
+      done_when: Exact-hash artifact and scoped QC verified
+    id: crm
+    inputs: []
+    instructions: No external writes or account effects
+    kind: task
+    needs:
+    - offer
+    outputs:
+    - artifact_id: crm-record
+      path: artifacts/crm.md
+      required: true
+    quality:
+      gates: []
+    required_actions:
+    - read
+    - write_local
+  - contract:
+      done_when: Exact-hash artifact and scoped QC verified
+    id: landing
+    inputs: []
+    instructions: No external writes or account effects
+    kind: task
+    needs:
+    - offer
+    outputs:
+    - artifact_id: landing-record
+      path: artifacts/landing.md
+      required: true
+    quality:
+      gates: []
+    required_actions:
+    - read
+    - write_local
+  - contract:
+      done_when: Exact-hash artifact and scoped QC verified
+    id: tracking
+    inputs: []
+    instructions: No external writes or account effects
+    kind: task
+    needs:
+    - crm
+    - landing
+    outputs:
+    - artifact_id: tracking-record
+      path: artifacts/tracking.md
+      required: true
+    quality:
+      gates: []
+    required_actions:
+    - read
+    - write_local
+  - contract:
+      done_when: Exact-hash artifact and scoped QC verified
+    id: prelaunch
+    inputs: []
+    instructions: No external writes or account effects
+    kind: task
+    needs:
+    - creative
+    - tracking
+    outputs:
+    - artifact_id: prelaunch-record
+      path: artifacts/prelaunch.md
+      required: true
+    quality:
+      gates: []
+    required_actions:
+    - read
+    - write_local
+  - contract:
+      done_when: Exact-hash artifact and scoped QC verified
+    id: launch-permit
+    inputs: []
+    instructions: No external writes or account effects
+    kind: task
+    needs:
+    - prelaunch
+    outputs:
+    - artifact_id: launch-permit-record
+      path: artifacts/launch-permit.md
+      required: true
+    quality:
+      gates: []
+    required_actions:
+    - read
+    - write_local

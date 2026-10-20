@@ -1,0 +1,33 @@
+{
+  "actor": {
+    "agent": "AmpgentResearch",
+    "instance": "p18-a",
+    "platform": "github-actions",
+    "role": "producer"
+  },
+  "attempt_id": "attempt-0001",
+  "extensions": {
+    "aosw": {
+      "attempt_count": 1,
+      "current_task_status": "COMPLETE",
+      "derived_from_event_seq": 8,
+      "error": null,
+      "retry": null
+    }
+  },
+  "graph_revision": "g0001",
+  "input_refs": [],
+  "output_refs": [
+    {
+      "artifact_id": "collect-record",
+      "locator": "artifacts/collect.json",
+      "revision": "v1",
+      "sha256": "3f4dd3cbb612c66f242ede6122ba29c899f56a1375703c3db3cc3c7242a1931a"
+    }
+  ],
+  "run_id": "run-001",
+  "schema_version": "1.0.0",
+  "started_at": "2026-10-20T21:09:30Z",
+  "status": "succeeded",
+  "task_id": "collect"
+}

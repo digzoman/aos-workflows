@@ -1,0 +1,17 @@
+{
+  "capabilities": {},
+  "created_at": "2026-10-20T21:09:30Z",
+  "created_by": {
+    "agent": "AmpgentResearch",
+    "instance": "p18-a",
+    "platform": "github-actions",
+    "role": "producer"
+  },
+  "graph_digest": "b21ba0b6d5049b9fe3cea0920d519844b0e1c2925dd7fd9eb65e08df6c1fd18b",
+  "graph_revision": "g0001",
+  "instance_id": "b9-parent",
+  "mode": "standalone_single_writer",
+  "run_id": "run-001",
+  "schema_version": "1.0.0",
+  "trigger_kind": "manual"
+}

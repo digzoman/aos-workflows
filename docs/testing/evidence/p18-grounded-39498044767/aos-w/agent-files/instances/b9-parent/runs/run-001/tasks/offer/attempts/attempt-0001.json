@@ -1,0 +1,33 @@
+{
+  "actor": {
+    "agent": "AmpgentResearch",
+    "instance": "p18-a",
+    "platform": "github-actions",
+    "role": "producer"
+  },
+  "attempt_id": "attempt-0001",
+  "extensions": {
+    "aosw": {
+      "attempt_count": 1,
+      "current_task_status": "COMPLETE",
+      "derived_from_event_seq": 57,
+      "error": null,
+      "retry": null
+    }
+  },
+  "graph_revision": "g0001",
+  "input_refs": [],
+  "output_refs": [
+    {
+      "artifact_id": "offer-record",
+      "locator": "artifacts/offer.md",
+      "revision": "v1",
+      "sha256": "98d36f5f17e692aba34a0748adec7028b9ee19c5abcead128017dc259a36418d"
+    }
+  ],
+  "run_id": "run-001",
+  "schema_version": "1.0.0",
+  "started_at": "2026-10-20T21:09:30Z",
+  "status": "succeeded",
+  "task_id": "offer"
+}
