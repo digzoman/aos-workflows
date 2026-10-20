@@ -84,3 +84,7 @@ Every proposed template should eventually declare accepted inputs, required skil
 Fourteen additional **design-only** creative templates C01–C14 are detailed in [CREATIVE-CATALOG.md](CREATIVE-CATALOG.md). These cover source assignment, offer truth, semantic pre-image approval, Meta copy, art direction, generation, deterministic branding, placement variants, export checks, independent visual/semantic QA, peer bakeoff, targeted correction, owner selection and provider handoff. See [CREATIVE-COMPOSITION-EXAMPLES.md](CREATIVE-COMPOSITION-EXAMPLES.md).
 
 No template implementation or workflow engine was created during Prompt 04.
+
+## Prompt 05 implementation modules
+
+Fifteen further **design-only** modules M01–M15 now appear in [OPERATIONS-CATALOG.md](OPERATIONS-CATALOG.md), with five [operations workflow composition sketches](OPERATIONS-COMPOSITIONS.md). They cover Meta preflight, graph planning, audience, creatives, messaging, CRM, website, tracking, paused staging, independent QA, separate launch permission, provider reconciliation, insights, controlled iteration and cross-provider recovery. They remain proposals pending Prompt 07 PRD approval.

@@ -1,8 +1,8 @@
 # AOS-W V1 Work Plan
 
 Updated: 2026-10-20
-Current phase: Prompt 04, advertising creative production research completed
-Next phase: Prompt 05, campaign configuration, launch and monitoring reverse engineering
+Current phase: Prompt 05, Meta campaign setup, CRM, tracking, activation and monitoring research completed
+Next phase: Prompt 06, A Rep/LangGraph/skills/locking/scheduling technical architecture research
 No workflow engine implementation authorized before PRD approval.
 
 ## Research and design stages
@@ -12,7 +12,7 @@ No workflow engine implementation authorized before PRD approval.
 - [x] Prompt 02. Indexed accessible Ampgent conversations and inspected restricted research, creative, collaboration, staging, launch, and website artifacts, with sanitization and evidence limitations documented.
 - [x] Prompt 03. Reconstructed 34-advertiser / 96-keyword queue workflow and 15-run vertical portfolio, scoring, source evidence, retry and independent QC; candidate research template specifications committed.
 - [x] Prompt 04. Reconstructed B1–B9 creative strategy, copy, semantic gates, image generation and repair, exact logo placement, format variants, QA, Fred/Muse critique and owner selection; 14 candidate creative templates documented.
-- [ ] Prompt 05. Reverse engineer Meta campaign setup, tracking, CRM, prelaunch QA, activation, and optimization.
+- [x] Prompt 05. Reconstructed Meta campaign/adset/ad architecture and targeted updates, provider state, paused staging, cross-system CRM/website/Pixel/CAPI gating, owner-controlled launch, rate limits, dedup/consent risks, and reporting; 15 candidate operations modules and composition designs documented.
 - [ ] Prompt 06. Review A Rep, LangGraph, Agent Skills, locking and portability tradeoffs; include scheduling backend interfaces, due-trigger behavior, skill packaging and skill resolution/trust.
 - [ ] Prompt 07. Produce enhanced PRD at `docs/specs/prd/PRD.md`, explicitly covering non-repeating vs recurring schedules, on-demand launch, missed/overlapping schedules, optional schedule triggering, template/instance skill bundles, lazy skill resolution, and remote skill security; obtain explicit human review and approval.
 

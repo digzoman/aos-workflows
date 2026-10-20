@@ -1,33 +1,37 @@
 # Progress snapshot
 
-Updated 2026-10-20
-Phase: Prompt 04, creative production reverse engineering
-Status: **COMPLETE**, research and candidate designs only. Next Prompt 05.
+Date: 2026-10-20
+Phase: Prompt 05, campaign setup, launch, tracking and optimization
+Status: COMPLETED as research/design stage. Next Prompt 06.
 
-## Already completed
+## Prior stages
 
-- Prompt 01/01b. Public repository, tracked decisions, portable scaffold placeholder, recurring/schedule/skill requirements.
-- Prompt 02. Sanitized Ampgent source history index and prior workflow failure cases.
-- Prompt 03. Source-ad and vertical research execution patterns, rubrics, evidence gates and candidate research templates.
+- Prompt 01/01b initial repository and decisions, optional Git, scheduling and skills.
+- Prompt 02 Ampgent historical index and observed failure patterns.
+- Prompt 03 competitor research queues, portfolio workflows, QC and template candidates.
+- Prompt 04 B1–B9 creative pipeline and version-aware quality template candidates.
 
-## Prompt 04 results
+## Prompt 05 completed
 
-- Read current operating rules, approved design decisions, handoff, plan and existing research models.
-- Inspected the private Max advertising creative documentation, B1–B5 upgrade and QA, B6/B7 creative bakeoff and Fred/Muse reciprocal reviews, B6.3 claims, B8 VA assets, and B9 coach/consultant iterative briefs and approval/staging records.
-- Indexed 31 directly inspected documents R51–R81 in `temp/research/creative-production/SOURCE-INDEX-04.md`. Binary assets were identified through directory listings, **not independently pixel-rendered in this research stage**.
-- Reconstructed end-to-end stages, source evidence through semantic/claim/copy approval, art direction, image generation, exact branding, safe variants, export and post-upload QC, peer review, human approval and separately authorized Meta staging.
-- Identified version-specific failure cases, wrong-logo subline, mis-sized imagery, cropped square placement, source-semantic drift, text overlay mismatch, image-tool input limitation, Meta preview gaps, and superseded owner-selected B9 assets.
-- Produced a granular proposed gate matrix with deterministic versus AI/visual versus human review responsibilities and branch-specific retry logic.
-- Documented just-in-time skill use including existing optional `add-ampgent-logo` helper, while maintaining no mandatory Python or Git for the scaffold.
-- Added 14 candidate creative templates C01–C14 and four non-executable creative workflow composition examples.
-- All public repo notes are sanitized; private source docs/images and account-specific data remain in restricted original sources.
+- Read required AOS-W operating rules, design, work plan and previous handoff.
+- Directly inspected relevant private Max Meta staging, audience, launch, B8/B9 creative/staging, website and HighLevel documentation, plus Fred issues and subsequent audit comments.
+- Examined an independent Oct 14 Pixel/CAPI audit and differentiated source-proven real booking events from probable duplicate Schedule counts, unknown Good Lead logic and incomplete GHL trigger verification.
+- Indexed 26 named directly inspected primary source files/issues as restricted pointers R82–R107 and labeled private conversation context as secondary.
+- Reconstructed stage-by-stage operations from approved source/permissions through Meta configuration, paused staging, prelaunch QA, owner activation, provider readback and read-only monitoring.
+- Formalized proposal for provider authority matrix, non-atomic side-effect compensation, idempotency, rate-limit recovery and distinguishing configured ACTIVE, effective ACTIVE, actual delivery, attributed and qualified leads.
+- Added 15 design-only operations template candidates, five compound workflows and PRD/test recommendations under temp/research/.
+- Kept historical statuses dated, including Oct 14 targeting superseded Oct 15, B9 paused staging preceding activation, old P-prefix not a reliable state, website source and deployment separation.
+- Sanitized every public document: no credential, contact, account or appointment IDs, raw internal emails/conversations, or actual confidential spend reports.
 
-## Deliberately not done
+## Not done
 
-- No workflow engine, executable template schema, image generation, actual visual re-evaluation, live ad account activity, or new customer-facing creative.
-- No cross-platform test execution or actual user approval for publishing.
-- No change to the approved AOS-W architecture; proposed new details await Prompt 07 PRD review.
+- No current live Meta/HighLevel/Firebase/API readback in Prompt 05 and no account changes.
+- No workflow engine, executable templates or schedule runner.
+- No verified current campaign performance; early prior-chat figures were not presented as current facts.
+- No new tracking events, CRM contacts, bookings, click-to-message tests or ad activation.
 
-## Next work, Prompt 05
+## Next step
 
-Read `temp/HANDOFF.md` and source references, then inspect actual Meta campaign/ad set/ad setup, messaging, destinations, geographies/budgets, tracking/CRM, launch and later monitoring. Verify staging versus actual provider write/read-back, especially failed/timed-out operations. Do not alter live accounts.
+Prompt 06, compare A Rep/Fred/Max plans and provenance, LangGraph graph/checkpoint/retry concepts, skills packages and just-in-time loading, portable file-only execution, optional host scheduling and Git LFS versus atomic task claims.
+
+Before acting, reread temp/OPERATING-RULES.md, DESIGN-DECISIONS.md, WORK-PLAN.md, PROGRESS.md, HANDOFF.md and the Prompt 05 research files.

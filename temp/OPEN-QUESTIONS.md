@@ -49,3 +49,16 @@ Open questions are not blockers for Prompt 02 research unless explicitly noted.
 33. How will a step-local optional logo skill resolve a pinned source/version and safe fallback without mandatory Python in AOS-W?
 34. How should GitHub asset persistence, Meta creative media mapping, actual placement previews, messaging and eventual publication be separate gate states?
 35. What is the scope of authorized automatic repair when it changes a headline, price, funding eligibility statement, official brand asset or owner-selected version?
+
+## Operations research decisions to resolve in PRD and runtime design
+
+36. Which provider-specific source-of-truth reads and external action adapters will be optional V1 capabilities, and what is the standalone file-only fallback?
+37. How to bind scoped launch authorization to exact child IDs, media/target revisions, permitted budget and excluded sibling campaigns without requiring Git?
+38. How to model write acceptance, provider configured/effective status, Meta review eligibility and actual insights as separate evidence dimensions?
+39. Which operations are idempotent by stable key versus need read-before-retry plus compensating work? What explicit emergency pause authority should exist?
+40. How should critical but incomplete CRM end-to-end messaging/tracking gates influence a conversations-optimized campaign launch, including documented human exception?
+41. How should channel attribution, booking Schedule browser/server dedup, Good Lead qualification and consent be represented without leaking sensitive customer data?
+42. How are provider API rate limits, unknown GHL definition scopes and ephemeral Meta preview URLs handled in durable checkpoints?
+43. Which measured/estimated reporting metrics, freshness windows and uncertainty flags belong in reusable recurring monitoring templates?
+44. When a parent campaign has held sibling adsets, what preflight prevents activating unapproved children?
+45. How should deployment authority distinguish a Max source build, Firebase DEV preview and subsequent production with explicit backup/rollback?

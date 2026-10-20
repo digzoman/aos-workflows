@@ -89,3 +89,7 @@ Thirty further directly inspected Max repository documents, R21–R50, are regis
 ## F. Prompt 04 creative production source expansion
 
 Thirty-one additional restricted Max documentation sources, R51–R81, are indexed in [creative-production/SOURCE-INDEX-04.md](creative-production/SOURCE-INDEX-04.md). New files document B1–B9 creative production, the canonical logo skill, image generation and correction, QA, approvals, asset versions and Meta staging boundaries. These notes do **not** imply current independent pixel inspection or production delivery verification.
+
+## G. Prompt 05 Meta operations, CRM, launch and tracking evidence
+
+Twenty-six additional directly inspected private repository/issue records R82–R107 are catalogued in [campaign-operations/SOURCE-INDEX-05.md](campaign-operations/SOURCE-INDEX-05.md). Staged and activated Meta state, rejected operations, adset geo/age revisions, HighLevel bot configuration/behavior distinction, Pixel/CAPI dedup uncertainty and website DEV/PROD release authority are described. These are historical document reads, not current live provider checks.

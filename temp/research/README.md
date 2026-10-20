@@ -29,3 +29,9 @@ Everything in candidate-templates remains proposed design input for PRD review, 
 The [creative-production directory](creative-production/SOURCE-INDEX-04.md) contains a sanitized primary source index R51–R81, [full process model](creative-production/CREATIVE-PRODUCTION-MODEL.md), [failure and correction cases](creative-production/FAILURES-REVISIONS-04.md), [granular QA/approval gates](creative-production/QA-GATES-AND-APPROVALS.md) and [artifact/skill lineage](creative-production/ASSET-LINEAGE-AND-SKILLS.md).
 
 Initial **non-executable** creative workflow specifications are [CREATIVE-CATALOG.md](candidate-templates/CREATIVE-CATALOG.md) and [CREATIVE-COMPOSITION-EXAMPLES.md](candidate-templates/CREATIVE-COMPOSITION-EXAMPLES.md). These require PRD and technical schema approval before development.
+
+## Prompt 05, campaign operations and monitoring
+
+See [campaign-operations/SOURCE-INDEX-05.md](campaign-operations/SOURCE-INDEX-05.md) for R82–R107 restricted primary sources and evidence tiers, [WORKFLOW-MODEL.md](campaign-operations/WORKFLOW-MODEL.md) for actual campaign/CRM/launch stages, [FAILURES-AND-AUTHORITY.md](campaign-operations/FAILURES-AND-AUTHORITY.md) for provider authority, duplicate/retry/reversal patterns, [CRM-TRACKING-LESSONS.md](campaign-operations/CRM-TRACKING-LESSONS.md) for Pixel/CAPI/consent/lead-source caveats and [PRD-RECOMMENDATIONS-05.md](campaign-operations/PRD-RECOMMENDATIONS-05.md) for prioritized architectural recommendations.
+
+Fifteen additional **non-executable** operations template contracts and five composition examples are under [candidate-templates/OPERATIONS-CATALOG.md](candidate-templates/OPERATIONS-CATALOG.md) and [OPERATIONS-COMPOSITIONS.md](candidate-templates/OPERATIONS-COMPOSITIONS.md). No live ad or CRM integrations were touched.

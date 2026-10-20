@@ -47,3 +47,12 @@ Future sessions should append substantive events with changed files, test eviden
 - Preserved important chronology such as B9 logo-free owner selection and later branded approved variants. Differentiated documented historical QA from a new direct image inspection, which was not performed here.
 - No executable engine, live creative generation, provider account modification or remote publish action.
 - Next Prompt 05, reverse engineer Meta configuration, launch, CRM and monitoring.
+
+## 2026-10-20. Prompt 05, historical Meta operations and tracking research
+
+- Read source Max Meta staging, launch, age/geo targeting and message field docs, B8/B9 QA, website source/DEV handoff and HighLevel bot audit.
+- Reviewed Fred issues 96,108,124,129,130,135,147 and relevant comments; read independent Oct 14 browser/server tracking analysis.
+- Created 26-source indexed reference set R82–R107 and sanitized operational workflow, source-of-truth/failure, CRM/consent lessons, operations template catalog and PRD recommendations.
+- Explicitly separated source-recorded historical provider actions from current live provider verification, which was not performed.
+- No Meta, CRM, GHL, website or external account edits, and no engine implementation.
+- Next Prompt 06 architecture/reliability research.
