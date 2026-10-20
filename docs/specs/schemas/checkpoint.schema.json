@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Durable checkpoint",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "checkpoint_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "graph_revision": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "event_seq": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "event_digest": {
+      "type": "string"
+    },
+    "state_revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "created_by": {
+      "$ref": "common.schema.json#/$defs/actor"
+    },
+    "integrity_level": {
+      "enum": [
+        "verified",
+        "advisory",
+        "unverified"
+      ]
+    },
+    "completed_tasks": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/id"
+      }
+    },
+    "pending_tasks": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/id"
+      }
+    },
+    "blocked_tasks": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/id"
+      }
+    },
+    "next_eligible_tasks": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/id"
+      }
+    },
+    "verified_artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/artifact"
+      }
+    },
+    "provider_unknown_operations": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/id"
+      }
+    },
+    "sync_status": {
+      "enum": [
+        "not_configured",
+        "local_only",
+        "pending",
+        "verified",
+        "conflict",
+        "unknown"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "checkpoint_id",
+    "run_id",
+    "graph_revision",
+    "event_seq",
+    "state_revision",
+    "created_at",
+    "created_by",
+    "integrity_level",
+    "completed_tasks",
+    "next_eligible_tasks"
+  ]
+}

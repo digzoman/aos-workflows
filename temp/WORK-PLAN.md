@@ -1,8 +1,8 @@
 # AOS-W V1 Work Plan
 
 Updated: 2026-10-20
-Current phase: Prompt 07, enhanced PRD draft committed for owner review
-Next phase: OWNER APPROVAL CHECKPOINT; Prompt 08 architecture/schema implementation remains BLOCKED
+Current phase: Prompt 08 technical architecture and file specifications drafted and committed
+Next phase: confirm formal PRD/spec approval before Prompt 09 scaffold implementation; no engine code yet
 No workflow engine implementation authorized before PRD approval.
 
 ## Research and design stages
@@ -16,9 +16,9 @@ No workflow engine implementation authorized before PRD approval.
 - [x] Prompt 06. Inspected A Rep/Fred/Max source conventions; researched current LangGraph, Agent Skills, Git LFS locks, Git worktrees and version-checked Git refs; documented portable versus host-enforced behavior, environments, architecture alternatives and eight proposed ADRs. Git locking winner deferred to empirical tests.
 - [ ] Prompt 07. **Draft and survey audit complete; owner approval PENDING.** Enhanced PRD at `docs/specs/prd/PRD.md`, supporting 16-question trace, decision register, acceptance matrix and approval checklist committed. Check this item only after explicit owner approval. No engine development yet.
 
-## Implementation stages, conditional on PRD approval
+## Implementation stages, conditional on PRD approval (Prompt 08 docs expressly requested; coding still conditional)
 
-- [ ] Prompt 08. Formal technical architecture and schemas, including trigger/schedule and skill reference/bundling definitions.
+- [x] Prompt 08. Technical design completed as documentation: protected scaffold layout, 16 JSON Schema designs, graph eligibility/composition/revisions, lifecycle/event/checkpoint/recovery, manual protocol, and five new PROPOSED ADRs under docs/specs/. No engine built and pending PRD approval record not altered.
 - [ ] Prompt 09. Build downloadable scaffold, protected framework files, writable `agent-files`.
 - [ ] Prompt 10. Template reuse, composition, dependencies, dynamic runs, non-repeating/scheduled trigger metadata, and ad hoc launch overrides.
 - [ ] Prompt 11. State, checkpoints, retries, recovery, and interruption semantics.

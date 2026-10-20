@@ -33,7 +33,7 @@ Start with [temp/OPERATING-RULES.md](temp/OPERATING-RULES.md) and [temp/HANDOFF.
 
 ## Roadmap
 
-Historical workflow and architecture research stages (Prompts 02–06) are complete, with sanitized results in tracked `temp/research/` and `temp/architecture/`. **The current step is owner review of the Prompt 07 enhanced PRD.** Prompt 08 implementation remains blocked until explicit approval. Draft architecture decision records are not yet approved.
+Historical workflow and architecture research stages (Prompts 02–06) are complete, with sanitized results in tracked `temp/research/` and `temp/architecture/`. **Prompt 08 technical design documents are now drafted** at [docs/specs/architecture/](docs/specs/architecture/), with [JSON Schema proposals](docs/specs/schemas/) and [additional proposed ADRs](docs/specs/adrs/). The PRD approval record remains pending. Actual Prompt 09 scaffold/engine implementation is blocked until explicit authorization. Draft architecture decision records are not yet approved.
 
 ## Licensing
 

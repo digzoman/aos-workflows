@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pinned template lock",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "instance_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "template_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 0
+    },
+    "origin": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pinned_snapshot_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "content_digest": {
+      "type": "string",
+      "minLength": 1
+    },
+    "graph_revision": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "resolved_at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "inheritance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "revision": {
+            "type": "string",
+            "minLength": 1
+          },
+          "digest": {
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "source",
+          "revision"
+        ]
+      }
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "instance_id",
+    "template_id",
+    "version",
+    "origin",
+    "pinned_snapshot_path",
+    "content_digest",
+    "graph_revision",
+    "resolved_at"
+  ]
+}

@@ -77,3 +77,14 @@ Open questions are not blockers for Prompt 02 research unless explicitly noted.
 55. Which exact manual/offline guarantees can reasonably be asserted in V1 and which require a verified runtime?
 56. How should AOS-W integrate with an existing A Rep plan-work without creating a second competing business-work plan?
 57. Need to reconcile public A Rep doc version mismatch CURRENT 1.5.0 versus main SKILL 1.5.1 when selecting an integration baseline. Installed Fred host remains unverified.
+
+## Prompt 08 final technical-design review gates
+
+58. PRD formal approval record remains pending though user requested Prompt 08. How should owner record explicit decision and selected ADR statuses before Prompt 09?
+59. Finalize proposed schema and file layout within agent-files after trial cold-start with independent agent; record any user-requested deviations, do not silently alter protocol.
+60. Verify JSON Schema with actual Draft 2020-12 validator and YAML-to-JSON parser, beyond document parsing/reference checks.
+61. Choose tested Git LFS vs Git CAS coordination adapter only after same-credential two-worker races, crash, lease, reclaim, fencing and offline network tests.
+62. Approve exact recurrence syntax, DST/missed/overlap default policies, and host trigger abilities.
+63. Review trust precedence and installed/remote skill collision handling, optional scripts and external privilege policy.
+64. Test events-as-audit/state-as-derived reconstruction on interrupted/torn writes with no mandatory Python, and articulate manual integrity limitations.
+65. Define production provider adapter permission scope, actual provider readback and CAPI idempotency only after separate owner authorization.

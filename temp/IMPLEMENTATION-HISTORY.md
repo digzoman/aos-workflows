@@ -76,3 +76,13 @@ Future sessions should append substantive events with changed files, test eviden
 - Added ACCEPTANCE-TEST-MATRIX, DECISION-REGISTER and APPROVAL-REVIEW documents. Left LFS versus atomic claims and all eight ADRs unapproved.
 - Retained fixed owner requirements rather than inventing exact schema, scheduler default or cloud guarantee; unresolved decisions remain clearly labeled.
 - No implementation code or live account modifications. Next owner approval checkpoint, then Prompt 08 only after explicit approval.
+
+## 2026-10-20. Prompt 08, technical architecture and file specifications
+
+- Inspected PRD 1.0-rc1 and latest review decision register, approved baseline survey and Prompt 01b context; no independent approval/change record evidenced after Prompt 07. Treated user Prompt 08 as authorization to produce design documents only.
+- Documented full future scaffold protected/mutable layout and compatible file responsibilities under `docs/specs/architecture`.
+- Authored technical contracts for schema fields, graph eligibility/conditions, template pinning, conditional fan-out/joins, impact-limited graph revision, state/event audit, claims, reviews/permissions, checkpoints and manual zero-script operations.
+- Authored 16 JSON Schema 2020-12 design files under docs/specs/schemas and proposed ADR-009 through ADR-013 under docs/specs/adrs.
+- Corrected sample nested retry schema version and added optional structured handoff companion.
+- No code engine, scripts, external provider operations, atomic Git lock tests, schedule daemon or permission changes.
+- Next owner approval/checkpoint, then Prompt 09 scaffold implementation if expressly authorized.

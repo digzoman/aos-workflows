@@ -1,39 +1,34 @@
 # AOS-W Progress Snapshot
 
 Date: 2026-10-20
-Phase: Prompt 07, enhanced PRD preparation and review package
-Status: **DRAFT COMPLETE, OWNER APPROVAL PENDING. No implementation authorized.**
+Phase: Prompt 08, technical architecture and file specifications
+Status: **DESIGN DOCUMENTS COMPLETE — COMMITTED; PRD FORMAL APPROVAL RECORD STILL PENDING. NO ENGINE IMPLEMENTATION.**
 
-## Verified prior work
+## Completed through Prompt 07
 
-- Prompts 01–01b: baseline user survey/revisions, public repo and tracked persistent development workspace.
-- Prompts 02–05: sanitized Ampgent competitor research, creative QA, Meta setup/launch, CRM/website/tracking and sample template analyses.
-- Prompt 06: inspected A Rep/Fred/Max and current external architecture references, eight PROPOSED ADRs, Git LFS versus atomic Git research, compatibility and runtime boundaries.
+- Prompts 01–01b saved original survey choices and recurrence/skills refinements.
+- Prompts 02–05 researched real Ampgent workflows, competitor evidence, creative production, Meta staging/launch, CRM and tracking, with sanitized source indexes.
+- Prompt 06 compared A Rep/Fred/Max, LangGraph, Agent Skills, Git worktrees, LFS and candidate atomic Git claims. Eight original ADRs are PROPOSED.
+- Prompt 07 created full 24-section PRD, all 16 original survey trace, T01–T16 acceptance matrix and draft approval checklist.
 
-## Prompt 07 draft deliverables
+## Prompt 08 completed
 
-- Comprehensive V1 PRD at docs/specs/prd/PRD.md covering 24 sections: vision/personas/scope, file scaffold/writable zone, graph and inheritance, run state, QC/authority, agent claims, Git, scheduling, skills, provider truth, security, functional and nonfunctional requirements, examples, failures, V1 tests, roadmap and unresolved decisions.
-- docs/specs/prd/SURVEY-TRACEABILITY.md explicitly maps all 16 original survey decisions and later Prompt 01b refinements.
-- docs/specs/prd/ACCEPTANCE-TEST-MATRIX.md defines reproducible evidence/negative cases for six original demos plus recurring/skill/robustness tests T07–T16.
-- docs/specs/prd/DECISION-REGISTER.md separates agreed constraints, proposed ADRs, owner/empirical open questions and schema design questions.
-- docs/specs/prd/APPROVAL-REVIEW.md is an explicit owner checkpoint with PENDING approval fields.
-- A PRD directory README/index supports navigation.
+- Read current PRD 1.0-rc1, decision register, formal approval checklist, baseline decisions, Prompt 01b, work plan/handoff and previous architecture research.
+- Searched relevant other AOS-W discussions for post-PRD approval/change requests; none independently evidenced. The user's explicit Prompt 08 instruction authorizes **technical documentation drafting**, not a claim that a separate formal approval record exists.
+- Created normative draft architecture package under `docs/specs/architecture/`: layer boundaries, portable modes, fully specified scaffold target layout, graph and conditional eligibility, policy inheritance, dynamic fan-out/joins/revisions, state machine, retry/checkpoint/recovery semantics, and manual no-helper-script runbook.
+- Created sixteen JSON Schema 2020-12 draft documents under `docs/specs/schemas/`: shared definitions, template, retry, instance, template lock, run, state, event, checkpoint, claim, review, approval, handoff and attempt.
+- Added five new proposed ADRs 009–013 under `docs/specs/adrs/`, while older ADRs 001–008 remain proposed and Git LFS versus atomic Git claim winner remains **unselected pending tests**.
+- Reference checks of schema JSON and relative refs were performed within the documentation transaction. These are structural checks, not actual execution, validation-library tests or V1 acceptance tests.
+- Maintained protected framework boundary: only future scaffold/agent-files can change under ordinary workflow execution. This prompt itself modified development specifications in docs/specs, not an installed scaffold.
+- Sanitized public documentation, with no credentials, private source content, live Meta/GHL changes or ad spending.
 
-## Consistency audit
+## Blocked or not claimed
 
-- All 16 survey answers traced to PRD sections and tests, including Q14 all six demos, Q15 no mandatory runtime/MCP/database/dashboard/scheduler, Q16 repo and independent scaffold plus optional Git.
-- Prompt 01b recurrence and just-in-time per-template/run skills included.
-- Git LFS versus atomic Git comparison is **not** marked decided or tested.
-- Scope never grants Meta/GHL/site live authority; research source material is historical and sanitized.
-- Validation of documentation includes all 24 PRD major sections and all 16 acceptance tests. These are **document checks**, not runtime acceptance tests.
+- No installed `scaffold/aos-w/` framework implementation from this task, no executable YAML interpreter, no scheduler/daemon, no Git CAS/LFS tests, no external provider integration.
+- No proven exclusive multi-agent coordination, automatic retries, crash-atomic writes or unattended scheduling in file-only mode.
+- No formal owner PRD approval decision was found in the existing approval record, and no ADR was silently marked accepted.
+- No T01–T16 acceptance tests were executed.
 
-## Not performed
+## Next step
 
-- No AOS-W engine, runnable schema, installable scaffold implementation, scripts, scheduler, Git claims or tests have been executed.
-- No Meta Ads, HighLevel, CRM, website or other production external accounts changed.
-- No PRD approval supplied by owner and no draft ADR accepted.
-- No V1 T01–T16 tests marked PASS.
-
-## Exact next action
-
-Present docs/specs/prd/PRD.md, survey trace, decision register and review checklist. Request explicit owner PRD approval or specific changes. **If not approved, remain stopped.** After approval, record owner decision/PRD revision in durable docs and only then begin Prompt 08 technical architecture and schemas within the accepted scope.
+Owner confirms formal PRD/technical specification review and authorizes Prompt 09. Then build downloadable scaffold with protected/read-mostly framework files and single writable agent-files root, using exact specs here. Continue staged prompts and empirically validate guarantees before claiming them.

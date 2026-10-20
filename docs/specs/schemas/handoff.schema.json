@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Structured handoff companion",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "graph_revision": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "checkpoint_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "last_event_seq": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "generated_at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "prepared_by": {
+      "$ref": "common.schema.json#/$defs/actor"
+    },
+    "completed": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/id"
+      }
+    },
+    "ready": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/id"
+      }
+    },
+    "blocked": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "task_id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "task_id",
+          "reason"
+        ]
+      }
+    },
+    "pending_approvals": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/id"
+      }
+    },
+    "pending_provider_reconciliations": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/id"
+      }
+    },
+    "source_references": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_action": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "sync_status": {
+      "enum": [
+        "not_configured",
+        "local_only",
+        "pending",
+        "verified",
+        "conflict",
+        "unknown"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "run_id",
+    "graph_revision",
+    "checkpoint_id",
+    "last_event_seq",
+    "generated_at",
+    "prepared_by",
+    "completed",
+    "ready",
+    "blocked",
+    "next_action"
+  ]
+}

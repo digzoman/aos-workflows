@@ -1,39 +1,44 @@
 # AOS-W Cross-Session Handoff
 
 Updated: 2026-10-20
-Completed: Prompt 07 PRD drafting and documents; **approval checkpoint pending**.
-Repository: digzoman/aos-workflows, public main. Verify current HEAD and readback before later edits.
+Completed: Prompt 08 technical architecture and file specifications (documentation only)
+Repository: digzoman/aos-workflows, public main. **Verify current HEAD before any edit.**
 
-## Mandatory opening reads
+## Required next-session reads
 
-1. temp/OPERATING-RULES.md
-2. temp/DESIGN-DECISIONS.md
-3. temp/CONCEPT-NOTES-01B.md
-4. docs/specs/prd/PRD.md
-5. docs/specs/prd/SURVEY-TRACEABILITY.md
-6. docs/specs/prd/ACCEPTANCE-TEST-MATRIX.md
-7. docs/specs/prd/DECISION-REGISTER.md
-8. docs/specs/prd/APPROVAL-REVIEW.md
-9. temp/WORK-PLAN.md and temp/PROGRESS.md
-10. temp/architecture/adrs/README.md and research indexes as necessary
+1. `temp/OPERATING-RULES.md` and `temp/DESIGN-DECISIONS.md`
+2. `temp/CONCEPT-NOTES-01B.md`
+3. `docs/specs/prd/PRD.md` and `docs/specs/prd/APPROVAL-REVIEW.md`
+4. `docs/specs/architecture/README.md`
+5. `docs/specs/architecture/ARCHITECTURE.md`
+6. `docs/specs/architecture/FILE-SPECIFICATION.md`
+7. `docs/specs/architecture/SCHEMA-CONTRACTS.md`
+8. `docs/specs/architecture/GRAPH-AND-REVISIONS.md`
+9. `docs/specs/architecture/EXECUTION-STATE.md`
+10. `docs/specs/architecture/MANUAL-AGENT-PROTOCOL.md`
+11. `docs/specs/architecture/OPEN-DECISIONS.md`
+12. `docs/specs/schemas/README.md` and 16 draft JSON schemas
+13. `docs/specs/adrs/README.md`, proposed ADR-009 through ADR-013, plus `temp/architecture/adrs/` 001–008
 
-## Current exact state
+## Architectural contract
 
-- PRD version 1.0-rc1 is **DRAFT FOR OWNER REVIEW**, not accepted.
-- Baseline 16 survey answers + Prompt 01b recurrence/skills are reflected and separately traced.
-- Eight architecture ADRs still **PROPOSED**; specific syntax, scheduling defaults, skill precedence, eventual LFS versus Git CAS winner, license, live-provider pilot depth and cloud durability guarantees remain open.
-- Required V1 six acceptance demonstrations T01–T06 remain mandatory; supporting T07–T16 specified but **not executed**.
-- All files deliberately stay in public sanitized wording and cite restricted source *pointers*, not copied private artifacts.
-- The requested technical roadmap runs Prompts 08–19, but these stages are **BLOCKED** until owner approves PRD.
+- Independent downloaded `scaffold/aos-w/` is read-mostly except `agent-files/`.
+- Instance holds pinned resolved template snapshot and immutable graph revisions; master updates never modify active runs without an authorized revision event.
+- Graph uses stable node IDs, explicit needs/conditions/join/fan-out with three-valued UNKNOWN; every READY task requires source, skills, permission and (if shared) verified claim.
+- Validated chronological per-run events are audit authority, `state.json` derived snapshot, checkpoints immutable recovery anchors. Torn/ambiguous effects require honest reconciliation.
+- QC binds exact rubric/artifact set/version; separate external action approval. Agent identity `[Agent | Platform | Role | Instance]` records producer only.
+- Default manual one-off/standalone one-writer; recurring schedules stored as metadata unless optional host wake; Git mirror optional. Exclusive multi-agent claims must use a **tested** backend, not advisory file or worktree.
+- Per-step skills can be bundled or pinned installed/remote; trust review, conflict fail-closed and no authorization escalation.
 
-## Action to take now
+## Authorization and next action
 
-**Only** review/clarify PRD for user. Ask whether user approves as written or requests section-specific changes. If user explicitly approves: (a) create durable owner decision with citation/time, (b) update PRD approval status and approved/deferred ADR registry, (c) commit it, and (d) proceed to Prompt 08 only upon explicit following instructions or when user clearly directs implementation. Approval does not authorize Meta/GHL production actions.
+The PRD approval checklist still says PENDING and no subsequent explicit recorded decision was found. The user specifically directed Prompt 08, authorizing this **design document work**; this did **not** automatically approve the PRD/ADRs or live actions. Before Prompt 09 implementation, obtain explicit owner approval of PRD/spec or direct authorization addressing the approval checkpoint. Record any owner decision and update ADR status only for specifically approved records.
 
-If owner requests changes: revise complete affected PRD/test/decision documents and present version for approval again. Do not silently begin implementation or select Git claim winner without trials.
+Prompt 09 should build the actual protected scaffold under `scaffold/aos-w/` only after authority is established. It must not introduce mandatory Python, Git, MCP, database, always-on scheduler or cloud service. No live Meta/HighLevel/website changes without separate authorization.
 
-## Warnings
+## Evidence/limitations
 
-- No framework engine, scheduler, lock adapter, finalized YAML schema or live external account integration is presently built.
-- Research documentation reflects historical Ampgent/A Rep records; not live current Meta/GHL audit.
-- Plain-files mode is cooperative single writer; multi-agent exclusivity requires tested adapter and real T03 collision evidence.
+- Sixteen schemas were authored and checked for valid JSON and relative reference links; actual validator execution and cross-model handoff tests remain future work.
+- No runtime behavior, atomic claim or crash-safe file write demonstrated.
+- References to Ampgent/Fred/Max are summarized/sanitized only; no private source copied.
+- Update this handoff, progress and history and commit with verified SHA at each future stage.
