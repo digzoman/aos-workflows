@@ -1,8 +1,8 @@
 # AOS-W V1 Work Plan
 
 Updated: 2026-10-20
-Current phase: Prompt 10 reusable templates/composition and local conformance completed
-Next phase: Prompt 11 durable run state, checkpoint/retry/recovery and interruption handling
+Current phase: Prompt 11 persistent state, checkpoints, retries and recovery implemented/tested locally
+Next phase: Prompt 12 identity/provenance, review/approvals and just-in-time skills
 No workflow engine implementation authorized before PRD approval.
 
 ## Research and design stages
@@ -21,7 +21,7 @@ No workflow engine implementation authorized before PRD approval.
 - [x] Prompt 08. Technical design completed as documentation: protected scaffold layout, 16 JSON Schema designs, graph eligibility/composition/revisions, lifecycle/event/checkpoint/recovery, manual protocol, and five new PROPOSED ADRs under docs/specs/. No engine built and pending PRD approval record not altered.
 - [x] Prompt 09. Implemented self-contained `scaffold/aos-w/` with protected docs, 16 copied draft schemas, two master templates, bundled evidence skill, user-owned `agent-files`, inert practice instance and handoffs, optional structural validator/ZIP packager, documented manual startup/recovery and staged structural check results.
 - [x] Prompt 10. Implemented 0.2.0 reusable template contracts, policy-constrained custom overlays, static/dynamic compound research workflows, optional local PyYAML composition/approval-gated instance helper, conditional/QA/permission-aware eligibility, revision impact planning, 11 passing conformance tests and sanitized multi-investigation fixtures. Automatic dispatch/event-safe revision application remain Prompt 11.
-- [ ] Prompt 11. State, checkpoints, retries, recovery, and interruption semantics.
+- [x] Prompt 11. Implemented optional local append-oriented SHA-256 event/state helper, immutable checkpoint anchors, attempt/retry records, pause/resume/cancel/fail, exact-scope provider operation identity/reconciliation, graph revision application, corrupted-tail and stale-snapshot recovery; updated 5 schema pairs and file-only manual protocol. 26 new + 11 prior tests PASS. No provider calls, automatic scheduler or distributed mutual exclusion.
 - [ ] Prompt 12. Agent provenance, autonomy, permissions, QC, handoffs, and just-in-time skill loading/resolution without implicit authority expansion.
 - [ ] Prompt 13. Optional Git syncing; compare LFS and atomic Git coordination.
 - [ ] Prompt 14. Optional helper tooling and independent download package.

@@ -26,7 +26,7 @@ function check(ok, message) { checks++; if (!ok) throw new Error(message); }
 const read = relative => fs.readFileSync(path.join(root, relative), "utf8");
 for(const p of required) check(fs.existsSync(path.join(root,p)), "Missing scaffold path: " + p);
 const version = JSON.parse(read("VERSION.json"));
-check(version.aosw_version === "0.2.0", "Unexpected framework version");
+check(version.aosw_version === "0.3.0", "Unexpected framework version");
 check(version.mandatory_git === false && version.mandatory_programming_runtime === false, "Required runtime unexpectedly configured");
 const sync=JSON.parse(read("agent-files/config/sync.json"));
 check(sync.enabled === false && sync.status === "not_configured", "Bundled Git mirror must default off");

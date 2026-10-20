@@ -49,7 +49,19 @@
         "recovery_checked",
         "sync_verified",
         "handoff_updated",
-        "correction"
+        "correction",
+        "task_failed",
+        "task_paused",
+        "task_resumed",
+        "run_paused",
+        "run_resumed",
+        "run_cancelled",
+        "run_failed",
+        "operation_intent",
+        "operation_submitted",
+        "operation_ack",
+        "operation_unknown",
+        "operation_reconciled"
       ]
     },
     "at": {
@@ -83,10 +95,12 @@
       "type": "object"
     },
     "prev_digest": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
     },
     "digest": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
     },
     "integrity_level": {
       "enum": [

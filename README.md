@@ -42,3 +42,7 @@ No open-source license has been selected yet. Public repository visibility does 
 ## Prompt 10, reusable composition (0.2.0)
 
 The [composition protocol](scaffold/aos-w/references/COMPOSITION.md) and [planning/competitor templates](scaffold/aos-w/templates/README.md) now support explicit task contracts, dependency routing, custom overlays, stable child proposals, independent research QC and reviewed portfolio merging. An [optional PyYAML helper](tools/composition/README.md) implements local checks and approval-gated child instantiation, with [sanitized fixtures](examples/conformance/README.md) and unit tests. **No Python or Git is mandatory for file-only operation.** Automatic task dispatch, enforced multi-agent claims and external provider APIs are not implemented.
+
+## Prompt 11 — durable run state (0.3.0)
+
+The [manual state/recovery protocol](scaffold/aos-w/references/STATE-AND-RECOVERY.md) now specifies append-oriented event history, checkpoints, retries, paused/failed runs, evidence integrity, provider-action intent reconciliation and fresh-agent recovery. The [optional deterministic helper](tools/state/README.md) implements and locally tests these operations under a **single-writer** assumption; 26 new tests and 11 composition regressions passed. Real provider writes, hard distributed locks, unattended timers and cryptographic human authorization are **not implemented**. All ordinary installed-workflow modifications remain under `agent-files/`.

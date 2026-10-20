@@ -110,3 +110,14 @@ Future sessions should append substantive events with changed files, test eviden
 - Ran 11 local unittest methods and CLI smoke commands PASS; verified source Git blob SHA identity before commit. Log at `temp/tests/PROMPT-10-COMPOSITION-CONFORMANCE.md`.
 - No provider/network actions, automatic workflow scheduling, live QA generation, concurrent task locking, event-backed revision application or crash-safe state engine implemented.
 - Next Prompt 11 durable state, checkpoints, retry/recovery and controlled graph revision application.
+
+## 2026-10-20. Prompt 11, durable state, retries and recovery
+
+- Read persistent operating rules, Prompt 10 handoff, pinned graph/state/event/checkpoint contracts and current GitHub main before development.
+- Implemented **optional** Python-local `tools/state/state.py` and `cli.py` with SHA-256-chained append-oriented JSONL, derived state with graph/version/actor/dependency/attempt/evidence/owner/pending operations, fsync and local snapshot replacement when supported, bounded retry and delay, explicit pause/resume/cancel/fail, and event-prefix checkpoints/handoffs.
+- Protected external-effect replay using deterministic operation keys and intent-before-submit, ambiguous ACK readback requirements, explicit new-key retry only after verified NOT_APPLIED result; no provider APIs called and approval metadata remains cooperative, not cryptographically authenticated.
+- Implemented authorized graph revision **application** to immutable graph file and graph_revised history with downstream invalidation, preserved completed evidence and stale-pointer recovery after crash. Existing older graphs remain pinned.
+- Added torn-tail and stale-snapshot recovery, digest tampering rejection, current completed-artifact hash checks, checkpoint mismatch/orphan detection, partial child directory audit without duplication, and advisory compatibility with legacy unhashed run logs.
+- Updated draft `state`, `event`, `run`, `handoff` and `retry-policy` schema definitions in **both** development and installable copies; added manual instructions `references/STATE-AND-RECOVERY.md` and synthetic recovery fixture descriptions.
+- Ran **26 new local tests PASS**, plus **11 Prompt 10 regression tests PASS**, 37/37 overall, with one initial test-fixture copy setup correction documented. Only local synthetic tools, no live external accounts. Report: `temp/tests/PROMPT-11-STATE-CONFORMANCE.md`.
+- No automatic execution scheduler, hard shared coordination, authenticated external-action authority or provider write/readback. Next Prompt 12 provenance/permissions/QC/skills.

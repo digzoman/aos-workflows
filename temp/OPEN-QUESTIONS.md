@@ -105,3 +105,12 @@ Open questions are not blockers for Prompt 02 research unless explicitly noted.
 74. User-requested truly parallel workers and shared-task exclusive claims still require Prompt 13 empirical coordination. Current READY categories are advisory for one writer.
 75. Mock fixture approvals are test-only; production owner identity authentication, peer reviewer independence and scope-proof require actual host enforcement where available (Prompt 12).
 76. Full remote skill availability/quality-gate proof is not implemented in optional classifier; it accepts supplied verified context and must not invent observed reviews or provider success.
+
+## Prompt 11 state/recovery follow-ups
+
+77. The optional helper enforces single-writer local event sequence, fsync and derived snapshots where supported. Real distributed atomicity, lost network and shared Git identity require empirical Prompt 13 coordination tests; do not claim exactly-once external effects.
+78. Provider operation `approval_id` and supplied readback references are cooperative test metadata. Authentication, scope proof and actual external resource verification remain Prompt 12/15+ host integration decisions.
+79. Full JSON Schema Draft 2020-12 validation of all updated bundled documents through a separate validator is not reported yet; 37 synthetic/local functional tests passed.
+80. File-only agents can manually follow state/recovery protocol without Python, but should mark digest/clock/atomicity as UNVERIFIED if not available; cross-agent and cross-cloud durability remain Prompt 16–17 release tests.
+81. Graph revision file write and journal event are separate local operations; optional helper can recover stale run pointer when new graph digest is valid, but a missing graph file after a committed event must block for owner intervention.
+82. The existing Prompt 10 child materializer is sequential rather than transactional. Prompt 11 provides PARTIAL/MISSING audit, not automatic repaired fan-out; future coordinator must require explicit reconciliation and review.

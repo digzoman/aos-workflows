@@ -7,3 +7,7 @@ These documents cover common types; master/custom/compound templates; retry; ins
 **Important:** these files specify record shapes; they are **not a schema-validator installation**. The current 0.1.0 release includes no automatic graph executor, nor independent proofs of permissions, evidence truth, claims, event atomicity or a scheduler. A capable single agent can follow the instructions manually.
 
 For full schema field details see `../SCHEMA-CONTRACTS.md`, `../GRAPH-AND-REVISIONS.md` and `../EXECUTION-STATE.md`.
+
+## Prompt 11 additive fields
+
+The draft `state`, `event`, `run`, `handoff` and `retry-policy` schemas now describe local owner/attempt/review references, hashed event predecessors, pausing/failing, operation uncertainty and active/revised graph identity. These are **structural contracts**; without optional host validation they are readable instructions only, not enforced permissions or proof of external provider success. Legacy 0.1/0.2 records remain valid by omission of newly optional fields.

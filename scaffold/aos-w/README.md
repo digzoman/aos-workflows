@@ -1,4 +1,4 @@
-# Agent OS Workflows — portable starter (0.2.0)
+# Agent OS Workflows — portable starter (0.3.0)
 
 **Status:** Initial **file-based scaffold**, not a workflow execution engine. It is usable as an instruction-driven, **single-writer, manually operated** workflow folder. Automatic graph execution, distributed locks, time-triggered runs, provider integration and validators are later milestones.
 
@@ -18,6 +18,10 @@ Only `agent-files/` may normally be modified. The installed `README.md`, `PROTOC
 See [references/COMPOSITION.md](references/COMPOSITION.md) for the portable conventions for master and custom templates, dependency/condition eligibility, approved child-generation, independent investigation reviews, all-accepted merging, and revision impact. New protected templates include `competitor-investigation`, `research-portfolio-planner` and `research-portfolio-compound`. An **optional**, separately installed PyYAML helper under the development repository's `tools/composition/` can check graphs and create approved local child instances. This helper is not included as a dependency of the downloadable scaffold.
 
 The original synthetic `demo-local-research` run stays pinned to the **0.1.0** master snapshot; the current `research-starter` master is **0.2.0**. Do not rewrite an existing pinned workflow when the master changes.
+
+## Durable state and recovery (0.3.0)
+
+Use [references/STATE-AND-RECOVERY.md](references/STATE-AND-RECOVERY.md) to persist event history, task attempts, owners, evidence, checkpoints, bounded retries, pauses/cancellations, interrupted-work handoffs, controlled graph revisions and external operation uncertainty. A second agent can resume using the pinned graph and validated files without previous conversation memory. The development repo's **optional** [tools/state/](../../tools/state/) Python helper demonstrates deterministic local replay/checkpoints/corrupt-tail quarantine; **no Python is required** for the installed file-only protocol. It never calls Meta, GHL, websites or any provider, and it does not enforce shared distributed claims.
 
 ## What comes in this directory
 
@@ -48,4 +52,4 @@ Treat an installed release's `agent-files/` as user-owned. To upgrade, **back up
 
 > Read `aos-w/README.md`, `aos-w/PROTOCOL.md`, `aos-w/agent-files/README.md`, and saved `handoff.md`. Discover instances under `agent-files/instances/`. Validate the selected run's pinned template, `events.jsonl` and `state.json`; report any inconsistencies, blockers, approval requirements or unknown external effects. Identify the **next eligible bounded step** and ask before actions requiring approval. Never infer completion from chat memory or merely from a plan.
 
-This is a foundation for future Prompts 11–19, not the fully tested Version 1 release.
+This is a foundation for future Prompts 12–19, not the fully tested Version 1 release.

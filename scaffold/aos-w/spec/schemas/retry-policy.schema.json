@@ -21,7 +21,11 @@
           "timeout",
           "validation_failed",
           "review_revise",
-          "unknown"
+          "unknown",
+          "incomplete_evidence",
+          "human_intervention",
+          "provider_ambiguous",
+          "stale_evidence"
         ]
       }
     },

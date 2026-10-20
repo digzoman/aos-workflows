@@ -42,7 +42,9 @@
         "BLOCKED",
         "COMPLETED",
         "CANCELLED",
-        "SUPERSEDED"
+        "SUPERSEDED",
+        "PAUSED",
+        "FAILED"
       ]
     },
     "tasks": {
@@ -68,7 +70,8 @@
               "COMPLETE",
               "SKIPPED",
               "CANCELLED",
-              "SUPERSEDED"
+              "SUPERSEDED",
+              "PAUSED"
             ]
           },
           "attempts": {
@@ -101,6 +104,61 @@
             "items": {
               "$ref": "common.schema.json#/$defs/id"
             }
+          },
+          "owner": {
+            "oneOf": [
+              {
+                "$ref": "common.schema.json#/$defs/actor"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "last_attempt_owner": {
+            "$ref": "common.schema.json#/$defs/actor"
+          },
+          "started_at": {
+            "$ref": "common.schema.json#/$defs/time"
+          },
+          "last_attempt_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "common.schema.json#/$defs/artifact"
+            }
+          },
+          "pending_actions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "retry": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "last_error": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "review": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "resume_status": {
+            "type": "string"
           }
         },
         "required": [
@@ -119,7 +177,27 @@
     "blocked_reasons": {
       "type": "array",
       "items": {
-        "type": "string"
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "task_id": {
+                "$ref": "common.schema.json#/$defs/id"
+              },
+              "reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "task_id",
+              "reason"
+            ],
+            "additionalProperties": false
+          }
+        ]
       }
     },
     "pending_provider_operations": {
@@ -130,6 +208,81 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "paused": {
+      "type": "boolean"
+    },
+    "operations": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "completed_steps": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/id"
+      }
+    },
+    "active_steps": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/id"
+      }
+    },
+    "owners": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "common.schema.json#/$defs/actor"
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "artifact_id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "locator": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "task_id": {
+            "$ref": "common.schema.json#/$defs/id"
+          }
+        },
+        "required": [
+          "artifact_id",
+          "locator",
+          "revision",
+          "task_id"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "checkpoints": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/id"
+      }
+    },
+    "audit_warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "superseded_results": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
     }
   },
   "required": [

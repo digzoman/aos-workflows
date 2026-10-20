@@ -11,3 +11,5 @@ This project will later add sanitized Ampgent research, creative production and 
 No example grants Meta, CRM, messaging or production deployment access.
 
 - [Prompt 10 composition fixtures](conformance/README.md), a sanitized 3-investigation portfolio and deliberately simulated approvals, with real **local-file-only** conformance tests. These are not completed real competitor investigations.
+
+- [Prompt 11 recovery scenarios](conformance/recovery/README.md) describe interrupted, inconsistent and incomplete local runs with no real provider actions. The executable `tests/test_state.py` builds these disposable fixtures and checks their safe outcomes.

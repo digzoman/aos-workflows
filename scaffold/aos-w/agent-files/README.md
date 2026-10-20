@@ -30,3 +30,7 @@ See `instances/README.md` and `../references/INSTANCE-LAYOUT.md` for exact paths
 ## What counts as a working feature
 
 An agent following `../PROTOCOL.md` can **manually** start a new instance, identify dependencies and save auditable files. Automatic task scheduling, enforced multi-agent leases, provider integrations, schema validation runtime and crash-atomic file transactions are **not implemented** by this folder.
+
+## Version 0.3.0 state and recovery
+
+Persist the actor-bound event journal and immutable graph revision under each run. Before resuming after interruption, reconcile `events.jsonl`, `state.json`, checkpoints, attempt records, actual artifacts and pending provider operation identities. The portable manual procedure is [STATE-AND-RECOVERY.md](../references/STATE-AND-RECOVERY.md). Local snapshot files may be regenerated; accepted history must not be silently rewritten. Only explicit repair quarantines a corrupt tail and retains all previously accepted event bytes. All such changes stay **inside agent-files**. There is no automatic timer or distributed mutex.

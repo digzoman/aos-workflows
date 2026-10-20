@@ -55,6 +55,13 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "graph_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "current_graph_revision": {
+      "$ref": "common.schema.json#/$defs/id"
     }
   },
   "required": [

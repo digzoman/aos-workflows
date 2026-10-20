@@ -1,8 +1,8 @@
 {
-  "aosw_version": "0.2.0",
+  "aosw_version": "0.3.0",
   "schema_version": "1.0.0",
   "distribution": "portable-file-scaffold",
-  "status": "manual-cooperative-plus-optional-template-composition",
+  "status": "manual-file-protocol-with-optional-local-state-recovery",
   "minimum_requirements": [
     "capable agent",
     "persistent writable files within agent-files"
@@ -28,5 +28,14 @@
     "optional_py_yaml_helper": "tools/composition/",
     "automatic_dispatch": "not implemented",
     "shared_claims": "not implemented"
+  },
+  "state": {
+    "manual": "documented",
+    "optional_python_helper": "tools/state/",
+    "history": "sha256-chain-for-new-helper-events",
+    "local_checkpoint_recovery": "implemented_in_optional_helper",
+    "shared_writes": "not implemented",
+    "provider_writes": "not implemented",
+    "scheduler": "not implemented"
   }
 }
