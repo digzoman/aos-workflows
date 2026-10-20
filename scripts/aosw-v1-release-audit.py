@@ -169,6 +169,7 @@ def main():
       "current_secret_candidates":len(current["secret_or_sensitive_path_candidates"]),
       "history_secret_candidates":historical["candidate_count"],
       "email_contextual_review_files":current["nonexample_email_file_count"],
+      "email_context_paths":[item["path"] for item in current["nonexample_email_files"][:20]],
       "checks":summary["checks"],"missing_docs":missing,"archive_unsafe_categories":[PurePosixPath(x).name for x in archive["unsafe_archive_entries"][:10]]}))
     if not summary["automated_gate_pass"]:
        raise SystemExit("Automated release gate found issues. Review JSON categories and fix before release.")
