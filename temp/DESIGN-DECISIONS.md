@@ -91,3 +91,7 @@ The source and tradeoff analysis is in `temp/architecture/`, including eight **P
 - AOS-W may declare schedules, skills, QA, retries and ownership in files, but a plain text protocol cannot by itself enforce hard claims, run a timer or perform external provider actions.
 
 Explicit owner approval of the enhanced PRD is required before technical implementation or marking any proposed ADR accepted.
+
+## Prompt 07 status note — no new owner approvals
+
+An enhanced PRD **draft** now lives at docs/specs/prd/PRD.md with traceability and open decision register. This is **not** a new user decision and does not supersede any survey answer or Prompt 01b requirement. All eight Prompt 06 ADRs remain PROPOSED. Owner approval must be explicitly recorded before changing statuses or starting implementation.

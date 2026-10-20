@@ -1,43 +1,39 @@
-# Latest AOS-W Cross-Session Handoff
+# AOS-W Cross-Session Handoff
 
 Updated: 2026-10-20
-Completed assignment: Prompt 06, architectural research and proposed decision records.
-Current repo: `digzoman/aos-workflows`, public `main`. Verify live HEAD before work.
+Completed: Prompt 07 PRD drafting and documents; **approval checkpoint pending**.
+Repository: digzoman/aos-workflows, public main. Verify current HEAD and readback before later edits.
 
-## Mandatory first reads for Prompt 07
+## Mandatory opening reads
 
-1. `temp/OPERATING-RULES.md`
-2. `temp/DESIGN-DECISIONS.md`
-3. `temp/WORK-PLAN.md`
-4. `temp/PROGRESS.md`
-5. `temp/OPEN-QUESTIONS.md`
-6. `temp/architecture/SOURCES-06.md`
-7. `temp/architecture/ALTERNATIVES-COMPARISON.md`
-8. `temp/architecture/PRD-INPUTS-06.md`
-9. `temp/architecture/ENVIRONMENTS-AND-MINIMAL-CORE.md`
-10. `temp/architecture/COORDINATION-AND-LOCKING.md`
-11. `temp/architecture/SKILLS-SCHEDULING-AND-SECURITY.md`
-12. `temp/architecture/adrs/README.md` and ADR-001 through ADR-008
-13. Previous marketing source indexes and candidate template catalogs under `temp/research/`
+1. temp/OPERATING-RULES.md
+2. temp/DESIGN-DECISIONS.md
+3. temp/CONCEPT-NOTES-01B.md
+4. docs/specs/prd/PRD.md
+5. docs/specs/prd/SURVEY-TRACEABILITY.md
+6. docs/specs/prd/ACCEPTANCE-TEST-MATRIX.md
+7. docs/specs/prd/DECISION-REGISTER.md
+8. docs/specs/prd/APPROVAL-REVIEW.md
+9. temp/WORK-PLAN.md and temp/PROGRESS.md
+10. temp/architecture/adrs/README.md and research indexes as necessary
 
-## Core findings requiring PRD treatment
+## Current exact state
 
-- **A Rep is not AOS-W**. One nondeterministic PRIMARY, optional plans and events, provenance header, approved vs scratch skills, optional Guardian. Fred is active with host wake; Max remains deliberate manual/dormant. Support both without requiring A Rep.
-- **Core must remain standalone**. Downloaded `scaffold/aos-w/` uses immutable standardized files and normally writable `agent-files/`. Git, Python, database, cloud/MCP, dedicated daemon or scheduler never mandatory. Same graph spec regardless of host.
-- **Portable text declares, host enforces**. Graph, QC, authorizations, retries, schedules and leases can be described in Markdown/YAML/JSON. Actual atomic locks, concurrency, timers, external action readback and hard permission restrictions depend on appropriate optional host mechanisms.
-- **LangGraph inspires** checkpoint/run identity, conditional edges, parallel fan-out, retry isolation, interrupt/human gates, versioned replan and recovery. Runtime is not copied/deployed.
-- **Git claim mechanism undecided**. Provisional CAS-backed task refs preferred over LFS for logical tasks/shared credential, but official generic REST PATCH lacks explicit expected_sha; tests must verify available CAS primitive. LFS same-account behavior, crashes/expiry/network and stale fencing remain untested. Worktrees are isolation, not task locks.
-- **Skills** follow progressive disclosure and may be bundled with master/custom/workflow packages or pinned externally; scripts/skills do not confer permissions. Remote skill trust, priority and offline fallback need approved resolution.
-- **Recurring** is optional scheduling metadata with manual ad hoc always possible. Host wake required for unattended execution. Separate occurrence IDs and overlap/missed/DST decisions required.
-- **A Rep public documentation discrepancy**. `CURRENT.md` says V1.5.0, `a-rep/SKILL.md` says V1.5.1; do not silently choose or assume live Fred host version.
+- PRD version 1.0-rc1 is **DRAFT FOR OWNER REVIEW**, not accepted.
+- Baseline 16 survey answers + Prompt 01b recurrence/skills are reflected and separately traced.
+- Eight architecture ADRs still **PROPOSED**; specific syntax, scheduling defaults, skill precedence, eventual LFS versus Git CAS winner, license, live-provider pilot depth and cloud durability guarantees remain open.
+- Required V1 six acceptance demonstrations T01–T06 remain mandatory; supporting T07–T16 specified but **not executed**.
+- All files deliberately stay in public sanitized wording and cite restricted source *pointers*, not copied private artifacts.
+- The requested technical roadmap runs Prompts 08–19, but these stages are **BLOCKED** until owner approves PRD.
 
-## Next assignment, Prompt 07
+## Action to take now
 
-Synthesize user-approved baseline, Prompt 01b schedule/skills, researched B1–B9 example workflows and this architecture evaluation into a detailed enhanced PRD at `docs/specs/prd/PRD.md`. Link spec requirements to research evidence, state definitions, testable acceptance and explicit risks. Include a decision register separating **approved requirements** from **proposed ADRs** and unresolved choices. Ask for explicit owner review and approval of PRD before building the workflow engine.
+**Only** review/clarify PRD for user. Ask whether user approves as written or requests section-specific changes. If user explicitly approves: (a) create durable owner decision with citation/time, (b) update PRD approval status and approved/deferred ADR registry, (c) commit it, and (d) proceed to Prompt 08 only upon explicit following instructions or when user clearly directs implementation. Approval does not authorize Meta/GHL production actions.
 
-## Guardrails
+If owner requests changes: revise complete affected PRD/test/decision documents and present version for approval again. Do not silently begin implementation or select Git claim winner without trials.
 
-- Do not implement code/engine, claims, Git locking, scheduling or external provider actions yet.
-- Do not publish private A Rep repo content or tokens, only sanitized descriptions and restricted-path pointers.
-- Do not claim a test passed based on a concept or official documentation alone.
-- After research/spec session, update progress, handoff and Git commit; verify actual HEAD and file contents.
+## Warnings
+
+- No framework engine, scheduler, lock adapter, finalized YAML schema or live external account integration is presently built.
+- Research documentation reflects historical Ampgent/A Rep records; not live current Meta/GHL audit.
+- Plain-files mode is cooperative single writer; multi-agent exclusivity requires tested adapter and real T03 collision evidence.

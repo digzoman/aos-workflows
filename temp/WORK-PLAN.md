@@ -1,8 +1,8 @@
 # AOS-W V1 Work Plan
 
 Updated: 2026-10-20
-Current phase: Prompt 06, architecture pattern and coordination research completed
-Next phase: Prompt 07, enhanced PRD draft, synthesis and explicit owner approval
+Current phase: Prompt 07, enhanced PRD draft committed for owner review
+Next phase: OWNER APPROVAL CHECKPOINT; Prompt 08 architecture/schema implementation remains BLOCKED
 No workflow engine implementation authorized before PRD approval.
 
 ## Research and design stages
@@ -14,7 +14,7 @@ No workflow engine implementation authorized before PRD approval.
 - [x] Prompt 04. Reconstructed B1–B9 creative strategy, copy, semantic gates, image generation and repair, exact logo placement, format variants, QA, Fred/Muse critique and owner selection; 14 candidate creative templates documented.
 - [x] Prompt 05. Reconstructed Meta campaign/adset/ad architecture and targeted updates, provider state, paused staging, cross-system CRM/website/Pixel/CAPI gating, owner-controlled launch, rate limits, dedup/consent risks, and reporting; 15 candidate operations modules and composition designs documented.
 - [x] Prompt 06. Inspected A Rep/Fred/Max source conventions; researched current LangGraph, Agent Skills, Git LFS locks, Git worktrees and version-checked Git refs; documented portable versus host-enforced behavior, environments, architecture alternatives and eight proposed ADRs. Git locking winner deferred to empirical tests.
-- [ ] Prompt 07. Produce enhanced PRD at `docs/specs/prd/PRD.md`, explicitly covering non-repeating vs recurring schedules, on-demand launch, missed/overlapping schedules, optional schedule triggering, template/instance skill bundles, lazy skill resolution, and remote skill security; obtain explicit human review and approval.
+- [ ] Prompt 07. **Draft and survey audit complete; owner approval PENDING.** Enhanced PRD at `docs/specs/prd/PRD.md`, supporting 16-question trace, decision register, acceptance matrix and approval checklist committed. Check this item only after explicit owner approval. No engine development yet.
 
 ## Implementation stages, conditional on PRD approval
 

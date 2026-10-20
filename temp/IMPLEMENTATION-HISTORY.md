@@ -67,3 +67,12 @@ Future sessions should append substantive events with changed files, test eviden
 - Wrote eight **PROPOSED** ADRs, without representing them as owner-approved decisions. Git LFS versus atomic claims is deliberately **unresolved pending empirical trials**.
 - No workflow runtime/code, provider action, lock test or scheduling service created.
 - Next Prompt 07 enhanced PRD with human approval before implementation.
+
+## 2026-10-20. Prompt 07, enhanced V1 PRD review package
+
+- Re-read saved AOS-W user decisions, refinements and architectural comparisons, plus historical competitor research, creative QA and Meta/CRM setup/launch source-indexed models.
+- Created a comprehensive 24-section DRAFT PRD and detailed requirements covering portable scaffold, agent-files-only normal writes, inheritance, graph semantics, checkpoint/replay, quality and human permission, task claims/Git, recurrence, skills, optional provider integrations and security.
+- Explicitly mapped all 16 original survey answers, documented the six mandatory V1 success tests, and added research-derived negative/failure scenarios.
+- Added ACCEPTANCE-TEST-MATRIX, DECISION-REGISTER and APPROVAL-REVIEW documents. Left LFS versus atomic claims and all eight ADRs unapproved.
+- Retained fixed owner requirements rather than inventing exact schema, scheduler default or cloud guarantee; unresolved decisions remain clearly labeled.
+- No implementation code or live account modifications. Next owner approval checkpoint, then Prompt 08 only after explicit approval.

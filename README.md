@@ -2,7 +2,7 @@
 
 AOS-W is a planned portable, file-based framework for repeatable, auditable AI-agent workflows. It is designed for one agent on a local or persistent cloud filesystem, with optional Git synchronization and multi-agent coordination. No Git installation, dedicated MCP server, database, Python runtime, or scheduler is required for the standalone design.
 
-> **Status: planning only.** This repository currently contains project decisions, working notes, and scaffold layout documentation. No workflow engine is implemented or claimed to work yet.
+> **Status: PRD drafted, awaiting owner approval.** The comprehensive [AOS-W Version 1 PRD](docs/specs/prd/PRD.md) and its [review documents](docs/specs/prd/README.md) are committed for human review. No workflow engine, lock mechanism or scheduler has been implemented or claimed to work yet.
 
 ## Planned distribution
 
@@ -33,7 +33,7 @@ Start with [temp/OPERATING-RULES.md](temp/OPERATING-RULES.md) and [temp/HANDOFF.
 
 ## Roadmap
 
-Historical workflow and architecture research stages (Prompts 02–06) are complete, with sanitized results in tracked `temp/research/` and `temp/architecture/`. **The next step is Prompt 07 enhanced PRD and explicit human approval**, after which implementation may begin. Draft architecture decision records are not yet approved.
+Historical workflow and architecture research stages (Prompts 02–06) are complete, with sanitized results in tracked `temp/research/` and `temp/architecture/`. **The current step is owner review of the Prompt 07 enhanced PRD.** Prompt 08 implementation remains blocked until explicit approval. Draft architecture decision records are not yet approved.
 
 ## Licensing
 
