@@ -23,7 +23,7 @@ def write(p,text):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text,e
 def refs(run,aid,path,version='v1'):return [{'artifact_id':aid,'locator':path,'sha256':checksum(run/path),'revision':version}]
 
 def main():
- parser=argparse.ArgumentParser();parser.add_argument('--zip',type=Path,required=True);parser.add_argument('--evidence',type=Path,required=True);arg=parser.parse_args()
+ parser=argparse.ArgumentParser();parser.add_argument('--zip',type=Path,required=True);parser.add_argument('--evidence',type=Path,required=True);parser.add_argument('--expected-version',default='0.6.0');arg=parser.parse_args()
  evidence=arg.evidence.resolve();evidence.mkdir(parents=True,exist_ok=True)
  work=evidence/'offline-working-directory';work.mkdir(parents=True,exist_ok=True)
  report={'run_date':now(),'release_zip':str(arg.zip.resolve()),'release_sha256':checksum(arg.zip),'test_mode':'REAL_LOCAL_FILES + SYNTHETIC_OFFLINE_RESEARCH; NOT REAL CLOUD OR LIVE PROVIDER','cases':[]}
@@ -43,7 +43,7 @@ def main():
    assert all(m.filename.startswith('aos-w/') for m in z.infolist())
    z.extractall(work)
   root=has_install();assert root.is_dir();assert not any(x.name=='.git' for x in root.rglob('.git'))
-  ver=json.loads((root/'VERSION.json').read_text());assert ver['aosw_version']=='0.6.0',ver
+  ver=json.loads((root/'VERSION.json').read_text());assert ver['aosw_version']==arg.expected_version,ver
   assert (root/'templates/research-starter/template.yaml').is_file()
   assert not list((root/'agent-files/instances').glob('*/instance.json'))
   assert not (root/'agent-files/custom-templates/competitor-investigation-ontario').exists()
