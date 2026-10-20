@@ -137,6 +137,12 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "gates": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/gate"
+      }
     }
   },
   "required": [
