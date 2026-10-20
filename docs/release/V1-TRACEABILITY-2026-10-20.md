@@ -39,3 +39,8 @@ Evidence entrypoints:
 - GitHub Actions run 39428039269, P17 workflow success but hosted CAS REVIEW_REQUIRED, LFS BLOCKED
 
 Classification is intentionally conservative. Contract compliance, local simulation, test harness runs and real independent agent execution are different evidence tiers.
+
+
+## Same-day post-audit pilot evidence
+
+T01 has a new PARTIAL SYNTHETIC execution record, run 39495294275 with 77 persisted events and explicit NOT_GRANTED publication gate. It does not demonstrate the original real-world T01 criterion. T04 likewise has additional deterministic mock research and SVG artifact review failure/recovery evidence, but independent AI reviewer verification is still not executed. See docs/testing/PROMPT-18-SYNTHETIC-PILOT-REPORT.md. All other classifications remain unchanged.

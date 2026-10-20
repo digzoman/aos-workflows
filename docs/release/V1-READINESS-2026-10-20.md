@@ -56,3 +56,8 @@ The temp/ material contains useful original research, survey history, decision r
 Stable V1 is BLOCKED until core T01 to T06 acceptance evidence is complete or the owner explicitly changes scope in an updated approved PRD, an independently reviewed security scan passes, the license and outstanding ADR policy decisions are addressed, and the owner gives explicit release approval. Earlier scoped implementation requests do not constitute final V1 sign-off.
 
 Next work: execute Prompt 18 in a controlled, sanitized environment, complete honest independent AI and hosted coordination tests where accessible, update installation docs and release notes, and return a fresh audit for owner decision. No live Meta, GHL, website, spend or publishing operations are authorized by this review.
+
+
+## Subsequent execution addendum, same-day continuation
+
+After the original main review, commit 0863e3f added an executable Prompt 18 synthetic marketing pilot and GitHub Actions run 39495294275 completed SUCCESS. This generated 77 real AOS-W file/state events including a failed and then corrected mock research review, a failed and corrected SVG creative fixture review, a three-branch join, parallel CRM and landing planning, a cold state reopen, and a launch gate left NOT_GRANTED. Full details in docs/testing/PROMPT-18-SYNTHETIC-PILOT-REPORT.md. This raises Prompt 18 from NOT RUN to PARTIAL, CONTROLLED SYNTHETIC ONLY, while T01 real marketing evidence, independent AI assessment and production-style creative proof remain incomplete. V1 release decision remains HOLD. Later CI run 39495294210 also passed portable distribution tests.

@@ -39,3 +39,8 @@ Next: hosted experiment readback; complete separate P15 library commit and repea
 ## 2026-10-20 verified continuation audit
 
 Prompt 15 was subsequently published in commit 3512cb7, schema repair a7b7e8a. Hosted 0.7.0 CI run 39434478250 PASSED 126 tests and published a clean preview ZIP. Previous P15-uncommitted notices above are historical, no longer current. Prompt 17 hosted CI run 39428039269 concluded success, but its OWN output states CAS REVIEW_REQUIRED and LFS BLOCKED. Prompt 18 pilot NOT RUN. Prompt 19 release assessment initiated and status HOLD; see docs/release/V1-READINESS-2026-10-20.md. Formal PRD-wide approval, independent AI cross-platform handoff and cloud persistent acceptance are still unfulfilled. No stable V1 release authorized.
+
+
+## Prompt 18 synthetic executable pilot, verified 2026-10-20
+
+CI run 39495294275 SUCCESS. Actual optional RunStore executed 77 on-disk event transitions in a mock three-vertical marketing scenario, including incomplete research QC -> correction, SVG fixture QC -> correction, parallel CRM/landing prep, cold reopening, checkpoint/handoff and deliberately NOT_GRANTED live permit. Report docs/testing/PROMPT-18-SYNTHETIC-PILOT-REPORT.md. This does NOT satisfy T01 real Ampgent pilot, independent model QA or provider state verification. Hosted portable CI 39495294210 also SUCCESS. Prompt 19 remains release HOLD pending original criteria and owner approval.

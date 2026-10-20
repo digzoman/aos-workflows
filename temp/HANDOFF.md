@@ -34,3 +34,8 @@ Inspect hosted Actions outcome, record PASS/BLOCKED/FAIL and any leaked claim re
 ## Verified handoff amendment after latest main review, 2026-10-20
 
 Read docs/release/V1-READINESS-2026-10-20.md, docs/release/V1-TRACEABILITY-2026-10-20.md, docs/release/V1X-BACKLOG.md and docs/testing/PROMPT-18-PILOT-PLAN.md before proceeding. Prompt 15 is now ON MAIN as version 0.7.0 and hosted 126 tests PASS, superseding older notes above. Prompt 17 hosted workflow success does NOT clear its CAS REVIEW_REQUIRED and LFS BLOCKED outcomes. Next actual work is to RUN Prompt 18 and save execution evidence, not to present its preparation as execution. Prompt 19 only prepared readiness documentation and release gate HOLD. Do not declare V1 complete until evidence gaps and owner approval are resolved. Do not modify live marketing accounts.
+
+
+## Prompt 18 actual pilot execution amendment, 2026-10-20
+
+Hosted synthetic file pilot executed successfully in run 39495294275, 77 events, no actual provider changes, no real research and no independent AI review. Read docs/testing/PROMPT-18-SYNTHETIC-PILOT-REPORT.md for what genuinely ran. Continue the REAL research/image/independent QC segment of P18, then re-audit stable V1. Do not mark T01 PASS or treat CI green as hosted Git CAS acceptance.

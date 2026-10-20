@@ -1,3 +1,5 @@
+**Latest published preview:** v0.7.0 with the 21-module marketing library. Download https://github.com/digzoman/aos-workflows/releases/download/v0.7.0-portable-preview/aos-w-portable-0.7.0.zip . Verified hosted SHA-256 0826ddf9807354e80e22b757dd129b86539aae8d6ff3c7799029e5f3719c74f7 . Hosted CI 39434478250 and subsequent 39495294210 both succeeded. The 0.6.0-specific commands and original evidence below remain as a historical reference, replace the version and ZIP filename with 0.7.0 for current installs. Do not treat preview as approved V1.
+
 # Install and start AOS-W 0.6.0
 
 AOS-W's **portable core is a set of Markdown, YAML and JSON files**. It does not need Python, Git, Node, MCP, a server or a running daemon. A capable AI agent follows `aos-w/README.md` and `PROTOCOL.md` using persistent file storage. No background execution or distributed-lock guarantee is implied.
