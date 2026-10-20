@@ -19,14 +19,14 @@ const required = [
   "agent-files/config/sync.json", "agent-files/custom-templates/README.md", "agent-files/instances/README.md",
   "agent-files/indexes/README.md", "agent-files/cache/README.md", "agent-files/coordination/README.md"
 ];
-const schemas = ["approval","attempt","checkpoint","claim","common","compound-template","custom-template","event",
+const schemas = ["sync-config","sync-state","approval","attempt","checkpoint","claim","common","compound-template","custom-template","event",
  "handoff","instance","retry-policy","review","run","state","template-lock","template"].map(x => x + ".schema.json");
 let checks = 0;
 function check(ok, message) { checks++; if (!ok) throw new Error(message); }
 const read = relative => fs.readFileSync(path.join(root, relative), "utf8");
 for(const p of required) check(fs.existsSync(path.join(root,p)), "Missing scaffold path: " + p);
 const version = JSON.parse(read("VERSION.json"));
-check(version.aosw_version === "0.4.0", "Unexpected framework version");
+check(version.aosw_version === "0.5.0", "Unexpected framework version");
 check(version.mandatory_git === false && version.mandatory_programming_runtime === false, "Required runtime unexpectedly configured");
 const sync=JSON.parse(read("agent-files/config/sync.json"));
 check(sync.enabled === false && sync.status === "not_configured", "Bundled Git mirror must default off");

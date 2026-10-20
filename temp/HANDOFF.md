@@ -1,33 +1,25 @@
-# AOS-W Cross-Session Handoff — Prompt 12
+# AOS-W Cross-Session Handoff — Prompt 13
 
 Updated: 2026-10-20
-Status: Prompt 12 governance implementation complete, 75 synthetic/local tests passed. Next: Prompt 13 optional Git synchronization and real claim experiments.
-Repo: `digzoman/aos-workflows`, main — verify HEAD and readback before edits.
+Status: AOS-W 0.5.0 optional Git synchronization and provisional Git ref CAS; 90 local tests passed.
+Repo: digzoman/aos-workflows public main. Inspect current HEAD and progress before changes.
 
 ## Required next reads
-1. `temp/OPERATING-RULES.md`, `temp/DESIGN-DECISIONS.md`, `temp/CONCEPT-NOTES-01B.md`
-2. `temp/WORK-PLAN.md`, `temp/PROGRESS.md`, `temp/IMPLEMENTATION-HISTORY.md`
-3. `scaffold/aos-w/README.md`, `PROTOCOL.md`, `VERSION.json`
-4. `scaffold/aos-w/references/PROVENANCE-QUALITY-PERMISSIONS.md` and `STATE-AND-RECOVERY.md`
-5. `tools/governance/governance.py`, `cli.py`, `README.md`
-6. `tools/state/state.py` plus `tools/composition/`
-7. `temp/tests/PROMPT-12-GOVERNANCE-CONFORMANCE.md`, `tests/test_governance.py`, `tests/test_governance_cli.py`
-8. `docs/specs/prd/PRD.md`, `docs/specs/architecture/COORDINATION-AND-LOCKING.md` if available, and `temp/architecture/COORDINATION-AND-LOCKING.md`
+1. temp/OPERATING-RULES.md, temp/DESIGN-DECISIONS.md and temp/CONCEPT-NOTES-01B.md
+2. temp/WORK-PLAN.md, temp/PROGRESS.md and this handoff
+3. scaffold/aos-w/README.md, PROTOCOL.md, VERSION.json and agent-files/config/sync.json
+4. scaffold/aos-w/references/GIT-SYNC-AND-COORDINATION.md
+5. tools/git/coordination.py, cli.py, README.md, tests/test_git_coordination.py
+6. temp/tests/PROMPT-13-GIT-COORDINATION.md, docs/specs/adrs/ADR-014-git-cas-provisional-selection.md
+7. docs/specs/schemas/sync-config.schema.json, sync-state.schema.json, plus existing state/governance and test suites.
 
-## Actual current behavior
-- The installed scaffold remains file-based and operable by agents without programming runtime. Optional local checker supports actor provenance `[Agent | Platform | Role | Instance]`, advisory task ownership and release, append-only governance history, exact artifact-set independent/human/self/deterministic QC, structured remediation and version-bound waiver, scope-limited action approvals and revocation/expiry/amount controls, and detailed handoffs.
-- `RunStore` Prompt 11 reducer now handles governance events and optional `context_checked` for authorized local adapter paths, with existing tests unchanged. This flag and user roles are NOT authenticated credentials.
-- A grant valid at claim time is rechecked at task begin. Sender/publisher side effects are never performed; `operation_intent` records only intent after cooperative approval check.
-- New record JSON is cross-checked against verified SHA-256 event content before reuse; file tampering fails closed, but filesystem access remains ultimately untrusted.
-- Reviewer PASS on a changed artifact or old attempt/graph cannot unlock new work. Independent siblings may progress when a failed gate blocks dependents.
-- More restrictive host permissions and real identity verification are not implemented.
+## Observed guarantees
+- Git-free standalone mode unaffected; only agent-files normally writable after install.
+- Optional Git mode supports remote readback and non-force agent-files-only commit/push; dirty/diverged or unknown ahead history is blocked rather than overwritten.
+- Per-task remote ref CAS had exactly one winner in competing local clones sharing Git username/email. Token/epoch identifies separate logical agents; expiring a lease does not grant automatic takeover.
+- Loss of network stops shared claims, verification and mutation; one-writer mirrored mode can keep bounded local work marked sync pending.
+- Git LFS prototype is documented but actual binary/server unavailable. Hosted GitHub Git transport cannot resolve from this container. CAS is **provisional preference only**.
+- No provider API fences, human identity authentication, cross-file atomic transactions, or live campaign changes.
 
-## Test scope
-- 38 new governance/CLI tests, 26 Prompt 11, and 11 Prompt 10: **75/75 pass** on isolated local files.
-- No two-host collision, signed grant, true owner verification, provider request, image interpretation, or live business integration tested.
-
-## Prompt 13 deliverables needed
-Test both Git LFS file locks and genuinely conditional atomic Git task claims with real simultaneous workers, including shared GitHub identity, stale leases, crashes and loss of network; evaluate fencing. Add optional Git sync with check-before/write-after/verified-readback, conflict reporting, handoff and no hidden provider authority. Do not automatically select an untested winner. The base manual/no-Git folder must continue to work.
-
-## Hard boundaries
-All ordinary writes confined to `agent-files/`. Public repo contains no private contacts, credentials or raw Ampgent account details. `role=owner` and a QC PASS are not permission to send, spend or publish without actual host authentication; the test fixtures use declared simulated actors only.
+## Next: Prompt 14
+Produce self-contained downloadable package; test install/upgrade preserving user data, optional helpers, complete schemas and cold-start. Test live remote CAS/LFS separately in a suitably connected host before production claims. Keep no-runtime standalone mode and avoid public user data/secrets.

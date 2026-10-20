@@ -47,3 +47,7 @@ See [architecture specification](../architecture/README.md) and [PRD](../prd/PRD
 ## Prompt 12 additions
 
 `remediation.schema.json` and `governance-handoff.schema.json` document the two newly formalized record types. Claim, review, approval, event, state, handoff and common gate schemas gained compatible optional fields. Development and installed copies are byte-identical. This is shape validation guidance, not user authentication.
+
+## Prompt 13 additions
+
+`sync-config.schema.json` and `sync-state.schema.json` bring the installed/development schema set to **20**. They define optional Git modes, claim-backend choice and fail-closed shared offline policy. Actual remotely enforced guarantees require independent empirical validation.

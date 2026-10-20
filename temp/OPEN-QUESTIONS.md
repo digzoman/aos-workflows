@@ -114,3 +114,13 @@ Open questions are not blockers for Prompt 02 research unless explicitly noted.
 80. File-only agents can manually follow state/recovery protocol without Python, but should mark digest/clock/atomicity as UNVERIFIED if not available; cross-agent and cross-cloud durability remain Prompt 16–17 release tests.
 81. Graph revision file write and journal event are separate local operations; optional helper can recover stale run pointer when new graph digest is valid, but a missing graph file after a committed event must block for owner intervention.
 82. The existing Prompt 10 child materializer is sequential rather than transactional. Prompt 11 provides PARTIAL/MISSING audit, not automatic repaired fan-out; future coordinator must require explicit reconciliation and review.
+
+## Prompt 13 follow-ups
+
+89. Run real GitHub-hosted CAS claim competition with two harnesses sharing GitHub credentials, branch protections, false ACKs and network reconnect before production claims.
+90. Install Git LFS and exercise real lock server acquire/verify/unlock, push enforcement and same-account behavior; mock parser cannot prove it.
+91. Confirm privacy-safe claim branch identifiers and retention/sweeper policy for public repositories.
+92. Provider-side fencing/idempotency and authenticated approvals remain separate; a Git ref CAS does not lock Meta or HighLevel effects.
+93. Verify clock skew policy and lease renewal; expiration alone must never authorize takeover.
+94. Multi-file transactional recovery across local event journal, claim ref and synced Git branch remains future work.
+95. Confirm hosted service supports namespaced claim branches and explicit expected-old-SHA lease before enabling shared mode.

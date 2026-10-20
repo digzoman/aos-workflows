@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "mode": "standalone_single_writer",
+  "status": "not_configured",
+  "last_verified_remote_sha": null,
+  "last_remote_checked_at": null,
+  "sync_pending": false,
+  "remote_reachable": "unverified",
+  "claim_backend": "none",
+  "note": "User-owned; no Git configured or lock currently held."
+}

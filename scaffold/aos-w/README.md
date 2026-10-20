@@ -1,4 +1,4 @@
-# Agent OS Workflows — portable starter (0.4.0)
+# Agent OS Workflows — portable starter (0.5.0)
 
 **Status:** Initial **file-based scaffold**, not a workflow execution engine. It is usable as an instruction-driven, **single-writer, manually operated** workflow folder. Automatic graph execution, distributed locks, time-triggered runs, provider integration and validators are later milestones.
 
@@ -26,6 +26,10 @@ Use [references/STATE-AND-RECOVERY.md](references/STATE-AND-RECOVERY.md) to pers
 ## Agent provenance, QC and permissions (0.4.0)
 
 Read [the manual governance protocol](references/PROVENANCE-QUALITY-PERMISSIONS.md) for four-field actor identity, advisory claims and handoffs, configurable workflow/step quality gates, remediation, waiver, and separate time/resource/version-limited approvals. The [optional local governance checker](../../tools/governance/README.md) validates those records and event history, but **does not authenticate owners, enforce shared locks or perform external provider actions**. File-only operation still needs no Python.
+
+## Optional Git synchronization and shared work (0.5.0)
+
+Standalone use remains Git-free. If your workspace explicitly configures Git, follow [GIT-SYNC-AND-COORDINATION.md](references/GIT-SYNC-AND-COORDINATION.md) for remote checks, fast-forward-only refresh, commit/push verification, and per-task claims. The optional [developer Git helper](../../tools/git/README.md) implements explicit expected-old-SHA remote ref CAS and a Git LFS lock prototype. Git CAS won **local bare-remote** competition tests with separate agents using the same Git login; hosted GitHub transport and live Git LFS locking are **not yet verified**. Shared mode **fails closed** if the remote is unreachable. Git is never mandatory, and claims do not grant external action authority.
 
 ## What comes in this directory
 
@@ -56,4 +60,4 @@ Treat an installed release's `agent-files/` as user-owned. To upgrade, **back up
 
 > Read `aos-w/README.md`, `aos-w/PROTOCOL.md`, `aos-w/agent-files/README.md`, and saved `handoff.md`. Discover instances under `agent-files/instances/`. Validate the selected run's pinned template, `events.jsonl` and `state.json`; report any inconsistencies, blockers, approval requirements or unknown external effects. Identify the **next eligible bounded step** and ask before actions requiring approval. Never infer completion from chat memory or merely from a plan.
 
-This is a foundation for future Prompts 13–19, not the fully tested Version 1 release.
+This is a foundation for future Prompts 14–19, not the fully tested Version 1 release.

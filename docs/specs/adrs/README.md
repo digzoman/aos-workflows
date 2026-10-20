@@ -9,3 +9,5 @@
 - [ADR-013](ADR-013-skill-schedule-permission.md), just-in-time skill and recurring trigger separation from permissions.
 
 Pending owner authorization is **not** satisfied by this repository commit. Git LFS vs atomic Git claim design is intentionally unresolved until Prompts 13/17 tests.
+
+- [ADR-014](ADR-014-git-cas-provisional-selection.md), provisional preference for explicit expected-SHA Git ref CAS based on real *local* bare-Git tests; no real hosted GitHub/LFS server comparison yet.

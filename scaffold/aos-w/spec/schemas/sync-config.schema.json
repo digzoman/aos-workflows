@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AOS-W optional synchronization configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "enabled", "mode", "provider", "remote", "branch", "claim_backend"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "enabled": {"type": "boolean"},
+    "mode": {"enum": ["standalone_single_writer", "git_mirrored_single_writer", "shared_coordinated"]},
+    "provider": {"enum": ["none", "git"]},
+    "remote": {"type": ["string", "null"]},
+    "branch": {"type": ["string", "null"]},
+    "claim_backend": {"enum": ["none", "git_ref_cas", "git_lfs_experimental"]},
+    "claim_namespace": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,49}$"},
+    "offline_policy": {"enum": ["local_only_no_remote_claims", "fail_closed_shared"]},
+    "sync_checkpoints": {"type": "array", "items": {"enum": ["session_start", "before_claim", "before_shared_write", "after_checkpoint", "after_push", "handoff", "on_reconnect"]}, "uniqueItems": true},
+    "credentials_reference": {"type": ["null", "string"], "description": "Name of a host credential provider, never a secret value"},
+    "status": {"type": "string"},
+    "repository": {"type": ["null", "string"]},
+    "remote_url": {"type": ["null", "string"]},
+    "last_verified_remote_revision": {"type": ["null", "string"]},
+    "notes": {"type": "string"},
+    "extensions": {"type": "object"}
+  },
+  "allOf": [
+    {"if": {"properties": {"mode": {"const": "standalone_single_writer"}}}, "then": {"properties": {"enabled": {"const": false}, "claim_backend": {"const": "none"}}}},
+    {"if": {"properties": {"mode": {"const": "shared_coordinated"}}}, "then": {"properties": {"enabled": {"const": true}, "provider": {"const": "git"}, "claim_backend": {"enum": ["git_ref_cas", "git_lfs_experimental"]}, "offline_policy": {"const": "fail_closed_shared"}}}}
+  ]
+}

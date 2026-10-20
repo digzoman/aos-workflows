@@ -1,9 +1,9 @@
 # AOS-W V1 Work Plan
 
 Updated: 2026-10-20
-Current phase: Prompt 11 persistent state, checkpoints, retries and recovery implemented/tested locally
-Next phase: Prompt 12 identity/provenance, review/approvals and just-in-time skills
-No workflow engine implementation authorized before PRD approval.
+Current phase: Prompt 13 optional Git synchronization and local-remote coordination experiments completed
+Next phase: Prompt 14 optional tools, packaging, and real remote capability validation
+Implementation phases 09–13 were explicitly directed by the owner; live external operations remain separately approval-gated. Full V1 production/release approval is not implied.
 
 ## Research and design stages
 
@@ -23,7 +23,7 @@ No workflow engine implementation authorized before PRD approval.
 - [x] Prompt 10. Implemented 0.2.0 reusable template contracts, policy-constrained custom overlays, static/dynamic compound research workflows, optional local PyYAML composition/approval-gated instance helper, conditional/QA/permission-aware eligibility, revision impact planning, 11 passing conformance tests and sanitized multi-investigation fixtures. Automatic dispatch/event-safe revision application remain Prompt 11.
 - [x] Prompt 11. Implemented optional local append-oriented SHA-256 event/state helper, immutable checkpoint anchors, attempt/retry records, pause/resume/cancel/fail, exact-scope provider operation identity/reconciliation, graph revision application, corrupted-tail and stale-snapshot recovery; updated 5 schema pairs and file-only manual protocol. 26 new + 11 prior tests PASS. No provider calls, automatic scheduler or distributed mutual exclusion.
 - [ ] Prompt 12. Agent provenance, autonomy, permissions, QC, handoffs, and just-in-time skill loading/resolution without implicit authority expansion.
-- [ ] Prompt 13. Optional Git syncing; compare LFS and atomic Git coordination.
+- [x] Prompt 13. Implemented optional Git sync, explicit old-SHA CAS task claims, Git LFS client prototype, fail-closed offline modes, and 15 local Git conformance tests (90 total); provisional preference for CAS, hosted GitHub/LFS server tests still pending.
 - [ ] Prompt 14. Optional helper tooling and independent download package.
 - [ ] Prompt 15. Sanitized Ampgent marketing template library.
 

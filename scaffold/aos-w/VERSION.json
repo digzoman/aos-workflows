@@ -1,8 +1,8 @@
 {
-  "aosw_version": "0.4.0",
+  "aosw_version": "0.5.0",
   "schema_version": "1.0.0",
   "distribution": "portable-file-scaffold",
-  "status": "manual-file-protocol-with-optional-state-and-governance-checkers",
+  "status": "manual-standalone-plus-optional-git-synchronization-and-provisional-cas",
   "minimum_requirements": [
     "capable agent",
     "persistent writable files within agent-files"
@@ -50,5 +50,18 @@
     "claim_enforcement": "advisory_only",
     "human_identity_authentication": "not_implemented",
     "provider_actions": "not_implemented"
+  },
+  "git": {
+    "optional": true,
+    "modes": [
+      "standalone_single_writer",
+      "git_mirrored_single_writer",
+      "shared_coordinated"
+    ],
+    "preferred_claim_adapter": "git_ref_cas_provisional",
+    "verified_on": "local_bare_git_remote_only",
+    "lfs_server_tested": false,
+    "hosted_github_claim_tested": false,
+    "no_external_api_fencing": true
   }
 }

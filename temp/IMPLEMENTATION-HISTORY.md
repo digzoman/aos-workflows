@@ -121,3 +121,14 @@ Future sessions should append substantive events with changed files, test eviden
 - Updated draft `state`, `event`, `run`, `handoff` and `retry-policy` schema definitions in **both** development and installable copies; added manual instructions `references/STATE-AND-RECOVERY.md` and synthetic recovery fixture descriptions.
 - Ran **26 new local tests PASS**, plus **11 Prompt 10 regression tests PASS**, 37/37 overall, with one initial test-fixture copy setup correction documented. Only local synthetic tools, no live external accounts. Report: `temp/tests/PROMPT-11-STATE-CONFORMANCE.md`.
 - No automatic execution scheduler, hard shared coordination, authenticated external-action authority or provider write/readback. Next Prompt 12 provenance/permissions/QC/skills.
+
+## 2026-10-20. Prompt 13 — optional Git synchronization and task claims
+
+- Built on the published Prompt 12 foundation and verified prior local regression tests.
+- Implemented Git-optional remote check/fetch, clean fast-forward, no silent auto-merge/reset/force-push, explicit agent-files-only commit and remote readback with four-part Agent-Provenance commit trailer.
+- Prototyped CAS task refs with explicit old SHA lease, logical actor separate from Git user, UUID token and monotonic epoch, explicit expired-claim reclaim, release and fail-closed offline behavior.
+- Git LFS lock/verify/unlock wrapper is present, but git-lfs binary and supporting server were unavailable; no real Git LFS experiment conducted.
+- Real local bare Git remote tested with separate clones using same Git user identity. 15 new tests passed, 90 regression tests total; six concurrent races each yielded one winner.
+- Added three-mode configuration, observed sync-state, two Draft 2020-12 JSON schemas (20 total), portable manual rules, ADR-014, sanitized fixtures and test evidence.
+- Provisional preferred coordinator is Git ref CAS, subject to hosted GitHub branch/ref, race and network testing; no real GitHub Git transport (DNS unresolved) or provider side effects.
+- Next Prompt 14: packaging and upgrade preservation, schema validation and optional-host readiness testing.

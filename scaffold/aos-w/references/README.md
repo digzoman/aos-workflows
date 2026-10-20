@@ -15,3 +15,5 @@ These documents are part of the **protected** scaffold. Put project-specific var
 - [STATE-AND-RECOVERY.md](STATE-AND-RECOVERY.md), 0.3.0 event history, checkpoint, bounded retry, external-operation reconciliation and cold-start handoff protocol.
 
 - [PROVENANCE-QUALITY-PERMISSIONS.md](PROVENANCE-QUALITY-PERMISSIONS.md), v0.4.0 identity, advisory claims, version-bound reviews, remediation, scoped approvals and handoffs.
+
+- [GIT-SYNC-AND-COORDINATION.md](GIT-SYNC-AND-COORDINATION.md), v0.5.0 optional local/Git/multiagent modes, remote refresh, explicit Git ref CAS, LFS limitations, offline recovery and safe handoffs.

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AOS-W optional synchronization observations",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "mode", "status", "claim_backend"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "mode": {"enum": ["standalone_single_writer", "git_mirrored_single_writer", "shared_coordinated"]},
+    "status": {"enum": ["not_configured", "verified_remote_response", "BLOCKED_OR_UNVERIFIED", "sync_pending", "conflict", "verified"]},
+    "claim_backend": {"enum": ["none", "git_ref_cas", "git_lfs_experimental"]},
+    "remote": {"type": "string"},
+    "branch": {"type": "string"},
+    "remote_reachable": {"enum": ["unverified", "yes", "no"]},
+    "last_verified_remote_sha": {"type": ["string", "null"]},
+    "last_remote_checked_at": {"type": ["string", "null"], "format": "date-time"},
+    "sync_pending": {"type": "boolean"},
+    "actor": {"type": ["object", "null"], "additionalProperties": true},
+    "action": {"type": "string"},
+    "checked_at": {"type": "string", "format": "date-time"},
+    "reason": {"type": "string"},
+    "note": {"type": "string"},
+    "extensions": {"type": "object"}
+  }
+}

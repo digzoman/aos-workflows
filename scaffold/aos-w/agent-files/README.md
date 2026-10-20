@@ -38,3 +38,7 @@ Persist the actor-bound event journal and immutable graph revision under each ru
 ## Prompt 12 append-only governance records
 
 Runs may create `claims/`, `reviews/`, `approvals/` and `handoffs/` records under this writable subtree. Append meaningful changes to `events.jsonl` and rebuild `state.json` from the verified event prefix. Owner/reviewer names are declared metadata, not authenticated permission; claims are advisory without a coordinator. Consult [the governance reference](../references/PROVENANCE-QUALITY-PERMISSIONS.md) and keep normal writes only under `agent-files`.
+
+## Optional Git synchronization (0.5.0)
+
+`config/sync.json` stores **configuration**, while `config/sync-state.json` stores the last actually observed sync attempt/result. Both belong to user-owned agent-files; no credentials are stored in either. If Git is not configured, mode remains standalone. In `shared_coordinated` mode, verified remote per-task claims must be obtained **before** modifying shared artifacts; no CAS connectivity means BLOCKED, not fallback to an expired local claim. Keep evidence and handoff records honest; remote commit and Git identity are separate from agent provenance and action approvals. See `../references/GIT-SYNC-AND-COORDINATION.md`.

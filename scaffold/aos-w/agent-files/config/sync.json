@@ -7,5 +7,20 @@
   "branch": null,
   "last_verified_remote_revision": null,
   "status": "not_configured",
-  "notes": "Git is optional; do not put credentials here. Configured sync must be checked before and after work."
+  "notes": "Git is optional; do not put credentials here. Configured sync must be checked before and after work.",
+  "mode": "standalone_single_writer",
+  "remote": null,
+  "claim_backend": "none",
+  "claim_namespace": "aosw-claims",
+  "offline_policy": "local_only_no_remote_claims",
+  "sync_checkpoints": [
+    "session_start",
+    "before_claim",
+    "before_shared_write",
+    "after_checkpoint",
+    "after_push",
+    "handoff",
+    "on_reconnect"
+  ],
+  "credentials_reference": null
 }

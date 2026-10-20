@@ -1,6 +1,6 @@
 # Installed draft JSON Schemas
 
-This directory ships the eighteen JSON Schema Draft 2020-12 design files **inside the standalone distribution**. They match the repository's `docs/specs/schemas/` at scaffold packaging time. No network access is required to read them.
+This directory ships the twenty JSON Schema Draft 2020-12 design files **inside the standalone distribution**. They match the repository's `docs/specs/schemas/` at scaffold packaging time. No network access is required to read them.
 
 These documents cover common types; master/custom/compound templates; retry; instance and pinned template lock; run; state; event; checkpoint; claim; review; approval; handoff and attempt. Source references use relative `$ref` paths inside this directory.
 
@@ -14,4 +14,8 @@ The draft `state`, `event`, `run`, `handoff` and `retry-policy` schemas now desc
 
 ## Governance record additions
 
-The 0.4.0 distribution includes **18** draft JSON Schemas: the original 16 plus `remediation.schema.json` and `governance-handoff.schema.json`. Claim/review/approval/state/event/handoff fields support additional actor, graph, expiry/revocation and waiver metadata. Schema-valid records do not prove owner identity or real provider authority.
+The 0.4.0 distribution includes **20** draft JSON Schemas: the original 16 plus `remediation.schema.json` and `governance-handoff.schema.json`. Claim/review/approval/state/event/handoff fields support additional actor, graph, expiry/revocation and waiver metadata. Schema-valid records do not prove owner identity or real provider authority.
+
+## Prompt 13 schemas
+
+Two new structural definitions, `sync-config.schema.json` and `sync-state.schema.json`, define modes, backend choice, offline behavior and observed remote status. There are now **20** bundled draft schemas; they do not prove a successful Git push, exclusive claim or provider authorization.
