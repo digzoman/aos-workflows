@@ -1,0 +1,20 @@
+{
+  "allowed_actions": [
+    "read",
+    "research",
+    "write_local",
+    "review"
+  ],
+  "artifacts": {
+    "approve-plan:plan-approval": {
+      "verified": true
+    },
+    "define-verticals:portfolio-plan": {
+      "verified": true
+    }
+  },
+  "graph_revision": "g0001",
+  "mode": "standalone_single_writer",
+  "reviews": {},
+  "values": {}
+}

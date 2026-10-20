@@ -61,6 +61,7 @@
               "RUNNING",
               "WAIT_EXTERNAL",
               "WAIT_REVIEW",
+              "FAILED",
               "NEEDS_REWORK",
               "BLOCKED",
               "RECONCILE_REQUIRED",

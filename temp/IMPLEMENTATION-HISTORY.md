@@ -98,3 +98,15 @@ Future sessions should append substantive events with changed files, test eviden
 - Performed staged Git tree validation: required paths present, 16 schema Git blobs match source, example template/snapshot/graph Git blob match and lock digest, two event sequence and state/checkpoint/handoff consistent, template graphs have no missing parsed dependencies or cycles. Detailed PASS/NOT-RUN evidence in `temp/tests/PROMPT-09-STRUCTURAL-VALIDATION.md`.
 - Did **not** run a full YAML/JSON-Schema validator, actual optional scripts, cross-agent cold-start or create a prebuilt ZIP in this tool environment, and did not implement graph executor, Git locking, schedule host, provider writes or live marketing actions.
 - Next Prompt 10, implement reusable template resolution, compound graph behavior and eligibility without violating no-runtime standalone mode.
+
+## 2026-10-20. Prompt 10, reusable workflow templates and composition
+
+- Read persistent project state, architecture/schema decisions and existing Prompt 09 scaffold; verified GitHub main at prior commit before building.
+- Extended read-only master library with `competitor-investigation`, `research-portfolio-planner`, and `research-portfolio-compound` (version 0.2.0), plus user-owned SHA-pinned custom Ontario overlay. Upgraded original master YAMLs to explicit step input/output/QC/dependency/contract fields, while preserving original practice run pinned to 0.1.0 bytes and adjusting optional legacy validation expectations.
+- Documented file-only manual composition under `scaffold/aos-w/references/COMPOSITION.md`, revised template indexes, master/overlay READMEs and installed operating protocol.
+- Added OPTIONAL PyYAML-based local helper and CLI in `tools/composition/` for schema-like graph shape validation, safe overlays, parameter resolution, readiness, stable dynamic child proposals, approved local materialization, strict reviewed synthesis and graph revision impact. Never made Python a mandatory runtime for downloaded file-only users.
+- Added sanitized conformance JSON/YAML fixtures for coaches, agency owners and roofing research; mock approvals and PASS reviews exist **only as test fixtures** and do not prove actual work or owner authorization.
+- Expanded `common.schema.json` (source and installed copy) for explicit node contracts and `state.schema.json` with FAILED for failure classification. Kept old schema fields optional to preserve 0.1.0 pinned run compatibility.
+- Ran 11 local unittest methods and CLI smoke commands PASS; verified source Git blob SHA identity before commit. Log at `temp/tests/PROMPT-10-COMPOSITION-CONFORMANCE.md`.
+- No provider/network actions, automatic workflow scheduling, live QA generation, concurrent task locking, event-backed revision application or crash-safe state engine implemented.
+- Next Prompt 11 durable state, checkpoints, retry/recovery and controlled graph revision application.

@@ -1,0 +1,6 @@
+{
+  "missing_approval": "BLOCKED",
+  "missing_review": "BLOCKED",
+  "old_template_pin": "MUST_REMAIN_VERSIONED",
+  "source_inaccessible": "UNKNOWN not EMPTY_VERIFIED"
+}

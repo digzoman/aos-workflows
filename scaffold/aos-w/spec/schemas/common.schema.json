@@ -605,6 +605,84 @@
             "content_digest",
             "authorization_mode"
           ]
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "from": {
+                "$ref": "#/$defs/id"
+              },
+              "artifact_id": {
+                "$ref": "#/$defs/id"
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "revision": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "from",
+              "artifact_id"
+            ]
+          }
+        },
+        "quality": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "gates": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/id"
+              }
+            },
+            "criteria": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "gates"
+          ]
+        },
+        "contract": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "done_when": {
+              "type": "string",
+              "minLength": 1
+            },
+            "scope": {
+              "type": "string"
+            },
+            "on_failure": {
+              "enum": [
+                "retry_bounded",
+                "block",
+                "escalate"
+              ]
+            }
+          },
+          "required": [
+            "done_when"
+          ]
+        },
+        "extensions": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Namespaced graph extensions for dynamic join sources; no permission escalation"
         }
       },
       "required": [

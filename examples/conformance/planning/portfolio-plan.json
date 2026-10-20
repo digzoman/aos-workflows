@@ -1,0 +1,29 @@
+{
+  "approval_node": "approve-plan",
+  "approved_input": true,
+  "child_template_id": "competitor-investigation",
+  "child_template_version": "0.2.0",
+  "items": [
+    {
+      "buyer": "Business coaches and consultants",
+      "focus": "DIY and AI-assisted Meta campaigns",
+      "market": "North America",
+      "slug": "coaches"
+    },
+    {
+      "buyer": "Agency owners",
+      "focus": "Meta ad creative production tools",
+      "market": "North America",
+      "slug": "agencies"
+    },
+    {
+      "buyer": "Roofing contractors",
+      "focus": "Lead generation ads, planned replacement versus storm",
+      "market": "North America",
+      "slug": "roofing"
+    }
+  ],
+  "parent_run_id": "portfolio-run-001",
+  "plan_id": "bucket9-research",
+  "revision": "r0001"
+}

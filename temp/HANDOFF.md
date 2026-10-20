@@ -1,43 +1,36 @@
 # AOS-W Cross-Session Handoff
 
 Date: 2026-10-20
-Completed: **Prompt 09 initial portable scaffold**
-Repository: `digzoman/aos-workflows`, public `main`. **Check latest HEAD before any next modifications.**
+Completed: **Prompt 10 reusable templates, compound workflow conventions, optional local helper and conformance tests**
+Repository: `digzoman/aos-workflows`, public main. **Check HEAD and project rules before the next change.**
 
-## First reads for next session
+## Priority reads for Prompt 11
+1. `temp/OPERATING-RULES.md`, `temp/DESIGN-DECISIONS.md`, `temp/CONCEPT-NOTES-01B.md`
+2. `temp/WORK-PLAN.md`, `temp/PROGRESS.md`, this handoff
+3. `scaffold/aos-w/README.md`, `PROTOCOL.md`, `VERSION.json`
+4. `scaffold/aos-w/references/COMPOSITION.md`, `START-A-RUN.md`
+5. `tools/composition/composition.py`, `cli.py`, `README.md`
+6. `tests/test_composition.py`, `temp/tests/PROMPT-10-COMPOSITION-CONFORMANCE.md`
+7. `scaffold/aos-w/templates/competitor-investigation/template.yaml`
+8. `scaffold/aos-w/templates/research-portfolio-planner/template.yaml`
+9. `scaffold/aos-w/templates/research-portfolio-compound/template.yaml`
+10. `examples/conformance/planning/` synthetic planning/approval/review fixtures
+11. `docs/specs/architecture/EXECUTION-STATE.md`, `GRAPH-AND-REVISIONS.md`, `MANUAL-AGENT-PROTOCOL.md`
 
-1. `temp/OPERATING-RULES.md`
-2. `temp/DESIGN-DECISIONS.md`, `temp/CONCEPT-NOTES-01B.md`
-3. `temp/WORK-PLAN.md`, `temp/PROGRESS.md`
-4. `docs/specs/prd/PRD.md`, `docs/specs/architecture/README.md`
-5. `scaffold/aos-w/README.md`, `scaffold/aos-w/PROTOCOL.md`, `scaffold/aos-w/VERSION.json`
-6. `scaffold/aos-w/agent-files/README.md` and `scaffold/aos-w/agent-files/instances/README.md`
-7. `scaffold/aos-w/references/START-A-RUN.md`, `INSTANCE-LAYOUT.md`, `UPGRADE-AND-PORTABILITY.md`
-8. `scaffold/aos-w/templates/research-starter/template.yaml`, `periodic-review-example/template.yaml`
-9. `scaffold/aos-w/agent-files/instances/demo-local-research/runs/run-001/handoff.md`
-10. `temp/tests/PROMPT-09-STRUCTURAL-VALIDATION.md`, `docs/specs/schemas/README.md`
+## Implemented contract
+- Master/custom reusable YAML templates; custom overlay pinned to exact base version + SHA256, cannot expand owner actions/parallel allowance or drop inherited QC.
+- New nodes explicitly declare inputs, outputs, expected quality gates, stable ID, needs and done_when contract. New 0.2 masters validate; old synthetic 0.1 practice instance remains **pinned** to old snapshot.
+- Approved plan produces deterministic proposed child IDs `plan_id-slug-revision`. A **separate exact-scope simulated approval** was exercised to locally create three independent run directories in tests, each CREATED and not yet executed.
+- Readiness categories: ready/waiting/blocked/failed/completed, preserving UNKNOWN conditions; explicit all-reviewed current children and separate approval before synthesis. Parallel branches are data-level independent, not automatically dispatched.
+- Proposed material revision impact preserves unaffected completed work, requires separate authorization for changes to executed/sensitive nodes. No durable graph-revision application/actual events yet.
+- Conformance: 11 local unit tests passed, CLI smoke tests passed, source SHA identities matched staged repository content.
 
-## Exact current implementation
+## Next Prompt 11 tasks
+- Formalize durable event append and materialized state with consistency and torn-write handling, checkpoint recovery, bounded retries and provider ambiguity tracking.
+- Implement protected graph-revision **application** without overwriting historical events/accepted artifacts, using the Prompt 10 revision impact reports and explicit version-scoped approval.
+- Address interrupted child instantiation or partial file-write reconciliation. Do not claim atomicity in plain-file mode.
+- Add negative tests for retry duplication, stale gate revisions, corrupted JSONL and crash recovery. Preserve 0.1 pinned fixtures and user-owned directories.
+- Keep provider state authoritative; no live Meta/GHL operations unless separately authorized.
 
-- Protected/read-mostly `scaffold/aos-w` framework docs/templates/skills/specs and `VERSION.json` tagged 0.1.0.
-- Sixteen JSON Schema drafts copied byte-for-byte into installed `spec/schemas/`.
-- Manual low-risk research-starter template with 3 valid graph nodes and bundled step-local skill; optional periodic-review template with disabled schedule declaration.
-- Only `agent-files/` is normal writable root; subdirectories for config, custom template, instances/runs, evidence/artifacts, attempts/history, claims, reviews, approvals and indexes/cache/coordination are physically represented by user-owned config and **synthetic practice instance**.
-- Practice `demo-local-research/run-001` has **created, not executed** state, 2 init events, no completed tasks/real research/authority, matching g0001 template pin and a safe next task `define-scope`.
-- No Git requirement for a downloaded folder. Git/scheduler/provider capabilities default disabled/unverified and live remote actions require separately established permission.
-
-## Tests and verification limits
-
-- Staged tree structural existence, Git blob pinning, schema-source copy identity, demo run event/state/checkpoint/handoff coherence, and both built-in graph shape checks PASSED. See test report.
-- Node validator and shell packager are **optional and authored but NOT RUN**; full YAML parser/JSON Schema validation NOT RUN, no real cross-platform handoff, no working auto engine/Git claims/provider API integration.
-- No actual scaffold-only ZIP release asset created by this ChatGPT tool session; using GitHub's repo ZIP plus copying the folder is documented.
-
-## Next assignment, Prompt 10
-
-Implement template resolution/inheritance, compound and conditional workflow semantics, dependency-aware eligibility, dynamic child proposals and merge logic according to current technical design. Keep manually readable portable specification and no mandatory Git/runtime; if adding optional tools, verify they are not a dependency. Exercise new workflow behavior with real local fixture files and explicitly label MOCKED versus LIVE.
-
-Avoid changes to live Meta, GHL, websites or real customer systems. Agent claims remain advisory unless a tested adapter is introduced. Update plan/progress/handoff/history and commit actual artifacts, not unverified reports.
-
-## Scoped approval
-
-User explicitly directed Prompt 09 implementation under the described approved PRD, recorded as authorization for **this scaffold**. Earlier form fields were pending, and no blanket ADR acceptance or provider publishing permissions are claimed.
+## Guardrails
+No mandatory Git, Python, database, MCP, cloud, dashboard or scheduler for file-native standalone users. Optional PyYAML requires explicit host choice. No tested Git LFS/CAS concurrency, no real unattended tasks, no production ad publishing. Programmatic helper writes only to user-owned `agent-files`; permissions in fixture are MOCKED and not authenticated authority.

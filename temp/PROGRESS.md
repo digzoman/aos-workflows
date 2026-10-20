@@ -1,46 +1,40 @@
 # AOS-W Development Progress
 
 Date: 2026-10-20
-Phase: **Prompt 09 initial portable scaffold IMPLEMENTED; staged structural validation PASSED.**
-Next: Prompt 10 template resolution, compound graphs, conditional eligibility and dynamic instance behavior.
+Phase: **Prompt 10 reusable workflow composition implemented and locally tested**
+Status: FILE-FIRST MANUAL STANDARD + OPTIONAL COMPOSITION HELPER. NOT A BACKGROUND ENGINE.
+Next: Prompt 11 durable execution state, checkpoints, retries, recovery and interrupted-work semantics.
 
-## Previous work
+## Prior phases
+- Prompts 01–08: requirements, historical Ampgent evidence, A Rep/LangGraph/Git research, PRD, technical specifications and proposed ADRs.
+- Prompt 09: installable standalone 0.1.0 scaffold with protected master definitions, user-owned agent-files, 16 schema copies, two starter templates, practice run and optional structural helpers.
 
-- Prompts 01–01b: user requirements, 16 survey answers, one-off/recurrence and step-local skills, public repo.
-- Prompts 02–05: sanitized evidence from Ampgent advertiser research, B1–B9 creative production, Meta/website/CRM staging, launch and monitoring.
-- Prompt 06: architectural comparisons and proposed ADRs 001–008.
-- Prompt 07: comprehensive PRD with user requirements trace, acceptance matrix and unresolved decisions.
-- Prompt 08: 16 draft JSON Schemas, detailed architecture, graph/revision/state/recovery/manual agent protocol, proposed ADRs 009–013.
+## What Prompt 10 actually added
+- Updated standardized scaffold version to **0.2.0**. Original synthetic 0.1.0 `demo-local-research` run remains pinned to its previous immutable source/graph (no silent template upgrade).
+- Master `competitor-investigation` template with five tasks, independent `evidence-qc`, explicit input/output/quality/dependency/contract fields.
+- Master `research-portfolio-planner` with define-plan, owner approval, deterministic child proposals and all-reviewed synthesis gate.
+- Master `research-portfolio-compound` showing three version-and-SHA256-pinned static children, scoped bindings and all-accepted join.
+- Existing `research-starter` and `periodic-review-example` master definitions upgraded to explicit 0.2.0 contracts without changing existing run history.
+- Sanitized `agent-files/custom-templates/competitor-investigation-ontario/` overlay with exact base source SHA and permission-constrained node patch.
+- Portable human/agent `references/COMPOSITION.md`, template READMEs and updated protocol.
+- **Optional** `tools/composition/composition.py` + `cli.py`: validate acyclic graph contracts, resolve bounded policy overlays/parameters, classify ready/waiting/blocked/failed/completed work, evaluate three-valued conditions, propose stable child IDs, locally create approved children, merge only reviewed children with explicit synthesis authorization, analyze authorized graph revision impact.
+- Expanded both authoritative and installed `common.schema.json` node definitions with `inputs`, `quality`, `contract`, `extensions`; added FAILED status in both state schema copies, preserving backwards-compatible optional node fields.
+- Conformance fixtures in `examples/conformance/planning/` for three buyer verticals, simulated approval and review, proposals, context and revised graph.
 
-## Prompt 09 working foundation
+## Actual validation performed
+- **11 unittest methods PASS** with PyYAML in local development runtime.
+- Optional helper CLI smoke tests of validate, classify, propose, materialize, merge, and revision-impact PASS against synthetic fixtures.
+- Verified local test source/blob identity against staged GitHub tree SHA for key tool, test, fixture and template files before commit.
+- Scoped simulated approval creates three CREATED child instance folders under a temporary `agent-files`; no real research, Meta, CRM, messages, website or spend.
+- Report: `temp/tests/PROMPT-10-COMPOSITION-CONFORMANCE.md`.
 
-- Download/copy `scaffold/aos-w/` alone to a persistent local/cloud directory. README, PROTOCOL, VERSION and five bundled detailed specifications plus **16 copied draft JSON Schemas** are installed; no external docs required for manual reading.
-- Master templates `research-starter` (3 nodes, manual, local-only, bundled evidence-handling SKILL) and `periodic-review-example` (2 nodes, disabled weekly trigger, no automatic wake).
-- Writable `agent-files/` includes config with Git/scheduler/provider unavailable by default, custom templates, instances, indexes, cache, coordination notes.
-- **Inert practice instance** `agent-files/instances/demo-local-research/`: pinned version and content blob, immutable g0001 snapshot, run-001 with run_created and initial checkpoint events, derived state READY only for define-scope, checkpoint/handoff, task attempts and audit/evidence/review/approval directories. This is a structural initial state **not performed work**.
-- Protected standard content versus writable user data clearly documented; safe manual upgrade must preserve agent-files without overwriting it.
-- Optional nonrequired maintainer scripts: `scripts/validate-scaffold.mjs` (Node.js structural checks) and `scripts/package-scaffold.sh` (zip helper). These were authored but **not executed in this environment**.
-- Updated root/scaffold/example documentation for directly downloadable repository-folder layout and honest capability limits.
+## Deliberate limits
+- No mandatory Python/PyYAML to use the **downloadable** file-and-instructions framework. Helper is development/host-optional.
+- No network provider calls, automatic background dispatch/schedule, authenticated approvals, truly exclusive concurrent claims, or crash-atomic multi-child transaction.
+- Graph revisions: impact and safety check **implemented**, event-backed application not implemented yet. Prompt 11 handles state/retries/recovery.
+- JSON Schema validator-library invocation on complete remote schema bundle not claimed; node shape validation is by the tested helper.
+- User's explicitly scoped Prompt 10 instruction authorizes these project files, **not** production account changes or blanket ADR acceptance.
+- Full V1 T01–T16 cross-platform/production/scheduling acceptance remains future work.
 
-## Verification actually performed
-
-Repository staged-tree reads confirmed:
-1. Required runtime/config/sample paths exist; 16 schema copies match original design blob SHAs.
-2. Master research template, saved snapshot and current g0001 graph match the exact same Git blob SHA, and template-lock digest matches.
-3. JSON sample records parse, events seq 1–2 align with state/checkpoint/handoff at seq 2; run state CREATED, no attempts completed or grants claimed.
-4. The two master templates passed simple static node/dependency resolution and no detected cycle.
-5. `temp/tests/PROMPT-09-STRUCTURAL-VALIDATION.md` distinguishes PASS from NOT_RUN tests.
-
-## Still NOT implemented or demonstrated
-
-- Full JSON Schema/YAML validation through an actual parser/validator in the installed distribution or even the optional Node script's execution.
-- A real end-to-end standalone run resumed across separate AI sessions.
-- Automated graph executor, durable crash-atomic filesystem writes, conditional/dynamic execution runtime, parallel scheduling, verified Git CAS/LFS locking, provider integration, external publishing, Meta/CRM actions.
-- Prebuilt ZIP uploaded as release; installation instructions use repository ZIP (copy only folder) or optional packager script.
-- All 16 V1 acceptance tests remain NOT RUN.
-
-## Owner authorization and limits
-
-The user explicitly requested Prompt 09 **implementation using the approved PRD**, which constitutes scoped authorization for this scaffold step. The prior dedicated PRD approval form did not separately record a broad decision; proposed ADRs are not all accepted by inference. No permission for live marketing operations or spending was given.
-
-Next Prompt 10 should implement and test actual template inheritance/composition/graph step eligibility while retaining the zero-mandatory-runtime manual protocol. **Do not oversell the 0.1.0 scaffold as a working execution engine.**
+## Next step
+Prompt 11 implements persistent event/state/checkpoint reconciliation, bounded retry mechanics, safe interrupted work and explicit revision transactions, staying compatible with manual single-agent mode and preserving only `agent-files/` normal writes.

@@ -1,6 +1,6 @@
 # Research starter template
 
-**Template ID:** `research-starter`; `version: 0.1.0`. Standalone manual, non-repeating, local-file-only by default.
+**Template ID:** `research-starter`; `version: 0.2.0`. Standalone manual, non-repeating, local-file-only by default.
 
 1. Supply a bounded `question` and optional `scope`.
 2. Pin `template.yaml` to your new instance under `agent-files/` before starting.
@@ -13,3 +13,5 @@ The review is **not independently reviewed**; the configured gate is `self_revie
 Outputs are **run-root-relative** paths, e.g. `agent-files/instances/<instance-id>/runs/<run-id>/artifacts/scope.md`, not paths inside this protected template directory.
 
 If source material is inaccessible, use retry/blocked notes instead of declaring it absent. No scheduled execution or automatic runtime is included.
+
+The 0.2.0 master adds explicit `inputs`, `quality.gates`, and `contract.done_when`. The pre-seeded synthetic example under `agent-files/instances/demo-local-research` correctly keeps its immutable **0.1.0** snapshot, not the new master.

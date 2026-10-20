@@ -1,0 +1,14 @@
+{
+  "approve-plan": {
+    "status": "COMPLETE"
+  },
+  "define-verticals": {
+    "status": "COMPLETE"
+  },
+  "propose-investigations": {
+    "status": "WAIT_DEPENDENCY"
+  },
+  "synthesize": {
+    "status": "WAIT_DEPENDENCY"
+  }
+}

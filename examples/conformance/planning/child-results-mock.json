@@ -1,0 +1,47 @@
+{
+  "bucket9-research-agencies-r0001": {
+    "artifacts": [
+      {
+        "artifact_id": "review-report",
+        "locator": "artifacts/review.md",
+        "revision": "fixture-only"
+      }
+    ],
+    "graph_revision": "g0001",
+    "review": {
+      "review_id": "review-bucket9-research-agencies-r0001",
+      "verdict": "PASS"
+    },
+    "status": "COMPLETE"
+  },
+  "bucket9-research-coaches-r0001": {
+    "artifacts": [
+      {
+        "artifact_id": "review-report",
+        "locator": "artifacts/review.md",
+        "revision": "fixture-only"
+      }
+    ],
+    "graph_revision": "g0001",
+    "review": {
+      "review_id": "review-bucket9-research-coaches-r0001",
+      "verdict": "PASS"
+    },
+    "status": "COMPLETE"
+  },
+  "bucket9-research-roofing-r0001": {
+    "artifacts": [
+      {
+        "artifact_id": "review-report",
+        "locator": "artifacts/review.md",
+        "revision": "fixture-only"
+      }
+    ],
+    "graph_revision": "g0001",
+    "review": {
+      "review_id": "review-bucket9-research-roofing-r0001",
+      "verdict": "PASS"
+    },
+    "status": "COMPLETE"
+  }
+}

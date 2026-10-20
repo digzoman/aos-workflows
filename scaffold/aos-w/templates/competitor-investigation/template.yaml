@@ -1,0 +1,140 @@
+schema_version: 1.0.0
+template_id: competitor-investigation
+version: 0.2.0
+name: Competitor ad and offer investigation
+description: Bounded Meta competitor research, never access or change customer ad accounts
+parameters:
+  buyer:
+    type: string
+    required: true
+  focus:
+    type: string
+    required: true
+  market:
+    type: string
+    required: false
+    default: US and Canada
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates:
+  - evidence-qc
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+gates:
+- gate_id: evidence-qc
+  kind: ai_independent
+  required: true
+  rubric: All declared source claims checked against dated evidence; no invented Meta Ad Library findings.
+graph:
+  nodes:
+  - id: scope
+    kind: task
+    needs: []
+    instructions: Clarify buyer, market, search questions and scope.
+    inputs: []
+    outputs:
+    - artifact_id: scope
+      path: artifacts/scope.md
+      required: true
+    quality:
+      gates: []
+    contract:
+      done_when: All declared output artifacts exist, are dated and have provenance; do not invent outcomes.
+    required_actions:
+    - read
+    - write_local
+  - id: search-ads
+    kind: task
+    needs:
+    - scope
+    instructions: Discover and log observed Meta advertisers and offers; unavailable is not zero.
+    inputs:
+    - from: scope
+      artifact_id: scope
+      required: true
+    outputs:
+    - artifact_id: source-log
+      path: artifacts/source-log.md
+      required: true
+    quality:
+      gates: []
+    contract:
+      done_when: All declared output artifacts exist, are dated and have provenance; do not invent outcomes.
+    required_actions:
+    - read
+    - write_local
+  - id: extract-offers
+    kind: task
+    needs:
+    - search-ads
+    instructions: Deduplicate advertisers and offer families; differentiate agency service versus tool.
+    inputs:
+    - from: search-ads
+      artifact_id: source-log
+      required: true
+    outputs:
+    - artifact_id: offer-matrix
+      path: artifacts/offer-matrix.md
+      required: true
+    quality:
+      gates: []
+    contract:
+      done_when: All declared output artifacts exist, are dated and have provenance; do not invent outcomes.
+    required_actions:
+    - read
+    - write_local
+  - id: verify-evidence
+    kind: task
+    needs:
+    - extract-offers
+    instructions: Cross-check required sources and flag unsupported claims.
+    inputs:
+    - from: extract-offers
+      artifact_id: offer-matrix
+      required: true
+    outputs:
+    - artifact_id: verified-evidence
+      path: artifacts/verified-evidence.md
+      required: true
+    quality:
+      gates: []
+    contract:
+      done_when: All declared output artifacts exist, are dated and have provenance; do not invent outcomes.
+    required_actions:
+    - read
+    - write_local
+  - id: review-investigation
+    kind: review
+    needs:
+    - verify-evidence
+    instructions: Independent quality reviewer checks all source evidence, rubric, claims and completeness.
+    inputs:
+    - from: verify-evidence
+      artifact_id: verified-evidence
+      required: true
+    outputs:
+    - artifact_id: review-report
+      path: artifacts/review-report.md
+      required: true
+    quality:
+      gates:
+      - evidence-qc
+    contract:
+      done_when: All declared output artifacts exist, are dated and have provenance; do not invent outcomes.
+    required_actions:
+    - read
+    - write_local

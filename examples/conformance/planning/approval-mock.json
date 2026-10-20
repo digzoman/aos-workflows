@@ -1,0 +1,21 @@
+{
+  "allowed_proposal_ids": [
+    "bucket9-research-coaches-r0001",
+    "bucket9-research-agencies-r0001",
+    "bucket9-research-roofing-r0001"
+  ],
+  "approval_id": "fixture-approved-children",
+  "decision": "GRANTED",
+  "issuer": {
+    "agent": "fixture-owner",
+    "instance": "fixture-only",
+    "platform": "simulated",
+    "role": "owner"
+  },
+  "plan_id": "bucket9-research",
+  "revision": "r0001",
+  "schema_version": "1.0.0",
+  "scope": "instantiate_children",
+  "simulation": true,
+  "template_sha256": "5bbb8f0fc62f1754808c55d4ad482d0fb3aad6c3e3885fd1f937ef4e9cf0849b"
+}

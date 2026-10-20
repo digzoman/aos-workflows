@@ -1,0 +1,158 @@
+schema_version: 1.0.0
+template_id: research-portfolio-compound
+version: 0.2.0
+name: Compound research portfolio with reusable child definitions
+description: Plan and authorize independent competitor studies, review each, then synthesize.
+parameters:
+  research_goal:
+    type: string
+    required: true
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+  human_required_actions:
+  - stage_paused
+  - activate_live
+  - change_budget
+  - deploy_prod
+  - send_message
+  - emit_conversion
+  default_gates: []
+  max_parallel_tasks: 3
+  allow_dynamic_children: true
+gates: []
+graph:
+  nodes:
+  - id: define-verticals
+    kind: task
+    needs: []
+    instructions: Define buyer segments and unique stable slugs, with evidence gates.
+    inputs: []
+    outputs:
+    - artifact_id: portfolio-plan
+      path: artifacts/portfolio-plan.md
+      required: true
+    quality:
+      gates: []
+    contract:
+      done_when: All declared output artifacts exist, are dated and have provenance; do not invent outcomes.
+    required_actions:
+    - read
+    - write_local
+  - id: approve-plan
+    kind: approval
+    needs:
+    - define-verticals
+    instructions: Request explicit authorization of proposed investigation scope; do not launch children yet.
+    inputs:
+    - from: define-verticals
+      artifact_id: portfolio-plan
+      required: true
+    outputs:
+    - artifact_id: plan-approval
+      path: artifacts/plan-approval.md
+      required: true
+    quality:
+      gates: []
+    contract:
+      done_when: All declared output artifacts exist, are dated and have provenance; do not invent outcomes.
+    required_actions:
+    - read
+    - write_local
+  - id: propose-investigations
+    kind: child_generator
+    needs:
+    - approve-plan
+    instructions: Create deterministic child-proposals.json from reviewed portfolio plan; no child starts without
+      authorization.
+    inputs:
+    - from: approve-plan
+      artifact_id: plan-approval
+      required: true
+    outputs:
+    - artifact_id: child-proposals
+      path: artifacts/child-proposals.json
+      required: true
+    quality:
+      gates: []
+    contract:
+      done_when: All declared output artifacts exist, are dated and have provenance; do not invent outcomes.
+    required_actions:
+    - read
+    - write_local
+    fanout:
+      child_template_id: competitor-investigation
+      child_template_version: 0.2.0
+      proposals_artifact: child-proposals
+      authorization_mode: per_child
+      max_children: 15
+      id_strategy: stable_parent_slug_source_revision
+  - id: synthesize
+    kind: join
+    needs:
+    - propose-investigations
+    instructions: Only synthesize once ALL proposed children are complete with current independent evidence-qc PASS
+      and synthesis approval.
+    inputs:
+    - from: propose-investigations
+      artifact_id: child-proposals
+      required: true
+    outputs:
+    - artifact_id: portfolio-synthesis
+      path: artifacts/portfolio-synthesis.md
+      required: true
+    quality:
+      gates: []
+    contract:
+      done_when: All declared output artifacts exist, are dated and have provenance; do not invent outcomes.
+    required_actions:
+    - read
+    - write_local
+    extensions:
+      join_source: artifacts/child-proposals.json
+      join_policy: all_accepted
+      no_auto_accept: true
+composition:
+  children:
+  - child_id: coaches
+    template_id: competitor-investigation
+    version: 0.2.0
+    content_digest: sha256:5bbb8f0fc62f1754808c55d4ad482d0fb3aad6c3e3885fd1f937ef4e9cf0849b
+    bindings:
+      buyer: Business coaches
+      focus: Paid Meta advertising evidence
+    depends_on:
+    - approve-plan
+    authorization_mode: per_child
+  - child_id: agencies
+    template_id: competitor-investigation
+    version: 0.2.0
+    content_digest: sha256:5bbb8f0fc62f1754808c55d4ad482d0fb3aad6c3e3885fd1f937ef4e9cf0849b
+    bindings:
+      buyer: Agency owners
+      focus: Paid Meta advertising evidence
+    depends_on:
+    - approve-plan
+    authorization_mode: per_child
+  - child_id: roofing
+    template_id: competitor-investigation
+    version: 0.2.0
+    content_digest: sha256:5bbb8f0fc62f1754808c55d4ad482d0fb3aad6c3e3885fd1f937ef4e9cf0849b
+    bindings:
+      buyer: Roofing contractors
+      focus: Paid Meta advertising evidence
+    depends_on:
+    - approve-plan
+    authorization_mode: per_child
+  join:
+    policy: all_accepted
+    children:
+    - coaches
+    - agencies
+    - roofing

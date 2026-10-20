@@ -80,3 +80,7 @@ Resolved snapshot is copied to `agent-files/instances/<id>/template-snapshots/`;
 - **Interrupted dynamic generator**: reloading same proposal IDs results in no new duplicate children; queued proposals remain distinct from authorized/started runs.
 
 This is a specification. Exact implementation mechanics and automated validator behavior remain Prompt 09–12 and test work, not achievements of Prompt 08.
+
+## Implemented Prompt 10 conventions
+
+See `../references/COMPOSITION.md`, `../../tools/composition/` in the development repository (optional; NOT part of standalone required files), and `templates/research-portfolio-*/template.yaml` for the currently implemented 0.2.0 portable contracts. Every new 0.2.0 node includes inputs, outputs, `quality.gates`, and `contract.done_when`. Dynamic planning produces deterministic PROPOSED children only; exact scoped approval precedes local child creation, and every child requires current independent review before all-accepted synthesis. The optional helper supplies graph shape, readiness, local child materialization, and impact **analysis**; durable graph-revision application is Prompt 11. This specification does not imply actual scheduler, authenticated permissions or lock enforcement.

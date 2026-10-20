@@ -1,8 +1,8 @@
 {
-  "aosw_version": "0.1.0",
+  "aosw_version": "0.2.0",
   "schema_version": "1.0.0",
   "distribution": "portable-file-scaffold",
-  "status": "manual-cooperative-foundation",
+  "status": "manual-cooperative-plus-optional-template-composition",
   "minimum_requirements": [
     "capable agent",
     "persistent writable files within agent-files"
@@ -22,5 +22,11 @@
       "templates"
     ],
     "preserve_user_path": "agent-files"
+  },
+  "composition": {
+    "manual": "documented",
+    "optional_py_yaml_helper": "tools/composition/",
+    "automatic_dispatch": "not implemented",
+    "shared_claims": "not implemented"
   }
 }

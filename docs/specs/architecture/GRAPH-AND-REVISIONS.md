@@ -80,3 +80,7 @@ Resolved snapshot is copied to `agent-files/instances/<id>/template-snapshots/`;
 - **Interrupted dynamic generator**: reloading same proposal IDs results in no new duplicate children; queued proposals remain distinct from authorized/started runs.
 
 This is a specification. Exact implementation mechanics and automated validator behavior remain Prompt 09–12 and test work, not achievements of Prompt 08.
+
+## Prompt 10 implementation status (2026-10-20)
+
+The 0.2.0 file-native scaffold now includes a planning-to-independent-research composition example and optional local PyYAML helper, as documented in `scaffold/aos-w/references/COMPOSITION.md`. Eleven local conformance tests cover stable child proposals, exact mocked instantiation scope, current independent review-before-merge, permission-constrained overlays, conditional readiness and downstream revision impact. Automated dispatch, real multi-agent coordination and **application** of immutable graph-revision events remain subsequent work. Python is optional; the manual protocol remains the required portable baseline.

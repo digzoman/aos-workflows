@@ -43,3 +43,7 @@ Claims written in `claims/` are advisory in plain-file mode; they are NOT distri
 If data, required reviewer, permission, skill, claim, source or provider readback is missing, record the precise blocker and handoff instead of guessing. Do not declare an external task done based on a local note, Git commit, plan or QC alone.
 
 See `spec/MANUAL-AGENT-PROTOCOL.md` for the longer reference procedure.
+
+## Reusable composition and dynamic child workflows (0.2.0)
+
+Read `references/COMPOSITION.md` for the authoritative no-helper procedure. Every new master/custom node must declare inputs, outputs, quality gates, dependencies and a `contract.done_when`. A `child_generator` creates **PROPOSED** stable-ID children only; separate exact-scope approval is needed before creating their run directories. The parent synthesis node must wait for **every required child's passing current quality review** and a separate synthesis authorization. The optional developer helper can perform deterministic local checks/instantiation, but is not required to follow the file contract. Revision changes append a new graph file and affected state events; never edit prior completed history.

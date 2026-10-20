@@ -1,0 +1,42 @@
+schema_version: 1.0.0
+template_id: competitor-investigation-ontario
+version: 0.2.1
+name: Ontario competitor investigation overlay
+base:
+  template_id: competitor-investigation
+  version: 0.2.0
+  content_digest: 5bbb8f0fc62f1754808c55d4ad482d0fb3aad6c3e3885fd1f937ef4e9cf0849b
+  origin: templates/competitor-investigation/template.yaml
+policy_overrides:
+  max_parallel_tasks: 1
+  allowed_actions:
+  - read
+  - research
+  - write_local
+  - review
+node_patches:
+- op: replace
+  node_id: search-ads
+  node:
+    id: search-ads
+    kind: task
+    needs:
+    - scope
+    instructions: Prioritize Ontario market; preserve source and query provenance; never infer that unavailable
+      ads are absent.
+    inputs:
+    - from: scope
+      artifact_id: scope
+      required: true
+    outputs:
+    - artifact_id: source-log
+      path: artifacts/source-log.md
+      required: true
+    quality:
+      gates: []
+    contract:
+      done_when: All declared output artifacts exist, are dated and have provenance; do not invent outcomes.
+    required_actions:
+    - read
+    - write_local
+  reason: Regional research focus

@@ -1,0 +1,529 @@
+{
+  "authorization_required": true,
+  "parent_run_id": "portfolio-run-001",
+  "plan_id": "bucket9-research",
+  "proposals": [
+    {
+      "authorization_required": true,
+      "execution_contracts": [
+        {
+          "done_when": "All declared output artifacts exist, are dated and have provenance; do not invent outcomes.",
+          "inputs": [],
+          "needs": [],
+          "outputs": [
+            {
+              "artifact_id": "scope",
+              "path": "artifacts/scope.md",
+              "required": true
+            }
+          ],
+          "quality": {
+            "gates": []
+          },
+          "step_id": "scope"
+        },
+        {
+          "done_when": "All declared output artifacts exist, are dated and have provenance; do not invent outcomes.",
+          "inputs": [
+            {
+              "artifact_id": "scope",
+              "from": "scope",
+              "required": true
+            }
+          ],
+          "needs": [
+            "scope"
+          ],
+          "outputs": [
+            {
+              "artifact_id": "source-log",
+              "path": "artifacts/source-log.md",
+              "required": true
+            }
+          ],
+          "quality": {
+            "gates": []
+          },
+          "step_id": "search-ads"
+        },
+        {
+          "done_when": "All declared output artifacts exist, are dated and have provenance; do not invent outcomes.",
+          "inputs": [
+            {
+              "artifact_id": "source-log",
+              "from": "search-ads",
+              "required": true
+            }
+          ],
+          "needs": [
+            "search-ads"
+          ],
+          "outputs": [
+            {
+              "artifact_id": "offer-matrix",
+              "path": "artifacts/offer-matrix.md",
+              "required": true
+            }
+          ],
+          "quality": {
+            "gates": []
+          },
+          "step_id": "extract-offers"
+        },
+        {
+          "done_when": "All declared output artifacts exist, are dated and have provenance; do not invent outcomes.",
+          "inputs": [
+            {
+              "artifact_id": "offer-matrix",
+              "from": "extract-offers",
+              "required": true
+            }
+          ],
+          "needs": [
+            "extract-offers"
+          ],
+          "outputs": [
+            {
+              "artifact_id": "verified-evidence",
+              "path": "artifacts/verified-evidence.md",
+              "required": true
+            }
+          ],
+          "quality": {
+            "gates": []
+          },
+          "step_id": "verify-evidence"
+        },
+        {
+          "done_when": "All declared output artifacts exist, are dated and have provenance; do not invent outcomes.",
+          "inputs": [
+            {
+              "artifact_id": "verified-evidence",
+              "from": "verify-evidence",
+              "required": true
+            }
+          ],
+          "needs": [
+            "verify-evidence"
+          ],
+          "outputs": [
+            {
+              "artifact_id": "review-report",
+              "path": "artifacts/review-report.md",
+              "required": true
+            }
+          ],
+          "quality": {
+            "gates": [
+              "evidence-qc"
+            ]
+          },
+          "step_id": "review-investigation"
+        }
+      ],
+      "expected_outputs": [
+        {
+          "artifact_id": "scope",
+          "path": "artifacts/scope.md",
+          "required": true,
+          "step_id": "scope"
+        },
+        {
+          "artifact_id": "source-log",
+          "path": "artifacts/source-log.md",
+          "required": true,
+          "step_id": "search-ads"
+        },
+        {
+          "artifact_id": "offer-matrix",
+          "path": "artifacts/offer-matrix.md",
+          "required": true,
+          "step_id": "extract-offers"
+        },
+        {
+          "artifact_id": "verified-evidence",
+          "path": "artifacts/verified-evidence.md",
+          "required": true,
+          "step_id": "verify-evidence"
+        },
+        {
+          "artifact_id": "review-report",
+          "path": "artifacts/review-report.md",
+          "required": true,
+          "step_id": "review-investigation"
+        }
+      ],
+      "inputs": {
+        "buyer": "Business coaches and consultants",
+        "focus": "DIY and AI-assisted Meta campaigns",
+        "market": "North America"
+      },
+      "instance_id": "bucket9-research-coaches-r0001",
+      "needs": [
+        "approve-plan"
+      ],
+      "proposal_id": "bucket9-research-coaches-r0001",
+      "quality_requirements": [
+        {
+          "gate_id": "evidence-qc",
+          "kind": "ai_independent",
+          "required": true,
+          "rubric": "All declared source claims checked against dated evidence; no invented Meta Ad Library findings."
+        }
+      ],
+      "run_id": "run-001",
+      "status": "PROPOSED",
+      "template_id": "competitor-investigation",
+      "template_version": "0.2.0"
+    },
+    {
+      "authorization_required": true,
+      "execution_contracts": [
+        {
+          "done_when": "All declared output artifacts exist, are dated and have provenance; do not invent outcomes.",
+          "inputs": [],
+          "needs": [],
+          "outputs": [
+            {
+              "artifact_id": "scope",
+              "path": "artifacts/scope.md",
+              "required": true
+            }
+          ],
+          "quality": {
+            "gates": []
+          },
+          "step_id": "scope"
+        },
+        {
+          "done_when": "All declared output artifacts exist, are dated and have provenance; do not invent outcomes.",
+          "inputs": [
+            {
+              "artifact_id": "scope",
+              "from": "scope",
+              "required": true
+            }
+          ],
+          "needs": [
+            "scope"
+          ],
+          "outputs": [
+            {
+              "artifact_id": "source-log",
+              "path": "artifacts/source-log.md",
+              "required": true
+            }
+          ],
+          "quality": {
+            "gates": []
+          },
+          "step_id": "search-ads"
+        },
+        {
+          "done_when": "All declared output artifacts exist, are dated and have provenance; do not invent outcomes.",
+          "inputs": [
+            {
+              "artifact_id": "source-log",
+              "from": "search-ads",
+              "required": true
+            }
+          ],
+          "needs": [
+            "search-ads"
+          ],
+          "outputs": [
+            {
+              "artifact_id": "offer-matrix",
+              "path": "artifacts/offer-matrix.md",
+              "required": true
+            }
+          ],
+          "quality": {
+            "gates": []
+          },
+          "step_id": "extract-offers"
+        },
+        {
+          "done_when": "All declared output artifacts exist, are dated and have provenance; do not invent outcomes.",
+          "inputs": [
+            {
+              "artifact_id": "offer-matrix",
+              "from": "extract-offers",
+              "required": true
+            }
+          ],
+          "needs": [
+            "extract-offers"
+          ],
+          "outputs": [
+            {
+              "artifact_id": "verified-evidence",
+              "path": "artifacts/verified-evidence.md",
+              "required": true
+            }
+          ],
+          "quality": {
+            "gates": []
+          },
+          "step_id": "verify-evidence"
+        },
+        {
+          "done_when": "All declared output artifacts exist, are dated and have provenance; do not invent outcomes.",
+          "inputs": [
+            {
+              "artifact_id": "verified-evidence",
+              "from": "verify-evidence",
+              "required": true
+            }
+          ],
+          "needs": [
+            "verify-evidence"
+          ],
+          "outputs": [
+            {
+              "artifact_id": "review-report",
+              "path": "artifacts/review-report.md",
+              "required": true
+            }
+          ],
+          "quality": {
+            "gates": [
+              "evidence-qc"
+            ]
+          },
+          "step_id": "review-investigation"
+        }
+      ],
+      "expected_outputs": [
+        {
+          "artifact_id": "scope",
+          "path": "artifacts/scope.md",
+          "required": true,
+          "step_id": "scope"
+        },
+        {
+          "artifact_id": "source-log",
+          "path": "artifacts/source-log.md",
+          "required": true,
+          "step_id": "search-ads"
+        },
+        {
+          "artifact_id": "offer-matrix",
+          "path": "artifacts/offer-matrix.md",
+          "required": true,
+          "step_id": "extract-offers"
+        },
+        {
+          "artifact_id": "verified-evidence",
+          "path": "artifacts/verified-evidence.md",
+          "required": true,
+          "step_id": "verify-evidence"
+        },
+        {
+          "artifact_id": "review-report",
+          "path": "artifacts/review-report.md",
+          "required": true,
+          "step_id": "review-investigation"
+        }
+      ],
+      "inputs": {
+        "buyer": "Agency owners",
+        "focus": "Meta ad creative production tools",
+        "market": "North America"
+      },
+      "instance_id": "bucket9-research-agencies-r0001",
+      "needs": [
+        "approve-plan"
+      ],
+      "proposal_id": "bucket9-research-agencies-r0001",
+      "quality_requirements": [
+        {
+          "gate_id": "evidence-qc",
+          "kind": "ai_independent",
+          "required": true,
+          "rubric": "All declared source claims checked against dated evidence; no invented Meta Ad Library findings."
+        }
+      ],
+      "run_id": "run-001",
+      "status": "PROPOSED",
+      "template_id": "competitor-investigation",
+      "template_version": "0.2.0"
+    },
+    {
+      "authorization_required": true,
+      "execution_contracts": [
+        {
+          "done_when": "All declared output artifacts exist, are dated and have provenance; do not invent outcomes.",
+          "inputs": [],
+          "needs": [],
+          "outputs": [
+            {
+              "artifact_id": "scope",
+              "path": "artifacts/scope.md",
+              "required": true
+            }
+          ],
+          "quality": {
+            "gates": []
+          },
+          "step_id": "scope"
+        },
+        {
+          "done_when": "All declared output artifacts exist, are dated and have provenance; do not invent outcomes.",
+          "inputs": [
+            {
+              "artifact_id": "scope",
+              "from": "scope",
+              "required": true
+            }
+          ],
+          "needs": [
+            "scope"
+          ],
+          "outputs": [
+            {
+              "artifact_id": "source-log",
+              "path": "artifacts/source-log.md",
+              "required": true
+            }
+          ],
+          "quality": {
+            "gates": []
+          },
+          "step_id": "search-ads"
+        },
+        {
+          "done_when": "All declared output artifacts exist, are dated and have provenance; do not invent outcomes.",
+          "inputs": [
+            {
+              "artifact_id": "source-log",
+              "from": "search-ads",
+              "required": true
+            }
+          ],
+          "needs": [
+            "search-ads"
+          ],
+          "outputs": [
+            {
+              "artifact_id": "offer-matrix",
+              "path": "artifacts/offer-matrix.md",
+              "required": true
+            }
+          ],
+          "quality": {
+            "gates": []
+          },
+          "step_id": "extract-offers"
+        },
+        {
+          "done_when": "All declared output artifacts exist, are dated and have provenance; do not invent outcomes.",
+          "inputs": [
+            {
+              "artifact_id": "offer-matrix",
+              "from": "extract-offers",
+              "required": true
+            }
+          ],
+          "needs": [
+            "extract-offers"
+          ],
+          "outputs": [
+            {
+              "artifact_id": "verified-evidence",
+              "path": "artifacts/verified-evidence.md",
+              "required": true
+            }
+          ],
+          "quality": {
+            "gates": []
+          },
+          "step_id": "verify-evidence"
+        },
+        {
+          "done_when": "All declared output artifacts exist, are dated and have provenance; do not invent outcomes.",
+          "inputs": [
+            {
+              "artifact_id": "verified-evidence",
+              "from": "verify-evidence",
+              "required": true
+            }
+          ],
+          "needs": [
+            "verify-evidence"
+          ],
+          "outputs": [
+            {
+              "artifact_id": "review-report",
+              "path": "artifacts/review-report.md",
+              "required": true
+            }
+          ],
+          "quality": {
+            "gates": [
+              "evidence-qc"
+            ]
+          },
+          "step_id": "review-investigation"
+        }
+      ],
+      "expected_outputs": [
+        {
+          "artifact_id": "scope",
+          "path": "artifacts/scope.md",
+          "required": true,
+          "step_id": "scope"
+        },
+        {
+          "artifact_id": "source-log",
+          "path": "artifacts/source-log.md",
+          "required": true,
+          "step_id": "search-ads"
+        },
+        {
+          "artifact_id": "offer-matrix",
+          "path": "artifacts/offer-matrix.md",
+          "required": true,
+          "step_id": "extract-offers"
+        },
+        {
+          "artifact_id": "verified-evidence",
+          "path": "artifacts/verified-evidence.md",
+          "required": true,
+          "step_id": "verify-evidence"
+        },
+        {
+          "artifact_id": "review-report",
+          "path": "artifacts/review-report.md",
+          "required": true,
+          "step_id": "review-investigation"
+        }
+      ],
+      "inputs": {
+        "buyer": "Roofing contractors",
+        "focus": "Lead generation ads, planned replacement versus storm",
+        "market": "North America"
+      },
+      "instance_id": "bucket9-research-roofing-r0001",
+      "needs": [
+        "approve-plan"
+      ],
+      "proposal_id": "bucket9-research-roofing-r0001",
+      "quality_requirements": [
+        {
+          "gate_id": "evidence-qc",
+          "kind": "ai_independent",
+          "required": true,
+          "rubric": "All declared source claims checked against dated evidence; no invented Meta Ad Library findings."
+        }
+      ],
+      "run_id": "run-001",
+      "status": "PROPOSED",
+      "template_id": "competitor-investigation",
+      "template_version": "0.2.0"
+    }
+  ],
+  "revision": "r0001",
+  "schema_version": "1.0.0",
+  "status": "PROPOSED"
+}

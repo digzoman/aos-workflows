@@ -96,3 +96,12 @@ Open questions are not blockers for Prompt 02 research unless explicitly noted.
 68. Test the pre-seeded created practice run with a fresh AI agent and verify real task transitions/checkpoint write/recovery, including one actual file-only without Git environment.
 69. Decide whether future releases should include the inert practice instance in agent-files or move it to a protected reference-only fixture. Keep user-owned data safe during upgrades.
 70. Confirm exact interpretation of owner Prompt 09 "using the approved PRD" within the formal PRD signoff register before accepting all proposed ADRs. Only scoped scaffold authorization was recorded.
+
+## Prompt 10 composition follow-ups
+
+71. File-native master YAML plus optional Python/PyYAML helper both work, but full JSON Schema library validation and migrated 0.1 pinned-run resume must be exercised in Prompt 11/16 beyond graph-shape tests.
+72. The optional multi-child materializer creates several directories sequentially, not transactionally; implement recovery of partially created batches and event audit before claiming crash-safe fan-out.
+73. Proposed graph revisions are analyzed with impact closure and permission check; actual immutable new revision and event-backed state transition are pending Prompt 11.
+74. User-requested truly parallel workers and shared-task exclusive claims still require Prompt 13 empirical coordination. Current READY categories are advisory for one writer.
+75. Mock fixture approvals are test-only; production owner identity authentication, peer reviewer independence and scope-proof require actual host enforcement where available (Prompt 12).
+76. Full remote skill availability/quality-gate proof is not implemented in optional classifier; it accepts supplied verified context and must not invent observed reviews or provider success.

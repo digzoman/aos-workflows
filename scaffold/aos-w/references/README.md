@@ -9,3 +9,5 @@ Start with `../README.md` and `../PROTOCOL.md`, then use these references **just
 - [SCHEDULES-AND-SKILLS.md](SCHEDULES-AND-SKILLS.md), manual defaults, optional host wake and task-specific trusted skills.
 
 These documents are part of the **protected** scaffold. Put project-specific variants into `agent-files/`.
+
+- [COMPOSITION.md](COMPOSITION.md), new 0.2.0 file-native template overlays, dependency/readiness contracts, dynamic child approval and reviewed merging.

@@ -1,0 +1,6 @@
+{
+  "agent": "fixture-author",
+  "instance": "fixture-01",
+  "platform": "local-test",
+  "role": "worker"
+}

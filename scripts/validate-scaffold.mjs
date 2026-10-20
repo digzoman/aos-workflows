@@ -26,7 +26,7 @@ function check(ok, message) { checks++; if (!ok) throw new Error(message); }
 const read = relative => fs.readFileSync(path.join(root, relative), "utf8");
 for(const p of required) check(fs.existsSync(path.join(root,p)), "Missing scaffold path: " + p);
 const version = JSON.parse(read("VERSION.json"));
-check(version.aosw_version === "0.1.0", "Unexpected framework version");
+check(version.aosw_version === "0.2.0", "Unexpected framework version");
 check(version.mandatory_git === false && version.mandatory_programming_runtime === false, "Required runtime unexpectedly configured");
 const sync=JSON.parse(read("agent-files/config/sync.json"));
 check(sync.enabled === false && sync.status === "not_configured", "Bundled Git mirror must default off");
@@ -84,8 +84,9 @@ check(inst.instance_id==="demo-local-research"&&inst.current_graph_revision==="g
 check(lock.template_id==="research-starter"&&lock.version==="0.1.0","Practice template pin missing");
 const master=read("templates/research-starter/template.yaml");
 const snapshot=read(base+"template-snapshots/master-v0-1-0/template.yaml");
-check(master===snapshot && snapshot===read(base+"graph-revisions/g0001.yaml"),"Pinned practice template mismatch");
-const blobHash=crypto.createHash("sha1").update("blob "+Buffer.byteLength(master)+"\0").update(master).digest("hex");
+check(snapshot===read(base+"graph-revisions/g0001.yaml"),"Pinned practice template mismatch");
+check(master!==snapshot && master.includes('version: 0.2.0'),"Updated master should not rewrite pinned 0.1.0 run");
+const blobHash=crypto.createHash("sha1").update("blob "+Buffer.byteLength(snapshot)+"\0").update(snapshot).digest("hex");
 check(lock.content_digest==="git-blob-sha1:"+blobHash,"Pinned template digest differs from actual blob");
 check(events.length===2 && events.every((e,i)=>e.seq===i+1 && e.run_id==="run-001"),"Practice run event order invalid");
 check(run.trigger_kind==="manual" && run.mode==="standalone_single_writer","Practice mode unexpectedly automated");
