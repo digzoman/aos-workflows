@@ -1,0 +1,106 @@
+{
+  "QA": "separate_process_deterministic_not_AI",
+  "as_of": "2026-10-20T21:05:46.236998+00:00",
+  "authentic_ai_creative_review": "NOT_RUN",
+  "checks": [
+    {
+      "case": "fresh-output",
+      "status": "PASS"
+    },
+    {
+      "case": "three-research-children",
+      "status": "PASS"
+    },
+    {
+      "case": "marketing-v07-present",
+      "status": "PASS"
+    },
+    {
+      "case": "collect-reject-first",
+      "status": "PASS"
+    },
+    {
+      "case": "collect-blocked",
+      "status": "PASS"
+    },
+    {
+      "case": "collect-independent-gate",
+      "status": "PASS"
+    },
+    {
+      "case": "collect-independent-gate",
+      "status": "PASS"
+    },
+    {
+      "case": "collect-independent-gate",
+      "status": "PASS"
+    },
+    {
+      "case": "all-child-runs-complete",
+      "status": "PASS"
+    },
+    {
+      "case": "coaches-exact-hash",
+      "status": "PASS"
+    },
+    {
+      "case": "coaches-reviewed",
+      "status": "PASS"
+    },
+    {
+      "case": "agencies-exact-hash",
+      "status": "PASS"
+    },
+    {
+      "case": "agencies-reviewed",
+      "status": "PASS"
+    },
+    {
+      "case": "remodeling-exact-hash",
+      "status": "PASS"
+    },
+    {
+      "case": "remodeling-reviewed",
+      "status": "PASS"
+    },
+    {
+      "case": "cold-replay-parallel-branches",
+      "status": "PASS"
+    },
+    {
+      "case": "creative-reject-first",
+      "status": "PASS"
+    },
+    {
+      "case": "creative-blocked",
+      "status": "PASS"
+    },
+    {
+      "case": "creative-independent-gate",
+      "status": "PASS"
+    },
+    {
+      "case": "corrected-creative-digest-different",
+      "status": "PASS"
+    },
+    {
+      "case": "final-live-approval-blocked",
+      "status": "PASS"
+    }
+  ],
+  "child_events": {
+    "agencies": 8,
+    "coaches": 13,
+    "remodeling": 8
+  },
+  "conversion_readback": "NOT_RUN",
+  "creative_sha256": "67be5fbe5f15375aa6090ac4f28e2260c7b1cdfecca2f872d85c7e4014528456",
+  "launch": "NOT_GRANTED",
+  "manual_time_comparison": "NOT_MEASURED",
+  "parent_events": 57,
+  "real_meta_crm_effects": "NONE",
+  "source_truth": "first_party_site_offers_not_verified_ad_cards",
+  "sources": 8,
+  "total_checks": 21,
+  "v1_T01": "PARTIAL_PUBLIC_EVIDENCE_STAGED_LOCAL"
+}

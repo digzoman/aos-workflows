@@ -1,0 +1,414 @@
+{
+  "active_steps": [],
+  "audit_warnings": [],
+  "blocked_reasons": [],
+  "checkpoints": [
+    "checkpoint-000005",
+    "checkpoint-000010",
+    "checkpoint-000015",
+    "checkpoint-000020",
+    "checkpoint-000025",
+    "checkpoint-000032",
+    "checkpoint-000039",
+    "checkpoint-000055",
+    "checkpoint-000056"
+  ],
+  "completed_steps": [
+    "plan",
+    "fanout",
+    "synthesis",
+    "offer",
+    "copy",
+    "creative",
+    "crm",
+    "landing",
+    "tracking",
+    "prelaunch"
+  ],
+  "eligible_tasks": [
+    "launch-permit"
+  ],
+  "evidence_refs": [
+    {
+      "artifact_id": "plan-record",
+      "locator": "artifacts/plan.md",
+      "revision": "v1",
+      "sha256": "892d58c64c352361ec42b03cb1e2f3b2c6b92747d66545e7aee872df1fe7f7e7",
+      "task_id": "plan"
+    },
+    {
+      "artifact_id": "fanout-record",
+      "locator": "artifacts/fanout.md",
+      "revision": "v1",
+      "sha256": "2639c9ce6fc4ce79877c789f6e479aee285f3c59c199a9ff7cf693074f20e22f",
+      "task_id": "fanout"
+    },
+    {
+      "artifact_id": "synthesis-record",
+      "locator": "artifacts/synthesis.md",
+      "revision": "v1",
+      "sha256": "fad7b46747e22e483bdfde6de5bfd61ffeb6c128111542eaea7f0e3709c64971",
+      "task_id": "synthesis"
+    },
+    {
+      "artifact_id": "offer-record",
+      "locator": "artifacts/offer.md",
+      "revision": "v1",
+      "sha256": "98d36f5f17e692aba34a0748adec7028b9ee19c5abcead128017dc259a36418d",
+      "task_id": "offer"
+    },
+    {
+      "artifact_id": "copy-record",
+      "locator": "artifacts/copy.md",
+      "revision": "v1",
+      "sha256": "0b283371515f0b3cb2cf65beafc8b71d302455736ef70845eb13fd21ea1c62d4",
+      "task_id": "copy"
+    },
+    {
+      "artifact_id": "creative-record",
+      "locator": "artifacts/creative.png",
+      "revision": "v2",
+      "sha256": "67be5fbe5f15375aa6090ac4f28e2260c7b1cdfecca2f872d85c7e4014528456",
+      "task_id": "creative"
+    },
+    {
+      "artifact_id": "crm-record",
+      "locator": "artifacts/crm.md",
+      "revision": "v1",
+      "sha256": "d4198353c84d1c1ebf7b78cfd1db4a0026d17d6cde293f33058539bd9bca2ec4",
+      "task_id": "crm"
+    },
+    {
+      "artifact_id": "landing-record",
+      "locator": "artifacts/landing.md",
+      "revision": "v1",
+      "sha256": "17245c909412b853171eb7cd7e1207196614bb97064500380657877c6cc75860",
+      "task_id": "landing"
+    },
+    {
+      "artifact_id": "tracking-record",
+      "locator": "artifacts/tracking.md",
+      "revision": "v1",
+      "sha256": "5626e85661b123e7801c852bb5a73ecd5c7699c06113f7ff807f573e53e3f899",
+      "task_id": "tracking"
+    },
+    {
+      "artifact_id": "prelaunch-record",
+      "locator": "artifacts/prelaunch.md",
+      "revision": "v1",
+      "sha256": "2dd1e97e78d46031e3e719462132b35ca869242acd38dcd95785c82965e4c995",
+      "task_id": "prelaunch"
+    }
+  ],
+  "governance": {
+    "claims": {},
+    "handoff": null,
+    "permissions": {},
+    "remediation": {},
+    "reviews": {}
+  },
+  "graph_revision": "g0001",
+  "integrity_level": "verified",
+  "last_event_digest": "b6895bda3c432dbb06bb038c8c609ac4edc5b8486b006fdcb504a09af3160c11",
+  "last_event_seq": 57,
+  "operations": {},
+  "owners": {},
+  "paused": false,
+  "pending_provider_operations": [],
+  "run_id": "run-001",
+  "run_status": "ACTIVE",
+  "schema_version": "1.0.0",
+  "state_revision": 57,
+  "tasks": {
+    "copy": {
+      "attempts": 1,
+      "evidence": [
+        {
+          "artifact_id": "copy-record",
+          "locator": "artifacts/copy.md",
+          "revision": "v1",
+          "sha256": "0b283371515f0b3cb2cf65beafc8b71d302455736ef70845eb13fd21ea1c62d4"
+        }
+      ],
+      "graph_revision": "g0001",
+      "last_attempt_id": "attempt-0001",
+      "last_attempt_owner": {
+        "agent": "AmpgentResearch",
+        "instance": "p18-a",
+        "platform": "github-actions",
+        "role": "producer"
+      },
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "started_at": "2026-10-20T21:05:45Z",
+      "status": "COMPLETE"
+    },
+    "creative": {
+      "attempts": 2,
+      "evidence": [
+        {
+          "artifact_id": "creative-record",
+          "locator": "artifacts/creative.png",
+          "revision": "v2",
+          "sha256": "67be5fbe5f15375aa6090ac4f28e2260c7b1cdfecca2f872d85c7e4014528456"
+        }
+      ],
+      "graph_revision": "g0001",
+      "last_attempt_id": "attempt-0002",
+      "last_attempt_owner": {
+        "agent": "ColdResume",
+        "instance": "p18-c",
+        "platform": "file-replay",
+        "role": "worker"
+      },
+      "last_error": {
+        "class": "review_revise",
+        "correction": "missing_correct_CTA"
+      },
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": {
+        "artifacts": [
+          {
+            "artifact_id": "creative-record",
+            "locator": "artifacts/creative.png",
+            "revision": "v2",
+            "sha256": "67be5fbe5f15375aa6090ac4f28e2260c7b1cdfecca2f872d85c7e4014528456"
+          }
+        ],
+        "review_id": "p18-creative-accepted",
+        "review_pid": 2158,
+        "reviewer_kind": "separate_deterministic_process",
+        "rubric_version": "p18-website-and-pixel-v1",
+        "verdict": "PASS"
+      },
+      "started_at": "2026-10-20T21:05:46Z",
+      "status": "COMPLETE"
+    },
+    "crm": {
+      "attempts": 1,
+      "evidence": [
+        {
+          "artifact_id": "crm-record",
+          "locator": "artifacts/crm.md",
+          "revision": "v1",
+          "sha256": "d4198353c84d1c1ebf7b78cfd1db4a0026d17d6cde293f33058539bd9bca2ec4"
+        }
+      ],
+      "graph_revision": "g0001",
+      "last_attempt_id": "attempt-0001",
+      "last_attempt_owner": {
+        "agent": "AmpgentResearch",
+        "instance": "p18-a",
+        "platform": "github-actions",
+        "role": "producer"
+      },
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "started_at": "2026-10-20T21:05:45Z",
+      "status": "COMPLETE"
+    },
+    "fanout": {
+      "attempts": 1,
+      "evidence": [
+        {
+          "artifact_id": "fanout-record",
+          "locator": "artifacts/fanout.md",
+          "revision": "v1",
+          "sha256": "2639c9ce6fc4ce79877c789f6e479aee285f3c59c199a9ff7cf693074f20e22f"
+        }
+      ],
+      "graph_revision": "g0001",
+      "last_attempt_id": "attempt-0001",
+      "last_attempt_owner": {
+        "agent": "AmpgentResearch",
+        "instance": "p18-a",
+        "platform": "github-actions",
+        "role": "producer"
+      },
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "started_at": "2026-10-20T21:05:45Z",
+      "status": "COMPLETE"
+    },
+    "landing": {
+      "attempts": 1,
+      "evidence": [
+        {
+          "artifact_id": "landing-record",
+          "locator": "artifacts/landing.md",
+          "revision": "v1",
+          "sha256": "17245c909412b853171eb7cd7e1207196614bb97064500380657877c6cc75860"
+        }
+      ],
+      "graph_revision": "g0001",
+      "last_attempt_id": "attempt-0001",
+      "last_attempt_owner": {
+        "agent": "AmpgentResearch",
+        "instance": "p18-a",
+        "platform": "github-actions",
+        "role": "producer"
+      },
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "started_at": "2026-10-20T21:05:45Z",
+      "status": "COMPLETE"
+    },
+    "launch-permit": {
+      "attempts": 0,
+      "evidence": [],
+      "graph_revision": "g0001",
+      "last_attempt_id": null,
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "status": "WAIT_DEPENDENCY"
+    },
+    "offer": {
+      "attempts": 1,
+      "evidence": [
+        {
+          "artifact_id": "offer-record",
+          "locator": "artifacts/offer.md",
+          "revision": "v1",
+          "sha256": "98d36f5f17e692aba34a0748adec7028b9ee19c5abcead128017dc259a36418d"
+        }
+      ],
+      "graph_revision": "g0001",
+      "last_attempt_id": "attempt-0001",
+      "last_attempt_owner": {
+        "agent": "AmpgentResearch",
+        "instance": "p18-a",
+        "platform": "github-actions",
+        "role": "producer"
+      },
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "started_at": "2026-10-20T21:05:45Z",
+      "status": "COMPLETE"
+    },
+    "plan": {
+      "attempts": 1,
+      "evidence": [
+        {
+          "artifact_id": "plan-record",
+          "locator": "artifacts/plan.md",
+          "revision": "v1",
+          "sha256": "892d58c64c352361ec42b03cb1e2f3b2c6b92747d66545e7aee872df1fe7f7e7"
+        }
+      ],
+      "graph_revision": "g0001",
+      "last_attempt_id": "attempt-0001",
+      "last_attempt_owner": {
+        "agent": "AmpgentResearch",
+        "instance": "p18-a",
+        "platform": "github-actions",
+        "role": "producer"
+      },
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "started_at": "2026-10-20T21:05:45Z",
+      "status": "COMPLETE"
+    },
+    "prelaunch": {
+      "attempts": 1,
+      "evidence": [
+        {
+          "artifact_id": "prelaunch-record",
+          "locator": "artifacts/prelaunch.md",
+          "revision": "v1",
+          "sha256": "2dd1e97e78d46031e3e719462132b35ca869242acd38dcd95785c82965e4c995"
+        }
+      ],
+      "graph_revision": "g0001",
+      "last_attempt_id": "attempt-0001",
+      "last_attempt_owner": {
+        "agent": "AmpgentResearch",
+        "instance": "p18-a",
+        "platform": "github-actions",
+        "role": "producer"
+      },
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "started_at": "2026-10-20T21:05:46Z",
+      "status": "COMPLETE"
+    },
+    "synthesis": {
+      "attempts": 1,
+      "evidence": [
+        {
+          "artifact_id": "synthesis-record",
+          "locator": "artifacts/synthesis.md",
+          "revision": "v1",
+          "sha256": "fad7b46747e22e483bdfde6de5bfd61ffeb6c128111542eaea7f0e3709c64971"
+        }
+      ],
+      "graph_revision": "g0001",
+      "last_attempt_id": "attempt-0001",
+      "last_attempt_owner": {
+        "agent": "AmpgentResearch",
+        "instance": "p18-a",
+        "platform": "github-actions",
+        "role": "producer"
+      },
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "started_at": "2026-10-20T21:05:45Z",
+      "status": "COMPLETE"
+    },
+    "tracking": {
+      "attempts": 1,
+      "evidence": [
+        {
+          "artifact_id": "tracking-record",
+          "locator": "artifacts/tracking.md",
+          "revision": "v1",
+          "sha256": "5626e85661b123e7801c852bb5a73ecd5c7699c06113f7ff807f573e53e3f899"
+        }
+      ],
+      "graph_revision": "g0001",
+      "last_attempt_id": "attempt-0001",
+      "last_attempt_owner": {
+        "agent": "AmpgentResearch",
+        "instance": "p18-a",
+        "platform": "github-actions",
+        "role": "producer"
+      },
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": null,
+      "started_at": "2026-10-20T21:05:45Z",
+      "status": "COMPLETE"
+    }
+  },
+  "updated_at": "2026-10-20T21:05:46Z"
+}

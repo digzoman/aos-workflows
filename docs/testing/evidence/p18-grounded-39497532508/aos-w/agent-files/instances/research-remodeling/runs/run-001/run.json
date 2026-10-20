@@ -1,0 +1,17 @@
+{
+  "capabilities": {},
+  "created_at": "2026-10-20T21:05:45Z",
+  "created_by": {
+    "agent": "AmpgentResearch",
+    "instance": "p18-a",
+    "platform": "github-actions",
+    "role": "producer"
+  },
+  "graph_digest": "1009dbccb959ed34f89cfc2cd7410f1117aabeda8b3e2b3f4465ef08fb299cc6",
+  "graph_revision": "g0001",
+  "instance_id": "research-remodeling",
+  "mode": "standalone_single_writer",
+  "run_id": "run-001",
+  "schema_version": "1.0.0",
+  "trigger_kind": "manual"
+}

@@ -1,0 +1,33 @@
+{
+  "blocked_tasks": [],
+  "checkpoint_id": "checkpoint-000007",
+  "completed_tasks": [
+    "collect"
+  ],
+  "created_at": "2026-10-20T21:05:45Z",
+  "created_by": {
+    "agent": "IndependentQC",
+    "instance": "p18-b",
+    "platform": "separate-process",
+    "role": "reviewer"
+  },
+  "event_digest": "f23f847d281415fec4a76f6dc5576374fbbc31081acc218fcc3ffea24e4e117f",
+  "event_seq": 7,
+  "graph_revision": "g0001",
+  "integrity_level": "verified",
+  "next_eligible_tasks": [],
+  "pending_tasks": [],
+  "provider_unknown_operations": [],
+  "run_id": "run-001",
+  "schema_version": "1.0.0",
+  "state_revision": 7,
+  "sync_status": "local_only",
+  "verified_artifacts": [
+    {
+      "artifact_id": "collect-record",
+      "locator": "artifacts/collect.json",
+      "revision": "v1",
+      "sha256": "7a6275129a1a656338c92bc356bf8d0341c1de9526293f5a9ab8bd179977772a"
+    }
+  ]
+}

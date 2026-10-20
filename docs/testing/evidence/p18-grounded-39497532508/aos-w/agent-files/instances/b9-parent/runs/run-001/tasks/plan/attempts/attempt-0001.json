@@ -1,0 +1,33 @@
+{
+  "actor": {
+    "agent": "AmpgentResearch",
+    "instance": "p18-a",
+    "platform": "github-actions",
+    "role": "producer"
+  },
+  "attempt_id": "attempt-0001",
+  "extensions": {
+    "aosw": {
+      "attempt_count": 1,
+      "current_task_status": "COMPLETE",
+      "derived_from_event_seq": 57,
+      "error": null,
+      "retry": null
+    }
+  },
+  "graph_revision": "g0001",
+  "input_refs": [],
+  "output_refs": [
+    {
+      "artifact_id": "plan-record",
+      "locator": "artifacts/plan.md",
+      "revision": "v1",
+      "sha256": "892d58c64c352361ec42b03cb1e2f3b2c6b92747d66545e7aee872df1fe7f7e7"
+    }
+  ],
+  "run_id": "run-001",
+  "schema_version": "1.0.0",
+  "started_at": "2026-10-20T21:05:45Z",
+  "status": "succeeded",
+  "task_id": "plan"
+}

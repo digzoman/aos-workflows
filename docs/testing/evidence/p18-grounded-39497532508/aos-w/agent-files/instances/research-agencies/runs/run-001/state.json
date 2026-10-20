@@ -1,0 +1,83 @@
+{
+  "active_steps": [],
+  "audit_warnings": [],
+  "blocked_reasons": [],
+  "checkpoints": [
+    "checkpoint-000007"
+  ],
+  "completed_steps": [
+    "collect"
+  ],
+  "eligible_tasks": [],
+  "evidence_refs": [
+    {
+      "artifact_id": "collect-record",
+      "locator": "artifacts/collect.json",
+      "revision": "v1",
+      "sha256": "7a6275129a1a656338c92bc356bf8d0341c1de9526293f5a9ab8bd179977772a",
+      "task_id": "collect"
+    }
+  ],
+  "governance": {
+    "claims": {},
+    "handoff": null,
+    "permissions": {},
+    "remediation": {},
+    "reviews": {}
+  },
+  "graph_revision": "g0001",
+  "integrity_level": "verified",
+  "last_event_digest": "66cdbc0fbfb1df1b0692dfa0260c1f50070061eaf7e399f23ac7b3a6c5dbb510",
+  "last_event_seq": 8,
+  "operations": {},
+  "owners": {},
+  "paused": false,
+  "pending_provider_operations": [],
+  "run_id": "run-001",
+  "run_status": "COMPLETED",
+  "schema_version": "1.0.0",
+  "state_revision": 8,
+  "tasks": {
+    "collect": {
+      "attempts": 1,
+      "evidence": [
+        {
+          "artifact_id": "collect-record",
+          "locator": "artifacts/collect.json",
+          "revision": "v1",
+          "sha256": "7a6275129a1a656338c92bc356bf8d0341c1de9526293f5a9ab8bd179977772a"
+        }
+      ],
+      "graph_revision": "g0001",
+      "last_attempt_id": "attempt-0001",
+      "last_attempt_owner": {
+        "agent": "AmpgentResearch",
+        "instance": "p18-a",
+        "platform": "github-actions",
+        "role": "producer"
+      },
+      "last_error": null,
+      "owner": null,
+      "pending_actions": [],
+      "retry": null,
+      "review": {
+        "artifacts": [
+          {
+            "artifact_id": "collect-record",
+            "locator": "artifacts/collect.json",
+            "revision": "v1",
+            "sha256": "7a6275129a1a656338c92bc356bf8d0341c1de9526293f5a9ab8bd179977772a"
+          }
+        ],
+        "review_id": "p18-collect-accepted",
+        "review_pid": 2154,
+        "reviewer_kind": "separate_deterministic_process",
+        "rubric_version": "p18-website-and-pixel-v1",
+        "verdict": "PASS"
+      },
+      "started_at": "2026-10-20T21:05:45Z",
+      "status": "COMPLETE"
+    }
+  },
+  "updated_at": "2026-10-20T21:05:45Z"
+}

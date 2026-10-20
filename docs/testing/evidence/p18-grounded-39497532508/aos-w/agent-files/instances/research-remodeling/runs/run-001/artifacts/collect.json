@@ -1,0 +1,28 @@
+{
+  "buyer": "Renovation and remodeling business owners",
+  "evidence": [
+    {
+      "ref": "R1",
+      "url": "https://veasy.ca/",
+      "seller": "V Easy",
+      "offer_kind": "managed_service",
+      "observed": "Facebook and Instagram ads plus AI text follow-up for contractors including renovation companies"
+    },
+    {
+      "ref": "R2",
+      "url": "https://www.syntexai.ca/",
+      "seller": "Syntex AI",
+      "offer_kind": "managed_service",
+      "observed": "Meta and Google ads with AI SMS response for general contractors"
+    },
+    {
+      "ref": "R3",
+      "url": "https://northvalemedia.ca/",
+      "seller": "NorthVale Media",
+      "offer_kind": "managed_service",
+      "observed": "Managed Meta ads for Ontario home services including renovations and roofers"
+    }
+  ],
+  "evidence_class": "FIRST_PARTY_OFFER_PAGES_NOT_AD_CARDS",
+  "hypothesis": "High-ticket projects present clear value, but most observed offerings are managed services, not self-serve tools"
+}
