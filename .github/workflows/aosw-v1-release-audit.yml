@@ -1,0 +1,48 @@
+name: AOS-W V1 release readiness audit
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/aosw-v1-release-audit.py'
+      - 'tests/acceptance/run_standalone_acceptance.py'
+      - '.github/workflows/aosw-v1-release-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  v1-release-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install optional local audit/test dependencies
+        run: python -m pip install pyyaml jsonschema pillow
+      - name: Execute complete unit and marketing test suite
+        run: python -m unittest discover -s tests -p 'test_*.py' -q
+      - name: Build and verify immutable preview package
+        run: |
+          mkdir -p dist audit-output
+          python scripts/aosw-distribution.py build scaffold/aos-w dist/aos-w-portable-0.7.0.zip
+          python scripts/aosw-distribution.py verify dist/aos-w-portable-0.7.0.zip
+      - name: Run standalone practical acceptance on the exact 0.7.0 package
+        run: |
+          python tests/acceptance/run_standalone_acceptance.py --zip dist/aos-w-portable-0.7.0.zip --evidence audit-output/standalone-acceptance --expected-version 0.7.0
+      - name: Scan all reachable repository history and ZIP contents
+        run: |
+          python scripts/aosw-v1-release-audit.py --zip dist/aos-w-portable-0.7.0.zip --out audit-output/v1-release-audit.json
+      - name: Upload all release-audit results and candidate ZIP
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aos-w-v1-release-review-evidence
+          path: |
+            audit-output/
+            dist/aos-w-portable-0.7.0.zip
+          retention-days: 90
+          if-no-files-found: warn
