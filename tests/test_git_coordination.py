@@ -105,8 +105,15 @@ class LocalRemoteTests(unittest.TestCase):
         with self.assertRaises(Unauthorized):self.ca.sync_commit(['../../secret'],A)
         with self.assertRaises(Unauthorized):self.ca.sync_commit(['scaffold/aos-w/agent-files/../../PROTOCOL.md'],A)
     def test_lfs_not_installed_and_no_false_success(self):
-        proto=LFSLockPrototype(self.ca)
-        self.assertFalse(proto.available(),'This environment was expected to lack Git LFS')
+        # Explicitly simulate missing LFS, independent of the host's installed packages.
+        # GitHub Actions runners may include git-lfs even if the developer VM does not.
+        import subprocess
+        class NoLFSClient:
+            def __init__(self,repo): self.repo=repo
+            def run(self,*args,allow_failure=False):
+                return subprocess.CompletedProcess(args,1,stdout='',stderr='git-lfs not installed')
+        proto=LFSLockPrototype(NoLFSClient(self.a))
+        self.assertFalse(proto.available(),'Simulated client must remain unavailable')
         p=self.a/'scaffold/aos-w/agent-files/README.md'
         with self.assertRaises(Offline):proto.lock(str(p.relative_to(self.a)),A)
     def test_mocked_lfs_result_uses_git_account_not_agent(self):
