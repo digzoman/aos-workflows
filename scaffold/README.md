@@ -1,5 +1,11 @@
-# Downloadable Scaffold
+# Portable AOS-W scaffold
 
-`aos-w/` will be the independently downloadable installable directory, suitable for copying to a local working folder or persistent cloud workspace without Git.
+The self-contained installable folder is [aos-w/](aos-w/). It now contains operating documentation, 16 draft JSON Schemas, master templates, a bundled skill, user-only writable agent-files config, and an inert practice instance.
 
-It is currently **layout documentation only**, not a runnable or complete workflow framework. Only `aos-w/agent-files/` is normally writable by installed AOS-W users. Development and explicit framework upgrades may change the standardized files.
+**Standalone operation is manual and cooperative.** Download GitHub's whole-repository ZIP, then extract/copy only `scaffold/aos-w/` to a local or persistent cloud folder. After installation no Git, Python, Node, database, MCP or scheduler is required for a capable agent to follow the file protocol.
+
+Only `aos-w/agent-files/` is normally writable. Future framework releases replace protected material while preserving this user-owned subtree. See `aos-w/references/UPGRADE-AND-PORTABILITY.md`.
+
+Optional project maintainer helper: `sh scripts/package-scaffold.sh` from the development repository root creates a ZIP containing only the installable folder if `zip` is installed.
+
+This is an initial scaffold, **not** a fully automated agent workflow engine or tested multi-agent locking system.

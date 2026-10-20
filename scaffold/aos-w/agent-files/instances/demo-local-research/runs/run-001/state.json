@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "run-001",
+  "graph_revision": "g0001",
+  "state_revision": 2,
+  "updated_at": "2026-10-20T12:00:00Z",
+  "last_event_seq": 2,
+  "integrity_level": "advisory",
+  "run_status": "CREATED",
+  "tasks": {
+    "define-scope": {
+      "status": "READY",
+      "attempts": 0,
+      "graph_revision": "g0001"
+    },
+    "collect-evidence": {
+      "status": "WAIT_DEPENDENCY",
+      "attempts": 0,
+      "graph_revision": "g0001"
+    },
+    "review-evidence": {
+      "status": "WAIT_DEPENDENCY",
+      "attempts": 0,
+      "graph_revision": "g0001"
+    }
+  },
+  "eligible_tasks": [
+    "define-scope"
+  ],
+  "blocked_reasons": [],
+  "pending_provider_operations": []
+}

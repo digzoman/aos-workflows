@@ -1,8 +1,8 @@
 # AOS-W V1 Work Plan
 
 Updated: 2026-10-20
-Current phase: Prompt 08 technical architecture and file specifications drafted and committed
-Next phase: confirm formal PRD/spec approval before Prompt 09 scaffold implementation; no engine code yet
+Current phase: Prompt 09 initial portable scaffold implemented and structurally checked
+Next phase: Prompt 10 template inheritance, compound graphs and eligibility behavior; no automatic engine/external integrations yet
 No workflow engine implementation authorized before PRD approval.
 
 ## Research and design stages
@@ -19,7 +19,7 @@ No workflow engine implementation authorized before PRD approval.
 ## Implementation stages, conditional on PRD approval (Prompt 08 docs expressly requested; coding still conditional)
 
 - [x] Prompt 08. Technical design completed as documentation: protected scaffold layout, 16 JSON Schema designs, graph eligibility/composition/revisions, lifecycle/event/checkpoint/recovery, manual protocol, and five new PROPOSED ADRs under docs/specs/. No engine built and pending PRD approval record not altered.
-- [ ] Prompt 09. Build downloadable scaffold, protected framework files, writable `agent-files`.
+- [x] Prompt 09. Implemented self-contained `scaffold/aos-w/` with protected docs, 16 copied draft schemas, two master templates, bundled evidence skill, user-owned `agent-files`, inert practice instance and handoffs, optional structural validator/ZIP packager, documented manual startup/recovery and staged structural check results.
 - [ ] Prompt 10. Template reuse, composition, dependencies, dynamic runs, non-repeating/scheduled trigger metadata, and ad hoc launch overrides.
 - [ ] Prompt 11. State, checkpoints, retries, recovery, and interruption semantics.
 - [ ] Prompt 12. Agent provenance, autonomy, permissions, QC, handoffs, and just-in-time skill loading/resolution without implicit authority expansion.

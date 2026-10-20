@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Workflow run",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "instance_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "graph_revision": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "trigger_kind": {
+      "enum": [
+        "manual",
+        "schedule",
+        "event"
+      ]
+    },
+    "occurrence_key": {
+      "type": "string",
+      "minLength": 0
+    },
+    "schedule_revision": {
+      "type": "string",
+      "minLength": 0
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "created_by": {
+      "$ref": "common.schema.json#/$defs/actor"
+    },
+    "mode": {
+      "enum": [
+        "standalone_single_writer",
+        "git_mirrored_single_writer",
+        "shared_coordinated"
+      ]
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "common.schema.json#/$defs/capability"
+      }
+    },
+    "parent_run_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "run_id",
+    "instance_id",
+    "graph_revision",
+    "trigger_kind",
+    "created_at",
+    "created_by",
+    "mode",
+    "capabilities"
+  ]
+}

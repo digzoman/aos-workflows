@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Retry policy",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "max_attempts": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "on": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "source_unavailable",
+          "rate_limited",
+          "transient_io",
+          "timeout",
+          "validation_failed",
+          "review_revise",
+          "unknown"
+        ]
+      }
+    },
+    "backoff": {
+      "enum": [
+        "manual",
+        "none",
+        "fixed",
+        "exponential"
+      ]
+    },
+    "delay_seconds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "on_exhausted": {
+      "enum": [
+        "block",
+        "escalate",
+        "skip_if_authorized"
+      ]
+    },
+    "reconcile_before_retry": {
+      "type": "boolean"
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "max_attempts",
+    "on",
+    "backoff"
+  ]
+}

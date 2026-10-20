@@ -1,0 +1,68 @@
+schema_version: "1.0.0"
+template_id: research-starter
+version: "0.1.0"
+name: Local research starter with evidence check
+description: A safe manual workflow for a bounded question using existing local or freely available nonconfidential material.
+parameters:
+  question:
+    type: string
+    required: true
+    description: The scoped question to investigate
+  scope:
+    type: string
+    required: false
+    default: "No external account changes"
+trigger:
+  kind: manual
+policy:
+  autonomy: bounded
+  allowed_actions: [read, research, write_local, review]
+  human_required_actions: [stage_paused, activate_live, change_budget, deploy_prod, send_message, emit_conversion]
+  default_gates: [evidence-self-check]
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+skills:
+  - skill_id: evidence-handling
+    source: bundled
+    path: skills/evidence-handling/SKILL.md
+    required: true
+    trust: approved
+gates:
+  - gate_id: evidence-self-check
+    kind: self_review
+    required: true
+    rubric: Evidence is clearly separated into observations, inference and unresolved checks.
+graph:
+  nodes:
+    - id: define-scope
+      kind: task
+      needs: []
+      instructions: Restate the question, permitted sources, exclusions and completion criteria. Do not contact external accounts.
+      required_actions: [read, write_local]
+      outputs:
+        - artifact_id: research-scope
+          path: artifacts/scope.md
+    - id: collect-evidence
+      kind: task
+      needs: [define-scope]
+      instructions: Gather bounded, dated evidence. If blocked, record source limits rather than inventing facts.
+      required_actions: [read, research, write_local]
+      skills: [evidence-handling]
+      retry:
+        schema_version: "1.0.0"
+        max_attempts: 2
+        on: [source_unavailable, transient_io]
+        backoff: manual
+        on_exhausted: escalate
+      outputs:
+        - artifact_id: evidence-log
+          path: artifacts/evidence.md
+    - id: review-evidence
+      kind: review
+      needs: [collect-evidence]
+      instructions: Review the complete source record against the evidence-self-check gate. Record actual reviewer and artifact versions.
+      required_actions: [review, write_local]
+      review_gate: evidence-self-check
+      outputs:
+        - artifact_id: reviewed-summary
+          path: artifacts/summary.md

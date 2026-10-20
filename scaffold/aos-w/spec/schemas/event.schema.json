@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Run event (single JSONL line)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "event_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "type": {
+      "enum": [
+        "run_created",
+        "task_proposed",
+        "task_ready",
+        "task_claimed",
+        "task_started",
+        "task_wait_external",
+        "task_submitted_review",
+        "task_completed",
+        "review_accepted",
+        "review_revise",
+        "task_requeued",
+        "task_blocked",
+        "task_unblocked",
+        "task_cancelled",
+        "task_superseded",
+        "authorization_granted",
+        "authorization_revoked",
+        "side_effect_intent",
+        "side_effect_ack",
+        "side_effect_unknown",
+        "provider_reconciled",
+        "checkpoint_created",
+        "graph_revision_requested",
+        "graph_revised",
+        "child_generation_proposed",
+        "child_authorized",
+        "condition_evaluated",
+        "recovery_checked",
+        "sync_verified",
+        "handoff_updated",
+        "correction"
+      ]
+    },
+    "at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "actor": {
+      "$ref": "common.schema.json#/$defs/actor"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "attempt_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "graph_revision": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "previous_status": {
+      "type": "string"
+    },
+    "next_status": {
+      "type": "string"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/artifact"
+      }
+    },
+    "payload": {
+      "type": "object"
+    },
+    "prev_digest": {
+      "type": "string"
+    },
+    "digest": {
+      "type": "string"
+    },
+    "integrity_level": {
+      "enum": [
+        "verified",
+        "advisory",
+        "unverified"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "event_id",
+    "seq",
+    "run_id",
+    "type",
+    "at",
+    "actor",
+    "graph_revision",
+    "evidence"
+  ]
+}

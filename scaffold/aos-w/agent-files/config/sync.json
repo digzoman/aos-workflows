@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "enabled": false,
+  "provider": "none",
+  "repository": null,
+  "remote_url": null,
+  "branch": null,
+  "last_verified_remote_revision": null,
+  "status": "not_configured",
+  "notes": "Git is optional; do not put credentials here. Configured sync must be checked before and after work."
+}

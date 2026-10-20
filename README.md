@@ -2,11 +2,11 @@
 
 AOS-W is a planned portable, file-based framework for repeatable, auditable AI-agent workflows. It is designed for one agent on a local or persistent cloud filesystem, with optional Git synchronization and multi-agent coordination. No Git installation, dedicated MCP server, database, Python runtime, or scheduler is required for the standalone design.
 
-> **Status: PRD drafted, awaiting owner approval.** The comprehensive [AOS-W Version 1 PRD](docs/specs/prd/PRD.md) and its [review documents](docs/specs/prd/README.md) are committed for human review. No workflow engine, lock mechanism or scheduler has been implemented or claimed to work yet.
+> **Status: first portable scaffold implemented (Prompt 09), manually operated only.** [Start with the self-contained scaffold](scaffold/aos-w/README.md). Templates, 16 draft schemas, instructions and a safe sample run are present. No automatic workflow engine, distributed lock or scheduler has been implemented.
 
 ## Planned distribution
 
-The installable directory will live at `scaffold/aos-w/`. Users will be able to copy or download that directory into an arbitrary working folder.
+The installable directory is [scaffold/aos-w/](scaffold/aos-w/). Copy it from the repository's ZIP into any persistent local/cloud folder, or use the optional packaging script to create a scaffold-only ZIP. It works manually without a Git checkout.
 
 Only `scaffold/aos-w/agent-files/` is intended to change during ordinary installed-framework use. It will contain project-specific configuration, customized templates, active runs, evidence, reviews, state, and history. Framework maintainers may update the standardized scaffold outside this area through explicit releases.
 
@@ -33,7 +33,7 @@ Start with [temp/OPERATING-RULES.md](temp/OPERATING-RULES.md) and [temp/HANDOFF.
 
 ## Roadmap
 
-Historical workflow and architecture research stages (Prompts 02–06) are complete, with sanitized results in tracked `temp/research/` and `temp/architecture/`. **Prompt 08 technical design documents are now drafted** at [docs/specs/architecture/](docs/specs/architecture/), with [JSON Schema proposals](docs/specs/schemas/) and [additional proposed ADRs](docs/specs/adrs/). The PRD approval record remains pending. Actual Prompt 09 scaffold/engine implementation is blocked until explicit authorization. Draft architecture decision records are not yet approved.
+Prompts 02–06 researched Ampgent processes, A Rep, LangGraph and collaboration. Prompt 07 produced the PRD; Prompt 08 produced [technical specifications](docs/specs/architecture/) and [draft schemas](docs/specs/schemas/). **Prompt 09 is the initial file-based scaffold implementation.** Later prompts will implement graph execution, durable automated recovery, permissions, Git coordination and full Ampgent templates, followed by tests. The user explicitly directed Prompt 09 implementation; this does **not** approve production account actions or automatically accept all draft ADRs.
 
 ## Licensing
 

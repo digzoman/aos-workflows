@@ -1,0 +1,11 @@
+# Reference guides
+
+Start with `../README.md` and `../PROTOCOL.md`, then use these references **just when relevant**:
+
+- [START-A-RUN.md](START-A-RUN.md), exact manual folder and record creation, safe task selection and resume.
+- [INSTANCE-LAYOUT.md](INSTANCE-LAYOUT.md), protected base definitions versus user-generated instance/run trees.
+- [UPGRADE-AND-PORTABILITY.md](UPGRADE-AND-PORTABILITY.md), copy/unzip to local/cloud and upgrade without overwriting agent-files.
+- [EVIDENCE-AND-PERMISSIONS.md](EVIDENCE-AND-PERMISSIONS.md), review, identity, approval and source-of-truth distinctions.
+- [SCHEDULES-AND-SKILLS.md](SCHEDULES-AND-SKILLS.md), manual defaults, optional host wake and task-specific trusted skills.
+
+These documents are part of the **protected** scaffold. Put project-specific variants into `agent-files/`.

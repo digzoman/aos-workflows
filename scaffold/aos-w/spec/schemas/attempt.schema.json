@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Task attempt and external operation evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "attempt_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "graph_revision": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "actor": {
+      "$ref": "common.schema.json#/$defs/actor"
+    },
+    "started_at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "finished_at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "status": {
+      "enum": [
+        "running",
+        "succeeded",
+        "failed",
+        "unknown",
+        "blocked"
+      ]
+    },
+    "input_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/artifact"
+      }
+    },
+    "output_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/artifact"
+      }
+    },
+    "operation_key": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "provider_object_id": {
+      "type": "string"
+    },
+    "desired_diff": {
+      "type": "object"
+    },
+    "approval_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "write_ack": {
+      "enum": [
+        "not_sent",
+        "accepted",
+        "rejected",
+        "ambiguous"
+      ]
+    },
+    "provider_readback": {
+      "enum": [
+        "not_checked",
+        "confirmed",
+        "mismatch",
+        "unavailable",
+        "unknown"
+      ]
+    },
+    "error_class": {
+      "type": "string"
+    },
+    "retry_next_at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "attempt_id",
+    "run_id",
+    "task_id",
+    "graph_revision",
+    "actor",
+    "started_at",
+    "status",
+    "input_refs",
+    "output_refs"
+  ]
+}

@@ -1,3 +1,11 @@
-# Examples
+# Sanitized examples and fixtures
 
-This directory will hold **sanitized** reference workflows and test cases, including Ampgent-inspired research and advertising examples. Examples must not disclose private business details, copied customer records, secrets, or account-specific identifiers. No example workflows are implemented yet.
+The downloaded [AOS-W scaffold](../scaffold/aos-w/) contains its own immediately inspectable starter examples:
+
+- [research-starter master template](../scaffold/aos-w/templates/research-starter/template.yaml) with [step-local evidence-handling skill](../scaffold/aos-w/templates/research-starter/skills/evidence-handling/SKILL.md).
+- [periodic-review-example template](../scaffold/aos-w/templates/periodic-review-example/template.yaml), a **disabled** weekly schedule declaration that can be manually invoked without a scheduler.
+- [demo-local-research](../scaffold/aos-w/agent-files/instances/demo-local-research/README.md), a pre-seeded **CREATED, not executed** practice instance with pinned template, run/events/state/checkpoint, task/claim/review/approval directories and handoff. Its source data is synthetic; no actions were actually executed.
+
+This project will later add sanitized Ampgent research, creative production and advertising implementation templates. The original private advertising sources and live provider records are **not** public fixtures.
+
+No example grants Meta, CRM, messaging or production deployment access.

@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "instance_id": "demo-local-research",
+  "template_id": "research-starter",
+  "version": "0.1.0",
+  "origin": "templates/research-starter/template.yaml",
+  "pinned_snapshot_path": "agent-files/instances/demo-local-research/template-snapshots/master-v0-1-0/template.yaml",
+  "content_digest": "git-blob-sha1:6dfc95e637498dd9cb14cfb592a261e81f06b4ce",
+  "graph_revision": "g0001",
+  "resolved_at": "2026-10-20T12:00:00Z",
+  "inheritance": [
+    {
+      "source": "templates/research-starter/template.yaml",
+      "revision": "0.1.0",
+      "digest": "git-blob-sha1:6dfc95e637498dd9cb14cfb592a261e81f06b4ce"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Task owner claim",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "claim_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "run_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "task_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "actor": {
+      "$ref": "common.schema.json#/$defs/actor"
+    },
+    "mode": {
+      "enum": [
+        "advisory",
+        "enforced_local",
+        "enforced_git"
+      ]
+    },
+    "token": {
+      "type": "string"
+    },
+    "acquired_at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "last_heartbeat_at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "expires_at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "base_state_revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "fencing_epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "backend_evidence": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "released",
+        "expired",
+        "reclaimed",
+        "unknown"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "claim_id",
+    "run_id",
+    "task_id",
+    "actor",
+    "mode",
+    "acquired_at",
+    "status"
+  ]
+}

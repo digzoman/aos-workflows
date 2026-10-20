@@ -1,0 +1,43 @@
+schema_version: "1.0.0"
+template_id: periodic-review-example
+version: "0.1.0"
+name: Optional scheduled review declaration
+description: Illustrates a recurring-capable workflow; it never wakes up or runs on its own.
+parameters:
+  subject:
+    type: string
+    required: true
+trigger:
+  kind: schedule
+  schedule:
+    format: rrule
+    expression: "FREQ=WEEKLY;BYDAY=MO"
+    timezone: "Etc/UTC"
+    enabled: false
+    missed_policy: manual_review
+    overlap_policy: block
+policy:
+  autonomy: bounded
+  allowed_actions: [read, research, write_local, review]
+  human_required_actions: [stage_paused, activate_live, change_budget, deploy_prod, send_message, emit_conversion]
+  default_gates: []
+  max_parallel_tasks: 1
+  allow_dynamic_children: false
+graph:
+  nodes:
+    - id: inspect
+      kind: task
+      needs: []
+      instructions: Inspect the permitted, user-supplied subject using currently available evidence. Never assume a scheduled wake occurred.
+      required_actions: [read, write_local]
+      outputs:
+        - artifact_id: findings
+          path: artifacts/findings.md
+    - id: summarize
+      kind: task
+      needs: [inspect]
+      instructions: Produce a dated summary with confidence, actual source limits and next suggested manual action.
+      required_actions: [write_local]
+      outputs:
+        - artifact_id: report
+          path: artifacts/report.md

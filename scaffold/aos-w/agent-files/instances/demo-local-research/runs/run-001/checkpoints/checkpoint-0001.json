@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "checkpoint_id": "checkpoint-0001",
+  "run_id": "run-001",
+  "graph_revision": "g0001",
+  "event_seq": 2,
+  "state_revision": 2,
+  "created_at": "2026-10-20T12:00:00Z",
+  "created_by": {
+    "agent": "aos-w",
+    "platform": "ChatGPT",
+    "role": "scaffold-author",
+    "instance": "prompt-09"
+  },
+  "integrity_level": "advisory",
+  "completed_tasks": [],
+  "pending_tasks": [
+    "define-scope",
+    "collect-evidence",
+    "review-evidence"
+  ],
+  "blocked_tasks": [],
+  "next_eligible_tasks": [
+    "define-scope"
+  ],
+  "verified_artifacts": [],
+  "provider_unknown_operations": [],
+  "sync_status": "not_configured"
+}

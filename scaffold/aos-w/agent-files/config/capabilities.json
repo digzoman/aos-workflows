@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "persistent_files": {
+    "status": "unverified"
+  },
+  "atomic_single_file_write": {
+    "status": "unverified"
+  },
+  "cryptographic_hash": {
+    "status": "unverified"
+  },
+  "exclusive_claim": {
+    "status": "unavailable"
+  },
+  "remote_sync": {
+    "status": "unavailable"
+  },
+  "clock": {
+    "status": "unverified"
+  },
+  "schedule_wake": {
+    "status": "unavailable"
+  },
+  "external_provider": {
+    "status": "unavailable"
+  },
+  "pixel_visual_review": {
+    "status": "unverified"
+  },
+  "independent_reviewer": {
+    "status": "unverified"
+  },
+  "notes": "Update only after checking actual tools and persistence. Presence of a configuration is not proof of availability."
+}

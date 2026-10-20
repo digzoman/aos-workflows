@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Custom template overlay",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "template_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "version": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "base": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "template_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "version": {
+          "type": "string"
+        },
+        "content_digest": {
+          "type": "string",
+          "minLength": 1
+        },
+        "origin": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "template_id",
+        "version",
+        "content_digest",
+        "origin"
+      ]
+    },
+    "parameters": {
+      "type": "object"
+    },
+    "policy_overrides": {
+      "type": "object",
+      "description": "Validated merge against protected base policy; never grants new authority"
+    },
+    "skill_overrides": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/skill"
+      }
+    },
+    "node_patches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "op": {
+            "enum": [
+              "add",
+              "replace",
+              "remove"
+            ]
+          },
+          "node_id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "node": {
+            "$ref": "common.schema.json#/$defs/node"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "op",
+          "node_id"
+        ]
+      }
+    },
+    "trigger_override": {
+      "$ref": "common.schema.json#/$defs/trigger"
+    },
+    "resolve_note": {
+      "type": "string"
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "template_id",
+    "version",
+    "name",
+    "base",
+    "node_patches"
+  ]
+}

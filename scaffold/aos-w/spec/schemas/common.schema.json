@@ -1,0 +1,617 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Shared AOS-W types",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version"
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,79}$"
+    },
+    "time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "agent": {
+          "type": "string",
+          "minLength": 1
+        },
+        "platform": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "instance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "agent_run": {
+          "type": "string",
+          "minLength": 0
+        }
+      },
+      "required": [
+        "agent",
+        "platform",
+        "role",
+        "instance"
+      ]
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "$ref": "#/$defs/id"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "integrity_level": {
+          "enum": [
+            "verified",
+            "advisory",
+            "unverified"
+          ]
+        },
+        "confidentiality": {
+          "enum": [
+            "public",
+            "internal",
+            "confidential"
+          ]
+        }
+      },
+      "required": [
+        "artifact_id",
+        "locator",
+        "revision"
+      ]
+    },
+    "action": {
+      "enum": [
+        "read",
+        "research",
+        "write_local",
+        "review",
+        "stage_paused",
+        "edit_crm",
+        "deploy_dev",
+        "deploy_prod",
+        "activate_live",
+        "change_budget",
+        "send_message",
+        "emit_conversion"
+      ]
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "autonomy": {
+          "enum": [
+            "bounded",
+            "delegated",
+            "supervised"
+          ]
+        },
+        "allowed_actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/action"
+          }
+        },
+        "human_required_actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/action"
+          }
+        },
+        "default_gates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "max_parallel_tasks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "allow_dynamic_children": {
+          "type": "boolean"
+        },
+        "allow_material_revisions": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "autonomy",
+        "allowed_actions",
+        "human_required_actions",
+        "default_gates",
+        "max_parallel_tasks",
+        "allow_dynamic_children"
+      ]
+    },
+    "skill": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "skill_id": {
+          "$ref": "#/$defs/id"
+        },
+        "source": {
+          "enum": [
+            "bundled",
+            "custom",
+            "instance",
+            "run",
+            "installed",
+            "local",
+            "git",
+            "remote"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "minLength": 0
+        },
+        "uri": {
+          "type": "string",
+          "minLength": 0
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "trust": {
+          "enum": [
+            "approved",
+            "experimental",
+            "untrusted",
+            "unknown"
+          ]
+        }
+      },
+      "required": [
+        "skill_id",
+        "source",
+        "required"
+      ]
+    },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "manual",
+            "schedule"
+          ]
+        },
+        "schedule": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "format": {
+              "enum": [
+                "rrule",
+                "cron"
+              ]
+            },
+            "expression": {
+              "type": "string",
+              "minLength": 1
+            },
+            "timezone": {
+              "type": "string",
+              "minLength": 1
+            },
+            "enabled": {
+              "type": "boolean"
+            },
+            "missed_policy": {
+              "enum": [
+                "manual_review",
+                "skip",
+                "coalesce",
+                "backfill"
+              ]
+            },
+            "overlap_policy": {
+              "enum": [
+                "block",
+                "queue",
+                "allow_if_independent"
+              ]
+            }
+          },
+          "required": [
+            "format",
+            "expression",
+            "timezone",
+            "enabled",
+            "missed_policy",
+            "overlap_policy"
+          ]
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "predicate": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "enum": [
+                "eq",
+                "neq",
+                "in",
+                "exists",
+                "gte",
+                "lte"
+              ]
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "value": {}
+          },
+          "required": [
+            "op",
+            "path"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "enum": [
+                "and",
+                "or"
+              ]
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/predicate"
+              }
+            }
+          },
+          "required": [
+            "op",
+            "args"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "not"
+            },
+            "arg": {
+              "$ref": "#/$defs/predicate"
+            }
+          },
+          "required": [
+            "op",
+            "arg"
+          ]
+        }
+      ]
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "available",
+            "unavailable",
+            "unverified"
+          ]
+        },
+        "mechanism": {
+          "type": "string",
+          "minLength": 0
+        },
+        "verified_at": {
+          "$ref": "#/$defs/time"
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 0
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "gate_id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "enum": [
+            "deterministic",
+            "ai_independent",
+            "human",
+            "self_review"
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "rubric": {
+          "type": "string",
+          "minLength": 0
+        },
+        "protected": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "gate_id",
+        "kind",
+        "required"
+      ]
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "$ref": "#/$defs/id"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 0
+        },
+        "required": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "path"
+      ]
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "enum": [
+            "task",
+            "review",
+            "approval",
+            "join",
+            "child_generator"
+          ]
+        },
+        "needs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "instructions": {
+          "type": "string",
+          "minLength": 0
+        },
+        "when": {
+          "$ref": "#/$defs/predicate"
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/output"
+          }
+        },
+        "required_actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/action"
+          }
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "retry": {
+          "$ref": "retry-policy.schema.json"
+        },
+        "review_gate": {
+          "$ref": "#/$defs/id"
+        },
+        "join": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "policy": {
+              "enum": [
+                "all_accepted",
+                "any_accepted",
+                "quorum"
+              ]
+            },
+            "threshold": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "members": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/id"
+              }
+            }
+          },
+          "required": [
+            "policy",
+            "members"
+          ]
+        },
+        "branch_cases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "when": {
+                "$ref": "#/$defs/predicate"
+              },
+              "targets": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "$ref": "#/$defs/id"
+                }
+              }
+            },
+            "required": [
+              "when",
+              "targets"
+            ]
+          }
+        },
+        "fanout": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "child_template_id": {
+              "$ref": "#/$defs/id"
+            },
+            "child_template_version": {
+              "type": "string"
+            },
+            "proposals_artifact": {
+              "$ref": "#/$defs/id"
+            },
+            "authorization_mode": {
+              "enum": [
+                "per_child",
+                "approved_batch",
+                "automatic_within_existing_scope"
+              ]
+            },
+            "max_children": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "id_strategy": {
+              "enum": [
+                "stable_parent_slug_source_revision"
+              ]
+            }
+          },
+          "required": [
+            "child_template_id",
+            "authorization_mode",
+            "max_children",
+            "id_strategy"
+          ]
+        },
+        "required_capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "child_template_ref": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "template_id": {
+              "$ref": "#/$defs/id"
+            },
+            "version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "content_digest": {
+              "type": "string",
+              "minLength": 1
+            },
+            "parameter_bindings": {
+              "type": "object"
+            },
+            "authorization_mode": {
+              "enum": [
+                "per_child",
+                "approved_batch",
+                "automatic_within_existing_scope"
+              ]
+            }
+          },
+          "required": [
+            "template_id",
+            "version",
+            "content_digest",
+            "authorization_mode"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "needs"
+      ]
+    }
+  }
+}

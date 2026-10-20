@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Workflow instance",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "instance_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "template_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "template_version": {
+      "type": "string",
+      "minLength": 0
+    },
+    "template_lock": {
+      "type": "string",
+      "minLength": 1
+    },
+    "current_graph_revision": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "parameters": {
+      "type": "object"
+    },
+    "policy": {
+      "$ref": "common.schema.json#/$defs/policy"
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/time"
+    },
+    "created_by": {
+      "$ref": "common.schema.json#/$defs/actor"
+    },
+    "parent_instance_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "instance_id",
+    "template_id",
+    "template_version",
+    "template_lock",
+    "current_graph_revision",
+    "parameters",
+    "policy",
+    "created_at",
+    "created_by"
+  ]
+}

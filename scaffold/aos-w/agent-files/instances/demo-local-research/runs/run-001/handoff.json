@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "run-001",
+  "graph_revision": "g0001",
+  "checkpoint_id": "checkpoint-0001",
+  "last_event_seq": 2,
+  "generated_at": "2026-10-20T12:00:00Z",
+  "prepared_by": {
+    "agent": "aos-w",
+    "platform": "ChatGPT",
+    "role": "scaffold-author",
+    "instance": "prompt-09"
+  },
+  "completed": [],
+  "ready": [
+    "define-scope"
+  ],
+  "blocked": [
+    {
+      "task_id": "collect-evidence",
+      "reason": "Needs define-scope"
+    },
+    {
+      "task_id": "review-evidence",
+      "reason": "Needs collect-evidence and gate review"
+    }
+  ],
+  "pending_approvals": [],
+  "pending_provider_reconciliations": [],
+  "source_references": [
+    "templates/research-starter/template.yaml"
+  ],
+  "next_action": "Verify persistent storage, actual agent identity and approved practice scope, then work on define-scope under this pinned graph. No task has yet run.",
+  "notes": "Synthetic pre-seeded practice example. Not an active background job or a completed research task.",
+  "sync_status": "not_configured"
+}

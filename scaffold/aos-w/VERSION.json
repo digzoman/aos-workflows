@@ -1,0 +1,26 @@
+{
+  "aosw_version": "0.1.0",
+  "schema_version": "1.0.0",
+  "distribution": "portable-file-scaffold",
+  "status": "manual-cooperative-foundation",
+  "minimum_requirements": [
+    "capable agent",
+    "persistent writable files within agent-files"
+  ],
+  "mandatory_programming_runtime": false,
+  "mandatory_git": false,
+  "mandatory_scheduler": false,
+  "exclusive_claims": "not implemented",
+  "automatic_graph_executor": "not implemented",
+  "upgrades": {
+    "protected_paths": [
+      "README.md",
+      "PROTOCOL.md",
+      "VERSION.json",
+      "spec",
+      "references",
+      "templates"
+    ],
+    "preserve_user_path": "agent-files"
+  }
+}

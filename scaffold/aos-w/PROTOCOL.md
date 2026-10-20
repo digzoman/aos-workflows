@@ -1,0 +1,45 @@
+# AOS-W portable agent protocol (0.1)
+
+**Use these instructions even with no Git or helper scripts.** This document is a concise standalone procedure. Detailed frozen design guidance is shipped in `spec/`.
+
+## Entry and authority
+
+1. Read `README.md`, `VERSION.json`, `agent-files/README.md` and `agent-files/config/settings.json`. Confirm the folder is actually persistent. Inspect current capability evidence; absent or unverified tools remain UNVERIFIED.
+2. Check `agent-files/instances/` for saved instances and each `runs/<run-id>/handoff.md`. Never rely on previous chat context alone.
+3. Treat user-authorized work scope and approvals as **separate** from a quality PASS, role, Git access or skill. Read the current approved state of any external provider before making a consequential authorized change.
+4. **Only write inside `agent-files/` during normal work.** Path traversal, symlink escape, credentials in public examples, and unreviewed remote script execution are forbidden.
+
+## Start a new run
+
+1. Choose a template under `templates/` or `agent-files/custom-templates/`.
+2. Validate the declared source, required parameters, skills, policy, outputs and dependencies. Pin the **resolved template bytes and version**, inherited effective policy and graph revision into a **new** `agent-files/instances/<instance-id>/`. Do not edit the master template.
+3. Create `runs/<run-id>/` with `run.json`, `events.jsonl`, `state.json`, `checkpoints/`, `tasks/`, `claims/`, `reviews/`, `approvals/`, `artifacts/`, `skills/`, and `handoff.md`. Paths and schema files are documented in `references/START-A-RUN.md` and `spec/schemas/`.
+4. Record run_created as event sequence 1 with four-field provenance `[Agent | Platform | Role | Instance]`. A one-off/manual run never implies further recurrence.
+
+## Pick the next eligible node
+
+A node is eligible only if it exists in the *pinned current graph revision*, its required predecessor outputs are accepted/current, its condition is TRUE (not UNKNOWN), no dependency is blocked or stale, and all required skills/capabilities and **before-execution** action approvals are present. An unresolved provider operation blocks replay. If an exclusive task is requested in shared mode, acquire a **verified** backend claim before mutation; otherwise use single-writer manual mode.
+
+Read relevant skills just in time. Mark missing/untrusted remote skills BLOCKED or use an explicitly permitted pinned offline fallback. Do not execute unknown code merely because a skill mentions it.
+
+## Work, review, checkpoint and handoff
+
+- Record task attempt/start before work and bound retries. Store source and evidence inside the run. External writes require explicit approved operation scope plus before/after provider readback; request ACK is not provider success.
+- Validate outputs and exact artifact revisions. If quality review is needed, save review and wait. A failed gate only blocks dependent steps; unrelated approved work may continue.
+- Append a complete single-line JSON event with unique event_id and increasing seq. Update derived `state.json`, create a checkpoint anchored to the last **validated** event, then update `handoff.md` with exact next step and blockers. Mark unavailable hashes/integrity tools as advisory or unverified; never invent PASS.
+- On restart, inspect event log in sequence and compare its last verified event with state/checkpoint. Preserve suspect partial writes, reconcile external effects before retry, and do not re-create children or provider objects merely because the previous response timed out.
+- A material revision produces a **new immutable graph revision** under the instance, preserving prior completed artifacts and invalidating only affected descendants/reviews.
+
+## Git, schedules, and collaboration
+
+Git sync is optional and off by default. If deliberately enabled, inspect remote status **before** changes and verify push/readback afterward. No network means sync remains pending; never assume remote lock ownership.
+
+Default triggers are manual. A scheduled declaration does not run itself. Each true scheduled invocation uses a unique occurrence key; unattended wake requires an external authorized host.
+
+Claims written in `claims/` are advisory in plain-file mode; they are NOT distributed locks. A second writer must not proceed with a colliding task absent a tested coordination backend. Git LFS vs atomic task-claim selection is still a future empirical decision.
+
+## Stop criteria
+
+If data, required reviewer, permission, skill, claim, source or provider readback is missing, record the precise blocker and handoff instead of guessing. Do not declare an external task done based on a local note, Git commit, plan or QC alone.
+
+See `spec/MANUAL-AGENT-PROTOCOL.md` for the longer reference procedure.

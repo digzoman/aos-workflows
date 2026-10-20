@@ -86,3 +86,15 @@ Future sessions should append substantive events with changed files, test eviden
 - Corrected sample nested retry schema version and added optional structured handoff companion.
 - No code engine, scripts, external provider operations, atomic Git lock tests, schedule daemon or permission changes.
 - Next owner approval/checkpoint, then Prompt 09 scaffold implementation if expressly authorized.
+
+## 2026-10-20. Prompt 09, portable standalone scaffold
+
+- User explicitly directed implementation of Prompt 09 "using the approved PRD and technical specifications." Treated that instruction as owner authorization for the **initial file-based scaffold only**, not blanket acceptance of all ADRs or permission for live external systems. Formal PRD review form still lacked a separate submitted answer.
+- Confirmed main HEAD at prior Prompt 08 commit. Inspected original scaffold placeholders, technical file map/manual protocol and current development rules before changes.
+- Implemented actual `scaffold/aos-w/` README, PROTOCOL and version manifest, self-contained `spec/` with five technical reference documents and sixteen versioned draft JSON Schemas, and read-only reference guides.
+- Implemented two master YAML templates: manually invoked `research-starter` with step-local bundled evidence-handling Agent Skill and safe self-review; `periodic-review-example` showing disabled weekly metadata without any scheduler.
+- Implemented `agent-files/config/`, `custom-templates/`, `instances/`, `cache/`, `indexes/`, `coordination/` and an inert synthetic practice instance with physically present run-state, event-history, checkpoint, task-attempt, evidence, review, approval, claim, skill and handoff directories. The practice run explicitly has **zero executed tasks and no provider permissions**.
+- Added optional `scripts/validate-scaffold.mjs` and `scripts/package-scaffold.sh` (not prerequisites for standalone users), plus sanitized example index and upgrade instructions.
+- Performed staged Git tree validation: required paths present, 16 schema Git blobs match source, example template/snapshot/graph Git blob match and lock digest, two event sequence and state/checkpoint/handoff consistent, template graphs have no missing parsed dependencies or cycles. Detailed PASS/NOT-RUN evidence in `temp/tests/PROMPT-09-STRUCTURAL-VALIDATION.md`.
+- Did **not** run a full YAML/JSON-Schema validator, actual optional scripts, cross-agent cold-start or create a prebuilt ZIP in this tool environment, and did not implement graph executor, Git locking, schedule host, provider writes or live marketing actions.
+- Next Prompt 10, implement reusable template resolution, compound graph behavior and eligibility without violating no-runtime standalone mode.

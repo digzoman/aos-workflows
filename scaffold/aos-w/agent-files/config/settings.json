@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "working_mode": "standalone_single_writer",
+  "default_trigger": "manual",
+  "default_autonomy": "bounded",
+  "allowed_local_actions": [
+    "read",
+    "research",
+    "write_local",
+    "review"
+  ],
+  "consequential_external_actions_require_explicit_approval": true,
+  "normal_writable_root": "agent-files",
+  "default_confidentiality": "internal",
+  "allow_dynamic_children_without_approval": false,
+  "notes": "User-owned configuration. The scaffold has no runtime enforcement and assumes one cooperating writer."
+}

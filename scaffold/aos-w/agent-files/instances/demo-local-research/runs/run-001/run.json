@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "run-001",
+  "instance_id": "demo-local-research",
+  "graph_revision": "g0001",
+  "trigger_kind": "manual",
+  "created_at": "2026-10-20T12:00:00Z",
+  "created_by": {
+    "agent": "aos-w",
+    "platform": "ChatGPT",
+    "role": "scaffold-author",
+    "instance": "prompt-09"
+  },
+  "mode": "standalone_single_writer",
+  "capabilities": {
+    "persistent_files": {
+      "status": "unverified"
+    },
+    "exclusive_claim": {
+      "status": "unavailable"
+    },
+    "remote_sync": {
+      "status": "unavailable"
+    },
+    "schedule_wake": {
+      "status": "unavailable"
+    }
+  }
+}

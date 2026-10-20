@@ -88,3 +88,11 @@ Open questions are not blockers for Prompt 02 research unless explicitly noted.
 63. Review trust precedence and installed/remote skill collision handling, optional scripts and external privilege policy.
 64. Test events-as-audit/state-as-derived reconstruction on interrupted/torn writes with no mandatory Python, and articulate manual integrity limitations.
 65. Define production provider adapter permission scope, actual provider readback and CAPI idempotency only after separate owner authorization.
+
+## Prompt 09 follow-up work
+
+66. The scaffold ships two YAML templates and 16 copied structural schemas; run an actual YAML-to-JSON JSON-Schema library validation and test cases in Prompt 10 or 14. The staged graph shape/static JSON checks are not full schema execution.
+67. Optionally automate safe upgrades and scaffold-only ZIP releases. The current manual upgrade guide and packaging script are documented; no automated release/upgrade or ZIP artifact generated in this turn.
+68. Test the pre-seeded created practice run with a fresh AI agent and verify real task transitions/checkpoint write/recovery, including one actual file-only without Git environment.
+69. Decide whether future releases should include the inert practice instance in agent-files or move it to a protected reference-only fixture. Keep user-owned data safe during upgrades.
+70. Confirm exact interpretation of owner Prompt 09 "using the approved PRD" within the formal PRD signoff register before accepting all proposed ADRs. Only scoped scaffold authorization was recorded.

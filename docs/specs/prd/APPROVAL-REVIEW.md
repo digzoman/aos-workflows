@@ -43,3 +43,13 @@ Approval accepts product scope, architecture principles, constraints and test re
 - Next permitted step: **owner review; Prompt 08 only after explicit approval**
 
 Use PRD.md §23 for detailed open decisions and DECISION-REGISTER.md to distinguish approved requirements from research recommendations.
+
+## 2026-10-20 Owner-directed scoped implementation authorization (Prompt 09)
+
+The owner explicitly instructed: **"Prompt 09. Build the Portable AOS-W Scaffold. Continue implementation using the approved PRD and technical specifications."**
+
+This direct instruction is recorded as authorization to build and commit the **initial file-based scaffold and developer structural tests**, even though the previous dedicated approval questionnaire fields above were never separately completed.
+
+**Scope approved by this direction:** the Prompt 09 scaffold, standard/protected files, `agent-files`, basic templates, agent instructions, sanitized examples and safe tests. **Not approved by this direction:** real Meta/GHL/website/customer actions; autonomous external publishing/spend; a selected Git claim winner; unattended scheduling; automatic acceptance of all proposed ADRs. This does not claim T01–T16 have passed.
+
+The PRD is the implementation reference for this bounded step. A formal PRD-wide status and further ADR decisions may be recorded separately; do not silently rewrite the earlier review history.
