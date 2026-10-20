@@ -1,7 +1,7 @@
 # AOS-W Cross-Session Handoff — Prompt 14
 
 Updated: 2026-10-20
-Status: **0.6.0 portable distribution tools committed; 108/108 local conformance tests PASS.** Hosted artifact status requires post-commit verification.
+Status: **0.6.0 portable distribution tools committed; 108/108 local conformance tests PASS.** GitHub Actions 39415147383 SUCCESS and v0.6.0-portable-preview ZIP published and verified.
 Repository: public digzoman/aos-workflows, main. Check exact HEAD and recent Actions run before changes.
 
 ## Mandatory opening reads
@@ -30,7 +30,7 @@ Repository: public digzoman/aos-workflows, main. Check exact HEAD and recent Act
 - 18 new + 90 old = **108 local tests passed**, including ZIP privacy/safety, upgrade preservation and task initialization. Tested on synthetic local ZIP; the full public repository artifact is tested in hosted workflow, not presumed from code alone.
 - The quickstarter was separately tested with real prior research-starter YAML and Prompt 11 RunStore verifying event prefix.
 - No shell script is mandatory for *using* the ZIP. Builder itself requires optional Python, only in development host.
-- Need to verify Actions run, artifact ID and prerelease before giving users an actual asset link. Actions may be unavailable, and artifact retention limited.
+- Verified Actions run 39415147383 SUCCESS, artifact ID 12261710573 available, prerelease v0.6.0-portable-preview with SHA256 digest independently matched; permanent release asset link below.
 - Does not authenticate human reviews/permissions, enforce provider-side fencing or run unattended work.
 
 ## Next prompt 15
@@ -40,3 +40,11 @@ Create sanitized actual Ampgent-style workflow master templates, protecting owne
 ## Reserved follow-ups
 
 Real hosted GitHub CAS races and Git LFS server lock competition remain Prompt 17 tasks; ZIP installation on varied cloud filesystems still needs broader release test coverage.
+
+## Hosted verified distribution download
+
+- GitHub release: https://github.com/digzoman/aos-workflows/releases/download/v0.6.0-portable-preview/aos-w-portable-0.6.0.zip
+- SHA-256: `7d9ce9a3ea72f9546fe9d398647d76867bd1766a42bae717d6912f827734c5e9`
+- Hosted workflow: https://github.com/digzoman/aos-workflows/actions/runs/39415147383 (SUCCESS, 108 tests)
+- Release ZIP: 97,648 bytes, 63 manifest entries, 20 schemas, clean agent-files; installed, initialized and upgraded independently after download.
+- Failed first run 39414897602 was corrected by mocking absence of Git LFS rather than assuming host environment. No live Git LFS lock server test was performed.

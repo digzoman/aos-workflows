@@ -1,7 +1,7 @@
 # AOS-W V1 Work Plan
 
 Updated: 2026-10-20
-Current phase: Prompt 14 distribution/optional helper implementation complete, release publication pending hosted verification
+Current phase: Prompt 14 distribution/optional helper implementation complete, release ZIP published and hosted smoke tests verified
 Next phase: Prompt 15 sanitized Ampgent marketing reusable workflow templates
 Implementation phases 09–13 were explicitly directed by the owner; live external operations remain separately approval-gated. Full V1 production/release approval is not implied.
 

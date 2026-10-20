@@ -26,3 +26,14 @@ A GitHub Actions conformance+package workflow is provided under `.github/workflo
 - Upgrades stage a directory and use local rename, not crash-atomic transaction across arbitrary remote/cloud storage.
 - Action artifact retention is limited and GitHub Release asset publication requires a separate verified release process.
 - End-to-end real cross-platform handoff, hosted shared CAS collision and live Git LFS server tests still pending Prompts 16–17.
+
+## Verified GitHub-hosted distribution — 2026-10-20
+
+- Initial run 39414897602 failed in a legacy environment-dependent Git LFS test: it assumed git-lfs was not installed. GitHub Actions runner **does** have git-lfs; the optional test was corrected to use a simulated unavailable client and committed separately (no server lock claims).
+- Successful rerun: [Actions run 39415147383](https://github.com/digzoman/aos-workflows/actions/runs/39415147383), head `558bcc7433188fe8fec830bd26c3c86a28103da2`, **completed SUCCESS**.
+- Hosted suite **108 tests PASS**; full-repository independent ZIP build and manifest verification PASSED; install in arbitrary folder, new `research-starter` instance and upgrade preserving `agent-files` artifact PASSED.
+- Actions artifact ID **12261710573** (archive containing the standalone ZIP), nonexpired at verification; permanent preview release **v0.6.0-portable-preview** published with `aos-w-portable-0.6.0.zip`.
+- [Download release asset](https://github.com/digzoman/aos-workflows/releases/download/v0.6.0-portable-preview/aos-w-portable-0.6.0.zip) — 97,648 bytes. GitHub release API reports SHA-256 **`7d9ce9a3ea72f9546fe9d398647d76867bd1766a42bae717d6912f827734c5e9`**.
+- Downloaded actual Actions artifact to a separate local container, extracted its inner ZIP, and verified: matching GitHub release digest; v0.6.0; **63 manifest file entries**, 20 draft schemas, bundled install guide, and clean user directory without any instance/custom data except directory READMEs.
+- Independently ran the **actual hosted ZIP** through the optional verifier, installed it into an arbitrary nested folder, initialized a real pinned one-off sample, checked next task `define-scope` and zero completed actions, upgraded that installation, and confirmed an added user artifact was **preserved byte-for-byte**, with a rollback backup folder present.
+- This proves this ZIP builds, extracts, initializes and upgrades on the tested hosts. It **does not** prove crash atomicity on arbitrary cloud filesystems, authentication of action approvals, unattended workflow execution or production shared coordination.
