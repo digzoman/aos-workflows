@@ -1,5 +1,5 @@
 {
-  "aosw_version": "0.8.2",
+  "aosw_version": "0.9.0",
   "schema_version": "1.0.0",
   "distribution": {
     "format": "aos-w-standalone-zip-v1",
@@ -11,7 +11,7 @@
     "user_data_policy": "release_excludes_user_instances_custom_templates_and_private_config",
     "mode": "file-only-manual"
   },
-  "status": "portable-manual-core-with-marketing-library-and-verified-offline-visualization",
+  "status": "portable-manual-core-with-human-first-visualization-and-advisory-agent-discovery",
   "minimum_requirements": [
     "capable agent",
     "persistent writable files within agent-files"
@@ -85,7 +85,7 @@
     ]
   },
   "visualization": {
-    "version": "0.8.0",
+    "version": "0.9.0",
     "snapshot_schema": "1.0.0",
     "mode": "offline_read_only_snapshot",
     "protected_viewer": "references/visualization-viewer.html",
@@ -95,8 +95,20 @@
     "optional_dev_generator": "scripts/aosw-visualize.py",
     "public_pages_publish": "explicit_owner_approval_and_sanitization_only",
     "live_provider_state": "not_verified_by_visualization",
-    "patch_release": "0.8.2",
+    "patch_release": "0.9.0",
     "browser_smoke": "chromium_desktop_mobile_keyboard_arrows_and_nested_drilldown_pass",
-    "delivery_priority": "rendered_html_then_individual_html_link_then_html_attachment_then_approved_hosting_or_zip_fallback"
+    "delivery_priority": "rendered_html_then_individual_html_link_then_html_attachment_then_approved_hosting_or_zip_fallback",
+    "human_step_briefs": "generated_read_only_projection",
+    "phase_and_lane_labels": "advisory",
+    "review_ready_counts": "supported",
+    "private_pages": "manual_or_authenticated_preview_only",
+    "public_pages": "synthetic_allowlist_manual_workflow_only"
+  },
+  "agent_discovery": {
+    "agents_md": "portable_entry_point",
+    "skills": "advisory_conformance_audit",
+    "capability_policy": "proactive_tool_recovery_and_parallel_progress_no_new_human_gates",
+    "a2a": "not_implemented",
+    "mcp_runtime": "optional_external"
   }
 }

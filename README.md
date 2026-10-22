@@ -1,3 +1,7 @@
+## v0.9.0 — human-first workflow coordination (preview)
+
+Current release: [AOS-W v0.9.0 portable preview](https://github.com/digzoman/aos-workflows/releases/tag/v0.9.0-portable-preview). Agents should use the included AGENTS.md entry point and the new human-first workflow viewer, status-aware review counts, portable step briefs, and capability-recovery guidance. A declared missing tool is not a reason to refuse, invent an owner approval gate, or stop safe parallel work. Private production snapshots must not be published automatically to public GitHub Pages; an opt-in **fictional** sanitized demo is prepared. Original stable V1 acceptance T01–T04 remains open.
+
 # AOS-W v0.8.2 Workflow Visualization
 
 **Current preview:** [v0.8.2 portable release](https://github.com/digzoman/aos-workflows/releases/tag/v0.8.2-portable-preview). This additive release includes a protected offline interactive HTML/SVG viewer, an optional generator, visualization snapshot schema, safe agent-files/visualizations output location, a sanitized sample and a new design spec. It is **not stable Version 1**. Previous four original V1 acceptance demonstrations remain pending. See [v0.8 visualization specification](docs/specs/visualization/V0.8-SPEC.md), [portable viewer guide](scaffold/aos-w/references/VISUALIZATION.md) and [Bucket 9 example](examples/visualization/bucket9-stage.json).
