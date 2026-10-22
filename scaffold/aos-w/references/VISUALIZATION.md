@@ -65,3 +65,8 @@ The helper checks run.json, pinned graph revision and a read-only replay of even
 For a legacy/advisory run that cannot be event-verified, specify --unverified. This renders a visibly SOURCE_SNAPSHOT_UNVERIFIED page and does NOT assert a valid event chain. Never use --unverified to imply real provider truth, review approval or independent verification.
 
 For long source prompts above the schema-supported maximum, conversion fails explicitly rather than shortening the execution instructions and losing a safety gate. No live filesystem watcher or background refresh is included.
+
+
+## v0.9 human-first viewer
+
+The default diagram now favors readable titles, named phases, workstream labels, a status-aware overview and independent reviews ready for pickup. The step drawer leads with purpose, next action, dated sources, input/output and QC. Source prompts and JSON are preserved in Advanced. Synthetic demo: examples/visualization/synthetic-six-audience.json. Agents must recover available tools rather than inventing user gates. A GitHub blob is source, not a rendered page; see docs/installation/V09-PAGES.md for the manual approved demo deployment path.

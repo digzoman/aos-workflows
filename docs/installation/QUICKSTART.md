@@ -1,9 +1,11 @@
-# Install and visualize AOS-W v0.8.1 portable preview
+**Current preview:** AOS-W **0.9.0**, with human-readable workflow diagrams, portable step briefs, AGENTS.md discovery, non-gating capability recovery and a manual fictional Pages export.
+
+# Install and visualize AOS-W v0.9.0 portable preview
 
 Current preview, October 22, 2026. This is an additive minor update to v0.7.0, NOT a stable V1 release. Existing marketing templates and their pinned template/child digests are unchanged.
 
-Download https://github.com/digzoman/aos-workflows/releases/tag/v0.8.1-portable-preview
-Asset aos-w-portable-0.8.1.zip
+Download https://github.com/digzoman/aos-workflows/releases/tag/v0.9.0-portable-preview
+Asset aos-w-portable-0.9.0.zip
 For the current exact digest, use the release asset's SHA-256 digest on GitHub and verify it locally before installing. The CI workflow independently builds/verifies the ZIP and preserves existing agent-files.
 
 ## File-only installation
@@ -53,8 +55,8 @@ Back up the ENTIRE installed aos-w directory. Check pinned graph and schema comp
 Optional maintainer commands in the development repo:
 
 ~~~sh
-python scripts/aosw-distribution.py verify dist/aos-w-portable-0.8.1.zip
-python scripts/aosw-distribution.py upgrade dist/aos-w-portable-0.8.1.zip /work/project/aos-w
+python scripts/aosw-distribution.py verify dist/aos-w-portable-0.9.0.zip
+python scripts/aosw-distribution.py upgrade dist/aos-w-portable-0.9.0.zip /work/project/aos-w
 ~~~
 
 The distribution upgrader performs content validation, backup and clean user subtree preservation, but a complete real multi-host/cloud migration guarantee remains unproven. Validate your own data after upgrade and do not discard rollback copies prematurely.
@@ -88,3 +90,6 @@ python scripts/aosw-visualize.py --run-dir /work/project/aos-w/agent-files/insta
 If the files are legacy or event verification is unavailable, add `--unverified` and the resulting page explicitly labels its source status UNVERIFIED. A generated diagram never grants a missing reviewer or publishing permission. Compound template previews can drill into real SHA-pinned child module instructions and QA gates without changing the source workflows.
 
 Current preview ZIP SHA-256: `3357d523e576180b65036c80e149517f658a6920b228d03db28d15826894a91b`. Desktop/mobile screenshots and independent Chromium test results are in [the Browser CI artifact](https://github.com/digzoman/aos-workflows/actions/runs/39747505741/artifacts/12411797423).
+
+
+For the new v0.9 design and limitations, read docs/specs/v0.9/IMPLEMENTATION-STATUS.md in the development repository. The standalone viewer requires no server. An authorized GitHub Pages deploy can render only the intentionally fictional demo by default; no live private user data is auto-published. Do not use capability absence to invent human approval gates.

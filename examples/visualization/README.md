@@ -12,3 +12,8 @@ Open the resulting self-contained index.html in a browser and click any step. No
 
 
 **How an agent should present a visualization:** prefer directly rendered HTML or a direct index.html file link. The GitHub Actions artifact may be ZIP-wrapped by GitHub; that is a secondary fallback and not the recommended user-facing interface. If only ZIP is possible, instruct the user to extract and open index.html. Hosting a sanitized public GitHub Pages site is optional, subject to explicit approval.
+
+
+## v0.9 human-first illustration
+
+A separate fictional 56-node sample is provided at synthetic-six-audience.json. The optional scripts/aosw-visualize.py generator turns it into human-readable HTML with six ready independent reviews, semantic workstream labels and source guidance. No private Ampgent research, brand assets or live campaigns are included. GitHub Actions can generate this page; a public browser URL requires an intentionally manual, approved Pages deployment (see docs/installation/V09-PAGES.md), not simply linking to a GitHub source file.
