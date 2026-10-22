@@ -17,3 +17,12 @@ Open the resulting self-contained index.html in a browser and click any step. No
 ## v0.9 human-first illustration
 
 A separate fictional 56-node sample is provided at synthetic-six-audience.json. The optional scripts/aosw-visualize.py generator turns it into human-readable HTML with six ready independent reviews, semantic workstream labels and source guidance. No private Ampgent research, brand assets or live campaigns are included. GitHub Actions can generate this page; a public browser URL requires an intentionally manual, approved Pages deployment (see docs/installation/V09-PAGES.md), not simply linking to a GitHub source file.
+
+
+## v0.9 accessibility six-lane example
+
+**[Six parallel audience lanes — accessible standalone HTML](six-lane-accessible.html)** is a fictional UI fixture for the exact reported **nearly-white-on-white audience heading** defect. The six headings have explicit contrasting color/background pairs and do not inherit host text colors. Desktop/mobile and light/dark browser screenshots plus computed contrast ratios are checked in CI.
+
+The [synthetic 56-step sample](synthetic-six-audience.json) exercises the *actual viewer*, complete with six parallel audiences, 6 READY review steps, and readable stage labels. It remains test data, not a real Bucket 9 work report.
+
+Optional standalone audit after generating a page: \`python scripts/aosw-contrast-audit.py --html /path/to/index.html --out /path/to/screenshots --six-lanes\` (use \`--six-lanes\` for the six-heading standalone fixture, not the generic DAG columns). If a heading becomes white-on-white, the audit must fail. Code files on GitHub are not executed HTML pages; download/open the individual HTML file or use an explicitly approved rendered host.

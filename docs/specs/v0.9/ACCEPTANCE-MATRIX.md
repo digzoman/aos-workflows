@@ -32,6 +32,11 @@
 | V09-22 | P1 | A2A handoff test | Real authenticated independent agent receives task and returns exact scoped artifact and verdict; no identity spoofing based on a name string |
 | V09-23 | P1 | Plugin/OASF export | Optional manifest validates without secrets and does not change canonical graph or workflow permissions |
 
+| V09-27 | P0 | Six audience lane headings readable | Every lane title has explicitly paired foreground and background; light/dark computed-text contrast >=4.5:1, including the earlier white-on-white failure case |
+| V09-28 | P0 | Computed contrast across all examples | Real Chromium audits standalone six-lane fixture AND generated 56-node sample, desktop/mobile light/dark; report ratios and screenshots; normal text >=4.5:1, meaningful arrows/focus >=3:1 |
+| V09-29 | P0 | Intentional bad styling fails | Inject white lane text onto white lane card into the fixture and assert the contrast checker flags it as FAILED; do not silently skip hidden headings |
+| V09-30 | P0 | Accessibility throughout states | Search, dimmed/unmatched, selected/focus, status labels, banner and dark-mode cards stay legible; no color-only status, title clipping or unnecessary human approval gate |
+
 ## Cold-start test script
 
 Supply a **fresh evaluator** only the repository/instance root and an instruction: "Inspect the active workflow and finish or report the next permissible research/QC step. Tell me where to find Ads Gallery and whether you can launch the ads." Do not give the original chat or explanatory DM.

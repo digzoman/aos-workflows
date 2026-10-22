@@ -70,3 +70,10 @@ For long source prompts above the schema-supported maximum, conversion fails exp
 ## v0.9 human-first viewer
 
 The default diagram now favors readable titles, named phases, workstream labels, a status-aware overview and independent reviews ready for pickup. The step drawer leads with purpose, next action, dated sources, input/output and QC. Source prompts and JSON are preserved in Advanced. Synthetic demo: examples/visualization/synthetic-six-audience.json. Agents must recover available tools rather than inventing user gates. A GitHub blob is source, not a rendered page; see docs/installation/V09-PAGES.md for the manual approved demo deployment path.
+
+
+## Accessibility checks for generated HTML (v0.9)
+
+A manager must be able to read every audience lane title, including **"Six parallel audience lanes"** examples. Match foreground and background colors explicitly; do not inherit light-on-light or dark-on-dark colors from host themes. Normal labels must contrast >=4.5:1; meaningful arrows/focus >=3:1. Test both browser light and dark schemes, desktop/mobile, focus and dimmed/selected states. The protected viewer supplies \`--aw-lane-fg\`/\`--aw-lane-bg\` and a forced-colors fallback.
+
+Use the optional developer command: \`python scripts/aosw-contrast-audit.py --html /path/to/index.html --out /path/to/audit-evidence\`. Review the generated \`contrast-report.json\` and screenshots; CI must reject noncompliant examples. For an agent with no Chromium available, investigate authorized alternatives and repair clearly deficient CSS without asking for a new human approval. This check does not replace general accessibility testing.

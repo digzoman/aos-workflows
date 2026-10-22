@@ -114,6 +114,16 @@ resume: Read the current handoff and last event before claiming the task.
 
 Replace all angle-bracket placeholders with real values before declaring any brief runnable; the examples are intentionally incomplete. Source/role identity must be verified on the host, not by a user-authored YAML claim.
 
+
+## Mandatory six-lane contrast regression, October 22, 2026
+
+The exact earlier chat-generated "Six parallel audience lanes" HTML is not the same source file as the protected offline AOS-W viewer, but both must conform to the same **WCAG 2.2 AA contrast** rules. The reproducible fixture \`examples/visualization/six-lane-accessible.html\` supplies six visually distinct audience headings with paired foreground/background colors in light and dark schemes. Its headings do not inherit a potentially white ChatGPT host title color. The shared viewer now uses explicit \`--aw-lane-fg\` and \`--aw-lane-bg\` properties for lane labels and equivalent class aliases. Never use raw design-system/inherited title colors unless the effective contrast has been measured.
+
+**Acceptance:** browser-opened fixture and generated 56-node workflow must demonstrate at least 4.5:1 on sampled text, 3:1 on meaningful edges/focus, in 1440px desktop and 390px mobile, light/dark schemes. Force a white-on-white lane heading into a regression test and assert that the audit returns FAILURE. Visual checking includes any statuses and six full lane names; no status relies on border color alone.
+
+**Tooling:** \`scripts/aosw-contrast-audit.py\` accepts local HTML and produces a readable JSON report plus four screenshots. This is an optional developer quality tool, not a mandatory runtime dependency or reason for agents to create a new human gate. If Chromium is not installed, agents should find a supported browser/vision alternative or derive deterministic contrast from explicit colors, then record that the computed rendering was not checked.
+
+**Theme/source rule:** contrast is calculated using **computed** CSS colors against the composited actual background—not just declared hex codes. All generated pages (including ChatGPT-produced independent HTML, static GitHub Pages exports, private preview files and demonstration assets) should pass before being represented as accessible. Audit results do not establish full WCAG conformance, user testing or private hosting authorization.
 ## GitHub Pages presentation contract
 
 **The problem:** \`https://github.com/<owner>/<repo>/blob/main/.../index.html\` is a code browsing page; it does not execute the embedded SVG/JS diagram as the user's interactive web page.
