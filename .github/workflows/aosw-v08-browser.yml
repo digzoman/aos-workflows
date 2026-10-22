@@ -32,7 +32,7 @@ jobs:
           python scripts/aosw-visualize.py --snapshot examples/visualization/bucket9-stage.json --out /tmp/aos-w/agent-files/visualizations/bucket9/index.html
       - name: Test real browser click, arrows, keyboard, mobile and network isolation
         run: |
-          python tests/acceptance/visualization_browser.py --html /tmp/aos-w/agent-files/visualizations/bucket9/index.html --out browser-evidence
+          python tests/acceptance/visualization_browser.py --html /tmp/aos-w/agent-files/visualizations/bucket9/index.html --out browser-evidence --compound /tmp/aos-w/agent-files/visualizations/compound/index.html
       - name: Archive screenshots and browser check results
         if: always()
         uses: actions/upload-artifact@v4

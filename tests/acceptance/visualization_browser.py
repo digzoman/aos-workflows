@@ -12,6 +12,7 @@ from playwright.sync_api import sync_playwright
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--html",required=True,type=Path)
+    ap.add_argument("--compound",type=Path,help="offline generated compound template preview")
     ap.add_argument("--out",required=True,type=Path)
     args=ap.parse_args()
     assert args.html.exists()
@@ -69,6 +70,20 @@ def main():
         assert not errors,errors
         assert not requests,requests
         results.append("no browser exceptions or outgoing network requests")
+        if args.compound:
+            page.goto(args.compound.resolve().as_uri(),wait_until="domcontentloaded")
+            page.locator(".step").first.wait_for()
+            assert page.locator(".step").count()>=20
+            snapshot=json.loads((args.compound.parent/"snapshot.json").read_text())
+            verified=[n for n in snapshot["nodes"] if n.get("child_resolution")=="PINNED_LOCAL_MODULE_VERIFIED"]
+            assert verified,"No pinned child modules found"
+            step=verified[0]
+            page.locator(".step[data-id='"+step["id"]+"']").click()
+            assert "Verified child workflow steps" in page.locator("#details").inner_text()
+            page.locator("#details details summary").first.click()
+            assert step["child_steps"][0]["prompt"] in page.locator("#details").inner_text()
+            page.screenshot(path=str(args.out/"compound-drilldown.png"),full_page=True)
+            results.append("full pinned child module prompts revealed by nested browser drilldown")
         browser.close()
     (args.out/"results.json").write_text(json.dumps({"status":"PASS","checks":results,"count":len(results)},indent=2)+"\n")
     print(json.dumps({"status":"PASS","checks":len(results),"screenshots":["desktop.png","mobile.png"]}))
