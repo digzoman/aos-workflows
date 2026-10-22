@@ -1,0 +1,42 @@
+# AOS-W v0.8 workflow visualization
+
+The visualization is a read-only interactive HTML page showing any template or pinned run with dependency arrows, status labels and a drill-down panel for exact step instructions, requirements, QC and evidence. It does not execute or approve work.
+
+## Output and operation
+
+Save under aos-w/agent-files/visualizations/<safe-id>/index.html, with optional snapshot.json. Only agent-files is normally writable. The protected page skeleton is aos-w/references/visualization-viewer.html, with a single token __AOSW_SNAPSHOT_JSON__ for a serialized visualization JSON object.
+
+For a TEMPLATE read template.yaml. For an INSTANCE use the pinned graph-revisions/gXXXX.yaml. For a RUN use the pinned graph with selected run state.json and reconciled events/checkpoints/reviews if possible. The page must label an unverified state as SOURCE_SNAPSHOT_UNVERIFIED rather than pretend to report live status.
+
+The complete schema is spec/schemas/visualization-snapshot.schema.json. Build node IDs from graph.nodes, arrows from needs, and the selected step prompt from instructions. Include inputs, outputs, contract, quality gates, retry, review and evidence when saved. Serialize the JSON escaping angle brackets, ampersand and Unicode line separators before embedding in the HTML script of type application/json. The viewer renders user text as textContent, never as active HTML.
+
+A capable AI agent may directly copy/modify the bundled viewer's placeholder and create a file without Python. There are no remote libraries, server or build steps in the installed core.
+
+## Optional developer converter
+
+Python and PyYAML for YAML input are optional tools only in the development repository:
+
+~~~sh
+python scripts/aosw-visualize.py \
+  --template scaffold/aos-w/templates/research-starter/template.yaml \
+  --out /path/to/aos-w/agent-files/visualizations/research-preview/index.html
+
+python scripts/aosw-visualize.py \
+  --graph /path/to/aos-w/agent-files/instances/my-case/graph-revisions/g0001.yaml \
+  --state /path/to/aos-w/agent-files/instances/my-case/runs/run-001/state.json \
+  --out /path/to/aos-w/agent-files/visualizations/my-case-run-001/index.html
+
+python scripts/aosw-visualize.py \
+  --snapshot /path/to/snapshot.json \
+  --out /path/to/aos-w/agent-files/visualizations/my-prepared-view/index.html
+~~~
+
+The converter writes index.html and snapshot.json. It never modifies the source template/run or writes to an external provider.
+
+## Updating and publishing
+
+Regenerate on user request, approved state transition or checkpoint. The HTML is a frozen snapshot and does not poll the file system or browser for new events. Opening a card only displays its saved details. Browsers with local file access can open index.html directly. If a cloud agent cannot render local HTML, share the file rather than pretending it is hosted.
+
+If the user requests hosting and local preview is impossible, suggest GitHub Pages as a separate opt-in action. Treat Pages as PUBLIC unless verified private access control exists. Export a separately reviewed sanitized copy; never push private agent-files/visualizations or publish prompts, customer data, secrets or unapproved offer details without authorization.
+
+The specification and acceptance checklist are in docs/specs/visualization/V0.8-SPEC.md in the development repository. Previous stable V1 acceptance blockers remain unaffected.
