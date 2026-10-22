@@ -1,6 +1,6 @@
 # AOS-W v0.9 — Visualization, Human Language and Third-Party Handoff
 
-**Status:** DRAFT SPEC, not shipped. Companion to [V0.9-PRODUCT-SPEC.md](V0.9-PRODUCT-SPEC.md).
+**Status:** v0.9.2 preview implementation and tested accessibility rules; some full human/agent portability and hosted Pages acceptance remains open. Companion to [V0.9-PRODUCT-SPEC.md](V0.9-PRODUCT-SPEC.md).
 **User report:** screenshot "Bucket 9 · Six-Audience Wave 1 · saved event 89", showing \`hvac-installation-owners--qc-research\` as both card title and ID; "Stage 1 / 2 / 3"; 56 cards in a flat graph; a right pane starting with huge machine JSON policy; top counters "Steps 56 / Complete 16 / Review 0 / Blocked 0" even though 6 review-kind nodes were READY; and a github.com/blob link that displayed HTML text.
 
 ## Desired first impression

@@ -1,7 +1,14 @@
-# AOS-W 0.9.1 Implementation and Remaining Acceptance
+# AOS-W 0.9.2 Implementation and Remaining Acceptance
 
 Date: October 22, 2026.
-Status: SHIPPED PREVIEW, not stable Version 1 approval. Current portable version 0.9.1. See V0.9-PRODUCT-SPEC.md and ACCEPTANCE-MATRIX.md for the target specification.
+Status: SHIPPED PREVIEW, not stable Version 1 approval. Current portable version 0.9.2. See V0.9-PRODUCT-SPEC.md and ACCEPTANCE-MATRIX.md for the target specification.
+
+## v0.9.2 accessibility verification
+
+- Readable six-lane headings use paired foreground and background colors in light, dark and forced-colors themes. Explicit focus states and legible workflow arrows are required.
+- A Chromium audit exercises the six-lane fixture and generated workflow in desktop and mobile light/dark modes. The audit enforces at least 4.5:1 text contrast and 3:1 meaningful non-text contrast, and deliberately rejects a white-on-white lane-title mutation.
+- Verification on commit `8a04c57d92203a1f20324b5f32fff8d5b781bf34`: [browser accessibility acceptance passed](https://github.com/digzoman/aos-workflows/actions/runs/39864824024), [Version 1 readiness audit passed](https://github.com/digzoman/aos-workflows/actions/runs/39864816925), and [portable preview built and published](https://github.com/digzoman/aos-workflows/releases/tag/v0.9.2-portable-preview). The complete unit suite ran 162 tests successfully.
+- This demonstrates the checked accessibility scenarios, not complete WCAG certification, external human usability acceptance, private Pages authorization, or stable Version 1 acceptance.
 
 ## Implemented and tested
 - Human-first offline HTML workflow viewer: readable generated labels, semantic phase names, overview-first navigation for larger workflows, workstream/status filters, quality review READY counters, task detail drawer with actionable next step and source references, original instructions and machine JSON accessible under Advanced.

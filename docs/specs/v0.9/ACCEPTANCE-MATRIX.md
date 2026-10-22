@@ -1,6 +1,6 @@
 # AOS-W v0.9.0 — Draft Acceptance and Release Gates
 
-**Status:** v0.9.0 preview released, with implementation and automated evidence summarized in [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). Several full third-party/hosted acceptance demonstrations remain NOT RUN; this matrix is the target, not a blanket claim of completion.
+**Status:** v0.9.2 preview released, with implementation and automated evidence summarized in [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md). Several full third-party/hosted acceptance demonstrations remain NOT RUN; this matrix is the target, not a blanket claim of completion.
 **Acceptance data:** Use sanitized 56-node Bucket 9 g0004 mock/replay snapshots containing six research, six READY independent-review tasks, later approval gates, and an intentionally unclear "Ads Gallery" reference. Preserve existing v0.8.2 read-only behavior.
 
 | ID | Priority | Test | Pass evidence required |
