@@ -133,49 +133,75 @@ select,.action-btn{border:1px solid #cbd5e1;border-radius:8px;padding:9px;backgr
  }
  function show(id){
   const n=byId.get(id);if(!n)return;
+  const h=brief(n),box=$("details");
   for(const b of document.querySelectorAll(".step"))b.classList.toggle("selected",b.dataset.id===id);
-  const box=$("details");box.replaceChildren();
-  box.appendChild(make("h2",n.label||n.name||n.id));
-  box.appendChild(make("span",n.status||"UNKNOWN","tag"));
-  prop(box,"Step ID",n.id);prop(box,"Type",n.kind);prop(box,"Requires",n.needs);
-  prop(box,"Agent/owner",n.owner);prop(box,"Attempt count",n.attempts);
-  prop(box,"Child workflow",n.child_template);
-  section(box,"Child template reference",n.child_ref);
-  prop(box,"Pinned child module inspection",n.child_resolution);
-  if(Array.isArray(n.child_steps)&&n.child_steps.length){
-    const wrap=make("div",undefined,"section");
-    wrap.appendChild(make("h3","Verified child workflow steps"));
-    for(const step of n.child_steps){
-      const disclosure=make("details");
-      const summary=make("summary",String(step.id)+" · "+String(step.kind||"task"));
-      summary.style.cursor="pointer";summary.style.padding="9px 3px";
-      disclosure.appendChild(summary);
-      for(const [heading,value] of [
-        ["Agent prompt",step.prompt],["Dependencies",step.needs],
-        ["Inputs",step.inputs],["Outputs",step.outputs],
-        ["Quality review",step.quality],["Completion contract",step.contract]]){
-        if(value===undefined||value===null)continue;
-        const subsection=make("div",undefined,"section");
-        subsection.appendChild(make("h3",heading));
-        subsection.appendChild(make("pre",typeof value==="string"?value:JSON.stringify(value,null,2)));
-        disclosure.appendChild(subsection);
-      }
-      wrap.appendChild(disclosure);
+  box.replaceChildren();
+  box.appendChild(make("h2",humanTitle(n)));
+  box.appendChild(make("span",labelStatus(n),"tag"));
+  if(h.summary)box.appendChild(make("p",h.summary,"resource"));
+  if(h.lane)prop(box,"Audience or workstream",h.lane);
+  if(h.phase)prop(box,"Phase",h.phase);
+  const next=make("div",undefined,"next-action");
+  next.appendChild(make("strong","What happens next"));
+  next.appendChild(make("div",h.next_action||n.notes||"Read the saved instructions and proceed with authorized work."));
+  box.appendChild(next);
+  if(h.purpose)section(box,"What this step does",h.purpose);
+  if(Array.isArray(h.resources)&&h.resources.length){
+   const sourceBox=make("div",undefined,"section");sourceBox.appendChild(make("h3","Where to look · Tools and sources"));
+   for(const r of h.resources){
+    const p=make("p",undefined,"resource");p.appendChild(make("strong",r.name||"Source"));
+    if(typeof r.url==="string"&&/^https:\/\//i.test(r.url)){
+      const a=make("a"," · Open source");a.href=r.url;a.target="_blank";a.rel="noopener noreferrer";p.appendChild(a);
     }
-    box.appendChild(wrap);
+    if(r.status)p.appendChild(document.createTextNode(" · "+String(r.status).replace(/_/g," ").toLowerCase()));
+    if(r.purpose)p.appendChild(make("div",r.purpose));
+    if(r.note)p.appendChild(make("div",r.note,"warning"));
+    sourceBox.appendChild(p);
+   }
+   box.appendChild(sourceBox);
   }
-  section(box,"Policy and required human approvals",n.policy);
-  section(box,"Prompt / agent instructions",n.prompt||n.instructions||"Not supplied in saved template.");
-  section(box,"Input requirements",n.inputs);
-  section(box,"Expected outputs",n.outputs);
-  section(box,"Quality controls and approval gates",n.quality);
-  section(box,"Execution rules and retry policy",n.contract?{contract:n.contract,retry:n.retry||null,when:n.when||null}:{retry:n.retry,when:n.when});
-  section(box,"Review and provenance",n.review);
-  section(box,"Artifacts and evidence references",n.evidence);
-  section(box,"Comments / next action",n.notes);
-  section(box,"Step activity (latest saved journal events)",n.activity);
-  prop(box,"Source",n.source);
+  if(h.source_context)section(box,"Starting context and references",h.source_context);
+  if(h.inputs&&h.inputs.length)section(box,"What you need",h.inputs);
+  if(h.outputs&&h.outputs.length)section(box,"What to produce",h.outputs);
+  const original=n.prompt||n.instructions||h.original_instructions;
+  if(original)section(box,"How to proceed · original instructions preview",original.length>480?original.slice(0,480)+"… (full text below)":original);
+  if(h.quality&&Object.keys(h.quality).length)section(box,"How work is reviewed",h.quality);
+  if(h.missing_references&&h.missing_references.length)section(box,"Missing information — work on other tasks",h.missing_references);
+  if(h.recovery_guidance)section(box,"If an available tool fails",h.recovery_guidance);
+  if(n.notes)section(box,"Recorded issue or next action",n.notes);
+  if(Array.isArray(n.child_steps)&&n.child_steps.length){
+   const wrap=make("div",undefined,"section");wrap.appendChild(make("h3","Verified child workflow steps"));
+   for(const step of n.child_steps){
+    const disclosure=make("details");
+    disclosure.appendChild(make("summary",String(step.id)+" · "+String(step.kind||"task")));
+    for(const [heading,value] of [["Agent prompt",step.prompt],["Dependencies",step.needs],["Inputs",step.inputs],["Outputs",step.outputs],["Quality review",step.quality],["Completion contract",step.contract]]){
+     if(value===undefined||value===null)continue;
+     const subsection=make("div",undefined,"section");subsection.appendChild(make("h3",heading));
+     subsection.appendChild(make("pre",typeof value==="string"?value:JSON.stringify(value,null,2)));disclosure.appendChild(subsection);
+    }
+    wrap.appendChild(disclosure);
+   }
+   box.appendChild(wrap);
+  }
+  const advanced=make("details",undefined,"technical");
+  advanced.appendChild(make("summary","Full instructions and technical details"));
+  const inner=make("div");
+  prop(inner,"Step ID",n.id);prop(inner,"Type",n.kind);prop(inner,"Requires",n.needs);
+  prop(inner,"Agent/owner",n.owner);prop(inner,"Attempt count",n.attempts);
+  prop(inner,"Child workflow",n.child_template);prop(inner,"Pinned child module inspection",n.child_resolution);
+  section(inner,"Prompt / agent instructions",n.prompt||n.instructions||"Not supplied in saved template.");
+  section(inner,"Input requirements",n.inputs);section(inner,"Expected outputs",n.outputs);
+  section(inner,"Quality controls and approval gates",n.quality);
+  section(inner,"Policy and required human approvals",n.policy);
+  section(inner,"Execution rules and retry policy",n.contract?{contract:n.contract,retry:n.retry||null,when:n.when||null}:{retry:n.retry,when:n.when});
+  section(inner,"Child template reference",n.child_ref);
+  section(inner,"Review and provenance",n.review);
+  section(inner,"Artifacts and evidence references",n.evidence);
+  section(inner,"Step activity (latest saved journal events)",n.activity);
+  section(inner,"Comments / next action",n.notes);prop(inner,"Source",n.source);
+  advanced.appendChild(inner);box.appendChild(advanced);
  }
+
  function redraw(){
   const canvas=$("canvas"),svg=$("links");
   const W=canvas.scrollWidth,H=canvas.scrollHeight;svg.setAttribute("width",W);svg.setAttribute("height",H);svg.setAttribute("viewBox","0 0 "+W+" "+H);
@@ -186,9 +212,11 @@ select,.action-btn{border:1px solid #cbd5e1;border-radius:8px;padding:9px;backgr
   const outer=canvas.getBoundingClientRect();
   for(const n of nodes){
    const target=document.querySelector('.step[data-id="'+CSS.escape(n.id)+'"]');if(!target)continue;
+   if(target.hidden||$("canvas").hidden)continue;
    const tr=target.getBoundingClientRect();
    for(const pred of values(n.needs)){
     const source=document.querySelector('.step[data-id="'+CSS.escape(pred)+'"]');if(!source)continue;
+    if(source.hidden)continue;
     const sr=source.getBoundingClientRect();const x1=sr.right-outer.left,y1=sr.top+sr.height/2-outer.top,x2=tr.left-outer.left,y2=tr.top+tr.height/2-outer.top;
     const path=document.createElementNS(NS,"path");const dx=Math.max(25,(x2-x1)/2);
     path.setAttribute("d","M"+x1+" "+y1+" C"+(x1+dx)+" "+y1+" "+(x2-dx)+" "+y2+" "+x2+" "+y2);
@@ -197,7 +225,48 @@ select,.action-btn{border:1px solid #cbd5e1;border-radius:8px;padding:9px;backgr
    }
   }
  }
- $("search").addEventListener("input",function(){const q=this.value.toLowerCase();for(const b of document.querySelectorAll(".step"))b.classList.toggle("dimmed",!b.textContent.toLowerCase().includes(q));});
+ const overview=$("overview");
+ const reviewsReady=nodes.filter(x=>x.kind==="review"&&x.status==="READY").length;
+ const needsChanges=nodes.filter(x=>x.status==="NEEDS_REWORK").length;
+ const waiting=nodes.filter(x=>x.status==="WAIT_DEPENDENCY").length;
+ overview.appendChild(make("h2","What is happening?"));
+ overview.appendChild(make("p",completed+" completed · "+reviewsReady+" reviews ready · "+needsChanges+" need changes · "+waiting+" waiting"));
+ if(reviewsReady||needsChanges){
+  const focus=make("div",undefined,"next-action");
+  focus.appendChild(make("strong",reviewsReady?"Next: complete ready reviews":"Next: correct review findings"));
+  focus.appendChild(make("div",reviewsReady?
+    reviewsReady+" independent review task(s) ready. Use an available authorized independent reviewer; continue safe parallel work.":
+    needsChanges+" task(s) need correction. Continue other eligible tasks."));
+  overview.appendChild(focus);
+ }
+ const phases=make("div",undefined,"phases");
+ for(const ph of [...new Set(nodes.map(phase))]){
+  const group=nodes.filter(n=>phase(n)===ph);
+  const b=make("button",undefined,"phase");b.type="button";
+  b.appendChild(make("strong",ph));b.appendChild(make("span",group.filter(isDone).length+" of "+group.length+" completed"));
+  b.onclick=()=>{visibleGraph=true;$("canvas").hidden=false;$("toggle-graph").textContent="Hide full graph";$("lane-filter").value="";$("status-filter").value="";for(const step of document.querySelectorAll(".step"))step.hidden=false;if(group[0])show(group[0].id);requestAnimationFrame(redraw);};
+  phases.appendChild(b);
+ }
+ overview.appendChild(phases);
+ $("canvas").hidden=!visibleGraph;
+ $("toggle-graph").textContent=visibleGraph?"Hide full graph":"Explore all steps";
+ $("toggle-graph").onclick=()=>{visibleGraph=!visibleGraph;$("canvas").hidden=!visibleGraph;$("toggle-graph").textContent=visibleGraph?"Hide full graph":"Explore all steps";if(visibleGraph)requestAnimationFrame(redraw);};
+ for(const lane of [...new Set(nodes.map(laneName))]){const opt=make("option",lane);opt.value=lane;$("lane-filter").appendChild(opt);}
+ for(const st of [...new Set(nodes.map(n=>n.status))]){const opt=make("option",String(st).replace(/_/g," "));opt.value=st;$("status-filter").appendChild(opt);}
+ function applyFilters(){
+  const q=$("search").value.toLowerCase(),lane=$("lane-filter").value,status=$("status-filter").value;
+  for(const step of document.querySelectorAll(".step")){
+   const n=byId.get(step.dataset.id);
+   step.hidden=!!((lane&&laneName(n)!==lane)||(status&&n.status!==status));
+   const hay=[humanTitle(n),n.id,laneName(n),phase(n)].join(" ").toLowerCase();
+   step.classList.toggle("dimmed",!!q&&!hay.includes(q));
+  }
+  if(!visibleGraph&&(q||lane||status))$("toggle-graph").click();
+  if(visibleGraph)requestAnimationFrame(redraw);
+ }
+ $("search").addEventListener("input",applyFilters);
+ $("lane-filter").addEventListener("change",applyFilters);
+ $("status-filter").addEventListener("change",applyFilters);
  if(nodes.length)show(nodes.find(x=>x.status==="RUNNING")?.id||nodes.find(x=>x.status==="READY")?.id||nodes[0].id);
  window.addEventListener("resize",redraw);requestAnimationFrame(redraw);
 })();
