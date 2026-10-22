@@ -13,6 +13,7 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--html",required=True,type=Path)
     ap.add_argument("--compound",type=Path,help="offline generated compound template preview")
+    ap.add_argument("--human-six",type=Path,help="v0.9 illustrative six-audience workflow")
     ap.add_argument("--out",required=True,type=Path)
     args=ap.parse_args()
     assert args.html.exists()
@@ -74,6 +75,7 @@ def main():
             page.goto(args.compound.resolve().as_uri(),wait_until="domcontentloaded")
             page.locator(".step").first.wait_for()
             assert page.locator(".step").count()>=20
+            page.locator("#toggle-graph").click()
             snapshot=json.loads((args.compound.parent/"snapshot.json").read_text())
             verified=[n for n in snapshot["nodes"] if n.get("child_resolution")=="PINNED_LOCAL_MODULE_VERIFIED"]
             assert verified,"No pinned child modules found"
@@ -84,6 +86,27 @@ def main():
             assert step["child_steps"][0]["prompt"] in page.locator("#details").inner_text()
             page.screenshot(path=str(args.out/"compound-drilldown.png"),full_page=True)
             results.append("full pinned child module prompts revealed by nested browser drilldown")
+        if args.human_six:
+            page.goto(args.human_six.resolve().as_uri(),wait_until="domcontentloaded")
+            page.locator(".step").first.wait_for()
+            assert page.locator(".step").count()==56
+            assert page.locator("#overview").is_visible()
+            assert "6 reviews ready" in page.locator("#overview").inner_text().lower()
+            assert "Stage 1" not in page.locator(".workspace").inner_text()
+            assert page.locator("#canvas").is_hidden()
+            page.locator("#toggle-graph").click()
+            assert page.locator("#canvas").is_visible()
+            node=page.locator(".step[data-id='hvac-installation-owners--qc-research']")
+            assert "Review HVAC business owners research" in node.inner_text()
+            assert "--qc-research" not in node.inner_text()
+            node.click()
+            detail=page.locator("#details")
+            assert "What happens next" in detail.inner_text()
+            assert "Meta Ad Library" in detail.inner_text()
+            assert "Do not stop or invent a human gate" in detail.inner_text()
+            assert "Full instructions and technical details" in detail.inner_text()
+            page.screenshot(path=str(args.out/"v09-six-audience-overview.png"),full_page=True)
+            results.append("v0.9 56-node human-first view, six ready reviews, hidden raw IDs, source access and no fake gate")
         browser.close()
     (args.out/"results.json").write_text(json.dumps({"status":"PASS","checks":results,"count":len(results)},indent=2)+"\n")
     print(json.dumps({"status":"PASS","checks":len(results),"screenshots":["desktop.png","mobile.png"]}))
