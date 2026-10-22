@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AOS-W: Six Parallel Audience Lanes — Contrast-Safe Example</title>
+<style>
+:root{color-scheme:light;--aw-bg:#f3f6fa;--aw-fg:#152b42;--aw-surface:#ffffff;--aw-border:#637c96;--aw-lane-bg:#eaf1f8;--aw-lane-fg:#203c58;--aw-muted:#344e68;--aw-badge-bg:#e8eef6;--aw-badge-fg:#233d55}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--aw-bg:#0d1928;--aw-fg:#f4f8ff;--aw-surface:#17283a;--aw-border:#7991ae;--aw-lane-bg:#2b4765;--aw-lane-fg:#f8fbff;--aw-muted:#d1e1f2;--aw-badge-bg:#29435e;--aw-badge-fg:#f6fbff}}
+*{box-sizing:border-box}body{margin:0;padding:28px;font:15px/1.55 system-ui,sans-serif;background:var(--aw-bg);color:var(--aw-fg)}
+main{max-width:1380px;margin:auto}h1{margin:0 0 9px;font-size:25px;line-height:1.3}
+.intro{color:var(--aw-muted);max-width:950px;margin-bottom:24px}
+.lanes{display:grid;grid-template-columns:repeat(3,minmax(210px,1fr));gap:17px}
+.audienceLane{background:var(--aw-surface);color:var(--aw-fg);border:1px solid var(--aw-border);border-radius:12px;padding:15px}
+.laneLabel,.audienceLaneTitle,.audience-lane-title{background:var(--aw-lane-bg)!important;color:var(--aw-lane-fg)!important;
+font-size:17px;line-height:1.4;font-weight:750;letter-spacing:0;border:1px solid var(--aw-border);border-radius:8px;padding:12px;margin:0 0 10px;opacity:1!important}
+.laneDetail{color:var(--aw-muted);margin:0 0 12px}
+.stepState{display:inline-block;background:var(--aw-badge-bg);color:var(--aw-badge-fg);padding:4px 9px;border-radius:6px;font-weight:700;font-size:12px}
+.audienceLane:focus-within{outline:3px solid var(--aw-fg);outline-offset:2px}
+@media(max-width:800px){.lanes{grid-template-columns:repeat(2,minmax(210px,1fr))}}
+@media(max-width:480px){.lanes{grid-template-columns:1fr}body{padding:16px}}
+@media(forced-colors:active){.laneLabel,.audienceLaneTitle,.audience-lane-title{color:CanvasText!important;background:Canvas!important;border:2px solid CanvasText}}
+</style></head>
+<body><main>
+<h1>Six parallel audience lanes</h1>
+<p class="intro">Illustrative public-safe UI contrast fixture, not a live Bucket 9 run. Each audience label has its OWN background and foreground color in light, dark and forced-contrast modes. The status is stated in words rather than conveyed by color alone.</p>
+<div class="lanes" aria-label="Six parallel audience lanes">
+<article class="audienceLane" tabindex="0"><h2 class="laneLabel">HVAC business owners</h2><p class="laneDetail">HVAC installation and replacement. Research evidence prepared for an independent quality check.</p><span class="stepState">Ready for independent review</span></article>
+<article class="audienceLane" tabindex="0"><h2 class="laneLabel">General trades contractors</h2><p class="laneDetail">Renovations and general contracting. Research evidence prepared for an independent quality check.</p><span class="stepState">Ready for independent review</span></article>
+<article class="audienceLane" tabindex="0"><h2 class="laneLabel">Experienced Meta advertisers</h2><p class="laneDetail">Experienced hands-on ad buyers. Research evidence prepared for an independent quality check.</p><span class="stepState">Ready for independent review</span></article>
+<article class="audienceLane" tabindex="0"><h2 class="laneLabel">Marketing agencies</h2><p class="laneDetail">Agency owners and operators. Research evidence prepared for an independent quality check.</p><span class="stepState">Ready for independent review</span></article>
+<article class="audienceLane" tabindex="0"><h2 class="laneLabel">Licensed life insurance agents</h2><p class="laneDetail">Licensed insurance sales professionals. Research evidence prepared for an independent quality check.</p><span class="stepState">Ready for independent review</span></article>
+<article class="audienceLane" tabindex="0"><h2 class="laneLabel">Small business owners</h2><p class="laneDetail">Owners across smaller business sectors. Research evidence prepared for an independent quality check.</p><span class="stepState">Ready for independent review</span></article>
+</div>
+</main></body></html>
