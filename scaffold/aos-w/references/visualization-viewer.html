@@ -120,6 +120,29 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7fa;border:1px so
   prop(box,"Agent/owner",n.owner);prop(box,"Attempt count",n.attempts);
   prop(box,"Child workflow",n.child_template);
   section(box,"Child template reference",n.child_ref);
+  prop(box,"Pinned child module inspection",n.child_resolution);
+  if(Array.isArray(n.child_steps)&&n.child_steps.length){
+    const wrap=make("div",undefined,"section");
+    wrap.appendChild(make("h3","Verified child workflow steps"));
+    for(const step of n.child_steps){
+      const disclosure=make("details");
+      const summary=make("summary",String(step.id)+" · "+String(step.kind||"task"));
+      summary.style.cursor="pointer";summary.style.padding="9px 3px";
+      disclosure.appendChild(summary);
+      for(const [heading,value] of [
+        ["Agent prompt",step.prompt],["Dependencies",step.needs],
+        ["Inputs",step.inputs],["Outputs",step.outputs],
+        ["Quality review",step.quality],["Completion contract",step.contract]]){
+        if(value===undefined||value===null)continue;
+        const subsection=make("div",undefined,"section");
+        subsection.appendChild(make("h3",heading));
+        subsection.appendChild(make("pre",typeof value==="string"?value:JSON.stringify(value,null,2)));
+        disclosure.appendChild(subsection);
+      }
+      wrap.appendChild(disclosure);
+    }
+    box.appendChild(wrap);
+  }
   section(box,"Policy and required human approvals",n.policy);
   section(box,"Prompt / agent instructions",n.prompt||n.instructions||"Not supplied in saved template.");
   section(box,"Input requirements",n.inputs);

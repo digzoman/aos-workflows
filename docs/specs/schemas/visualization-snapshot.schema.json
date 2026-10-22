@@ -199,7 +199,40 @@
               "null"
             ]
           },
-          "child_ref": {}
+          "child_ref": {},
+          "child_resolution": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "child_steps": {
+            "type": "array",
+            "maxItems": 60,
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "prompt"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "kind": {},
+                "prompt": {
+                  "type": "string",
+                  "maxLength": 18000
+                },
+                "needs": {},
+                "inputs": {},
+                "outputs": {},
+                "quality": {},
+                "contract": {}
+              },
+              "additionalProperties": false
+            }
+          }
         },
         "additionalProperties": true
       }
