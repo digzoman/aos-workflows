@@ -200,4 +200,28 @@ class VisualizationAcceptance(unittest.TestCase):
   data=viz.run_dir_snapshot(run)
   Draft202012Validator(SCHEMA,format_checker=FormatChecker()).validate(data)
 
+
+ def test_25_exact_pinned_child_module_prompt_drilldown(self):
+  path=ROOT/"scaffold/aos-w/templates/marketing-lifecycle-compound/template.yaml"
+  data=viz.source_to_snapshot(viz.load_yaml(path),None,str(path),None)
+  viz.resolve_local_children(data,path)
+  resolved=[n for n in data["nodes"] if n.get("child_resolution")=="PINNED_LOCAL_MODULE_VERIFIED"]
+  self.assertGreater(len(resolved),0)
+  self.assertTrue(all(n.get("child_steps") for n in resolved))
+  self.assertTrue(any("prompt" in st and st["prompt"] for n in resolved for st in n["child_steps"]))
+  self.assertIn("Verified child workflow steps",HTML)
+  from jsonschema import Draft202012Validator,FormatChecker
+  Draft202012Validator(SCHEMA,format_checker=FormatChecker()).validate(data)
+
+ def test_26_child_digest_mismatch_blocks_prompt_expansion(self):
+  from copy import deepcopy
+  path=ROOT/"scaffold/aos-w/templates/marketing-lifecycle-compound/template.yaml"
+  data=viz.source_to_snapshot(viz.load_yaml(path),None,str(path),None)
+  node=next(n for n in data["nodes"] if isinstance(n.get("child_ref"),dict))
+  node["child_ref"]=deepcopy(node["child_ref"])
+  node["child_ref"]["content_digest"]="sha256:"+("0"*64)
+  viz.resolve_local_children(data,path)
+  self.assertEqual(node["child_resolution"],"PIN_DIGEST_MISMATCH")
+  self.assertNotIn("child_steps",node)
+
 if __name__=="__main__":unittest.main()
