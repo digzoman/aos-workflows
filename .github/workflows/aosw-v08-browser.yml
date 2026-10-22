@@ -10,6 +10,9 @@ on:
       - 'tests/acceptance/visualization_browser.py'
       - 'tests/test_visualization.py'
       - 'scripts/aosw_human_profile.py'
+      - 'scripts/aosw-contrast-audit.py'
+      - 'tests/acceptance/contrast_negative.py'
+      - 'examples/visualization/six-lane-accessible.html'
       - 'scaffold/aos-w/references/HUMAN-FIRST.md'
       - '.github/workflows/aosw-v08-browser.yml'
   workflow_dispatch:
@@ -33,6 +36,18 @@ jobs:
           python scripts/aosw-visualize.py --template scaffold/aos-w/templates/marketing-lifecycle-compound/template.yaml --out /tmp/aos-w/agent-files/visualizations/compound/index.html
           python scripts/aosw-visualize.py --snapshot examples/visualization/bucket9-stage.json --out /tmp/aos-w/agent-files/visualizations/bucket9/index.html
           python scripts/aosw-visualize.py --snapshot examples/visualization/synthetic-six-audience.json --out /tmp/aos-w/agent-files/visualizations/six/index.html
+      - name: Enforce WCAG AA contrast in real light/dark desktop/mobile views
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/aosw-contrast-audit.py \
+            --html examples/visualization/six-lane-accessible.html \
+            --out browser-evidence/contrast-six-lanes --six-lanes
+          python scripts/aosw-contrast-audit.py \
+            --html /tmp/aos-w/agent-files/visualizations/six/index.html \
+            --out browser-evidence/contrast-generated-workflow
+          python tests/acceptance/contrast_negative.py \
+            --html examples/visualization/six-lane-accessible.html
       - name: Test real browser click, arrows, keyboard, mobile and network isolation
         run: |
           python tests/acceptance/visualization_browser.py --html /tmp/aos-w/agent-files/visualizations/bucket9/index.html --out browser-evidence --compound /tmp/aos-w/agent-files/visualizations/compound/index.html --human-six /tmp/aos-w/agent-files/visualizations/six/index.html
