@@ -247,7 +247,7 @@ class VisualizationAcceptance(unittest.TestCase):
   self.assertEqual(human["phase"],"Check the research")
   self.assertEqual(human["lane"],"HVAC business owners")
   self.assertNotIn("--",human["title"])
-  self.assertIn("independent reviewer",human["next_action"])
+  self.assertIn("independent agent",human["next_action"])
   self.assertTrue(any(r["name"]=="Meta Ad Library" for r in human["resources"]))
   self.assertEqual(result["nodes"][1]["id"],"hvac-installation-owners--qc-research")
 
