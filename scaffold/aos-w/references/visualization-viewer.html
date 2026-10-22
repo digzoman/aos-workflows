@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<title>AOS-W Workflow Visualization</title>
+<style>
+:root{font:15px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#1c2939;background:#f4f6f9}
+*{box-sizing:border-box}body{margin:0}.header{background:#fff;border-bottom:1px solid #dae2e9;padding:18px 26px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+h1{margin:0;font-size:22px;line-height:1.3}.subtitle{color:#64748b;font-size:12px;max-width:770px}.tag{display:inline-flex;padding:4px 9px;border-radius:999px;background:#e8eff6;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.banner{padding:8px 26px;background:#fff8e5;color:#70510e;border-bottom:1px solid #e7d19d;font-size:12px}
+.dashboard{display:grid;grid-template-columns:minmax(450px,1fr) minmax(300px,360px);height:calc(100vh - 125px);min-height:560px}
+.workspace{overflow:auto;position:relative;padding:22px}.tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
+input{border:1px solid #cbd5e1;border-radius:10px;padding:10px 13px;min-width:225px;font:inherit;background:#fff;max-width:100%}
+.metrics{display:flex;gap:8px;flex-wrap:wrap}.metric{padding:6px 10px;border:1px solid #d8e0e8;background:white;border-radius:8px;font-size:12px}
+.canvas{position:relative;min-width:720px;width:max-content;max-width:none;border:1px solid #d8e1eb;border-radius:13px;padding:38px 28px;background:#fff;min-height:370px;box-shadow:0 5px 20px #182c4210}
+#links{position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:0}
+.columns{display:grid;gap:100px;grid-auto-columns:220px;grid-auto-flow:column;position:relative;z-index:1}
+.lane{display:flex;flex-direction:column;gap:24px}.laneLabel{font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;color:#8a97a8;height:18px}
+.step{font:inherit;background:#fff;border:1px solid #d9e2ea;color:#1c2939;border-left:5px solid #93a3b5;border-radius:10px;text-align:left;padding:12px 11px;cursor:pointer;min-height:101px;box-shadow:0 4px 9px #142b3c0a}
+.step:hover,.step:focus-visible{outline:2px solid #1576b5;outline-offset:2px}.step.selected{outline:3px solid #096da7}
+.step.dimmed{opacity:.3}.stepTitle{display:block;font-weight:700;font-size:13px;line-height:1.35}.stepId{display:block;font-size:10px;color:#687b8e;font-family:ui-monospace,monospace;margin-top:5px;overflow-wrap:anywhere}
+.stepState{display:inline-block;font-size:10px;margin-top:10px;padding:2px 6px;border-radius:5px;background:#e9eef3;letter-spacing:.015em}
+.step[data-status="COMPLETE"],.step[data-status="ACCEPTED"]{border-left-color:#168052}.step[data-status="RUNNING"]{border-left-color:#1775ce}.step[data-status="READY"]{border-left-color:#be890f}
+.step[data-status="BLOCKED"],.step[data-status="NEEDS_REWORK"],.step[data-status="RECONCILE_REQUIRED"]{border-left-color:#d43b3b}
+.step[data-status="REVIEW_WAIT"],.step[data-status="WAIT_APPROVAL"]{border-left-color:#7c4bc5}
+.panel{overflow:auto;border-left:1px solid #d8e1eb;background:white;padding:22px}.panel h2{margin:0 0 10px;font-size:21px}.section{border-top:1px solid #e6edf3;padding-top:15px;margin-top:16px}
+.section h3{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:#50657b}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7fa;border:1px solid #e2e8f0;padding:12px;border-radius:8px;font:12px/1.6 ui-monospace,monospace}
+.prop{font-size:12px;margin:7px 0;overflow-wrap:anywhere}.prop strong{color:#425568}.empty{color:#8593a5;font-size:13px}.warning{color:#825015}.progress{height:7px;background:#e1e7ef;border-radius:8px;width:160px;overflow:hidden}.progress>div{height:100%;background:#168052}
+@media(max-width:860px){.dashboard{display:block;height:auto}.workspace{max-height:60vh;min-height:430px}.panel{border-left:0;border-top:1px solid #d8e1eb;min-height:300px}.canvas{min-width:700px}}
+@media print{.header,.banner{padding:10px}.dashboard{display:block;height:auto}.workspace{overflow:visible}.panel{break-before:page}.tools{display:none}}
+</style>
+</head>
+<body>
+<header class="header">
+ <div><h1 id="title">Workflow Visualization</h1><div class="subtitle" id="subtitle"></div></div>
+ <div><span class="tag" id="mode">Template</span><div class="progress" title="Reported completed steps"><div id="bar" style="width:0%"></div></div></div>
+</header>
+<div class="banner" id="provenance">Read-only generated snapshot. This page never changes workflow state or provider accounts.</div>
+<div class="dashboard">
+ <main class="workspace" id="workspace">
+  <div class="tools"><input aria-label="Find a workflow step" id="search" placeholder="Search steps or IDs"><div class="metrics" id="metrics"></div></div>
+  <div class="canvas" id="canvas"><svg aria-hidden="true" id="links"></svg><div class="columns" id="columns"></div></div>
+ </main>
+ <aside class="panel" id="details" aria-label="Selected step details" aria-live="polite"><h2>Choose a step</h2><p class="empty">Click a box in the workflow to inspect its prompt and requirements.</p></aside>
+</div>
+<script id="aosw-snapshot" type="application/json">__AOSW_SNAPSHOT_JSON__</script>
+<script>
+"use strict";
+(function(){
+ const NS="http://www.w3.org/2000/svg";
+ const $=id=>document.getElementById(id);
+ let d;
+ try {d=JSON.parse($("aosw-snapshot").textContent);}
+ catch(e){$("provenance").textContent="Visualization unavailable: invalid embedded snapshot.";return;}
+ if(!d||!Array.isArray(d.nodes)){ $("provenance").textContent="Visualization unavailable: missing nodes.";return;}
+ const nodes=d.nodes.filter(x=>x && typeof x.id==="string");
+ const byId=new Map(nodes.map(n=>[n.id,n]));
+ const make=(tag,text,cl)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=String(text);if(cl)e.className=cl;return e;};
+ const values=x=>Array.isArray(x)?x:[];
+ $("title").textContent=d.title||"AOS-W workflow";
+ $("mode").textContent=d.mode||"TEMPLATE";
+ $("subtitle").textContent=(d.template_id||"")+(d.run_id?" · Run "+d.run_id:"")+(d.graph_revision?" · Graph "+d.graph_revision:"");
+ $("provenance").textContent="READ ONLY · "+(d.verification||"UNVERIFIED_SNAPSHOT")+
+   " · Generated "+(d.generated_at||"time unknown")+" · No live refresh or provider verification. "+
+   (d.warning||"")+(d.public_export?" · PUBLIC SANITIZED COPY":" · LOCAL / PRIVATE VIEW");
+ const isDone=n=>["COMPLETE","ACCEPTED"].includes(n.status);
+ const completed=nodes.filter(isDone).length;
+ $("bar").style.width=(nodes.length?100*completed/nodes.length:0)+"%";
+ for(const [label,num] of [["Steps",nodes.length],["Complete",completed],["Review",nodes.filter(x=>["REVIEW_WAIT","WAIT_APPROVAL","NEEDS_REWORK"].includes(x.status)).length],["Blocked",nodes.filter(x=>["BLOCKED","RECONCILE_REQUIRED"].includes(x.status)).length]]){
+  $("metrics").appendChild(make("span",label+" "+num,"metric"));
+ }
+ const memo=new Map();
+ function depth(id,stack){
+  if(memo.has(id))return memo.get(id);
+  if(stack.has(id))return 0;
+  stack.add(id);
+  const n=byId.get(id);
+  const value=n?1+Math.max(-1,...values(n.needs).filter(x=>byId.has(x)).map(x=>depth(x,stack))):0;
+  stack.delete(id);memo.set(id,value);return value;
+ }
+ const layers=[];
+ for(const n of nodes){const dep=depth(n.id,new Set());(layers[dep]||(layers[dep]=[])).push(n);}
+ for(let i=0;i<layers.length;i++){
+  const lane=make("div",undefined,"lane");lane.appendChild(make("div","Stage "+(i+1),"laneLabel"));
+  for(const node of layers[i]||[]){
+   const b=make("button",undefined,"step");
+   b.type="button";b.dataset.id=node.id;b.dataset.status=node.status||"UNKNOWN";
+   b.appendChild(make("span",node.label||node.name||node.id,"stepTitle"));
+   b.appendChild(make("span",node.id,"stepId"));
+   b.appendChild(make("span",String(node.status||"UNKNOWN").replace(/_/g," "),"stepState"));
+   b.onclick=()=>show(node.id);
+   lane.appendChild(b);
+  }
+  $("columns").appendChild(lane);
+ }
+ function prop(box,key,val){
+  if(val===undefined||val===null||val==="")return;
+  let txt=Array.isArray(val)?val.map(v=>typeof v==="string"?v:JSON.stringify(v)).join(", "):typeof val==="object"?JSON.stringify(val):String(val);
+  const p=make("div",undefined,"prop");p.appendChild(make("strong",key+" · "));p.appendChild(document.createTextNode(txt));box.appendChild(p);
+ }
+ function section(panel,name,body){
+  if(body===undefined||body===null||body==="")return;
+  const wrap=make("div",undefined,"section");wrap.appendChild(make("h3",name));
+  wrap.appendChild(make("pre",typeof body==="string"?body:JSON.stringify(body,null,2)));panel.appendChild(wrap);
+ }
+ function show(id){
+  const n=byId.get(id);if(!n)return;
+  for(const b of document.querySelectorAll(".step"))b.classList.toggle("selected",b.dataset.id===id);
+  const box=$("details");box.replaceChildren();
+  box.appendChild(make("h2",n.label||n.name||n.id));
+  box.appendChild(make("span",n.status||"UNKNOWN","tag"));
+  prop(box,"Step ID",n.id);prop(box,"Type",n.kind);prop(box,"Requires",n.needs);
+  prop(box,"Agent/owner",n.owner);prop(box,"Attempt count",n.attempts);
+  prop(box,"Child workflow",n.child_template);
+  section(box,"Prompt / agent instructions",n.prompt||n.instructions||"Not supplied in saved template.");
+  section(box,"Input requirements",n.inputs);
+  section(box,"Expected outputs",n.outputs);
+  section(box,"Quality controls and approval gates",n.quality);
+  section(box,"Execution rules and retry policy",n.contract?{contract:n.contract,retry:n.retry||null,when:n.when||null}:{retry:n.retry,when:n.when});
+  section(box,"Review and provenance",n.review);
+  section(box,"Artifacts and evidence references",n.evidence);
+  section(box,"Comments / next action",n.notes);
+  prop(box,"Source",n.source);
+ }
+ function redraw(){
+  const canvas=$("canvas"),svg=$("links");
+  const W=canvas.scrollWidth,H=canvas.scrollHeight;svg.setAttribute("width",W);svg.setAttribute("height",H);svg.setAttribute("viewBox","0 0 "+W+" "+H);
+  svg.replaceChildren();
+  const defs=document.createElementNS(NS,"defs");const m=document.createElementNS(NS,"marker");
+  m.setAttribute("id","arrow");m.setAttribute("viewBox","0 0 10 10");m.setAttribute("refX","9");m.setAttribute("refY","5");m.setAttribute("markerWidth","7");m.setAttribute("markerHeight","7");m.setAttribute("orient","auto-start-reverse");
+  const arrow=document.createElementNS(NS,"path");arrow.setAttribute("d","M 0 0 L 10 5 L 0 10 z");arrow.setAttribute("fill","#9fb0c2");m.appendChild(arrow);defs.appendChild(m);svg.appendChild(defs);
+  const outer=canvas.getBoundingClientRect();
+  for(const n of nodes){
+   const target=document.querySelector('.step[data-id="'+CSS.escape(n.id)+'"]');if(!target)continue;
+   const tr=target.getBoundingClientRect();
+   for(const pred of values(n.needs)){
+    const source=document.querySelector('.step[data-id="'+CSS.escape(pred)+'"]');if(!source)continue;
+    const sr=source.getBoundingClientRect();const x1=sr.right-outer.left,y1=sr.top+sr.height/2-outer.top,x2=tr.left-outer.left,y2=tr.top+tr.height/2-outer.top;
+    const path=document.createElementNS(NS,"path");const dx=Math.max(25,(x2-x1)/2);
+    path.setAttribute("d","M"+x1+" "+y1+" C"+(x1+dx)+" "+y1+" "+(x2-dx)+" "+y2+" "+x2+" "+y2);
+    path.setAttribute("stroke","#a9b7c9");path.setAttribute("stroke-width","2");path.setAttribute("fill","none");path.setAttribute("marker-end","url(#arrow)");
+    svg.appendChild(path);
+   }
+  }
+ }
+ $("search").addEventListener("input",function(){const q=this.value.toLowerCase();for(const b of document.querySelectorAll(".step"))b.classList.toggle("dimmed",!b.textContent.toLowerCase().includes(q));});
+ if(nodes.length)show(nodes.find(x=>x.status==="RUNNING")?.id||nodes.find(x=>x.status==="READY")?.id||nodes[0].id);
+ window.addEventListener("resize",redraw);requestAnimationFrame(redraw);
+})();
+</script>
+</body></html>
