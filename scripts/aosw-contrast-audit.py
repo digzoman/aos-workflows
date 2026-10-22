@@ -24,7 +24,14 @@ SELECTORS = [
 
 JS_AUDIT = r"""(selectors) => {
  function color(v){
-   const m=String(v).match(/rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:[,\s\/]+([\d.]+))?/);
+   const x=String(v).trim();
+   const hex=x.match(/^#([0-9a-f]{3}|[0-9a-f]{4}|[0-9a-f]{6}|[0-9a-f]{8})$/i);
+   if(hex){
+     const raw=hex[1],full=raw.length<=4?[...raw].map(ch=>ch+ch).join(""):raw;
+     const rgb=[0,2,4].map(i=>parseInt(full.slice(i,i+2),16));
+     return rgb.concat(full.length===8?parseInt(full.slice(6,8),16)/255:1);
+   }
+   const m=x.match(/rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:[,\s\/]+([\d.]+))?/);
    if(!m)return null;
    return [Number(m[1]),Number(m[2]),Number(m[3]),m[4]===undefined?1:Number(m[4])];
  }
