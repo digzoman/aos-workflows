@@ -1,5 +1,10 @@
 # AOS-W preview release change notes
 
+## v0.9.1 portable preview patch, October 22, 2026
+
+Rebuilt the preview after final bundled v0.9 reference/documentation updates, so downloadable framework instructions match tested main. No additional runtime behavior, provider integrations or new human gates. Release assets remain immutable by tag.
+
+
 ## v0.9.0 portable preview, October 22, 2026
 
 Added a human-first workflow viewer with meaningful step titles, phases, workstream labels, read-only step briefs, tool/source guidance, clearer READY review counters, overview-first browsing of large diagrams, accessible long technical instructions and audience/status filters. Added AGENTS.md developer and installed entry points, a non-gating Agent Skills conformance checker, and strongly proactive tool/capability recovery guidance: agents should use alternate tools, try their available skills, and keep safe work moving rather than refusing or creating extra human gates. A manually triggered GitHub Pages workflow publishes only an allowlisted **fictional** sanitized demonstration after the owner sets up Pages. Real private workflows are not auto-published. Existing workflow schema/marketing template pins and stable-V1 blockers stay unchanged.

@@ -1,11 +1,11 @@
-**Current preview:** AOS-W **0.9.0**, with human-readable workflow diagrams, portable step briefs, AGENTS.md discovery, non-gating capability recovery and a manual fictional Pages export.
+**Current preview:** AOS-W **0.9.1**, with human-readable workflow diagrams, portable step briefs, AGENTS.md discovery, non-gating capability recovery and a manual fictional Pages export.
 
-# Install and visualize AOS-W v0.9.0 portable preview
+# Install and visualize AOS-W v0.9.1 portable preview
 
 Current preview, October 22, 2026. This is an additive minor update to v0.7.0, NOT a stable V1 release. Existing marketing templates and their pinned template/child digests are unchanged.
 
-Download https://github.com/digzoman/aos-workflows/releases/tag/v0.9.0-portable-preview
-Asset aos-w-portable-0.9.0.zip
+Download https://github.com/digzoman/aos-workflows/releases/tag/v0.9.1-portable-preview
+Asset aos-w-portable-0.9.1.zip
 For the current exact digest, use the release asset's SHA-256 digest on GitHub and verify it locally before installing. The CI workflow independently builds/verifies the ZIP and preserves existing agent-files.
 
 ## File-only installation
@@ -55,8 +55,8 @@ Back up the ENTIRE installed aos-w directory. Check pinned graph and schema comp
 Optional maintainer commands in the development repo:
 
 ~~~sh
-python scripts/aosw-distribution.py verify dist/aos-w-portable-0.9.0.zip
-python scripts/aosw-distribution.py upgrade dist/aos-w-portable-0.9.0.zip /work/project/aos-w
+python scripts/aosw-distribution.py verify dist/aos-w-portable-0.9.1.zip
+python scripts/aosw-distribution.py upgrade dist/aos-w-portable-0.9.1.zip /work/project/aos-w
 ~~~
 
 The distribution upgrader performs content validation, backup and clean user subtree preservation, but a complete real multi-host/cloud migration guarantee remains unproven. Validate your own data after upgrade and do not discard rollback copies prematurely.

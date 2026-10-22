@@ -1,6 +1,6 @@
-## v0.9.0 — human-first workflow coordination (preview)
+## v0.9.1 — human-first workflow coordination (preview)
 
-Current release: [AOS-W v0.9.0 portable preview](https://github.com/digzoman/aos-workflows/releases/tag/v0.9.0-portable-preview). Agents should use the included AGENTS.md entry point and the new human-first workflow viewer, status-aware review counts, portable step briefs, and capability-recovery guidance. A declared missing tool is not a reason to refuse, invent an owner approval gate, or stop safe parallel work. Private production snapshots must not be published automatically to public GitHub Pages; an opt-in **fictional** sanitized demo is prepared. Original stable V1 acceptance T01–T04 remains open.
+Current release: [AOS-W v0.9.1 portable preview](https://github.com/digzoman/aos-workflows/releases/tag/v0.9.1-portable-preview). Agents should use the included AGENTS.md entry point and the new human-first workflow viewer, status-aware review counts, portable step briefs, and capability-recovery guidance. A declared missing tool is not a reason to refuse, invent an owner approval gate, or stop safe parallel work. Private production snapshots must not be published automatically to public GitHub Pages; an opt-in **fictional** sanitized demo is prepared. Original stable V1 acceptance T01–T04 remains open.
 
 # AOS-W v0.8.2 Workflow Visualization
 

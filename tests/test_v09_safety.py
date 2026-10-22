@@ -38,7 +38,7 @@ class V09Safety(unittest.TestCase):
 
  def test_release_is_portable_without_pages_dependency(self):
   version=json.loads((ROOT/"scaffold/aos-w/VERSION.json").read_text())
-  self.assertEqual(version["aosw_version"],"0.9.0")
+  self.assertEqual(version["aosw_version"],"0.9.1")
   self.assertFalse(version["mandatory_programming_runtime"])
   self.assertFalse(version["mandatory_git"])
   self.assertEqual(version["agent_discovery"]["a2a"],"not_implemented")

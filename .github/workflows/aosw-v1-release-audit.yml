@@ -35,14 +35,14 @@ jobs:
       - name: Build and verify immutable preview package
         run: |
           mkdir -p dist audit-output
-          python scripts/aosw-distribution.py build scaffold/aos-w dist/aos-w-portable-0.9.0.zip
-          python scripts/aosw-distribution.py verify dist/aos-w-portable-0.9.0.zip
-      - name: Run standalone practical acceptance on the exact 0.9.0 package
+          python scripts/aosw-distribution.py build scaffold/aos-w dist/aos-w-portable-0.9.1.zip
+          python scripts/aosw-distribution.py verify dist/aos-w-portable-0.9.1.zip
+      - name: Run standalone practical acceptance on the exact 0.9.1 package
         run: |
-          python tests/acceptance/run_standalone_acceptance.py --zip dist/aos-w-portable-0.9.0.zip --evidence audit-output/standalone-acceptance --expected-version 0.9.0
+          python tests/acceptance/run_standalone_acceptance.py --zip dist/aos-w-portable-0.9.1.zip --evidence audit-output/standalone-acceptance --expected-version 0.9.1
       - name: Scan all reachable repository history and ZIP contents
         run: |
-          python scripts/aosw-v1-release-audit.py --zip dist/aos-w-portable-0.9.0.zip --out audit-output/v1-release-audit.json
+          python scripts/aosw-v1-release-audit.py --zip dist/aos-w-portable-0.9.1.zip --out audit-output/v1-release-audit.json
       - name: Upload all release-audit results and candidate ZIP
         if: always()
         uses: actions/upload-artifact@v4
@@ -50,6 +50,6 @@ jobs:
           name: aos-w-v1-release-review-evidence
           path: |
             audit-output/
-            dist/aos-w-portable-0.9.0.zip
+            dist/aos-w-portable-0.9.1.zip
           retention-days: 90
           if-no-files-found: warn

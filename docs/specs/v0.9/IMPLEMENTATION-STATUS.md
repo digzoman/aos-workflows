@@ -1,7 +1,7 @@
-# AOS-W 0.9.0 Implementation and Remaining Acceptance
+# AOS-W 0.9.1 Implementation and Remaining Acceptance
 
 Date: October 22, 2026.
-Status: SHIPPED PREVIEW, not stable Version 1 approval. Current portable version 0.9.0. See V0.9-PRODUCT-SPEC.md and ACCEPTANCE-MATRIX.md for the target specification.
+Status: SHIPPED PREVIEW, not stable Version 1 approval. Current portable version 0.9.1. See V0.9-PRODUCT-SPEC.md and ACCEPTANCE-MATRIX.md for the target specification.
 
 ## Implemented and tested
 - Human-first offline HTML workflow viewer: readable generated labels, semantic phase names, overview-first navigation for larger workflows, workstream/status filters, quality review READY counters, task detail drawer with actionable next step and source references, original instructions and machine JSON accessible under Advanced.
