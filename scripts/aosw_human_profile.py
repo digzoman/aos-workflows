@@ -66,7 +66,7 @@ def source_title(entry):
     }
     if audience and suffix in actions:
         action = actions[suffix]
-        subject = audience[0].lower()+audience[1:] if audience else ""
+        subject = audience if audience.startswith(("HVAC","CRM","AI")) else audience[0].lower()+audience[1:] if audience else ""
         if suffix == "qc-research":return "Review "+subject+" research", "GENERATED_FROM_ID"
         if suffix == "research":return "Research ads for "+subject, "GENERATED_FROM_ID"
         if action.endswith("for"):return action+" "+subject, "GENERATED_FROM_ID"

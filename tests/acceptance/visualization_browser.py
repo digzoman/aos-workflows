@@ -46,7 +46,7 @@ def main():
         results.append("search filters visually without removing dependency graph")
         page.locator(".step[data-id='launch']").click()
         assert "Require a new explicit owner authorization" in details.inner_text()
-        assert "WAIT_APPROVAL" in details.inner_text()
+        assert "WAIT APPROVAL" in details.inner_text()
         results.append("pending launch authorization visibly remains blocked")
         page.screenshot(path=str(args.out/"desktop.png"),full_page=True)
         page.set_viewport_size({"width":390,"height":820})
