@@ -73,7 +73,7 @@ def build(source: Path, dest: Path):
         if len(data)>MAX_FILE: raise DistributionError('Oversized distribution file')
         if len(data)+sum(map(len,files.values()))>MAX_TOTAL: raise DistributionError('Oversized distribution')
         files[rel]=data
-    for req in ('AGENTS.md','README.md','PROTOCOL.md','VERSION.json','spec/README.md',
+    for req in ('README.md','PROTOCOL.md','VERSION.json','spec/README.md',
                 'templates/README.md','references/README.md','agent-files/README.md','agent-files/config/settings.json'):
         if req not in files: raise DistributionError('Missing required framework file: '+req)
     if len(files)>MAX_FILES: raise DistributionError('Too many files')
@@ -126,9 +126,11 @@ def verify(archive: Path):
         if len(files[k])!=v['bytes'] or sha(files[k])!=v['sha256']:
             raise DistributionError('SHA256 mismatch: '+k)
     if json.loads(files['VERSION.json'])['aosw_version']!=m['version']:raise DistributionError('Version mismatch')
-    for p in ('AGENTS.md','README.md','PROTOCOL.md','VERSION.json','spec/README.md','templates/README.md',
+    for p in ('README.md','PROTOCOL.md','VERSION.json','spec/README.md','templates/README.md',
               'agent-files/README.md','agent-files/config/settings.json'):
         if p not in files:raise DistributionError('Required installed content absent: '+p)
+    if tuple(map(int,m['version'].split('.')[:2])) >= (0,9) and 'AGENTS.md' not in files:
+        raise DistributionError('v0.9+ archive requires AGENTS.md')
     return m,files
 
 def _safe_user_tree(existing: Path):
