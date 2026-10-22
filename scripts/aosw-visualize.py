@@ -119,7 +119,9 @@ def source_to_snapshot(template: dict, state: dict | None, source: str, title: s
             "review": sanitized_text(task.get("review")),
             "evidence": sanitized_text(task.get("evidence")),
             "notes": sanitized_text(task.get("error") or task.get("blocked_reason")),
-            "source": "Pinned graph source, not current mutable master" if mode != "TEMPLATE" else "Published template definition"
+            "source": "Pinned graph source, not current mutable master" if mode != "TEMPLATE" else "Published template definition",
+            "policy": sanitized_text(template.get("policy",{})),
+            "child_ref": sanitized_text(child)
         })
     missing = sorted({dep for n in nodes for dep in (n["needs"] or [])
                       if isinstance(dep, str) and dep not in seen})
@@ -158,6 +160,74 @@ def source_to_snapshot(template: dict, state: dict | None, source: str, title: s
         "warning": warning,
         "nodes": nodes
     }
+
+def run_dir_snapshot(folder: Path, title: str | None = None, verify_events: bool = True):
+    """Read a saved run and its pinned graph without mutating the run.
+
+    With the optional development RunStore, scan exact event hashes, detect
+    torn tails and reject a conflicting snapshot. No reviewer/provider
+    authentication can be inferred from valid local event bytes alone.
+    """
+    folder = folder.absolute()
+    if folder.is_symlink() or any(p.is_symlink() for p in folder.parents):
+        raise ViewError("Symlink source run folder not allowed")
+    if not folder.is_dir() or folder.parent.name != "runs":
+        raise ViewError("Expected agent-files/instances/<id>/runs/<run-id>")
+    instance = folder.parent.parent
+    if instance.parent.name != "instances" or instance.parent.parent.name != "agent-files":
+        raise ViewError("Run is not in an AOS-W instance")
+    data = json.loads((folder/"run.json").read_text(encoding="utf-8"))
+    state = json.loads((folder/"state.json").read_text(encoding="utf-8"))
+    if data.get("run_id") != folder.name or state.get("run_id") != folder.name:
+        raise ViewError("Run identity conflicts with saved file path")
+    revision = state.get("graph_revision")
+    if not isinstance(revision,str) or not SAFE.fullmatch(revision):
+        raise ViewError("Invalid pinned graph revision")
+    graph_path = instance/"graph-revisions"/(revision+".yaml")
+    if not graph_path.is_file() or graph_path.is_symlink():
+        raise ViewError("Pinned graph revision missing/unsafe")
+    graph = load_yaml(graph_path)
+    if verify_events:
+        sys.path.insert(0,str(ROOT/"tools/state"))
+        try:
+            from state import RunStore, StateError
+            result = RunStore(folder).verified()
+        except (OSError, ValueError, KeyError) as exc:
+            raise ViewError("Event verification failed, visualization blocked: "+str(exc)) from exc
+        if result.get("graph_revision") != revision or result.get("last_event_seq") != state.get("last_event_seq"):
+            raise ViewError("Saved state differs from event-verified graph/sequence")
+        if result.get("last_event_digest") != state.get("last_event_digest"):
+            raise ViewError("Saved state digest disagrees with event stream")
+        # Use the recomputed state as the display source of truth, not a
+        # potentially older standalone state.json overlay.
+        state = result
+    doc=source_to_snapshot(graph,state,str(graph_path),title)
+    doc["verification"] = ("EVENTS_RECONCILED"
+                           if verify_events and state.get("integrity_level")=="verified"
+                           else "SOURCE_SNAPSHOT_UNVERIFIED")
+    doc["warning"] = (
+        "Event chain reconciled against local journal; actor/reviewer claims and external provider state are NOT authenticated."
+        if doc["verification"]=="EVENTS_RECONCILED"
+        else "Saved state is advisory or legacy; no proof of external provider truth or authenticated review.")
+    doc["source_graph"] = revision
+    doc["instance_id"] = instance.name
+    # Bounded activity metadata only. Avoid opaque event payloads that may hold
+    # tokens, customer data or private source content.
+    if (folder/"events.jsonl").is_file():
+        activity={}
+        for line in (folder/"events.jsonl").read_text(encoding="utf-8").splitlines():
+            if not line.strip(): continue
+            event=json.loads(line)
+            task_id=event.get("task_id")
+            if task_id and isinstance(task_id,str):
+                log=activity.setdefault(task_id,[])
+                actor=event.get("actor") or {}
+                log.append({"seq":event.get("seq"),"type":event.get("type"),
+                            "at":event.get("at"),"actor": actor.get("agent") if isinstance(actor,dict) else None})
+                if len(log)>8: del log[:-8]
+        for node in doc["nodes"]:
+            node["activity"]=activity.get(node["id"],[])
+    return doc
 
 def encode_json(data):
     # This embedding never executes untrusted labels as HTML, JS, or a URL.
@@ -239,12 +309,17 @@ def main():
     group.add_argument("--template",type=Path,help="source template.yaml")
     group.add_argument("--graph",type=Path,help="pinned graph-revisions/g*.yaml")
     group.add_argument("--snapshot",type=Path,help="prepared visualization snapshot.json")
+    group.add_argument("--run-dir",type=Path,help="existing run folder, auto-loads pinned graph and verifies events")
     parser.add_argument("--state",type=Path,help="optional derived run state.json")
-    parser.add_argument("--out",required=True,type=Path,help="agent-files/visualizations/<id>/index.html")
+    parser.add_argument("--out",type=Path,help="agent-files/visualizations/<id>/index.html (automatic for --run-dir)")
+    parser.add_argument("--unverified",action="store_true",help="skip event verification, label source as UNVERIFIED")
     parser.add_argument("--title",help="optional display title")
     args=parser.parse_args()
     try:
-        if args.snapshot:
+        if args.unverified and not args.run_dir:raise ViewError("--unverified applies only to --run-dir")
+        if args.run_dir:
+            data=run_dir_snapshot(args.run_dir,args.title,verify_events=not args.unverified)
+        elif args.snapshot:
             if args.state:raise ViewError("--snapshot cannot be combined with --state")
             data=json.loads(args.snapshot.read_text(encoding="utf-8"))
         else:
@@ -253,7 +328,14 @@ def main():
             state=json.loads(args.state.read_text(encoding="utf-8")) if args.state else None
             data=source_to_snapshot(tpl,state,str(path),args.title)
         html=render(data,VIEWER.read_text(encoding="utf-8"))
-        location=save(html,args.out,data)
+        if args.out:
+            destination=args.out
+        elif args.run_dir:
+            destination=args.run_dir.absolute().parents[3]/"visualizations"/(
+                data["instance_id"]+"--"+data["run_id"]+"--"+data["graph_revision"])/"index.html"
+        else:
+            raise ViewError("--out required for template, graph and JSON snapshot inputs")
+        location=save(html,destination,data)
         print(json.dumps({"result":"GENERATED_READ_ONLY","html":str(location),
                           "snapshot":str(location.parent/"snapshot.json"),
                           "nodes":len(data["nodes"]),"mode":data.get("mode"),
