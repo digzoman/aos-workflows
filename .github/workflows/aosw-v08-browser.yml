@@ -1,0 +1,43 @@
+name: AOS-W visualization browser smoke
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scaffold/aos-w/references/visualization-viewer.html'
+      - 'scaffold/aos-w/spec/schemas/visualization-snapshot.schema.json'
+      - 'scripts/aosw-visualize.py'
+      - 'examples/visualization/**'
+      - 'tests/acceptance/visualization_browser.py'
+      - 'tests/test_visualization.py'
+      - '.github/workflows/aosw-v08-browser.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install optional viewer test dependencies and Chromium
+        run: |
+          python -m pip install pyyaml jsonschema playwright
+          python -m playwright install --with-deps chromium
+      - name: Generate two actual offline HTML diagrams
+        run: |
+          python scripts/aosw-visualize.py --template scaffold/aos-w/templates/marketing-lifecycle-compound/template.yaml --out /tmp/aos-w/agent-files/visualizations/compound/index.html
+          python scripts/aosw-visualize.py --snapshot examples/visualization/bucket9-stage.json --out /tmp/aos-w/agent-files/visualizations/bucket9/index.html
+      - name: Test real browser click, arrows, keyboard, mobile and network isolation
+        run: |
+          python tests/acceptance/visualization_browser.py --html /tmp/aos-w/agent-files/visualizations/bucket9/index.html --out browser-evidence
+      - name: Archive screenshots and browser check results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aos-w-v08-browser-smoke
+          path: browser-evidence/
+          retention-days: 90
+          if-no-files-found: warn
