@@ -1,6 +1,6 @@
-# AOS-W v0.8.0 Workflow Visualization
+# AOS-W v0.8.1 Workflow Visualization
 
-**Current preview:** [v0.8.0 portable release](https://github.com/digzoman/aos-workflows/releases/tag/v0.8.0-portable-preview). This additive release includes a protected offline interactive HTML/SVG viewer, an optional generator, visualization snapshot schema, safe agent-files/visualizations output location, a sanitized sample and a new design spec. It is **not stable Version 1**. Previous four original V1 acceptance demonstrations remain pending. See [v0.8 visualization specification](docs/specs/visualization/V0.8-SPEC.md), [portable viewer guide](scaffold/aos-w/references/VISUALIZATION.md) and [Bucket 9 example](examples/visualization/bucket9-stage.json).
+**Current preview:** [v0.8.1 portable release](https://github.com/digzoman/aos-workflows/releases/tag/v0.8.1-portable-preview). This additive release includes a protected offline interactive HTML/SVG viewer, an optional generator, visualization snapshot schema, safe agent-files/visualizations output location, a sanitized sample and a new design spec. It is **not stable Version 1**. Previous four original V1 acceptance demonstrations remain pending. See [v0.8 visualization specification](docs/specs/visualization/V0.8-SPEC.md), [portable viewer guide](scaffold/aos-w/references/VISUALIZATION.md) and [Bucket 9 example](examples/visualization/bucket9-stage.json).
 
 # Agent OS Workflows, AOS-W
 
@@ -45,3 +45,8 @@ Original test requirements and acceptance conditions are in docs/specs/prd/ACCEP
 **No open-source license has been selected.** Public GitHub visibility does not automatically grant reuse rights. Approval to publish an AOS-W release is separate from approval to publish marketing advertisements, spend funds or access customer systems. Live external actions require explicit, authenticated, scoped authority and read-back at the provider boundary.
 
 For current work, read [the release approval packet](docs/release/V1-RELEASE-APPROVAL-PACKET.md) and temp/HANDOFF.md. Verify the current main commit and actual CI results before making changes.
+
+
+## Working visualization implementation and browser evidence
+
+The [v0.8.1 code and test report](docs/testing/V08-WORKFLOW-VISUALIZATION.md) documents the real browser smoke, one-command verified run visualization, nested SHA-pinned child prompts and interactive HTML. [Open desktop/mobile browser test screenshots](https://github.com/digzoman/aos-workflows/actions/runs/39747505741/artifacts/12411797423). The [0.8.1 preview release](https://github.com/digzoman/aos-workflows/releases/tag/v0.8.1-portable-preview) is the current distribution. Stable V1 acceptance remains pending.

@@ -1,9 +1,9 @@
-# Install and visualize AOS-W v0.8.0 portable preview
+# Install and visualize AOS-W v0.8.1 portable preview
 
 Current preview, October 22, 2026. This is an additive minor update to v0.7.0, NOT a stable V1 release. Existing marketing templates and their pinned template/child digests are unchanged.
 
-Download https://github.com/digzoman/aos-workflows/releases/tag/v0.8.0-portable-preview
-Asset aos-w-portable-0.8.0.zip
+Download https://github.com/digzoman/aos-workflows/releases/tag/v0.8.1-portable-preview
+Asset aos-w-portable-0.8.1.zip
 For the current exact digest, use the release asset's SHA-256 digest on GitHub and verify it locally before installing. The CI workflow independently builds/verifies the ZIP and preserves existing agent-files.
 
 ## File-only installation
@@ -51,8 +51,8 @@ Back up the ENTIRE installed aos-w directory. Check pinned graph and schema comp
 Optional maintainer commands in the development repo:
 
 ~~~sh
-python scripts/aosw-distribution.py verify dist/aos-w-portable-0.8.0.zip
-python scripts/aosw-distribution.py upgrade dist/aos-w-portable-0.8.0.zip /work/project/aos-w
+python scripts/aosw-distribution.py verify dist/aos-w-portable-0.8.1.zip
+python scripts/aosw-distribution.py upgrade dist/aos-w-portable-0.8.1.zip /work/project/aos-w
 ~~~
 
 The distribution upgrader performs content validation, backup and clean user subtree preservation, but a complete real multi-host/cloud migration guarantee remains unproven. Validate your own data after upgrade and do not discard rollback copies prematurely.
@@ -73,3 +73,16 @@ The helper checks run.json, pinned graph revision and a read-only replay of even
 For a legacy/advisory run that cannot be event-verified, specify --unverified. This renders a visibly SOURCE_SNAPSHOT_UNVERIFIED page and does NOT assert a valid event chain. Never use --unverified to imply real provider truth, review approval or independent verification.
 
 For long source prompts above the schema-supported maximum, conversion fails explicitly rather than shortening the execution instructions and losing a safety gate. No live filesystem watcher or background refresh is included.
+
+
+## Visualize a saved active run with verified history
+
+From the development repository, the optional helper can verify the local run event chain and automatically choose its pinned graph and visualization output directory. No provider state is inferred.
+
+~~~sh
+python scripts/aosw-visualize.py --run-dir /work/project/aos-w/agent-files/instances/my-case/runs/run-001
+~~~
+
+If the files are legacy or event verification is unavailable, add `--unverified` and the resulting page explicitly labels its source status UNVERIFIED. A generated diagram never grants a missing reviewer or publishing permission. Compound template previews can drill into real SHA-pinned child module instructions and QA gates without changing the source workflows.
+
+Current preview ZIP SHA-256: `3357d523e576180b65036c80e149517f658a6920b228d03db28d15826894a91b`. Desktop/mobile screenshots and independent Chromium test results are in [the Browser CI artifact](https://github.com/digzoman/aos-workflows/actions/runs/39747505741/artifacts/12411797423).

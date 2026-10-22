@@ -59,3 +59,8 @@ Reproducible CI audited v0.7.0 preview, 126 hosted test passes, 13 standalone v0
 ## 0.8.0 preview feature shipped, October 22, 2026
 
 Added read-only offline workflow visualization with template, pinned instance and run snapshot modes, DAG arrows and step prompt/QC/evidence drill-down; all generated files must remain under agent-files/visualizations. New optional CLI, schema, sanitized Bucket 9 demo, full spec and 19 tests. GitHub Actions 39741816281 SUCCESS, 145 total unit/conformance tests, two actual standalone HTML snapshots generated, sanitized example archived. Public v0.8.0-portable-preview asset available. Browser-level interactive visual smoke not yet performed. Original four outstanding V1 acceptance demos remain open.
+
+
+## v0.8.1 visualization release, October 22, 2026
+
+Full read-only HTML workflow visualization coded/tested in repo. CLI supports exact saved run selection and event verified state, pinned submodule detailed prompt expansion, browser click/keyboard/mobile smoke. GitHub Actions 39747745980 package SUCCESS, 39747746118 audit SUCCESS 152 unit checks plus 13 standalone cases, browser Actions 39747505741 PASS 9 checks. Versioned preview 0.8.1 uploaded; tag asset immutability rule added. Original T01–T04 stable V1 acceptance remains pending.

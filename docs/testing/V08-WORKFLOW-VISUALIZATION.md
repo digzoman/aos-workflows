@@ -59,3 +59,25 @@ No stable Version 1 declaration. T01 actual end-to-end Ampgent acceptance, T02 c
 After the original preview, extra tests were added for the real persisted Bucket 9 parent run stored in docs/testing/evidence/p18-grounded-39498378421. The visualization CLI now verifies its actual event ledger/checkpoint status, exact graph revision, rejected invalid event history and preserves UNVERIFIED labels for optional advisory mode. The viewer includes a short metadata-only activity history, human approval policy and child template reference on step drilldown.
 
 A separate dedicated GitHub Actions workflow .github/workflows/aosw-v08-browser.yml generates actual HTML and drives headless Chromium to check SVG dependency edges, click and keyboard drilldown, desktop/mobile layout, search behavior, false publication status and lack of network requests. It archives screenshots and test results. The browser result should be checked by its actual CI conclusion before representing this as verified.
+
+
+## Final v0.8.1 code and browser acceptance evidence, October 22, 2026
+
+The original 0.8.0 was the first visualization preview. The code has since been materially extended and shipped as a new immutable **0.8.1 patch preview** rather than silently replacing the same GitHub release ZIP.
+
+Changes implemented in main:
+- From any active AOS-W run, use `python scripts/aosw-visualize.py --run-dir <path-to-run>` to auto-discover the pinned graph and saved state, verify journal event chain and checkpoint anchors where available, and create the page under the installation's own `agent-files/visualizations/`.
+- Read-only selected step now shows a bounded journal activity history, the precise current event sequence, policy/approval requirements, artifacts, review metadata and all original prompt text.
+- For a published compound marketing template, the generator resolves sibling child module templates only after verifying exact SHA-256 pinned content and version. Nested expandable child steps show their actual prompts, inputs, expected outputs, QA gates and done_when. Mismatched/missing pins refuse child expansion.
+- Corrupt/tampered journal, wrong graph digest, mismatched state, duplicate/cyclic graph IDs, unsafe output path or out-of-policy prompt all block validated rendering rather than produce misleading progress.
+- Public GitHub Pages is NOT enabled; no web server, provider writes, tracking, remote scripts or live automatic refresh.
+
+Verifications:
+- Hosted CI release audit 39747746118 SUCCESS, 152 conformance/unit tests including 26 visualization tests, and 13/13 practical standalone 0.8.1 cases PASS.
+- Hosted CI build 39747745980 SUCCESS and published 0.8.1 preview ZIP at https://github.com/digzoman/aos-workflows/releases/tag/v0.8.1-portable-preview.
+- Independent desktop/mobile headless Chromium run 39747505741 SUCCESS, 9 browser checks including all arrows, accessible click/keyboard selection, search, full selected prompts/QC, mobile layout, nested verified child module expansion and zero outgoing network requests/JS errors.
+- Browser screenshots/evidence: https://github.com/digzoman/aos-workflows/actions/runs/39747505741/artifacts/12411797423
+- Published archive SHA-256: 3357d523e576180b65036c80e149517f658a6920b228d03db28d15826894a91b.
+- GitHub release uploader changed to never overwrite an existing published tag asset. New release content requires a version increment.
+
+Outstanding outside v0.8.1 scope: live state auto-refresh without a verified agent watcher, real GitHub Pages deployment (intentionally unapproved), a native cross-agent collaborative viewer, and original stable V1 acceptance T01–T04. No owner authorization to publish Meta, change spend, create Pages or share private customer/workflow data.
