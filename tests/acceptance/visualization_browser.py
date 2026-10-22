@@ -79,7 +79,7 @@ def main():
             assert verified,"No pinned child modules found"
             step=verified[0]
             page.locator(".step[data-id='"+step["id"]+"']").click()
-            assert "Verified child workflow steps" in page.locator("#details").inner_text()
+            assert "Verified child workflow steps" in page.locator("#details").inner_text(), {"step":step["id"],"rendered":page.locator("#details").inner_text()[:1500],"page_errors":errors,"html_has_child":page.evaluate("(id) => JSON.parse(document.getElementById(\'aosw-snapshot\').textContent).nodes.find(n=>n.id===id)?.child_steps?.length",step["id"])}
             page.locator("#details details summary").first.click()
             assert step["child_steps"][0]["prompt"] in page.locator("#details").inner_text()
             page.screenshot(path=str(args.out/"compound-drilldown.png"),full_page=True)
