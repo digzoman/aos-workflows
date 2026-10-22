@@ -58,3 +58,18 @@ python scripts/aosw-distribution.py upgrade dist/aos-w-portable-0.8.0.zip /work/
 The distribution upgrader performs content validation, backup and clean user subtree preservation, but a complete real multi-host/cloud migration guarantee remains unproven. Validate your own data after upgrade and do not discard rollback copies prematurely.
 
 The previous [v0.7 installation instructions](QUICKSTART-v0.7.0.md) and [v0.6 guide](QUICKSTART-v0.6.0.md) remain available. Original V1 owner approval and four priority acceptance tests T01–T04 remain pending.
+
+## One-command rendering of an existing persisted workflow
+
+An optional development helper can now find the **pinned graph and run state directly from the existing run directory**, rather than requiring an agent to supply --graph, --state and --out separately.
+
+~~~sh
+python scripts/aosw-visualize.py \
+  --run-dir /work/project/aos-w/agent-files/instances/my-case/runs/run-001
+~~~
+
+The helper checks run.json, pinned graph revision and a read-only replay of events.jsonl using the optional AOS-W state helper. If the saved snapshot does not match the event-verified sequence/digest or if the journal has a corrupt tail, rendering is blocked instead of displaying false progress. It writes an automatically named view under the same installation's agent-files/visualizations folder. It includes event sequence, current step statuses and up to eight **metadata-only** activity records per task, without copying the event payload or provider credentials. Step panels now display the template policy, child template reference and last saved journal activity.
+
+For a legacy/advisory run that cannot be event-verified, specify --unverified. This renders a visibly SOURCE_SNAPSHOT_UNVERIFIED page and does NOT assert a valid event chain. Never use --unverified to imply real provider truth, review approval or independent verification.
+
+For long source prompts above the schema-supported maximum, conversion fails explicitly rather than shortening the execution instructions and losing a safety gate. No live filesystem watcher or background refresh is included.

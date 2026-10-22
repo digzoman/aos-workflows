@@ -40,3 +40,18 @@ Regenerate on user request, approved state transition or checkpoint. The HTML is
 If the user requests hosting and local preview is impossible, suggest GitHub Pages as a separate opt-in action. Treat Pages as PUBLIC unless verified private access control exists. Export a separately reviewed sanitized copy; never push private agent-files/visualizations or publish prompts, customer data, secrets or unapproved offer details without authorization.
 
 The specification and acceptance checklist are in docs/specs/visualization/V0.8-SPEC.md in the development repository. Previous stable V1 acceptance blockers remain unaffected.
+
+## One-command rendering of an existing persisted workflow
+
+An optional development helper can now find the **pinned graph and run state directly from the existing run directory**, rather than requiring an agent to supply --graph, --state and --out separately.
+
+~~~sh
+python scripts/aosw-visualize.py \
+  --run-dir /work/project/aos-w/agent-files/instances/my-case/runs/run-001
+~~~
+
+The helper checks run.json, pinned graph revision and a read-only replay of events.jsonl using the optional AOS-W state helper. If the saved snapshot does not match the event-verified sequence/digest or if the journal has a corrupt tail, rendering is blocked instead of displaying false progress. It writes an automatically named view under the same installation's agent-files/visualizations folder. It includes event sequence, current step statuses and up to eight **metadata-only** activity records per task, without copying the event payload or provider credentials. Step panels now display the template policy, child template reference and last saved journal activity.
+
+For a legacy/advisory run that cannot be event-verified, specify --unverified. This renders a visibly SOURCE_SNAPSHOT_UNVERIFIED page and does NOT assert a valid event chain. Never use --unverified to imply real provider truth, review approval or independent verification.
+
+For long source prompts above the schema-supported maximum, conversion fails explicitly rather than shortening the execution instructions and losing a safety gate. No live filesystem watcher or background refresh is included.

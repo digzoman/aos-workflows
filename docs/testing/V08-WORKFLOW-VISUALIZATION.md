@@ -53,3 +53,9 @@ The hosted test actually generated two self-contained webpages and archived the 
 The generator treats run state as SOURCE_SNAPSHOT_UNVERIFIED unless a host separately validates the authoritative journal and reviewer records. Pages is suggested as a separately authorized/public-safe fallback, not automatically deployed or tested. The page does not perform task execution, approvals, coordination, provider API calls or live refresh.
 
 No stable Version 1 declaration. T01 actual end-to-end Ampgent acceptance, T02 cross-platform AI handoff, T03 hosted CAS locking and T04 independent AI QA remain open from Prompt 19. Visualization is an additive 0.8 preview capability and did not modify those criteria.
+
+## Extended executable implementation and browser test
+
+After the original preview, extra tests were added for the real persisted Bucket 9 parent run stored in docs/testing/evidence/p18-grounded-39498378421. The visualization CLI now verifies its actual event ledger/checkpoint status, exact graph revision, rejected invalid event history and preserves UNVERIFIED labels for optional advisory mode. The viewer includes a short metadata-only activity history, human approval policy and child template reference on step drilldown.
+
+A separate dedicated GitHub Actions workflow .github/workflows/aosw-v08-browser.yml generates actual HTML and drives headless Chromium to check SVG dependency edges, click and keyboard drilldown, desktop/mobile layout, search behavior, false publication status and lack of network requests. It archives screenshots and test results. The browser result should be checked by its actual CI conclusion before representing this as verified.
