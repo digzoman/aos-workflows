@@ -1,0 +1,1150 @@
+{
+  "visualization_schema": "1.0.0",
+  "mode": "RUN",
+  "title": "Illustrative six-audience ad workflow",
+  "template_id": "synthetic-v09-six-lane",
+  "run_id": "example-not-production",
+  "graph_revision": "g0004-example",
+  "event_seq_observed": 89,
+  "generated_at": "2026-10-22T00:00:00Z",
+  "verification": "SOURCE_SNAPSHOT_UNVERIFIED",
+  "public_export": true,
+  "warning": "Fictional synthetic example. Contains no real private project data, no source readback and no Meta operations.",
+  "nodes": [
+    {
+      "id": "hvac-installation-owners--research",
+      "label": "hvac-installation-owners--research",
+      "kind": "task",
+      "needs": [],
+      "status": "COMPLETE",
+      "prompt": "Research dated competitor ads. Inspect actual source with authorizations.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/hvac-installation-owners--research.md"
+        }
+      ]
+    },
+    {
+      "id": "hvac-installation-owners--qc-research",
+      "label": "hvac-installation-owners--qc-research",
+      "kind": "review",
+      "needs": [
+        "hvac-installation-owners--research"
+      ],
+      "status": "READY",
+      "prompt": "Do the qc research work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/hvac-installation-owners--qc-research.md"
+        }
+      ]
+    },
+    {
+      "id": "hvac-installation-owners--image-customize",
+      "label": "hvac-installation-owners--image-customize",
+      "kind": "task",
+      "needs": [
+        "hvac-installation-owners--qc-research"
+      ],
+      "status": "COMPLETE",
+      "prompt": "Do the image customize work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/hvac-installation-owners--image-customize.md"
+        }
+      ]
+    },
+    {
+      "id": "hvac-installation-owners--qc-image",
+      "label": "hvac-installation-owners--qc-image",
+      "kind": "review",
+      "needs": [
+        "hvac-installation-owners--image-customize"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc image work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/hvac-installation-owners--qc-image.md"
+        }
+      ]
+    },
+    {
+      "id": "hvac-installation-owners--copy-message",
+      "label": "hvac-installation-owners--copy-message",
+      "kind": "task",
+      "needs": [
+        "hvac-installation-owners--qc-image"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the copy message work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/hvac-installation-owners--copy-message.md"
+        }
+      ]
+    },
+    {
+      "id": "hvac-installation-owners--qc-copy",
+      "label": "hvac-installation-owners--qc-copy",
+      "kind": "review",
+      "needs": [
+        "hvac-installation-owners--copy-message"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc copy work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/hvac-installation-owners--qc-copy.md"
+        }
+      ]
+    },
+    {
+      "id": "hvac-installation-owners--manager-setup",
+      "label": "hvac-installation-owners--manager-setup",
+      "kind": "task",
+      "needs": [
+        "hvac-installation-owners--qc-copy"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the manager setup work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/hvac-installation-owners--manager-setup.md"
+        }
+      ]
+    },
+    {
+      "id": "hvac-installation-owners--qc-setup",
+      "label": "hvac-installation-owners--qc-setup",
+      "kind": "review",
+      "needs": [
+        "hvac-installation-owners--manager-setup"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc setup work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/hvac-installation-owners--qc-setup.md"
+        }
+      ]
+    },
+    {
+      "id": "hvac-installation-owners--prep-copy",
+      "label": "hvac-installation-owners--prep-copy",
+      "kind": "task",
+      "needs": [],
+      "status": "COMPLETE",
+      "prompt": "Do the prep copy work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/hvac-installation-owners--prep-copy.md"
+        }
+      ]
+    },
+    {
+      "id": "planned-general-trades--research",
+      "label": "planned-general-trades--research",
+      "kind": "task",
+      "needs": [],
+      "status": "COMPLETE",
+      "prompt": "Research dated competitor ads. Inspect actual source with authorizations.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/planned-general-trades--research.md"
+        }
+      ]
+    },
+    {
+      "id": "planned-general-trades--qc-research",
+      "label": "planned-general-trades--qc-research",
+      "kind": "review",
+      "needs": [
+        "planned-general-trades--research"
+      ],
+      "status": "READY",
+      "prompt": "Do the qc research work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/planned-general-trades--qc-research.md"
+        }
+      ]
+    },
+    {
+      "id": "planned-general-trades--image-customize",
+      "label": "planned-general-trades--image-customize",
+      "kind": "task",
+      "needs": [
+        "planned-general-trades--qc-research"
+      ],
+      "status": "COMPLETE",
+      "prompt": "Do the image customize work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/planned-general-trades--image-customize.md"
+        }
+      ]
+    },
+    {
+      "id": "planned-general-trades--qc-image",
+      "label": "planned-general-trades--qc-image",
+      "kind": "review",
+      "needs": [
+        "planned-general-trades--image-customize"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc image work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/planned-general-trades--qc-image.md"
+        }
+      ]
+    },
+    {
+      "id": "planned-general-trades--copy-message",
+      "label": "planned-general-trades--copy-message",
+      "kind": "task",
+      "needs": [
+        "planned-general-trades--qc-image"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the copy message work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/planned-general-trades--copy-message.md"
+        }
+      ]
+    },
+    {
+      "id": "planned-general-trades--qc-copy",
+      "label": "planned-general-trades--qc-copy",
+      "kind": "review",
+      "needs": [
+        "planned-general-trades--copy-message"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc copy work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/planned-general-trades--qc-copy.md"
+        }
+      ]
+    },
+    {
+      "id": "planned-general-trades--manager-setup",
+      "label": "planned-general-trades--manager-setup",
+      "kind": "task",
+      "needs": [
+        "planned-general-trades--qc-copy"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the manager setup work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/planned-general-trades--manager-setup.md"
+        }
+      ]
+    },
+    {
+      "id": "planned-general-trades--qc-setup",
+      "label": "planned-general-trades--qc-setup",
+      "kind": "review",
+      "needs": [
+        "planned-general-trades--manager-setup"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc setup work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/planned-general-trades--qc-setup.md"
+        }
+      ]
+    },
+    {
+      "id": "planned-general-trades--prep-copy",
+      "label": "planned-general-trades--prep-copy",
+      "kind": "task",
+      "needs": [],
+      "status": "COMPLETE",
+      "prompt": "Do the prep copy work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/planned-general-trades--prep-copy.md"
+        }
+      ]
+    },
+    {
+      "id": "experienced-meta-marketers--research",
+      "label": "experienced-meta-marketers--research",
+      "kind": "task",
+      "needs": [],
+      "status": "COMPLETE",
+      "prompt": "Research dated competitor ads. Inspect actual source with authorizations.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/experienced-meta-marketers--research.md"
+        }
+      ]
+    },
+    {
+      "id": "experienced-meta-marketers--qc-research",
+      "label": "experienced-meta-marketers--qc-research",
+      "kind": "review",
+      "needs": [
+        "experienced-meta-marketers--research"
+      ],
+      "status": "READY",
+      "prompt": "Do the qc research work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/experienced-meta-marketers--qc-research.md"
+        }
+      ]
+    },
+    {
+      "id": "experienced-meta-marketers--image-customize",
+      "label": "experienced-meta-marketers--image-customize",
+      "kind": "task",
+      "needs": [
+        "experienced-meta-marketers--qc-research"
+      ],
+      "status": "COMPLETE",
+      "prompt": "Do the image customize work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/experienced-meta-marketers--image-customize.md"
+        }
+      ]
+    },
+    {
+      "id": "experienced-meta-marketers--qc-image",
+      "label": "experienced-meta-marketers--qc-image",
+      "kind": "review",
+      "needs": [
+        "experienced-meta-marketers--image-customize"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc image work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/experienced-meta-marketers--qc-image.md"
+        }
+      ]
+    },
+    {
+      "id": "experienced-meta-marketers--copy-message",
+      "label": "experienced-meta-marketers--copy-message",
+      "kind": "task",
+      "needs": [
+        "experienced-meta-marketers--qc-image"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the copy message work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/experienced-meta-marketers--copy-message.md"
+        }
+      ]
+    },
+    {
+      "id": "experienced-meta-marketers--qc-copy",
+      "label": "experienced-meta-marketers--qc-copy",
+      "kind": "review",
+      "needs": [
+        "experienced-meta-marketers--copy-message"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc copy work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/experienced-meta-marketers--qc-copy.md"
+        }
+      ]
+    },
+    {
+      "id": "experienced-meta-marketers--manager-setup",
+      "label": "experienced-meta-marketers--manager-setup",
+      "kind": "task",
+      "needs": [
+        "experienced-meta-marketers--qc-copy"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the manager setup work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/experienced-meta-marketers--manager-setup.md"
+        }
+      ]
+    },
+    {
+      "id": "experienced-meta-marketers--qc-setup",
+      "label": "experienced-meta-marketers--qc-setup",
+      "kind": "review",
+      "needs": [
+        "experienced-meta-marketers--manager-setup"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc setup work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/experienced-meta-marketers--qc-setup.md"
+        }
+      ]
+    },
+    {
+      "id": "experienced-meta-marketers--prep-copy",
+      "label": "experienced-meta-marketers--prep-copy",
+      "kind": "task",
+      "needs": [],
+      "status": "COMPLETE",
+      "prompt": "Do the prep copy work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/experienced-meta-marketers--prep-copy.md"
+        }
+      ]
+    },
+    {
+      "id": "agency-owners--research",
+      "label": "agency-owners--research",
+      "kind": "task",
+      "needs": [],
+      "status": "COMPLETE",
+      "prompt": "Research dated competitor ads. Inspect actual source with authorizations.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/agency-owners--research.md"
+        }
+      ]
+    },
+    {
+      "id": "agency-owners--qc-research",
+      "label": "agency-owners--qc-research",
+      "kind": "review",
+      "needs": [
+        "agency-owners--research"
+      ],
+      "status": "READY",
+      "prompt": "Do the qc research work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/agency-owners--qc-research.md"
+        }
+      ]
+    },
+    {
+      "id": "agency-owners--image-customize",
+      "label": "agency-owners--image-customize",
+      "kind": "task",
+      "needs": [
+        "agency-owners--qc-research"
+      ],
+      "status": "COMPLETE",
+      "prompt": "Do the image customize work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/agency-owners--image-customize.md"
+        }
+      ]
+    },
+    {
+      "id": "agency-owners--qc-image",
+      "label": "agency-owners--qc-image",
+      "kind": "review",
+      "needs": [
+        "agency-owners--image-customize"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc image work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/agency-owners--qc-image.md"
+        }
+      ]
+    },
+    {
+      "id": "agency-owners--copy-message",
+      "label": "agency-owners--copy-message",
+      "kind": "task",
+      "needs": [
+        "agency-owners--qc-image"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the copy message work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/agency-owners--copy-message.md"
+        }
+      ]
+    },
+    {
+      "id": "agency-owners--qc-copy",
+      "label": "agency-owners--qc-copy",
+      "kind": "review",
+      "needs": [
+        "agency-owners--copy-message"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc copy work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/agency-owners--qc-copy.md"
+        }
+      ]
+    },
+    {
+      "id": "agency-owners--manager-setup",
+      "label": "agency-owners--manager-setup",
+      "kind": "task",
+      "needs": [
+        "agency-owners--qc-copy"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the manager setup work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/agency-owners--manager-setup.md"
+        }
+      ]
+    },
+    {
+      "id": "agency-owners--qc-setup",
+      "label": "agency-owners--qc-setup",
+      "kind": "review",
+      "needs": [
+        "agency-owners--manager-setup"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc setup work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/agency-owners--qc-setup.md"
+        }
+      ]
+    },
+    {
+      "id": "agency-owners--prep-copy",
+      "label": "agency-owners--prep-copy",
+      "kind": "task",
+      "needs": [],
+      "status": "COMPLETE",
+      "prompt": "Do the prep copy work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/agency-owners--prep-copy.md"
+        }
+      ]
+    },
+    {
+      "id": "licensed-life-insurance-agents--research",
+      "label": "licensed-life-insurance-agents--research",
+      "kind": "task",
+      "needs": [],
+      "status": "COMPLETE",
+      "prompt": "Research dated competitor ads. Inspect actual source with authorizations.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/licensed-life-insurance-agents--research.md"
+        }
+      ]
+    },
+    {
+      "id": "licensed-life-insurance-agents--qc-research",
+      "label": "licensed-life-insurance-agents--qc-research",
+      "kind": "review",
+      "needs": [
+        "licensed-life-insurance-agents--research"
+      ],
+      "status": "READY",
+      "prompt": "Do the qc research work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/licensed-life-insurance-agents--qc-research.md"
+        }
+      ]
+    },
+    {
+      "id": "licensed-life-insurance-agents--image-customize",
+      "label": "licensed-life-insurance-agents--image-customize",
+      "kind": "task",
+      "needs": [
+        "licensed-life-insurance-agents--qc-research"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the image customize work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/licensed-life-insurance-agents--image-customize.md"
+        }
+      ]
+    },
+    {
+      "id": "licensed-life-insurance-agents--qc-image",
+      "label": "licensed-life-insurance-agents--qc-image",
+      "kind": "review",
+      "needs": [
+        "licensed-life-insurance-agents--image-customize"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc image work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/licensed-life-insurance-agents--qc-image.md"
+        }
+      ]
+    },
+    {
+      "id": "licensed-life-insurance-agents--copy-message",
+      "label": "licensed-life-insurance-agents--copy-message",
+      "kind": "task",
+      "needs": [
+        "licensed-life-insurance-agents--qc-image"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the copy message work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/licensed-life-insurance-agents--copy-message.md"
+        }
+      ]
+    },
+    {
+      "id": "licensed-life-insurance-agents--qc-copy",
+      "label": "licensed-life-insurance-agents--qc-copy",
+      "kind": "review",
+      "needs": [
+        "licensed-life-insurance-agents--copy-message"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc copy work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/licensed-life-insurance-agents--qc-copy.md"
+        }
+      ]
+    },
+    {
+      "id": "licensed-life-insurance-agents--manager-setup",
+      "label": "licensed-life-insurance-agents--manager-setup",
+      "kind": "task",
+      "needs": [
+        "licensed-life-insurance-agents--qc-copy"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the manager setup work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/licensed-life-insurance-agents--manager-setup.md"
+        }
+      ]
+    },
+    {
+      "id": "licensed-life-insurance-agents--qc-setup",
+      "label": "licensed-life-insurance-agents--qc-setup",
+      "kind": "review",
+      "needs": [
+        "licensed-life-insurance-agents--manager-setup"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc setup work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/licensed-life-insurance-agents--qc-setup.md"
+        }
+      ]
+    },
+    {
+      "id": "licensed-life-insurance-agents--prep-copy",
+      "label": "licensed-life-insurance-agents--prep-copy",
+      "kind": "task",
+      "needs": [],
+      "status": "COMPLETE",
+      "prompt": "Do the prep copy work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/licensed-life-insurance-agents--prep-copy.md"
+        }
+      ]
+    },
+    {
+      "id": "general-smb-owners--research",
+      "label": "general-smb-owners--research",
+      "kind": "task",
+      "needs": [],
+      "status": "COMPLETE",
+      "prompt": "Research dated competitor ads. Inspect actual source with authorizations.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/general-smb-owners--research.md"
+        }
+      ]
+    },
+    {
+      "id": "general-smb-owners--qc-research",
+      "label": "general-smb-owners--qc-research",
+      "kind": "review",
+      "needs": [
+        "general-smb-owners--research"
+      ],
+      "status": "READY",
+      "prompt": "Do the qc research work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/general-smb-owners--qc-research.md"
+        }
+      ]
+    },
+    {
+      "id": "general-smb-owners--image-customize",
+      "label": "general-smb-owners--image-customize",
+      "kind": "task",
+      "needs": [
+        "general-smb-owners--qc-research"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the image customize work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/general-smb-owners--image-customize.md"
+        }
+      ]
+    },
+    {
+      "id": "general-smb-owners--qc-image",
+      "label": "general-smb-owners--qc-image",
+      "kind": "review",
+      "needs": [
+        "general-smb-owners--image-customize"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc image work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/general-smb-owners--qc-image.md"
+        }
+      ]
+    },
+    {
+      "id": "general-smb-owners--copy-message",
+      "label": "general-smb-owners--copy-message",
+      "kind": "task",
+      "needs": [
+        "general-smb-owners--qc-image"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the copy message work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/general-smb-owners--copy-message.md"
+        }
+      ]
+    },
+    {
+      "id": "general-smb-owners--qc-copy",
+      "label": "general-smb-owners--qc-copy",
+      "kind": "review",
+      "needs": [
+        "general-smb-owners--copy-message"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc copy work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/general-smb-owners--qc-copy.md"
+        }
+      ]
+    },
+    {
+      "id": "general-smb-owners--manager-setup",
+      "label": "general-smb-owners--manager-setup",
+      "kind": "task",
+      "needs": [
+        "general-smb-owners--qc-copy"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the manager setup work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/general-smb-owners--manager-setup.md"
+        }
+      ]
+    },
+    {
+      "id": "general-smb-owners--qc-setup",
+      "label": "general-smb-owners--qc-setup",
+      "kind": "review",
+      "needs": [
+        "general-smb-owners--manager-setup"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do the qc setup work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "independent-qc"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/general-smb-owners--qc-setup.md"
+        }
+      ]
+    },
+    {
+      "id": "general-smb-owners--prep-copy",
+      "label": "general-smb-owners--prep-copy",
+      "kind": "task",
+      "needs": [],
+      "status": "COMPLETE",
+      "prompt": "Do the prep copy work for this audience; preserve evidence and get exact required QC.",
+      "quality": {
+        "gates": [
+          "source-evidence"
+        ]
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "artifacts/general-smb-owners--prep-copy.md"
+        }
+      ]
+    },
+    {
+      "id": "human-creative-review",
+      "label": "human-creative-review",
+      "kind": "approval",
+      "needs": [
+        "hvac-installation-owners--qc-setup",
+        "planned-general-trades--qc-setup",
+        "experienced-meta-marketers--qc-setup",
+        "agency-owners--qc-setup",
+        "licensed-life-insurance-agents--qc-setup",
+        "general-smb-owners--qc-setup"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Only an explicitly authorized owner may approve the current exact creative artifacts."
+    },
+    {
+      "id": "launch-approved",
+      "label": "launch-approved",
+      "kind": "approval",
+      "needs": [
+        "human-creative-review"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Do not launch without an explicit current separate owner launch authorization."
+    }
+  ]
+}

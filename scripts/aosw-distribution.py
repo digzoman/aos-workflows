@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse, hashlib, json, os, re, shutil, stat, sys, tempfile, zipfile
 from pathlib import Path, PurePosixPath
 
-PROTECTED = ('README.md', 'PROTOCOL.md', 'VERSION.json', 'spec/', 'references/', 'templates/')
+PROTECTED = ('AGENTS.md', 'README.md', 'PROTOCOL.md', 'VERSION.json', 'spec/', 'references/', 'templates/')
 SEED = ('README.md', 'config/settings.json', 'config/capabilities.json',
         'config/sync.json', 'config/sync-state.json', 'custom-templates/README.md',
         'instances/README.md', 'indexes/README.md', 'cache/README.md',
@@ -38,7 +38,7 @@ def permitted(rel):
     Anything else is never copied into a public distributable archive.
     """
     parts=PurePosixPath(rel).parts
-    if rel in ('README.md','PROTOCOL.md','VERSION.json',MANIFEST):return True
+    if rel in ('AGENTS.md','README.md','PROTOCOL.md','VERSION.json',MANIFEST):return True
     if parts[:1]==('spec',):
         return (len(parts)==2 and parts[1].endswith('.md') or
                 len(parts)==3 and parts[1]=='schemas' and (parts[2].endswith('.schema.json') or parts[2]=='README.md'))
@@ -73,7 +73,7 @@ def build(source: Path, dest: Path):
         if len(data)>MAX_FILE: raise DistributionError('Oversized distribution file')
         if len(data)+sum(map(len,files.values()))>MAX_TOTAL: raise DistributionError('Oversized distribution')
         files[rel]=data
-    for req in ('README.md','PROTOCOL.md','VERSION.json','spec/README.md',
+    for req in ('AGENTS.md','README.md','PROTOCOL.md','VERSION.json','spec/README.md',
                 'templates/README.md','references/README.md','agent-files/README.md','agent-files/config/settings.json'):
         if req not in files: raise DistributionError('Missing required framework file: '+req)
     if len(files)>MAX_FILES: raise DistributionError('Too many files')
@@ -126,7 +126,7 @@ def verify(archive: Path):
         if len(files[k])!=v['bytes'] or sha(files[k])!=v['sha256']:
             raise DistributionError('SHA256 mismatch: '+k)
     if json.loads(files['VERSION.json'])['aosw_version']!=m['version']:raise DistributionError('Version mismatch')
-    for p in ('README.md','PROTOCOL.md','VERSION.json','spec/README.md','templates/README.md',
+    for p in ('AGENTS.md','README.md','PROTOCOL.md','VERSION.json','spec/README.md','templates/README.md',
               'agent-files/README.md','agent-files/config/settings.json'):
         if p not in files:raise DistributionError('Required installed content absent: '+p)
     return m,files

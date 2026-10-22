@@ -234,4 +234,60 @@ class VisualizationAcceptance(unittest.TestCase):
   self.assertIn('HTML FIRST',protocol)
   self.assertIn('framework installer',guide)
 
+
+ def test_28_v09_human_titles_and_phases_for_six_lanes(self):
+  data={"graph":{"nodes":[
+   {"id":"hvac-installation-owners--research","kind":"task","needs":[],"instructions":"Investigate dated competitor advertising evidence.","outputs":[{"path":"artifacts/research.md"}]},
+   {"id":"hvac-installation-owners--qc-research","kind":"review","needs":["hvac-installation-owners--research"],"instructions":"Review exact current sources.","quality":{"gates":["independent-qc"]}}
+  ]}}
+  result=viz.source_to_snapshot(data,{"run_id":"run-001","graph_revision":"g0004","tasks":{"hvac-installation-owners--research":{"status":"COMPLETE"},"hvac-installation-owners--qc-research":{"status":"READY"}}},"graph-revisions/g0004.yaml",None)
+  self.assertEqual(len(result["nodes"]),2)
+  human=result["nodes"][1]["human"]
+  self.assertEqual(human["title"],"Review HVAC business owners research")
+  self.assertEqual(human["phase"],"Check the research")
+  self.assertEqual(human["lane"],"HVAC business owners")
+  self.assertNotIn("--",human["title"])
+  self.assertIn("independent reviewer",human["next_action"])
+  self.assertTrue(any(r["name"]=="Meta Ad Library" for r in human["resources"]))
+  self.assertEqual(result["nodes"][1]["id"],"hvac-installation-owners--qc-research")
+
+ def test_29_v09_capability_flags_are_not_new_human_gates(self):
+  data={"graph":{"nodes":[{"id":"hvac-installation-owners--image-customize","kind":"task","needs":[],
+          "instructions":"Inspect exact source image pixels.","outputs":[{"path":"artifacts/image.png"}]}]}}
+  result=viz.source_to_snapshot(data,None,"template.yaml",None)
+  h=result["nodes"][0]["human"]
+  self.assertEqual(h["human_required_actions_existing_policy"],[])
+  self.assertTrue(h["required_capabilities"])
+  self.assertIn("Do not stop or invent a human gate",h["recovery_guidance"])
+  self.assertEqual(h["source_status"],"PINNED_INSTRUCTIONS_PROJECTION")
+
+ def test_30_v09_ads_gallery_identity_does_not_fabricate_url(self):
+  data={"graph":{"nodes":[{"id":"research-competitors","kind":"task","needs":[],
+      "instructions":"Use our Ads Gallery for research.","outputs":[{"path":"artifacts/research.md"}]}]}}
+  result=viz.source_to_snapshot(data,None,"template.yaml",None)
+  sources=result["nodes"][0]["human"]["resources"]
+  gallery=next(x for x in sources if x["name"]=="Ads Gallery")
+  self.assertEqual(gallery["status"],"IDENTITY_UNVERIFIED")
+  self.assertNotIn("url",gallery)
+  library=next(x for x in sources if x["name"]=="Meta Ad Library")
+  self.assertEqual(library["status"],"SUGGESTED_NOT_VERIFIED")
+
+ def test_31_v09_installable_agent_entry_and_skills_advisory(self):
+  self.assertTrue((ROOT/"scaffold/aos-w/AGENTS.md").is_file())
+  self.assertTrue((ROOT/"AGENTS.md").is_file())
+  module=importlib.util.spec_from_file_location("skills_audit",ROOT/"scripts/aosw-skills-validate.py")
+  audit=importlib.util.module_from_spec(module);module.loader.exec_module(audit)
+  result=audit.scan(ROOT/"scaffold/aos-w/templates")
+  self.assertGreaterEqual(result["total"],4)
+  self.assertEqual(result["result"],"ADVISORY_NON_GATING")
+  self.assertEqual(result["conformant"],result["total"])
+  mod=importlib.util.spec_from_file_location("package_v09",ROOT/"scripts/aosw-distribution.py")
+  pkg=importlib.util.module_from_spec(mod);mod.loader.exec_module(pkg)
+  self.assertTrue(pkg.permitted("AGENTS.md"))
+
+ def test_32_v09_human_browser_layout_exists(self):
+  for txt in ["What is happening?","Reviews ready","What happens next","Where to look · Tools and sources","Full instructions and technical details","All audiences"]:
+   self.assertIn(txt,HTML)
+  self.assertNotIn('"Stage "+(i+1)',HTML)
+
 if __name__=="__main__":unittest.main()

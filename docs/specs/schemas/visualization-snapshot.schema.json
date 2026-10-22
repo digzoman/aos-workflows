@@ -232,6 +232,95 @@
               },
               "additionalProperties": false
             }
+          },
+          "human": {
+            "type": "object",
+            "required": [
+              "title",
+              "title_origin",
+              "phase",
+              "lane",
+              "next_action",
+              "resources",
+              "recovery_guidance"
+            ],
+            "properties": {
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 110
+              },
+              "title_origin": {
+                "enum": [
+                  "AUTHOR_DEFINED",
+                  "GENERATED_FROM_ID"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              },
+              "purpose": {
+                "type": "string"
+              },
+              "phase": {
+                "type": "string"
+              },
+              "phase_id": {
+                "type": "string"
+              },
+              "lane": {
+                "type": "string"
+              },
+              "lane_id": {
+                "type": "string"
+              },
+              "next_action": {
+                "type": "string"
+              },
+              "resources": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              },
+              "inputs": {
+                "type": "array"
+              },
+              "outputs": {
+                "type": "array"
+              },
+              "source_context": {
+                "type": "object"
+              },
+              "required_capabilities": {
+                "type": "array"
+              },
+              "allowed_actions": {
+                "type": "array"
+              },
+              "human_required_actions_existing_policy": {
+                "type": "array"
+              },
+              "acceptance": {
+                "type": "object"
+              },
+              "quality": {
+                "type": "object"
+              },
+              "missing_references": {
+                "type": "array"
+              },
+              "recovery_guidance": {
+                "type": "string"
+              },
+              "source_status": {
+                "type": "string"
+              },
+              "original_instructions": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
           }
         },
         "additionalProperties": true
