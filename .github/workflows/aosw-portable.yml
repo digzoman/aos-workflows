@@ -6,6 +6,8 @@ on:
       - "scaffold/aos-w/**"
       - "scripts/aosw-distribution.py"
       - "scripts/aosw-ops.py"
+      - "scripts/aosw-visualize.py"
+      - "examples/visualization/**"
       - "tests/**"
       - ".github/workflows/aosw-portable.yml"
   workflow_dispatch:
@@ -41,6 +43,23 @@ jobs:
           python scripts/aosw-distribution.py upgrade dist/aos-w-portable-0.8.0.zip "$RUNNER_TEMP/install-a/aos-w"
           test "$(cat "$RUNNER_TEMP/install-a/aos-w/agent-files/instances/integration-test/runs/run-001/artifacts/user-data.txt")" = PRESERVE_ME
           python scripts/aosw-ops.py status "$RUNNER_TEMP/install-a/aos-w" integration-test run-001
+      - name: Generate offline sample diagrams for compound template and staged run
+        shell: bash
+        run: |
+          set -euo pipefail
+          PREVIEW="$RUNNER_TEMP/aos-w/agent-files/visualizations"
+          python scripts/aosw-visualize.py --template scaffold/aos-w/templates/marketing-lifecycle-compound/template.yaml --out "$PREVIEW/template/index.html"
+          python scripts/aosw-visualize.py --snapshot examples/visualization/bucket9-stage.json --out "$PREVIEW/bucket9/index.html"
+          test -s "$PREVIEW/template/index.html"
+          test -s "$PREVIEW/bucket9/index.html"
+          test -s "$PREVIEW/bucket9/snapshot.json"
+      - name: Archive sanitized interactive HTML demonstration
+        uses: actions/upload-artifact@v4
+        with:
+          name: aos-w-v08-interactive-visualization-demo
+          path: ${{ runner.temp }}/aos-w/agent-files/visualizations/bucket9/
+          retention-days: 90
+          if-no-files-found: error
       - name: Upload portable ZIP artifact
         uses: actions/upload-artifact@v4
         with:

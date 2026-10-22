@@ -124,4 +124,28 @@ class VisualizationAcceptance(unittest.TestCase):
   self.assertNotIn("subprocess.run",code)
   self.assertIn("GENERATED_READ_ONLY",code)
 
+
+ def test_16_prepared_snapshot_rejects_duplicate_ids(self):
+  d=json.loads(json.dumps(EXAMPLE))
+  d["nodes"].append(dict(d["nodes"][0]))
+  with self.assertRaisesRegex(viz.ViewError,"Duplicate snapshot"):
+   viz.render(d,HTML)
+
+ def test_17_prepared_snapshot_rejects_cycles(self):
+  d=json.loads(json.dumps(EXAMPLE))
+  d["nodes"][0]["needs"]=["launch"]
+  with self.assertRaisesRegex(viz.ViewError,"Cycle detected"):
+   viz.render(d,HTML)
+
+ def test_18_exact_long_prompt_rejected_not_truncated(self):
+  d={"graph":{"nodes":[{"id":"a","needs":[],"instructions":"x"*18001}]}}
+  with self.assertRaisesRegex(viz.ViewError,"not silently truncated"):
+   viz.source_to_snapshot(d,None,"example.yaml",None)
+
+ def test_19_prepared_snapshot_rejects_missing_dependency(self):
+  d=json.loads(json.dumps(EXAMPLE))
+  d["nodes"][0]["needs"]=["no-such-node"]
+  with self.assertRaisesRegex(viz.ViewError,"Unknown snapshot dependency"):
+   viz.render(d,HTML)
+
 if __name__=="__main__":unittest.main()
