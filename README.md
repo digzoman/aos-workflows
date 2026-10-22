@@ -6,7 +6,7 @@
 
 AOS-W is a **portable, file-based workflow standard** for AI agents. It provides repeatable tasks, reusable template contracts, evidence tracking, checkpoints, handoffs and manual protocols. Its downloaded core does not require Git, Python, an MCP server, a database or a scheduler. Optional helper tooling adds local deterministic validation, file state management and experimental Git synchronization.
 
-**Current status, October 20, 2026.** The [0.7.0 portable preview](https://github.com/digzoman/aos-workflows/releases/tag/v0.7.0-portable-preview) is available and tested. **The original six Version 1 success criteria are not all demonstrated, and stable Version 1 is not approved or published.** See the [release approval packet](docs/release/V1-RELEASE-APPROVAL-PACKET.md), [full requirement traceability](docs/release/V1-REQUIREMENTS-MATRIX.md), and [limitations](docs/release/V1-LIMITATIONS-AND-RISKS.md).
+**Earlier release status, October 20, 2026.** The [0.7.0 portable preview](https://github.com/digzoman/aos-workflows/releases/tag/v0.7.0-portable-preview) is available and tested. **The original six Version 1 success criteria are not all demonstrated, and stable Version 1 is not approved or published.** See the [release approval packet](docs/release/V1-RELEASE-APPROVAL-PACKET.md), [full requirement traceability](docs/release/V1-REQUIREMENTS-MATRIX.md), and [limitations](docs/release/V1-LIMITATIONS-AND-RISKS.md).
 
 ## Download and start
 

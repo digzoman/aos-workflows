@@ -54,3 +54,8 @@ GitHub Actions run 39498378421 SUCCESS, 27/27 assertions, three separate researc
 ## Prompt 19 release audit and archival migration, October 20, 2026
 
 Reproducible CI audited v0.7.0 preview, 126 hosted test passes, 13 standalone v0.7.0 practical passes, secret signature checks against current tree and 713 historical Git blobs, and integrity checked ZIP matching 0826ddf9807354e80e22b757dd129b86539aae8d6ff3c7799029e5f3719c74f7. Original survey/01b, proposed ADR-001..008 and historical test reports migrated by exact-copy into docs. No temp files deleted. docs/release/V1-RELEASE-APPROVAL-PACKET.md holds formal decision, no owner signoff yet, V1 NOT DECLARED COMPLETE.
+
+
+## 0.8.0 preview feature shipped, October 22, 2026
+
+Added read-only offline workflow visualization with template, pinned instance and run snapshot modes, DAG arrows and step prompt/QC/evidence drill-down; all generated files must remain under agent-files/visualizations. New optional CLI, schema, sanitized Bucket 9 demo, full spec and 19 tests. GitHub Actions 39741816281 SUCCESS, 145 total unit/conformance tests, two actual standalone HTML snapshots generated, sanitized example archived. Public v0.8.0-portable-preview asset available. Browser-level interactive visual smoke not yet performed. Original four outstanding V1 acceptance demos remain open.
