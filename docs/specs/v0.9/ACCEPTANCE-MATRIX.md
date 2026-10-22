@@ -25,6 +25,9 @@
 | V09-18 | P0 | Accessibility and usability | Chromium desktop/mobile screenshots, keyboard navigation, color-independent states, long prompt disclosure; real naive-reader check |
 | V09-19 | P0 | Backward compatibility | Open existing v0.8.2 snapshot and old g0004 run without mutating pinned IDs, event/checkpoint history or template content hashes |
 | V09-20 | P0 | Independent QC and approval | No visual summary, exporter, reviewer claim, Pages deployment or handoff can mark a failed QC as PASS or grant human Meta staging/launch permission |
+| V09-24 | P0 | No artificial capability blockers | An agent with an alternate approved browser or skill completes work rather than filing an invented human gate; independent parallel tasks continue |
+| V09-25 | P0 | Evidence-based escalation | A single unavailable tool never causes a whole-run refusal; after documented repeated failures, only the affected step is blocked and existing owner/provider gates are preserved |
+| V09-26 | P0 | No fake approvals | Fallback access cannot fabricate reviewer independence, pixel inspection or published Meta state; no new human gate appears unless already required |
 | V09-21 | P1 | MCP discovery export | Optional typed mapping, host verification and deny scopes; no required MCP runtime |
 | V09-22 | P1 | A2A handoff test | Real authenticated independent agent receives task and returns exact scoped artifact and verdict; no identity spoofing based on a name string |
 | V09-23 | P1 | Plugin/OASF export | Optional manifest validates without secrets and does not change canonical graph or workflow permissions |

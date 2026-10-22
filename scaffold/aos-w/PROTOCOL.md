@@ -69,3 +69,8 @@ On a user request or at an authorized checkpoint, an agent may derive a visual *
 ### Visualization delivery rule (v0.8.2)
 
 **HTML FIRST.** Once the agent creates a visualization, prioritize showing its self-contained index.html directly in the host's HTML/browser preview, or give a verified link/attachment to the individual HTML page. Do not lead with a ZIP archive of a single diagram. Only use ZIP when platform-forced, specifically requested or genuinely multi-file, with instructions to open index.html. Public hosting via GitHub Pages is optional and needs explicit approval and sanitization. This does not alter the ZIP required to install the multi-file AOS-W framework.
+
+
+## v0.9 agent capability recovery — do the work, do not invent gates
+
+A missing or unverified capability flag is **not an excuse to decline the whole assignment**. Use the available tools proactively: inspect connected apps and browser access, approved skills, alternate authorized APIs/sources, and eligible delegation. Retry or switch tools within existing boundaries; complete independent work in parallel; capture exact failures and their workarounds. Only a *specific* task with an actually unsatisfied mandatory evidence/independent-review/provider requirement is held after genuine attempts. Do not introduce an ad hoc human gate, request unnecessary approvals, or describe routine tool selection as the owner's problem. **Keep existing explicit human authorization for external consequential actions intact; never forge QC or provider readback.** This policy is normative for v0.9 agent instructions and [references/CAPABILITY-RECOVERY.md](references/CAPABILITY-RECOVERY.md).

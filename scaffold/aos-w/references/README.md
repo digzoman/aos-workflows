@@ -21,3 +21,6 @@ These documents are part of the **protected** scaffold. Put project-specific var
 - [INSTALL.md](INSTALL.md), clean standalone ZIP installation, no-script quick start and upgrades preserving agent-files.
 
 - [VISUALIZATION.md](VISUALIZATION.md), version 0.8.0 read-only HTML DAG snapshots, local agent-files/visualizations output, complete step prompt/detail drilldown and explicit opt-in GitHub Pages safety. The offline [visualization-viewer.html](visualization-viewer.html) is a protected, dependency-free page skeleton.
+
+- [CAPABILITY-RECOVERY.md](CAPABILITY-RECOVERY.md), proactive tool discovery, alternative execution, narrow evidence-based blockers, parallel progress and no invented human gates (v0.9).
+- [HUMAN-FIRST.md](HUMAN-FIRST.md), transferable plain-English step briefs, agent discovery and honest HTML-first visualization (v0.9).
