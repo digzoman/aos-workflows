@@ -176,7 +176,7 @@ class MarketingConformance(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             z=Path(d)/'marketing-portable.zip';dist.build(ROOT,z)
             manifest,_=dist.verify(z)
-            self.assertEqual(manifest['version'],'0.9.1')
+            self.assertEqual(manifest['version'],'0.9.2')
             self.assertIn('templates/marketing-lifecycle-compound/template.yaml',manifest['entries'])
             self.assertIn('templates/MARKETING-LIBRARY.md',manifest['entries'])
             self.assertIn('templates/marketing-competitor-execution/skills/marketing-source-claims/SKILL.md',manifest['entries'])

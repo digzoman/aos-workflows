@@ -83,3 +83,8 @@ Create a **read-only interactive webpage** from a template, pinned graph or run,
 ## v0.9 human-first workflows
 
 Read [AGENTS.md](AGENTS.md), [references/HUMAN-FIRST.md](references/HUMAN-FIRST.md), and [references/CAPABILITY-RECOVERY.md](references/CAPABILITY-RECOVERY.md). The offline viewer prefers plain-English titles and semantic phases, with source prompts and machine IDs under technical details. A capability profile is an invitation to discover tools, try alternate authorized methods and continue parallel work, not to demand a human do routine work or create new approval gates. Preserve all existing explicit independent-QC and consequential provider permissions. GitHub Pages may render an approved fictional demo, but no private workspace content may be auto-published.
+
+
+## v0.9.2: Contrast-safe workflow diagrams
+
+All agent-generated HTML, including independent lane diagrams, must use explicit foreground/background pairs and WCAG 2.2 AA contrast (4.5:1 text, 3:1 meaningful non-text). See `references/HUMAN-FIRST.md`, `references/VISUALIZATION.md`, the optional CI browser audit `scripts/aosw-contrast-audit.py` in the development repo, and the six-lane public-safe fixture `examples/visualization/six-lane-accessible.html`. Correct accessibility issues autonomously; do not add a human approval gate. This preview does not change the manual file-first runtime or old graph/history data.

@@ -1,6 +1,6 @@
 # AOS-W preview release change notes
 
-## v0.9.1 portable preview patch, October 22, 2026
+## v0.9.2 portable preview patch, October 22, 2026
 
 Rebuilt the preview after final bundled v0.9 reference/documentation updates, so downloadable framework instructions match tested main. No additional runtime behavior, provider integrations or new human gates. Release assets remain immutable by tag.
 

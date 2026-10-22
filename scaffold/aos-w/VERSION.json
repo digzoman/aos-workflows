@@ -1,5 +1,5 @@
 {
-  "aosw_version": "0.9.1",
+  "aosw_version": "0.9.2",
   "schema_version": "1.0.0",
   "distribution": {
     "format": "aos-w-standalone-zip-v1",
@@ -85,7 +85,7 @@
     ]
   },
   "visualization": {
-    "version": "0.9.1",
+    "version": "0.9.2",
     "snapshot_schema": "1.0.0",
     "mode": "offline_read_only_snapshot",
     "protected_viewer": "references/visualization-viewer.html",
@@ -95,14 +95,26 @@
     "optional_dev_generator": "scripts/aosw-visualize.py",
     "public_pages_publish": "explicit_owner_approval_and_sanitization_only",
     "live_provider_state": "not_verified_by_visualization",
-    "patch_release": "0.9.1",
+    "patch_release": "0.9.2",
     "browser_smoke": "chromium_desktop_mobile_keyboard_arrows_and_nested_drilldown_pass",
     "delivery_priority": "rendered_html_then_individual_html_link_then_html_attachment_then_approved_hosting_or_zip_fallback",
     "human_step_briefs": "generated_read_only_projection",
     "phase_and_lane_labels": "advisory",
     "review_ready_counts": "supported",
     "private_pages": "manual_or_authenticated_preview_only",
-    "public_pages": "synthetic_allowlist_manual_workflow_only"
+    "public_pages": "synthetic_allowlist_manual_workflow_only",
+    "accessibility": {
+      "paired_foreground_background": "required",
+      "wcag_text_ratio": 4.5,
+      "nontext_ratio": 3,
+      "themes": [
+        "light",
+        "dark",
+        "forced-colors"
+      ],
+      "browser_test": "light_dark_desktop_mobile_and_deliberate_white_on_white_failure",
+      "human_approval_gate_added": false
+    }
   },
   "agent_discovery": {
     "agents_md": "portable_entry_point",

@@ -33,18 +33,18 @@ jobs:
       - name: Build standalone release ZIP
         run: |
           mkdir -p dist
-          python scripts/aosw-distribution.py build scaffold/aos-w dist/aos-w-portable-0.9.1.zip
-          python scripts/aosw-distribution.py verify dist/aos-w-portable-0.9.1.zip
+          python scripts/aosw-distribution.py build scaffold/aos-w dist/aos-w-portable-0.9.2.zip
+          python scripts/aosw-distribution.py verify dist/aos-w-portable-0.9.2.zip
       - name: Test cold installation, initialization and upgrade preservation
         shell: bash
         run: |
           set -euo pipefail
-          python scripts/aosw-distribution.py install dist/aos-w-portable-0.9.1.zip "$RUNNER_TEMP/install-a/aos-w"
+          python scripts/aosw-distribution.py install dist/aos-w-portable-0.9.2.zip "$RUNNER_TEMP/install-a/aos-w"
           python scripts/aosw-ops.py list "$RUNNER_TEMP/install-a/aos-w"
           python scripts/aosw-ops.py init "$RUNNER_TEMP/install-a/aos-w" marketing-research-plan integration-test run-001 --actor '{"agent":"ci","platform":"github-actions","role":"tester","instance":"job-one"}' --parameters '{"research_question":"Compare fictional small-business buyer niches"}'
           python scripts/aosw-ops.py status "$RUNNER_TEMP/install-a/aos-w" integration-test run-001
           printf 'PRESERVE_ME\n' > "$RUNNER_TEMP/install-a/aos-w/agent-files/instances/integration-test/runs/run-001/artifacts/user-data.txt"
-          python scripts/aosw-distribution.py upgrade dist/aos-w-portable-0.9.1.zip "$RUNNER_TEMP/install-a/aos-w"
+          python scripts/aosw-distribution.py upgrade dist/aos-w-portable-0.9.2.zip "$RUNNER_TEMP/install-a/aos-w"
           test "$(cat "$RUNNER_TEMP/install-a/aos-w/agent-files/instances/integration-test/runs/run-001/artifacts/user-data.txt")" = PRESERVE_ME
           python scripts/aosw-ops.py status "$RUNNER_TEMP/install-a/aos-w" integration-test run-001
       - name: Generate offline sample diagrams for compound template and staged run
@@ -67,8 +67,8 @@ jobs:
       - name: Upload portable ZIP artifact
         uses: actions/upload-artifact@v4
         with:
-          name: aos-w-portable-0.9.1
-          path: dist/aos-w-portable-0.9.1.zip
+          name: aos-w-portable-0.9.2
+          path: dist/aos-w-portable-0.9.2.zip
           retention-days: 90
           if-no-files-found: error
       - name: Publish versioned preview release asset (best effort)
@@ -79,11 +79,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          TAG="v0.9.1-portable-preview"
+          TAG="v0.9.2-portable-preview"
           if gh release view "$TAG" >/dev/null 2>&1; then
             echo "::notice::Existing preview release is immutable. Skipping upload, bump VERSION.json for a new package."
           else
-            gh release create "$TAG" --target "$GITHUB_SHA" --title "AOS-W 0.9.1 portable preview" --prerelease --notes "Portable file-first AOS-W with human-readable workflow diagrams, portable step briefs, proactive capability recovery, AGENTS.md discovery, and optional manually approved Pages demo. No automatic executor, public private-workflow exposure or invented approval gates."
-            gh release upload "$TAG" dist/aos-w-portable-0.9.1.zip
+            gh release create "$TAG" --target "$GITHUB_SHA" --title "AOS-W 0.9.2 portable preview" --prerelease --notes "Portable file-first AOS-W with human-readable workflow diagrams, portable step briefs, proactive capability recovery, AGENTS.md discovery, and optional manually approved Pages demo. No automatic executor, public private-workflow exposure or invented approval gates."
+            gh release upload "$TAG" dist/aos-w-portable-0.9.2.zip
           fi
           gh release view "$TAG" --json url,assets
