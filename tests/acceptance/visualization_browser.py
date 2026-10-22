@@ -27,7 +27,7 @@ def main():
         requests=[]
         page.on("request",lambda req: requests.append(req.url) if not req.url.startswith("file://") else None)
         page.goto(args.html.resolve().as_uri(),wait_until="domcontentloaded")
-        page.locator(".step").first.wait_for()
+        page.locator(".step").first.wait_for(state="attached")
         assert page.locator(".step").count()==11
         results.append("11 nodes rendered")
         assert page.locator("#links path[marker-end]").count()==sum(
@@ -73,7 +73,7 @@ def main():
         results.append("no browser exceptions or outgoing network requests")
         if args.compound:
             page.goto(args.compound.resolve().as_uri(),wait_until="domcontentloaded")
-            page.locator(".step").first.wait_for()
+            page.locator(".step").first.wait_for(state="attached")
             assert page.locator(".step").count()>=20
             page.locator("#toggle-graph").click()
             snapshot=json.loads((args.compound.parent/"snapshot.json").read_text())
@@ -88,7 +88,7 @@ def main():
             results.append("full pinned child module prompts revealed by nested browser drilldown")
         if args.human_six:
             page.goto(args.human_six.resolve().as_uri(),wait_until="domcontentloaded")
-            page.locator(".step").first.wait_for()
+            page.locator(".step").first.wait_for(state="attached")
             assert page.locator(".step").count()==56
             assert page.locator("#overview").is_visible()
             assert "6 reviews ready" in page.locator("#overview").inner_text().lower()
