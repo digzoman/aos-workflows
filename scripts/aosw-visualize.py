@@ -11,6 +11,10 @@ import argparse, hashlib, json, os, re, sys, tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
+# Optional developer convenience; the installed core remains manual/file-only.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from aosw_human_profile import add_human_profile
+
 ROOT = Path(__file__).resolve().parents[1]
 VIEWER = ROOT / "scaffold/aos-w/references/visualization-viewer.html"
 TOKEN = "__AOSW_SNAPSHOT_JSON__"
@@ -102,7 +106,17 @@ def source_to_snapshot(template: dict, state: dict | None, source: str, title: s
             raise ViewError("Step "+node_id+" prompt must be full text of at most 18000 chars, not silently truncated")
         nodes.append({
             "id": node_id,
-            "label": sanitized_text(entry.get("name") or entry.get("title") or node_id, 180),
+            "label": sanitized_text(entry.get("title") or entry.get("name") or node_id, 180),
+            "title": sanitized_text(entry.get("title"), 140),
+            "summary": sanitized_text(entry.get("summary"), 500),
+            "purpose": sanitized_text(entry.get("purpose"), 500),
+            "phase_id": sanitized_text(entry.get("phase_id"), 120),
+            "phase_title": sanitized_text(entry.get("phase_title"), 120),
+            "lane_id": sanitized_text(entry.get("lane_id"), 120),
+            "lane_title": sanitized_text(entry.get("lane_title"), 120),
+            "required_actions": sanitized_text(entry.get("required_actions")),
+            "resources": sanitized_text(entry.get("resources")),
+
             "kind": sanitized_text(entry.get("kind"), 70),
             "needs": sanitized_text(entry.get("needs", [])),
             "status": status,
@@ -146,7 +160,7 @@ def source_to_snapshot(template: dict, state: dict | None, source: str, title: s
         warning = "State overlay used on nonpinned template path; verify graph revision manually."
     else:
         warning = "Run status is derived from state.json and has NOT been reconciled against events, providers or reviewer signatures." if state is not None else "Template-only structure; no live progress is implied."
-    return {
+    result = {
         "visualization_schema": "1.0.0",
         "mode": mode,
         "title": title or template.get("name") or "AOS-W workflow",
@@ -160,6 +174,7 @@ def source_to_snapshot(template: dict, state: dict | None, source: str, title: s
         "warning": warning,
         "nodes": nodes
     }
+    return add_human_profile(result, template)
 
 def run_dir_snapshot(folder: Path, title: str | None = None, verify_events: bool = True):
     """Read a saved run and its pinned graph without mutating the run.
@@ -227,7 +242,7 @@ def run_dir_snapshot(folder: Path, title: str | None = None, verify_events: bool
                 if len(log)>8: del log[:-8]
         for node in doc["nodes"]:
             node["activity"]=activity.get(node["id"],[])
-    return doc
+    return add_human_profile(doc, graph)
 
 def resolve_local_children(snapshot: dict, template_path: Path):
     """Show actual subworkflow prompts only when the local module matches
@@ -375,6 +390,10 @@ def main():
             # Pinned run revisions must never resolve changing template HEAD.
             if args.template:
                 data=resolve_local_children(data,path)
+        # Prepared v0.8 JSON remains compatible; generate advisory human-facing
+        # labels/briefs without rewriting pinned canonical workflow sources.
+        if any(not isinstance(n.get("human"), dict) for n in data.get("nodes",[])):
+            data=add_human_profile(data)
         html=render(data,VIEWER.read_text(encoding="utf-8"))
         if args.out:
             destination=args.out
