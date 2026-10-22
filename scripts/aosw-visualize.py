@@ -97,13 +97,16 @@ def source_to_snapshot(template: dict, state: dict | None, source: str, title: s
         raw_status = task.get("status") if state is not None else "NOT_STARTED"
         status = raw_status if raw_status in ALLOWED_STATUSES else "UNKNOWN"
         child = entry.get("child_template_ref")
+        full_prompt = entry.get("instructions") or entry.get("prompt")
+        if full_prompt is not None and (not isinstance(full_prompt, str) or len(full_prompt) > 18000):
+            raise ViewError("Step "+node_id+" prompt must be full text of at most 18000 chars, not silently truncated")
         nodes.append({
             "id": node_id,
             "label": sanitized_text(entry.get("name") or entry.get("title") or node_id, 180),
             "kind": sanitized_text(entry.get("kind"), 70),
             "needs": sanitized_text(entry.get("needs", [])),
             "status": status,
-            "prompt": sanitized_text(entry.get("instructions") or entry.get("prompt"), 16000),
+            "prompt": full_prompt,
             "inputs": sanitized_text(entry.get("inputs")),
             "outputs": sanitized_text(entry.get("outputs")),
             "quality": sanitized_text(entry.get("quality")),
@@ -163,9 +166,48 @@ def encode_json(data):
             .replace("&", "\\u0026").replace("\u2028", "\\u2028")
             .replace("\u2029", "\\u2029"))
 
+def validate_snapshot(data: dict):
+    if not isinstance(data, dict) or data.get("visualization_schema") != "1.0.0":
+        raise ViewError("Visualization schema must be 1.0.0")
+    if data.get("mode") not in ("TEMPLATE", "INSTANCE", "RUN"):
+        raise ViewError("Invalid visualization mode")
+    if not isinstance(data.get("title"), str) or not data["title"]:
+        raise ViewError("Missing visualization title")
+    if data.get("verification") not in ("SOURCE_SNAPSHOT_UNVERIFIED", "EVENTS_RECONCILED", "HOST_VALIDATED"):
+        raise ViewError("Invalid verification tier")
+    nodes=data.get("nodes")
+    if not isinstance(nodes, list) or not 1<=len(nodes)<=240:
+        raise ViewError("Expected 1..240 nodes")
+    names=set()
+    for n in nodes:
+        if not isinstance(n, dict) or not isinstance(n.get("id"), str) or not SAFE.fullmatch(n["id"]):
+            raise ViewError("Invalid snapshot step ID")
+        if n["id"] in names:
+            raise ViewError("Duplicate snapshot step ID")
+        names.add(n["id"])
+        if n.get("status") not in ALLOWED_STATUSES:
+            raise ViewError("Invalid snapshot task status")
+        if not isinstance(n.get("needs"), list) or any(not isinstance(x,str) or not SAFE.fullmatch(x) for x in n["needs"]):
+            raise ViewError("Invalid snapshot dependencies")
+        if n.get("prompt") is not None and (not isinstance(n["prompt"],str) or len(n["prompt"])>18000):
+            raise ViewError("Prompt too long for exact display")
+    byid={n["id"]:n for n in nodes}
+    visiting=set()
+    visited=set()
+    def visit(node):
+        if node in visiting:raise ViewError("Cycle detected in snapshot at "+node)
+        if node in visited:return
+        visiting.add(node)
+        for dep in byid[node]["needs"]:
+            if dep not in byid:raise ViewError("Unknown snapshot dependency "+dep)
+            visit(dep)
+        visiting.remove(node)
+        visited.add(node)
+    for n in byid:
+        visit(n)
+
 def render(data: dict, html_template: str):
-    if not isinstance(data, dict) or not isinstance(data.get("nodes"), list):
-        raise ViewError("Snapshot requires nodes array")
+    validate_snapshot(data)
     if html_template.count(TOKEN) != 1:
         raise ViewError("Viewer template placeholder missing or duplicated")
     if len(data["nodes"]) > 240:
