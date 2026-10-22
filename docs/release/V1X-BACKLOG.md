@@ -33,3 +33,8 @@ Updated October 20, 2026. Current published version remains v0.7.0-portable-prev
 5. Owner-reviewed temp archive cleanup after durable migration is complete, with no historical erasure.
 
 See docs/release/V1-RELEASE-APPROVAL-PACKET.md and docs/release/V1-REQUIREMENTS-MATRIX.md. An owner decision is needed before any change to the original success definition.
+
+
+## Proposed preview v0.9.0 UX and compatibility (October 22, 2026)
+
+Owner feedback on Bucket 9 screenshot led to a separate **DRAFT** next-minor proposal, not approved or implemented. [Full v0.9 product spec](../specs/v0.9/V0.9-PRODUCT-SPEC.md), [visualization, hosting, and third-party handoff spec](../specs/v0.9/VISUALIZATION-AND-HANDOFF.md), and [measurable acceptance matrix](../specs/v0.9/ACCEPTANCE-MATRIX.md). Requirements: human task titles/phases, no raw slug repetition, accurate six-READY-review summary, complete third-party executable briefs naming Ads Gallery / Meta Ad Library and access, real rendered browser links from safe authorized GitHub Pages or an authenticated preview rather than GitHub source blob, AGENTS.md entry and Agent Skills conformance, capability and handoff profiles. A2A/MCP/plugins/OASF adapters remain optional follow-ons. Protect private source data; a private GitHub repository by itself does not make GitHub Pages private. The existing stable V1 blockers remain unaffected.
