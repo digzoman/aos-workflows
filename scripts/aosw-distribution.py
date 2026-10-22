@@ -10,8 +10,8 @@ PROTECTED = ('README.md', 'PROTOCOL.md', 'VERSION.json', 'spec/', 'references/',
 SEED = ('README.md', 'config/settings.json', 'config/capabilities.json',
         'config/sync.json', 'config/sync-state.json', 'custom-templates/README.md',
         'instances/README.md', 'indexes/README.md', 'cache/README.md',
-        'coordination/README.md')
-USER_DIRS = ('config', 'custom-templates', 'instances', 'indexes', 'cache', 'coordination')
+        'coordination/README.md', 'visualizations/README.md')
+USER_DIRS = ('config', 'custom-templates', 'instances', 'indexes', 'cache', 'coordination', 'visualizations')
 MAX_FILE = 8_000_000
 MAX_TOTAL = 60_000_000
 MAX_FILES = 600
@@ -42,7 +42,7 @@ def permitted(rel):
     if parts[:1]==('spec',):
         return (len(parts)==2 and parts[1].endswith('.md') or
                 len(parts)==3 and parts[1]=='schemas' and (parts[2].endswith('.schema.json') or parts[2]=='README.md'))
-    if parts[:1]==('references',):return len(parts)==2 and parts[1].endswith('.md')
+    if parts[:1]==('references',):return len(parts)==2 and (parts[1].endswith('.md') or parts[1]=='visualization-viewer.html')
     if parts[:1]==('templates',):
         return (len(parts)==2 and parts[1] in ('README.md','MARKETING-LIBRARY.md') or
                 len(parts)==3 and parts[2] in ('README.md','template.yaml') or
