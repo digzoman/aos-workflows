@@ -7,7 +7,7 @@ writes a READ-ONLY standalone HTML snapshot under agent-files/visualizations.
 Never uploads to GitHub Pages, never edits workflow state or authorizations.
 """
 from __future__ import annotations
-import argparse, json, os, re, sys, tempfile
+import argparse, hashlib, json, os, re, sys, tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -229,6 +229,50 @@ def run_dir_snapshot(folder: Path, title: str | None = None, verify_events: bool
             node["activity"]=activity.get(node["id"],[])
     return doc
 
+def resolve_local_children(snapshot: dict, template_path: Path):
+    """Show actual subworkflow prompts only when the local module matches
+    the compound template's pinned content SHA-256. Never fetch remotely.
+    """
+    template_path=Path(template_path).absolute()
+    if template_path.name!="template.yaml" or template_path.parent.parent.name!="templates":
+        return snapshot
+    library=template_path.parent.parent
+    for n in snapshot["nodes"]:
+        ref=n.get("child_ref")
+        if not isinstance(ref,dict): continue
+        name=ref.get("template_id")
+        pin=ref.get("content_digest")
+        n["child_resolution"]="UNRESOLVED"
+        if not isinstance(name,str) or not SAFE.fullmatch(name):
+            n["child_resolution"]="INVALID_ID";continue
+        if not isinstance(pin,str) or not re.fullmatch(r"sha256:[a-f0-9]{64}",pin):
+            n["child_resolution"]="NO_VERIFIABLE_PIN";continue
+        target=library/name/"template.yaml"
+        if target.is_symlink() or not target.is_file():
+            n["child_resolution"]="PINNED_MODULE_NOT_FOUND";continue
+        actual="sha256:"+hashlib.sha256(target.read_bytes()).hexdigest()
+        if actual!=pin:
+            n["child_resolution"]="PIN_DIGEST_MISMATCH";continue
+        child=load_yaml(target)
+        if child.get("template_id")!=name or child.get("version")!=ref.get("version"):
+            n["child_resolution"]="PIN_VERSION_MISMATCH";continue
+        steps=child.get("graph",{}).get("nodes",[])
+        if not isinstance(steps,list) or len(steps)>60:
+            n["child_resolution"]="INVALID_SUBGRAPH";continue
+        listed=[]
+        for step in steps:
+            prompt=step.get("instructions") or step.get("prompt")
+            if not isinstance(prompt,str) or len(prompt)>18000:
+                n["child_resolution"]="INVALID_PROMPT";listed=[];break
+            listed.append({"id":step.get("id"),"kind":step.get("kind"),"prompt":prompt,
+                "needs":step.get("needs",[]),"inputs":step.get("inputs",[]),
+                "outputs":step.get("outputs",[]),"quality":step.get("quality",{}),
+                "contract":step.get("contract",{})})
+        if listed:
+            n["child_resolution"]="PINNED_LOCAL_MODULE_VERIFIED"
+            n["child_steps"]=listed
+    return snapshot
+
 def encode_json(data):
     # This embedding never executes untrusted labels as HTML, JS, or a URL.
     return (json.dumps(data, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
@@ -327,6 +371,10 @@ def main():
             tpl=load_yaml(path)
             state=json.loads(args.state.read_text(encoding="utf-8")) if args.state else None
             data=source_to_snapshot(tpl,state,str(path),args.title)
+            # Only master/template mode can securely load sibling child modules.
+            # Pinned run revisions must never resolve changing template HEAD.
+            if args.template:
+                data=resolve_local_children(data,path)
         html=render(data,VIEWER.read_text(encoding="utf-8"))
         if args.out:
             destination=args.out
