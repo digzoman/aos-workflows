@@ -81,3 +81,8 @@ Verifications:
 - GitHub release uploader changed to never overwrite an existing published tag asset. New release content requires a version increment.
 
 Outstanding outside v0.8.1 scope: live state auto-refresh without a verified agent watcher, real GitHub Pages deployment (intentionally unapproved), a native cross-agent collaborative viewer, and original stable V1 acceptance T01–T04. No owner authorization to publish Meta, change spend, create Pages or share private customer/workflow data.
+
+
+## v0.8.2 HTML-first visualization presentation
+
+The agent-facing display rule now prefers an actual HTML/browser preview and direct single index.html file link/attachment over zipped visualization artifacts. ZIP remains allowed when forced by the platform, explicitly requested or needed for a multi-file evidence bundle, with clear file-opening instructions. The versioned AOS-W multi-file framework package still uses ZIP. GitHub Pages remains optional, sanitized and approval-gated.

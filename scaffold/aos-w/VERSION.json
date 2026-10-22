@@ -1,5 +1,5 @@
 {
-  "aosw_version": "0.8.1",
+  "aosw_version": "0.8.2",
   "schema_version": "1.0.0",
   "distribution": {
     "format": "aos-w-standalone-zip-v1",
@@ -95,7 +95,8 @@
     "optional_dev_generator": "scripts/aosw-visualize.py",
     "public_pages_publish": "explicit_owner_approval_and_sanitization_only",
     "live_provider_state": "not_verified_by_visualization",
-    "patch_release": "0.8.1",
-    "browser_smoke": "chromium_desktop_mobile_keyboard_arrows_and_nested_drilldown_pass"
+    "patch_release": "0.8.2",
+    "browser_smoke": "chromium_desktop_mobile_keyboard_arrows_and_nested_drilldown_pass",
+    "delivery_priority": "rendered_html_then_individual_html_link_then_html_attachment_then_approved_hosting_or_zip_fallback"
   }
 }

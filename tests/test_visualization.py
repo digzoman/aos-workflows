@@ -224,4 +224,14 @@ class VisualizationAcceptance(unittest.TestCase):
   self.assertEqual(node["child_resolution"],"PIN_DIGEST_MISMATCH")
   self.assertNotIn("child_steps",node)
 
+ def test_27_html_first_delivery_guidance_is_shipped(self):
+  spec=(ROOT/'docs/specs/visualization/V0.8-SPEC.md').read_text()
+  guide=(ROOT/'scaffold/aos-w/references/VISUALIZATION.md').read_text()
+  protocol=(ROOT/'scaffold/aos-w/PROTOCOL.md').read_text()
+  self.assertIn('HTML-first presentation and delivery contract',spec)
+  self.assertIn('direct link to the individual index.html file',spec)
+  self.assertIn('Default output: directly viewable HTML, not a ZIP',guide)
+  self.assertIn('HTML FIRST',protocol)
+  self.assertIn('framework installer',guide)
+
 if __name__=="__main__":unittest.main()

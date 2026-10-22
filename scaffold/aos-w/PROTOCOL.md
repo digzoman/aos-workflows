@@ -64,3 +64,8 @@ Only when Git is enabled: read `agent-files/config/sync.json`, confirm actual re
 ## Optional workflow visualization, version 0.8.0
 
 On a user request or at an authorized checkpoint, an agent may derive a visual **read-only** snapshot from a template or exact pinned graph plus selected run state. Read references/VISUALIZATION.md and spec/schemas/visualization-snapshot.schema.json. Generate agent-files/visualizations/<safe-view-id>/index.html by inserting correctly escaped snapshot JSON in protected references/visualization-viewer.html. Show each graph dependency arrow, exact step instructions, saved QA, retries and evidence; distinguish real event-derived progress from an advisory state snapshot and never claim provider readback. Visualization generation is not a workflow task execution, reviewer approval or permission to act. If local browser rendering is unsupported, provide the file; suggest public GitHub Pages only on user opt-in with separately sanitized export, never expose raw agent-files.
+
+
+### Visualization delivery rule (v0.8.2)
+
+**HTML FIRST.** Once the agent creates a visualization, prioritize showing its self-contained index.html directly in the host's HTML/browser preview, or give a verified link/attachment to the individual HTML page. Do not lead with a ZIP archive of a single diagram. Only use ZIP when platform-forced, specifically requested or genuinely multi-file, with instructions to open index.html. Public hosting via GitHub Pages is optional and needs explicit approval and sanitization. This does not alter the ZIP required to install the multi-file AOS-W framework.

@@ -13,6 +13,8 @@ For the current exact digest, use the release asset's SHA-256 digest on GitHub a
 3. Choose a master workflow under aos-w/templates or a custom template under aos-w/agent-files/custom-templates. Pin its exact current template revision and create a run under agent-files/instances.
 4. Use the normal event/checkpoint/handoff state protocol. No visualization may grant authorization, complete tasks, send messages or change provider state.
 
+
+**HTML first:** After generating a diagram, render it directly in an HTML/browser preview, or provide the standalone index.html link/attachment. Do not make a visualization ZIP the default just because a CI system provides compressed artifacts. If ZIP is unavoidable, give open-index.html instructions. The framework install ZIP is a different, multi-file distribution.
 ## New in v0.8, interactive visualization
 
 Read aos-w/references/VISUALIZATION.md. The framework now includes aos-w/references/visualization-viewer.html and spec/schemas/visualization-snapshot.schema.json.

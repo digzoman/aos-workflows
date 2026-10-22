@@ -1,6 +1,6 @@
-# AOS-W v0.8.1 Workflow Visualization
+# AOS-W v0.8.2 Workflow Visualization
 
-**Current preview:** [v0.8.1 portable release](https://github.com/digzoman/aos-workflows/releases/tag/v0.8.1-portable-preview). This additive release includes a protected offline interactive HTML/SVG viewer, an optional generator, visualization snapshot schema, safe agent-files/visualizations output location, a sanitized sample and a new design spec. It is **not stable Version 1**. Previous four original V1 acceptance demonstrations remain pending. See [v0.8 visualization specification](docs/specs/visualization/V0.8-SPEC.md), [portable viewer guide](scaffold/aos-w/references/VISUALIZATION.md) and [Bucket 9 example](examples/visualization/bucket9-stage.json).
+**Current preview:** [v0.8.2 portable release](https://github.com/digzoman/aos-workflows/releases/tag/v0.8.2-portable-preview). This additive release includes a protected offline interactive HTML/SVG viewer, an optional generator, visualization snapshot schema, safe agent-files/visualizations output location, a sanitized sample and a new design spec. It is **not stable Version 1**. Previous four original V1 acceptance demonstrations remain pending. See [v0.8 visualization specification](docs/specs/visualization/V0.8-SPEC.md), [portable viewer guide](scaffold/aos-w/references/VISUALIZATION.md) and [Bucket 9 example](examples/visualization/bucket9-stage.json).
 
 # Agent OS Workflows, AOS-W
 
@@ -46,6 +46,10 @@ Original test requirements and acceptance conditions are in docs/specs/prd/ACCEP
 
 For current work, read [the release approval packet](docs/release/V1-RELEASE-APPROVAL-PACKET.md) and temp/HANDOFF.md. Verify the current main commit and actual CI results before making changes.
 
+
+## HTML-first workflow viewing
+
+Agents should display an interactive HTML diagram directly in an available browser/HTML preview or give the individual index.html link/attachment. Do not make users download a ZIP to inspect a workflow if direct HTML is possible. The AOS-W **framework** remains a multi-file ZIP installation. See [HTML-first visualization spec](docs/specs/visualization/V0.8-SPEC.md).
 
 ## Working visualization implementation and browser evidence
 

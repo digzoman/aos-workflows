@@ -9,3 +9,6 @@ python scripts/aosw-visualize.py --snapshot examples/visualization/bucket9-stage
 ~~~
 
 Open the resulting self-contained index.html in a browser and click any step. No external script or network required. Before publishing any real project snapshot to GitHub Pages, obtain explicit authorization and sanitize separately.
+
+
+**How an agent should present a visualization:** prefer directly rendered HTML or a direct index.html file link. The GitHub Actions artifact may be ZIP-wrapped by GitHub; that is a secondary fallback and not the recommended user-facing interface. If only ZIP is possible, instruct the user to extract and open index.html. Hosting a sanitized public GitHub Pages site is optional, subject to explicit approval.

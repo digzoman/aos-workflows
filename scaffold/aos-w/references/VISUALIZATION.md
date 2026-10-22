@@ -2,6 +2,16 @@
 
 The visualization is a read-only interactive HTML page showing any template or pinned run with dependency arrows, status labels and a drill-down panel for exact step instructions, requirements, QC and evidence. It does not execute or approve work.
 
+## Default output: directly viewable HTML, not a ZIP
+
+When presenting a completed visualization to a user, **render the standalone index.html webpage in the host's supported HTML/browser preview** whenever possible. Otherwise give an ordinary **link or attachment to the individual index.html file** as the primary deliverable. Never make the user download and unzip an archive simply to inspect one workflow diagram if the host supports HTML.
+
+Only use a ZIP for a requested archive, genuine supporting multi-file bundle, or when the platform (such as GitHub Actions artifacts) forces compressed downloads. If unavoidable, tell the user to extract it and open index.html. Do not describe a ZIP artifact as a working webpage link.
+
+If the environment cannot render or share standalone HTML, a **sanitized GitHub Pages webpage** can be suggested only with explicit owner publishing approval. No automatic Pages deployment, private customer content sharing, or exposure of internal workflows is authorized.
+
+The downloaded AOS-W **framework installer** is deliberately a multi-file ZIP and is NOT covered by the visualization HTML-first preference.
+
 ## Output and operation
 
 Save under aos-w/agent-files/visualizations/<safe-id>/index.html, with optional snapshot.json. Only agent-files is normally writable. The protected page skeleton is aos-w/references/visualization-viewer.html, with a single token __AOSW_SNAPSHOT_JSON__ for a serialized visualization JSON object.

@@ -1,5 +1,9 @@
 # AOS-W preview release change notes
 
+## v0.8.2 portable preview, October 22, 2026
+
+Agent guidance now explicitly prioritizes **directly rendered HTML workflow pages or an individual index.html link** instead of ZIP downloads. If a hosting platform forces a ZIP, agents must explain how to open index.html. GitHub Pages is opt-in and sanitized; the separately versioned multi-file framework installer remains ZIP. No changes to the visualizer engine, marketing template pins, or original stable V1 acceptance gates.
+
 ## v0.8.1 portable preview, October 22, 2026
 
 Final implementation polish for v0.8 workflow visualization, including one-command rendering of real saved runs with verified event-ledger checks, immutable pinned-graph matching, bounded per-step journal activity, exact effective approval policy, SHA-256 pinned nested child-module prompt/QA drilldowns, cycle/hash/path fail-closed checks, and confirmed real Chromium desktop/mobile/keyboard/arrow browser smoke. 152 CI conformance tests and all 13 standalone acceptance cases passed, plus 9 browser checks. This patch is a new versioned preview, not a stable Version 1 release. Existing marketing template 0.7 pins remain unchanged. Publishing tooling now preserves existing versioned release assets rather than overwriting them.
