@@ -160,10 +160,61 @@
           "evidence": {},
           "notes": {},
           "child_template": {},
-          "source": {}
+          "source": {},
+          "activity": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "seq": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "type": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "actor": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          },
+          "policy": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "child_ref": {}
         },
         "additionalProperties": true
       }
+    },
+    "instance_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_graph": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "additionalProperties": false

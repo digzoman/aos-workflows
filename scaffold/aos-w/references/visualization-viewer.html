@@ -63,7 +63,10 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7fa;border:1px so
  const values=x=>Array.isArray(x)?x:[];
  $("title").textContent=d.title||"AOS-W workflow";
  $("mode").textContent=d.mode||"TEMPLATE";
- $("subtitle").textContent=(d.template_id||"")+(d.run_id?" · Run "+d.run_id:"")+(d.graph_revision?" · Graph "+d.graph_revision:"");
+ $("subtitle").textContent=(d.instance_id?"Instance "+d.instance_id+" · ":"")+
+   (d.template_id||"")+(d.run_id?" · Run "+d.run_id:"")+
+   (d.graph_revision?" · Graph "+d.graph_revision:"")+
+   (d.event_seq_observed!==undefined&&d.event_seq_observed!==null?" · Event #"+d.event_seq_observed:"");
  $("provenance").textContent="READ ONLY · "+(d.verification||"UNVERIFIED_SNAPSHOT")+
    " · Generated "+(d.generated_at||"time unknown")+" · No live refresh or provider verification. "+
    (d.warning||"")+(d.public_export?" · PUBLIC SANITIZED COPY":" · LOCAL / PRIVATE VIEW");
@@ -116,6 +119,8 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7fa;border:1px so
   prop(box,"Step ID",n.id);prop(box,"Type",n.kind);prop(box,"Requires",n.needs);
   prop(box,"Agent/owner",n.owner);prop(box,"Attempt count",n.attempts);
   prop(box,"Child workflow",n.child_template);
+  section(box,"Child template reference",n.child_ref);
+  section(box,"Policy and required human approvals",n.policy);
   section(box,"Prompt / agent instructions",n.prompt||n.instructions||"Not supplied in saved template.");
   section(box,"Input requirements",n.inputs);
   section(box,"Expected outputs",n.outputs);
@@ -124,6 +129,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7fa;border:1px so
   section(box,"Review and provenance",n.review);
   section(box,"Artifacts and evidence references",n.evidence);
   section(box,"Comments / next action",n.notes);
+  section(box,"Step activity (latest saved journal events)",n.activity);
   prop(box,"Source",n.source);
  }
  function redraw(){
