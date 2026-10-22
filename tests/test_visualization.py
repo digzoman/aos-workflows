@@ -148,4 +148,56 @@ class VisualizationAcceptance(unittest.TestCase):
   with self.assertRaisesRegex(viz.ViewError,"Unknown snapshot dependency"):
    viz.render(d,HTML)
 
+
+ def test_20_real_p18_run_loads_and_reconciles_saved_events(self):
+  run=ROOT/"docs/testing/evidence/p18-grounded-39498378421/aos-w/agent-files/instances/b9-parent/runs/run-001"
+  d=viz.run_dir_snapshot(run)
+  self.assertEqual(d["mode"],"RUN")
+  self.assertEqual(d["run_id"],"run-001")
+  self.assertEqual(d["instance_id"],"b9-parent")
+  self.assertEqual(d["verification"],"EVENTS_RECONCILED")
+  self.assertGreaterEqual(d["event_seq_observed"],40)
+  self.assertEqual(len(d["nodes"]),11)
+  by_id={n["id"]:n for n in d["nodes"]}
+  self.assertEqual(by_id["creative"]["status"],"COMPLETE")
+  self.assertNotEqual(by_id["launch-permit"]["status"],"COMPLETE")
+  self.assertTrue(by_id["creative"]["activity"])
+
+ def test_21_runner_auto_output_path_matches_writable_folder(self):
+  run=ROOT/"docs/testing/evidence/p18-grounded-39498378421/aos-w/agent-files/instances/b9-parent/runs/run-001"
+  d=viz.run_dir_snapshot(run)
+  default=run.absolute().parents[3]/"visualizations"/(
+      d["instance_id"]+"--"+d["run_id"]+"--"+d["graph_revision"])/"index.html"
+  self.assertTrue(str(default).endswith("agent-files/visualizations/b9-parent--run-001--g0001/index.html"))
+  viz.ensure_safe_output(default)
+
+ def test_22_event_integrity_tamper_blocks_verified_visual(self):
+  import shutil
+  from pathlib import Path
+  source=ROOT/"docs/testing/evidence/p18-grounded-39498378421/aos-w/agent-files/instances/b9-parent"
+  target=Path(self.temp.name)/"aos-w/agent-files/instances/b9-parent"
+  shutil.copytree(source,target)
+  run=target/"runs/run-001"
+  events=run/"events.jsonl"
+  lines=events.read_text().splitlines()
+  entry=json.loads(lines[0])
+  entry["type"]="forged_workflow_event"
+  lines[0]=json.dumps(entry)
+  events.write_text("\n".join(lines)+"\n")
+  with self.assertRaisesRegex(viz.ViewError,"Event verification failed"):
+   viz.run_dir_snapshot(run)
+
+ def test_23_unverified_run_is_clearly_labeled(self):
+  run=ROOT/"docs/testing/evidence/p18-grounded-39498378421/aos-w/agent-files/instances/b9-parent/runs/run-001"
+  d=viz.run_dir_snapshot(run,verify_events=False)
+  self.assertEqual(d["verification"],"SOURCE_SNAPSHOT_UNVERIFIED")
+  self.assertIn("advisory",d["warning"])
+  self.assertNotEqual(d["nodes"][-1]["status"],"COMPLETE")
+
+ def test_24_visualization_run_metadata_schema(self):
+  from jsonschema import Draft202012Validator,FormatChecker
+  run=ROOT/"docs/testing/evidence/p18-grounded-39498378421/aos-w/agent-files/instances/b9-parent/runs/run-001"
+  data=viz.run_dir_snapshot(run)
+  Draft202012Validator(SCHEMA,format_checker=FormatChecker()).validate(data)
+
 if __name__=="__main__":unittest.main()
