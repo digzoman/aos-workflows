@@ -1,4 +1,4 @@
-# Agent OS Workflows — portable starter (0.7.0)
+# Agent OS Workflows — portable starter (0.8.0)
 
 **Status:** Initial **file-based scaffold**, not a workflow execution engine. It is usable as an instruction-driven, **single-writer, manually operated** workflow folder. Automatic graph execution, distributed locks, time-triggered runs, provider integration and validators are later milestones.
 
@@ -73,3 +73,8 @@ Treat an installed release's `agent-files/` as user-owned. To upgrade, **back up
 > Read `aos-w/README.md`, `aos-w/PROTOCOL.md`, `aos-w/agent-files/README.md`, and saved `handoff.md`. Discover instances under `agent-files/instances/`. Validate the selected run's pinned template, `events.jsonl` and `state.json`; report any inconsistencies, blockers, approval requirements or unknown external effects. Identify the **next eligible bounded step** and ask before actions requiring approval. Never infer completion from chat memory or merely from a plan.
 
 This is a foundation for future Prompts 16–19, not the fully tested Version 1 release.
+
+
+## Workflow visualization (0.8.0)
+
+Create a **read-only interactive webpage** from a template, pinned graph or run, with clickable step cards, dependency arrows, exact agent instructions/prompts, output contracts, reviewer/approval details and source-labeled progress. Read [VISUALIZATION.md](references/VISUALIZATION.md) and use the protected single-file viewer [visualization-viewer.html](references/visualization-viewer.html). Generated HTML and JSON go **only** under agent-files/visualizations/<view-id>/; no browser server, Git, Python, remote CDN or installed renderer needed. The browser page does not start tasks or authorize external changes. A Pages hosting export is optional and only after specific owner approval and public-safe sanitization. The old 0.7 marketing library template versions remain deliberately pinned.

@@ -1,5 +1,12 @@
 # AOS-W preview release change notes
 
+## v0.8.0 portable preview, October 22, 2026
+
+Introduced a **read-only interactive workflow visualization** capability. Agents can construct a local single-file HTML/SVG diagram for any template, pinned instance or workflow run, show dependency arrows, statuses, parallel branches/joins and click-to-inspect exact prompts, inputs, outputs and quality/approval contracts. Installed reference viewer and JSON Schema do not require Git, Python, CDN or a web server; visualizations are generated only inside agent-files/visualizations. An optional developer Python/YAML converter and a sanitized 11-step Bucket 9 example are included in the development repository. Publishing via GitHub Pages remains opt-in and requires explicit sanitized owner-approved export, never automatic. The existing 21 marketing modules retain their pinned 0.7.0 template versions.
+
+New executable conformance checks cover source graph conversion, schema, offline viewer, security escaping, cycle/dependency rejection, user directory protection and safe packaging. This remains a preview and does not satisfy the four outstanding stable V1 acceptance tests T01–T04.
+
+
 ## v0.7.0 portable preview, October 20, 2026
 
 This is a PREVIEW release, not stable Version 1.

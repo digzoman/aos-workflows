@@ -51,3 +51,8 @@ See [architecture specification](../architecture/README.md) and [PRD](../prd/PRD
 ## Prompt 13 additions
 
 `sync-config.schema.json` and `sync-state.schema.json` bring the installed/development schema set to **20**. They define optional Git modes, claim-backend choice and fail-closed shared offline policy. Actual remotely enforced guarantees require independent empirical validation.
+
+
+## Version 0.8 visualization projection
+
+The additive [visualization-snapshot.schema.json](visualization-snapshot.schema.json) describes an offline read-only snapshot, not a workflow engine state or event authority. It is shipped unmodified under scaffold/aos-w/spec/schemas and tested against the sanitized Bucket 9 demo.

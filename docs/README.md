@@ -2,6 +2,11 @@
 
 Read this first when reviewing, operating or releasing AOS-W.
 
+## Current preview
+
+- [v0.8 interactive visualization specification](specs/visualization/V0.8-SPEC.md), with node diagram, step drill-down, status, snapshot, local hosting and safe GitHub Pages fallback.
+- [Sanitized visualization demo](../examples/visualization/README.md) and [portable viewer guide](../scaffold/aos-w/references/VISUALIZATION.md).
+
 ## Current release preparation
 
 - [Version 1 owner decision packet](release/V1-RELEASE-APPROVAL-PACKET.md). Release status pending, original acceptance gaps identified.

@@ -1,6 +1,6 @@
 # Installed draft JSON Schemas
 
-This directory ships the twenty JSON Schema Draft 2020-12 design files **inside the standalone distribution**. They match the repository's `docs/specs/schemas/` at scaffold packaging time. No network access is required to read them.
+This directory ships the twenty-one JSON Schema Draft 2020-12 design files **inside the standalone distribution**. They match the repository's `docs/specs/schemas/` at scaffold packaging time. No network access is required to read them.
 
 These documents cover common types; master/custom/compound templates; retry; instance and pinned template lock; run; state; event; checkpoint; claim; review; approval; handoff and attempt. Source references use relative `$ref` paths inside this directory.
 
@@ -19,3 +19,6 @@ The 0.4.0 distribution includes **20** draft JSON Schemas: the original 16 plus 
 ## Prompt 13 schemas
 
 Two new structural definitions, `sync-config.schema.json` and `sync-state.schema.json`, define modes, backend choice, offline behavior and observed remote status. There are now **20** bundled draft schemas; they do not prove a successful Git push, exclusive claim or provider authorization.
+
+
+**Visualization schema added in v0.8.0:** visualization-snapshot.schema.json defines the non-authoritative read-only TEMPLATE/INSTANCE/RUN projection used by references/visualization-viewer.html. It does not alter the existing workflow template/instance/run state schemas, or their pinned earlier version identifiers.

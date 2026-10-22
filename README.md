@@ -1,3 +1,7 @@
+# AOS-W v0.8.0 Workflow Visualization
+
+**Current preview:** [v0.8.0 portable release](https://github.com/digzoman/aos-workflows/releases/tag/v0.8.0-portable-preview). This additive release includes a protected offline interactive HTML/SVG viewer, an optional generator, visualization snapshot schema, safe agent-files/visualizations output location, a sanitized sample and a new design spec. It is **not stable Version 1**. Previous four original V1 acceptance demonstrations remain pending. See [v0.8 visualization specification](docs/specs/visualization/V0.8-SPEC.md), [portable viewer guide](scaffold/aos-w/references/VISUALIZATION.md) and [Bucket 9 example](examples/visualization/bucket9-stage.json).
+
 # Agent OS Workflows, AOS-W
 
 AOS-W is a **portable, file-based workflow standard** for AI agents. It provides repeatable tasks, reusable template contracts, evidence tracking, checkpoints, handoffs and manual protocols. Its downloaded core does not require Git, Python, an MCP server, a database or a scheduler. Optional helper tooling adds local deterministic validation, file state management and experimental Git synchronization.

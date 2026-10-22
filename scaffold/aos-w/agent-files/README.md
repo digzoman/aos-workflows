@@ -42,3 +42,8 @@ Runs may create `claims/`, `reviews/`, `approvals/` and `handoffs/` records unde
 ## Optional Git synchronization (0.5.0)
 
 `config/sync.json` stores **configuration**, while `config/sync-state.json` stores the last actually observed sync attempt/result. Both belong to user-owned agent-files; no credentials are stored in either. If Git is not configured, mode remains standalone. In `shared_coordinated` mode, verified remote per-task claims must be obtained **before** modifying shared artifacts; no CAS connectivity means BLOCKED, not fallback to an expired local claim. Keep evidence and handoff records honest; remote commit and Git identity are separate from agent provenance and action approvals. See `../references/GIT-SYNC-AND-COORDINATION.md`.
+
+
+## Version 0.8.0 user-owned visualizations
+
+Use [visualizations/README.md](visualizations/README.md) to save generated offline read-only workflow pages. A view consists of visualizations/<view-id>/index.html plus an optional snapshot.json projection. It may show a template or a pinned graph with a saved run status. This is an **advisory snapshot**, not workflow authority or live provider truth. No generated file belongs outside agent-files; the protected HTML skeleton lives in ../references/visualization-viewer.html and normal agents must copy it rather than editing it. GitHub Pages is a separate public export requiring explicit permission and sanitization.

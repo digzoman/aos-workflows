@@ -19,3 +19,5 @@ These documents are part of the **protected** scaffold. Put project-specific var
 - [GIT-SYNC-AND-COORDINATION.md](GIT-SYNC-AND-COORDINATION.md), v0.5.0 optional local/Git/multiagent modes, remote refresh, explicit Git ref CAS, LFS limitations, offline recovery and safe handoffs.
 
 - [INSTALL.md](INSTALL.md), clean standalone ZIP installation, no-script quick start and upgrades preserving agent-files.
+
+- [VISUALIZATION.md](VISUALIZATION.md), version 0.8.0 read-only HTML DAG snapshots, local agent-files/visualizations output, complete step prompt/detail drilldown and explicit opt-in GitHub Pages safety. The offline [visualization-viewer.html](visualization-viewer.html) is a protected, dependency-free page skeleton.
