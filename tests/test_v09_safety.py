@@ -33,7 +33,7 @@ class V09Safety(unittest.TestCase):
   protocol=(ROOT/"scaffold/aos-w/PROTOCOL.md").read_text()
   self.assertIn("zero new human approval gates",source)
   self.assertIn("approved skills",source)
-  self.assertIn("Continue",source)
+  self.assertIn("Keep working on independent tasks",source)
   self.assertIn("do not invent gates",protocol.lower())
 
  def test_release_is_portable_without_pages_dependency(self):
