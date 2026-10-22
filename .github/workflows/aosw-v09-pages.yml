@@ -1,0 +1,47 @@
+name: AOS-W public-safe HTML example (manual Pages deployment)
+on:
+  workflow_dispatch:
+    inputs:
+      example:
+        description: "Explicitly public-safe fictional demo only"
+        required: true
+        type: choice
+        options: [synthetic-six-audience]
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: aosw-v09-manual-pages
+  cancel-in-progress: false
+jobs:
+  publish-example:
+    if: github.event.inputs.example == 'synthetic-six-audience'
+    environment:
+      name: github-pages
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate only an allowlisted public fictional workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/aosw-visualize.py --snapshot examples/visualization/synthetic-six-audience.json --out "$RUNNER_TEMP/aos-w/agent-files/visualizations/six/index.html"
+          python scripts/aosw-pages-preflight.py "$RUNNER_TEMP/aos-w/agent-files/visualizations/six/snapshot.json" "$RUNNER_TEMP/aos-w/agent-files/visualizations/six/index.html" public/index.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - name: Deploy GitHub Pages to authorized site
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Report the actual returned site URL
+        env:
+          PUBLISHED_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          test -n "$PUBLISHED_URL"
+          echo "Rendered Pages URL: $PUBLISHED_URL" >> "$GITHUB_STEP_SUMMARY"
