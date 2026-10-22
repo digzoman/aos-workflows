@@ -1,5 +1,5 @@
 {
-  "aosw_version": "0.8.0",
+  "aosw_version": "0.8.1",
   "schema_version": "1.0.0",
   "distribution": {
     "format": "aos-w-standalone-zip-v1",
@@ -11,7 +11,7 @@
     "user_data_policy": "release_excludes_user_instances_custom_templates_and_private_config",
     "mode": "file-only-manual"
   },
-  "status": "portable-manual-core-with-marketing-library-and-offline-read-only-visualization",
+  "status": "portable-manual-core-with-marketing-library-and-verified-offline-visualization",
   "minimum_requirements": [
     "capable agent",
     "persistent writable files within agent-files"
@@ -94,6 +94,8 @@
     "built_in_generator": "none_required_manual_agent_can_embed_snapshot",
     "optional_dev_generator": "scripts/aosw-visualize.py",
     "public_pages_publish": "explicit_owner_approval_and_sanitization_only",
-    "live_provider_state": "not_verified_by_visualization"
+    "live_provider_state": "not_verified_by_visualization",
+    "patch_release": "0.8.1",
+    "browser_smoke": "chromium_desktop_mobile_keyboard_arrows_and_nested_drilldown_pass"
   }
 }
