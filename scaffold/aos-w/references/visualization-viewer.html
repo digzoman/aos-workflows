@@ -32,6 +32,15 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7fa;border:1px so
 .prop{font-size:12px;margin:7px 0;overflow-wrap:anywhere}.prop strong{color:#425568}.empty{color:#8593a5;font-size:13px}.warning{color:#825015}.progress{height:7px;background:#e1e7ef;border-radius:8px;width:160px;overflow:hidden}.progress>div{height:100%;background:#168052}
 @media(max-width:860px){.dashboard{display:block;height:auto}.workspace{max-height:60vh;min-height:430px}.panel{border-left:0;border-top:1px solid #d8e1eb;min-height:300px}.canvas{min-width:700px}}
 @media print{.header,.banner{padding:10px}.dashboard{display:block;height:auto}.workspace{overflow:visible}.panel{break-before:page}.tools{display:none}}
+.overview{background:#fff;border:1px solid #d8e1eb;border-radius:12px;padding:18px;margin-bottom:16px}.overview h2{font-size:16px;margin:0 0 6px}.overview p{font-size:13px;color:#536880;margin:0 0 12px}
+.phases{display:flex;gap:8px;flex-wrap:wrap}.phase{border:1px solid #ced8e5;border-radius:9px;background:#f8fafc;padding:9px 12px;cursor:pointer;text-align:left;font:inherit;font-size:12px}.phase strong{display:block}.phase:hover,.phase:focus-visible{outline:2px solid #187db4}
+.stepId{display:none!important}.stepSummary{display:block;font-size:11px;color:#596e84;margin-top:6px}.stepTitle{font-size:14px!important}
+.step[data-status="READY"][data-kind="review"]{border-left-color:#8054b3}
+.next-action{padding:10px 13px;background:#eef7ff;border-left:3px solid #1676bd;border-radius:7px;margin:12px 0;font-size:13px}
+select,.action-btn{border:1px solid #cbd5e1;border-radius:8px;padding:9px;background:#fff;font:inherit;font-size:12px}
+.action-btn{cursor:pointer;font-weight:700}.technical{margin-top:16px;border-top:1px solid #dde5ec;padding-top:12px}.technical summary{cursor:pointer;font-weight:650}
+.resource{font-size:13px;line-height:1.55}.resource a{color:#126e9d}.step[hidden],.canvas[hidden]{display:none!important}
+@media(max-width:860px){.phase{flex:1 1 130px}}
 </style>
 </head>
 <body>
@@ -42,7 +51,11 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7fa;border:1px so
 <div class="banner" id="provenance">Read-only generated snapshot. This page never changes workflow state or provider accounts.</div>
 <div class="dashboard">
  <main class="workspace" id="workspace">
-  <div class="tools"><input aria-label="Find a workflow step" id="search" placeholder="Search steps or IDs"><div class="metrics" id="metrics"></div></div>
+  <div class="overview" id="overview" aria-label="Workflow overview"></div>
+<div class="tools"><input aria-label="Find a workflow step" id="search" placeholder="Find a task or audience">
+<select id="lane-filter" aria-label="Filter by audience"><option value="">All audiences</option></select>
+<select id="status-filter" aria-label="Filter by step status"><option value="">Every status</option></select>
+<button type="button" class="action-btn" id="toggle-graph">Show all steps</button><div class="metrics" id="metrics"></div></div>
   <div class="canvas" id="canvas"><svg aria-hidden="true" id="links"></svg><div class="columns" id="columns"></div></div>
  </main>
  <aside class="panel" id="details" aria-label="Selected step details" aria-live="polite"><h2>Choose a step</h2><p class="empty">Click a box in the workflow to inspect its prompt and requirements.</p></aside>
@@ -61,6 +74,14 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7fa;border:1px so
  const byId=new Map(nodes.map(n=>[n.id,n]));
  const make=(tag,text,cl)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=String(text);if(cl)e.className=cl;return e;};
  const values=x=>Array.isArray(x)?x:[];
+ const brief=n=>n.human&&typeof n.human==="object"?n.human:{};
+ const humanTitle=n=>brief(n).title||String(n.label||n.name||n.id).replace(/--/g," ").replace(/[-_]/g," ");
+ const phase=n=>brief(n).phase||"Prepare workflow";
+ const laneName=n=>brief(n).lane||"Shared workflow";
+ const labelStatus=n=>n.kind==="review"&&n.status==="READY"?"READY FOR REVIEW":
+   n.status==="NEEDS_REWORK"?"NEEDS CHANGES":n.status==="WAIT_DEPENDENCY"?"WAITING":
+   String(n.status||"UNKNOWN").replace(/_/g," ");
+ let visibleGraph=nodes.length<=12;
  $("title").textContent=d.title||"AOS-W workflow";
  $("mode").textContent=d.mode||"TEMPLATE";
  $("subtitle").textContent=(d.instance_id?"Instance "+d.instance_id+" · ":"")+
@@ -73,7 +94,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7fa;border:1px so
  const isDone=n=>["COMPLETE","ACCEPTED"].includes(n.status);
  const completed=nodes.filter(isDone).length;
  $("bar").style.width=(nodes.length?100*completed/nodes.length:0)+"%";
- for(const [label,num] of [["Steps",nodes.length],["Complete",completed],["Review",nodes.filter(x=>["REVIEW_WAIT","WAIT_APPROVAL","NEEDS_REWORK"].includes(x.status)).length],["Blocked",nodes.filter(x=>["BLOCKED","RECONCILE_REQUIRED"].includes(x.status)).length]]){
+ for(const [label,num] of [["Steps",nodes.length],["Complete",completed],["Reviews ready",nodes.filter(x=>x.kind==="review"&&x.status==="READY").length],["Needs changes",nodes.filter(x=>x.status==="NEEDS_REWORK").length],["Waiting",nodes.filter(x=>x.status==="WAIT_DEPENDENCY").length],["Blocked",nodes.filter(x=>["BLOCKED","RECONCILE_REQUIRED"].includes(x.status)).length]]){
   $("metrics").appendChild(make("span",label+" "+num,"metric"));
  }
  const memo=new Map();
@@ -88,13 +109,13 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7fa;border:1px so
  const layers=[];
  for(const n of nodes){const dep=depth(n.id,new Set());(layers[dep]||(layers[dep]=[])).push(n);}
  for(let i=0;i<layers.length;i++){
-  const lane=make("div",undefined,"lane");lane.appendChild(make("div","Stage "+(i+1),"laneLabel"));
+  const lane=make("div",undefined,"lane");const p=[...new Set((layers[i]||[]).map(phase))];lane.appendChild(make("div",p.length===1?p[0]:"Parallel preparation","laneLabel"));
   for(const node of layers[i]||[]){
    const b=make("button",undefined,"step");
-   b.type="button";b.dataset.id=node.id;b.dataset.status=node.status||"UNKNOWN";
-   b.appendChild(make("span",node.label||node.name||node.id,"stepTitle"));
-   b.appendChild(make("span",node.id,"stepId"));
-   b.appendChild(make("span",String(node.status||"UNKNOWN").replace(/_/g," "),"stepState"));
+   b.type="button";b.dataset.id=node.id;b.dataset.status=node.status||"UNKNOWN";b.dataset.kind=node.kind||"task";
+   b.appendChild(make("span",humanTitle(node),"stepTitle"));
+   if(brief(node).lane&&brief(node).lane!=="Shared workflow")b.appendChild(make("span",laneName(node),"stepSummary"));
+   b.appendChild(make("span",labelStatus(node),"stepState"));
    b.onclick=()=>show(node.id);
    lane.appendChild(b);
   }
