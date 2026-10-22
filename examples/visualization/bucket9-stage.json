@@ -1,0 +1,164 @@
+{
+  "visualization_schema": "1.0.0",
+  "mode": "RUN",
+  "title": "Bucket 9 | Advertising Workflow Preview",
+  "template_id": "marketing-lifecycle-compound",
+  "run_id": "example-local-stage",
+  "graph_revision": "g0001",
+  "event_seq_observed": 17,
+  "generated_at": "2026-10-22T00:00:00Z",
+  "verification": "SOURCE_SNAPSHOT_UNVERIFIED",
+  "public_export": true,
+  "warning": "Sanitized fictional example. This is not Meta provider state or owner approval.",
+  "nodes": [
+    {
+      "id": "plan",
+      "label": "Research plan",
+      "kind": "task",
+      "needs": [],
+      "status": "COMPLETE",
+      "prompt": "Define the audience, evidence sources and success criteria.",
+      "inputs": [],
+      "outputs": [
+        {
+          "artifact_id": "plan"
+        }
+      ],
+      "quality": {
+        "gates": [
+          "scope-check"
+        ]
+      },
+      "attempts": 1
+    },
+    {
+      "id": "coach-research",
+      "label": "Coaches research",
+      "kind": "task",
+      "needs": [
+        "plan"
+      ],
+      "status": "COMPLETE",
+      "prompt": "Investigate coach and consultant competitors with dated URLs.",
+      "quality": {
+        "gates": [
+          "independent-source-QA"
+        ]
+      },
+      "review": {
+        "verdict": "PASS",
+        "method": "separate deterministic process"
+      },
+      "attempts": 2
+    },
+    {
+      "id": "agency-research",
+      "label": "Agency research",
+      "kind": "task",
+      "needs": [
+        "plan"
+      ],
+      "status": "COMPLETE",
+      "prompt": "Research experienced advertisers and agencies.",
+      "quality": {
+        "gates": [
+          "evidence-check"
+        ]
+      },
+      "attempts": 1
+    },
+    {
+      "id": "merge",
+      "label": "Reviewed synthesis",
+      "kind": "join",
+      "needs": [
+        "coach-research",
+        "agency-research"
+      ],
+      "status": "COMPLETE",
+      "prompt": "Merge only accepted exact-artifact child outputs.",
+      "quality": {
+        "gates": [
+          "all-accepted"
+        ]
+      }
+    },
+    {
+      "id": "offer",
+      "label": "Offer strategy",
+      "kind": "task",
+      "needs": [
+        "merge"
+      ],
+      "status": "COMPLETE",
+      "prompt": "Define a proposed offer with clearly marked unverified claims and price."
+    },
+    {
+      "id": "copy",
+      "label": "Ad copy",
+      "kind": "task",
+      "needs": [
+        "offer"
+      ],
+      "status": "RUNNING",
+      "prompt": "Write primary ad text, headline and a Send Message CTA."
+    },
+    {
+      "id": "creative",
+      "label": "Image creative",
+      "kind": "task",
+      "needs": [
+        "copy"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Prepare a 1080x1350 image with 5% safe margins.",
+      "quality": {
+        "gates": [
+          "image-review"
+        ]
+      }
+    },
+    {
+      "id": "crm",
+      "label": "CRM messaging plan",
+      "kind": "task",
+      "needs": [
+        "offer"
+      ],
+      "status": "READY",
+      "prompt": "Plan lead message routing; do not alter live GHL."
+    },
+    {
+      "id": "landing",
+      "label": "Landing plan",
+      "kind": "task",
+      "needs": [
+        "offer"
+      ],
+      "status": "READY",
+      "prompt": "Plan landing page and consent; do not deploy."
+    },
+    {
+      "id": "prelaunch",
+      "label": "Prelaunch review",
+      "kind": "review",
+      "needs": [
+        "creative",
+        "crm",
+        "landing"
+      ],
+      "status": "WAIT_DEPENDENCY",
+      "prompt": "Check exact copies, logo, targeting and tracking evidence."
+    },
+    {
+      "id": "launch",
+      "label": "Human launch approval",
+      "kind": "approval",
+      "needs": [
+        "prelaunch"
+      ],
+      "status": "WAIT_APPROVAL",
+      "prompt": "Require a new explicit owner authorization before any Meta budget or publication."
+    }
+  ]
+}
