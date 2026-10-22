@@ -122,6 +122,21 @@ def source_to_snapshot(template: dict, state: dict | None, source: str, title: s
                       if isinstance(dep, str) and dep not in seen})
     if missing:
         raise ViewError("Missing graph dependencies: " + ", ".join(missing[:12]))
+    # Reject cyclic dependencies, rather than draw false DAG ordering.
+    lookup = {n["id"]: n for n in nodes}
+    visiting, visited = set(), set()
+    def check_acyclic(node_id):
+        if node_id in visiting:
+            raise ViewError("Cycle detected at " + node_id)
+        if node_id in visited:
+            return
+        visiting.add(node_id)
+        for predecessor in lookup[node_id]["needs"] or []:
+            check_acyclic(predecessor)
+        visiting.remove(node_id)
+        visited.add(node_id)
+    for node_id in lookup:
+        check_acyclic(node_id)
     if state is not None and state.get("graph_revision") and "graph-revisions" not in source:
         warning = "State overlay used on nonpinned template path; verify graph revision manually."
     else:
